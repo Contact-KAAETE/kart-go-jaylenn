@@ -31,3 +31,15 @@ Nog in uitvoering. Geen claim dat de publicatie of het project voltooid is.
 - Pickup-, onweer-, sprong-, boost-, ijs- en botsingseffecten.
 - Automatische verlaging van tekenafstand, details en resolutie bij langdurig lage beeldsnelheid.
 - Browser- en simulatiecontrole volgt; nog niet naar GitHub gepubliceerd wegens ontbrekende repositorytoegang.
+
+## Fase D — spelregels en eerste controles (lokaal geslaagd)
+
+- Alle twintig unieke banen in een simulatie met de echte spelcode uitgereden en gewonnen door een eenvoudige stuurcontroller.
+- Exacte kansgrenzen voor Onweer/Hypnose/Boost/Banaan/Jump gecontroleerd (50/20/15/10/5).
+- Eindbaas: negen eenmalige Lucky Blocks; hond neemt geen blokken; ijs om de tien seconden; bevriezen twee seconden; Jump voorkomt een treffer.
+- Voortgang van V2 blijft onder dezelfde sleutel bewaard; oude gegevens worden geback-upt; racesessie kan na heropenen hervatten.
+- Pointer-eigenaarschap, meerdere vingers, pedaalprioriteit, loslaten, annuleren, reset, draaien en drie besturingsmethoden geslaagd.
+- In Chromium echte browsercontroles met zichtbare testpagina uitgevoerd: start, rijden, verzamelen, power-upknoppen, synthetische touch-events en geen overlap bij 320×568, 375×667, 390×844, 430×932 en 844×390.
+- Een CSS-fout bij het verwijderen van externe webfonts gevonden en hersteld; alle lettertypen en styles zijn lokaal.
+- Browsercontroles voor finish/opslaan/eindbaas en definitieve publicatie nog in uitvoering.
+- Niet getest op een fysieke iPhone of Android. Geen gemeten garantie van 60 FPS op echte telefoons.
