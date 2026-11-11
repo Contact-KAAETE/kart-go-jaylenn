@@ -21,3 +21,13 @@ Bedenker: Jaylenn. Hervat vanaf bestaande GitHub-commit ebc396a09c4622716dbcc725
 ## Fasen C–E
 
 Nog in uitvoering. Geen claim dat de publicatie of het project voltooid is.
+
+## Fase C (lokaal)
+
+- Bestaande 2,5D-engine behouden; twintig baanprofielen met stapsgewijze bochten en hoogteverschillen.
+- Bruggen boven water met houten leuningen; stenen tunnelportalen, binnenwanden en tunnelverlichting.
+- Bestaande landschapsonderdelen behouden en rijkere menu-illustratie, bewegende wolken toegevoegd.
+- Karts met getekende banden/treden, licht en schaduw; grotere Hotdog-Hond.
+- Pickup-, onweer-, sprong-, boost-, ijs- en botsingseffecten.
+- Automatische verlaging van tekenafstand, details en resolutie bij langdurig lage beeldsnelheid.
+- Browser- en simulatiecontrole volgt; nog niet naar GitHub gepubliceerd wegens ontbrekende repositorytoegang.

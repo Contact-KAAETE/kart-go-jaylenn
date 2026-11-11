@@ -42,8 +42,58 @@ function drawLandscape(c,w,h,s){
   landscapeCache={cv,w,h};
  }
  const drift=Math.sin(s.d/18000)*w*.035-s.x*w*.018;c.drawImage(landscapeCache.cv,-w*.10+drift,0);
+ // Separate foreground clouds slide over the cached panorama.
+ c.save();c.globalAlpha=.42;for(let j=0;j<3;j++){const cx=((s.time*6+j*w*.39)%(w*1.3))-w*.15,cy=h*(.09+(j%2)*.055);for(let k=0;k<4;k++)ellipse(c,cx+k*16,cy-Math.sin(k*1.7)*5,22,7,'#fffde6');}c.restore();
  // A few birds move above the distant hills.
  c.strokeStyle='#4f827680';c.lineWidth=1.4;for(let i=0;i<4;i++){const x=w*.40+i*17+Math.sin(s.time*.2)*25,y=h*.15+Math.sin(i*3)*12;c.beginPath();c.moveTo(x-5,y);c.quadraticCurveTo(x-2,y-4,x,y);c.quadraticCurveTo(x+3,y-4,x+6,y);c.stroke();}
 }
-function elevation(d){return Math.sin(d/LENGTH*Math.PI*4+sceneryLevel*.2)*(130+sceneryLevel*5)+Math.sin(d/LENGTH*Math.PI*8)*70;}
+function elevation(d){const profile=trackProfile(sceneryLevel);return Math.sin(d/LENGTH*Math.PI*4+sceneryLevel*.2)*profile.hill+Math.sin(d/LENGTH*Math.PI*8)*profile.hill*.28;}
 
+// Road furniture is projected with the same points as the track.
+function drawRoadFurniture(c,a,b,terrain){
+ if(terrain==='bridge'){
+  for(const side of [-1,1]){
+   const ax=a.x+side*a.w*1.10,bx=b.x+side*b.w*1.10,ah=a.scale*150*H*.62,bh=b.scale*150*H*.62;
+   shape(c,[[ax-4,a.y-ah],[ax+4,a.y-ah],[bx+2,b.y-bh],[bx-2,b.y-bh]],'#e5ce96');
+   if(a.segIndex%2===0){c.strokeStyle='#786447';c.lineWidth=Math.max(1,a.w*.018);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y-ah-3);c.stroke();}
+  }
+  c.strokeStyle='#876e4e44';c.lineWidth=1;c.beginPath();c.moveTo(a.x-a.w,a.y);c.lineTo(a.x+a.w,a.y);c.stroke();
+ }else if(terrain==='tunnel'){
+  for(const side of [-1,1]){
+   const heightA=a.scale*720*H*.62,heightB=b.scale*720*H*.62;
+   shape(c,[[a.x+side*a.w*1.02,a.y],[a.x+side*a.w*1.30,a.y-heightA],[b.x+side*b.w*1.30,b.y-heightB],[b.x+side*b.w*1.02,b.y]],a.segIndex%2?'#455e4f':'#4a6351');
+   if(a.segIndex%4===0){c.fillStyle='#ffed9a';const size=Math.max(1,a.w*.025);c.fillRect(a.x+side*a.w*1.17-size,a.y-heightA*.6,size*2,size*.55);}
+  }
+ }
+}
+function drawTunnelPortal(c,p){
+ if(p.w<4)return;const x=p.x,y=p.y,w=p.w;c.save();
+ c.beginPath();c.moveTo(x-w*1.42,y+2);c.lineTo(x-w*1.42,y-w*.58);c.ellipse(x,y-w*.58,w*1.42,w*1.01,0,Math.PI,Math.PI*2);c.lineTo(x+w*1.42,y+2);c.closePath();
+ c.moveTo(x-w*1.04,y+3);c.lineTo(x-w*1.04,y-w*.58);c.ellipse(x,y-w*.58,w*1.04,w*.73,0,Math.PI,Math.PI*2);c.lineTo(x+w*1.04,y+3);c.closePath();
+ c.fillStyle=gradient(c,x-w,y-w*1.6,x+w,y,[[0,'#cccca5'],[.5,'#9caa86'],[1,'#6c826d']]);c.fill('evenodd');
+ c.lineWidth=Math.max(1,w*.015);c.strokeStyle='#63785b';
+ for(let i=0;i<=12;i++){const a=Math.PI+i/12*Math.PI;c.beginPath();c.moveTo(x+Math.cos(a)*w*1.05,y-w*.58+Math.sin(a)*w*.74);c.lineTo(x+Math.cos(a)*w*1.4,y-w*.58+Math.sin(a)*w);c.stroke();}
+ for(const side of [-1,1]){for(let j=0;j<4;j++){c.beginPath();c.moveTo(x+side*w*1.04,y-j*w*.14);c.lineTo(x+side*w*1.42,y-j*w*.14);c.stroke();}}
+ c.restore();
+}
+function drawHazard(c,type,x,y,k){
+ if(type==='puddle'){ellipse(c,x,y-2*k,49*k,12*k,'#b7e6d7b0');ellipse(c,x-5*k,y-4*k,34*k,6*k,'#81bcb4');c.strokeStyle='#ecfff18a';c.lineWidth=Math.max(1,k);c.beginPath();c.ellipse(x,y-5*k,24*k,3*k,0,0,Math.PI);c.stroke();return;}
+ ellipse(c,x,y,25*k,5*k,'#263f2d40');rr(c,x-24*k,y-6*k,48*k,7*k,2*k,'#4b654a');
+ shape(c,[[x-17*k,y-6*k],[x-5*k,y-58*k],[x+5*k,y-58*k],[x+17*k,y-6*k]],'#f19848');
+ shape(c,[[x-12*k,y-27*k],[x-9*k,y-40*k],[x+9*k,y-40*k],[x+12*k,y-27*k]],'#fff1d0');
+}
+function drawRaceEffects(c,s,py){
+ for(const fx of s.effects){
+  const t=fx.age/fx.life;c.save();c.globalAlpha=1-t;
+  if(fx.type==='lightning'){
+   c.strokeStyle='#fff6ab';c.lineWidth=3;
+   for(let j=0;j<3;j++){const x=W*(.25+j*.25);c.beginPath();c.moveTo(x,H*.08);c.lineTo(x-14,H*.23);c.lineTo(x+8,H*.21);c.lineTo(x-12,H*.42);c.stroke();}
+  }else{
+   const color={pickup:'#fff4a2',jump:'#eaffaa',boost:'#ffcb65',impact:'#f3d09b',ice:'#b7f1ff'}[fx.type]||'#efffcf';
+   for(let j=0;j<(quality.level>0?12:7);j++){const a=j/12*Math.PI*2,r=(18+t*75)*Math.min(W/400,1.5);ellipse(c,W/2+Math.cos(a)*r,py-35+Math.sin(a)*r*.5,Math.max(1,4*(1-t)),Math.max(1,4*(1-t)),color);}
+  }c.restore();
+ }
+ if(surfaceAt(Math.floor(s.d/SEG))==='tunnel'){
+  const g=c.createRadialGradient(W*.5,H*.60,Math.min(W,H)*.16,W*.5,H*.55,Math.max(W,H)*.65);g.addColorStop(0,'#112f1c00');g.addColorStop(1,'#0c241aba');c.fillStyle=g;c.fillRect(0,0,W,H);
+ }
+}
