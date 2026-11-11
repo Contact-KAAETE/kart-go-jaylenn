@@ -43,3 +43,18 @@ Nog in uitvoering. Geen claim dat de publicatie of het project voltooid is.
 - Een CSS-fout bij het verwijderen van externe webfonts gevonden en hersteld; alle lettertypen en styles zijn lokaal.
 - Browsercontroles voor finish/opslaan/eindbaas en definitieve publicatie nog in uitvoering.
 - Niet getest op een fysieke iPhone of Android. Geen gemeten garantie van 60 FPS op echte telefoons.
+
+## Fase E — lokale kandidaat gereed; publicatie geblokkeerd
+
+- Functionele browsercontroles voor finish, vrijspelen, heropenen, hervatten, draaien, automatische ijsaanval, bevriezen en Jump geslaagd.
+- De definitieve spelcodecontrole is deterministisch en heeft alle twintig banen gewonnen.
+- Een onjuist vroege tijdscheck in de lokale testhulp is vervangen door wachten op het echte botsingsresultaat; het spel zelf bevroor correct.
+- Zichtbaarheid van karts en Lucky Blocks in perspectief verbeterd; de Hotdog-Hond heeft nu een duidelijk grotere schaal. Een donkere strook buiten de tunnel is hersteld.
+- Sluiten van het finishvenster gaat terug naar de wereldkaart; opgeslagen lage grafische kwaliteit wordt ook na heropenen toegepast.
+- Alle details en beperkingen staan in docs/TEST_RESULTS.md.
+- Laatste controle van de GitHub-installatie: uitsluitend digitale-marco-native toegestaan, Kart Go nog niet toegevoegd.
+- ONLINE GAME NOG NIET V3: publicatie en GitHub-back-up wachten op eigenaarstoegang. De originele remote hoofdbranch is ongewijzigd.
+
+### Hervatten zonder opnieuw te bouwen
+
+De lokale geschiedenis bevat aparte commits voor B, C, D en de E-kandidaat. De lokale branch backup/v2-before-v3-20261111 bewaart de oorspronkelijke versie. Een herstelbundel wordt bewaard omdat deze nieuwe commits door de toegangsfout nog niet extern gesynchroniseerd zijn. Na toegang eerst remote status en back-up verifiëren, dan de fasen opslaan en de echte Pages-link testen. Niet teruggaan naar een oudere ZIP of het oorspronkelijke Sites-project.
