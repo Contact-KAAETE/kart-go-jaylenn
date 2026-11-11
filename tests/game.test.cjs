@@ -12,9 +12,9 @@ function environment(initial={}){
  }return nodes.get(id);}
  const math=Object.create(Math);let seed=123456;const seededRandom=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};math.random=seededRandom;
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
- const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},console,Math:math,URL,Blob,Date};
+ const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
  vm.createContext(sandbox);
- for(const file of ['scenery.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
+ for(const file of ['vendor/qrcode.js','player.js','scenery.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
  return{random:seededRandom,run:code=>vm.runInContext(code,sandbox),nodes,storage,math,events,sandbox};
 }
 const e=environment(),{run,nodes,storage}=e;const event=(id,x=65,y=65)=>({pointerId:id,clientX:x,clientY:y,button:0,pointerType:'touch',preventDefault(){}});
@@ -79,3 +79,17 @@ for(let level=1;level<=20;level++){
 }
 assert.equal(tracks.size,20);assert.ok(winners>=18,`controller won ${winners}/20`);assert.equal(run('state.profile.difficulty'),29);
 console.log(`PASS: 20 unique playable tracks (${winners}/20 controller wins), multitouch ownership, all 3 controls, simultaneous pedals, cancellation, rotation, pause/resume, exact item thresholds, 9-block boss, 10-second ice, 2-second freeze, jump, legacy save migration, checkpoints and scenery.`);
+
+// V4 player migration, rewards and garage survive reopening and import sanitization.
+const proto=JSON.stringify({nickname:'TurboJay',character:'🐸',paint:'🔵',code:'KG-ABC234',friends:['KG-DEF567']});
+const v4=environment({'kartgo-jaylenn-v1':legacy,'kartgo-jaylenn-friends-prototype-v1':proto});
+assert.equal(v4.storage['kartgo-jaylenn-v1-backup-before-v4'],legacy);
+assert.equal(v4.run('saved.player.name'),'TurboJay');assert.equal(v4.run('saved.player.avatar'),'🐸');assert.equal(v4.run('saved.player.color'),'#579be4');
+assert.equal(v4.run('saved.xp'),200);assert.equal(v4.run("effectOpen('splash')"),false);
+v4.run('saved.wins=Array.from({length:14},(_,i)=>i+1)');assert.equal(v4.run("effectOpen('splash')"),true);assert.equal(v4.run("effectOpen('boem')"),false);
+v4.run('saved.wins=Array.from({length:39},(_,i)=>i+1);saved.xp=2000');assert.equal(v4.run("effectOpen('boem')"),true);assert.equal(v4.run('xpLevel()'),5);
+v4.run("saved.player.color='#ab75d0';saved.player.effect='boem';saved.rewards.glitter=true;persist()");const v4again=environment(v4.storage);assert.equal(v4again.run('saved.player.effect'),'boem');assert.equal(v4again.run('saved.rewards.glitter'),true);assert.equal(v4again.run('saved.player.code'),'KG-ABC234');
+assert.equal(v4.run("cleanPlayer({name:'<Turbo>',color:'javascript:x',avatar:'<img>',effect:'fake'}).name"),'Turbo');assert.equal(v4.run("cleanPlayer({color:'red'}).color"),'#f56a48');
+v4.run('start(1);state.count=0;cosmeticBurst()');assert.equal(v4.run("state.effects.filter(e=>e.type==='boem').length"),1);v4.run('cosmeticBurst()');assert.equal(v4.run('state.effects.length'),1);v4.run('state.time=2;cosmeticBurst()');assert.equal(v4.run('state.effects.length'),2);
+v4.run("saved.player.effect='none';state.time=4;cosmeticBurst()");assert.equal(v4.run('state.effects.length'),2);
+console.log('PASS: V4 prototype migration, safe profile, rewards 15/40, XP5, persistent paint/avatar/code and Boem 2-second cooldown.');

@@ -25,3 +25,12 @@ Node regressies volgen na integratie. Alle nieuwe functies zijn nog in uitvoerin
 
 ## Volgende stap
 Fase2: geïntegreerde coureur, garage, opslagmigratie. Daarna Wereld1/2, QR en backendonderzoek, volledige regressies, veilige publicatie en livecontrole.
+
+## Fase2 — geïntegreerd
+Alias en poppetje (bestaande zes prototypekeuzes), helm en kartkleur staan in de echte game. De enige bestaande spelerskart blijft de originele kart; geen nieuwe voertuigtypen toegevoegd. Garage heeft één actief effect: geen/glitter/splash/boem. Splash vanaf bereikt15, Boem vanaf bereikt40 met2s afkoeling. Glitters ophalen op de kaart na eerste winst. XP:100 per eerste levelwinst;500 per XP-level, vanafXP5 glanzende kart. Deze transparante XP-drempel en glitterkaartbeloning zijn implementatiekeuzes bij niet-gespecificeerde details.
+
+Opslag behoudt sleutel kartgo-jaylenn-v1 en maakt backup-before-v4. Alias, avatar, kleur en code worden overgenomen uit het lokale prototype indien nog geen echt profiel bestaat; de lokale proefvrienden worden niet als echte vrienden overgenomen. Export bevat profiel/garage/XP; import voegt overwinningen/beste tijden samen en leest bewust gekozen profiel en instellingen in. Nieuwe lokale codes gebruiken crypto.getRandomValues. QR is lokaal gegenereerd met MIT qrcode-generator1.4.4, geen netwerkdienst. Online koppeling staat expliciet uit.
+
+Tests: bestaande20leveltests nog groen; nieuwe tests voor profielvalidatie, prototypemigratie, blijvende code/kleur/effect, beloningen15/40, XP5 en Boem2s. Browsercontrole en tekenen van effecten volgen in volgende fase.
+
+Fase1 GitHub-commit:9af1790cb7ff6ce1cf62bf32f4a566895fecaf9d.

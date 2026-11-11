@@ -1,0 +1,40 @@
+/* Player and garage UI, integrated with the original race and storage. */
+'use strict';
+const AVATARS=['🧑‍🚀','🥷','🦊','🐼','🐸','🤖'];
+const PAINTS={'🔴':'#f56a48','🔵':'#579be4','🟢':'#78b747','🟡':'#f3c84e','🟣':'#ab75d0'};
+const safeText=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function newFriendCode(){const bytes=new Uint8Array(12);crypto.getRandomValues(bytes);return 'KG-'+[...bytes].map(v=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[v%32]).join('');}
+function cleanPlayer(p={}){
+ return{name:typeof p.name==='string'?p.name.replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,16):'',avatar:AVATARS.includes(p.avatar)?p.avatar:AVATARS[0],helmet:/^#[\da-f]{6}$/i.test(p.helmet)?p.helmet:'#306b4c',color:/^#[\da-f]{6}$/i.test(p.color)?p.color:PAINTS[p.paint]||'#f56a48',kart:'classic',effect:['none','glitter','splash','boem'].includes(p.effect)?p.effect:'none',code:/^KG-[A-HJ-NP-Z2-9]{6,16}$/.test(p.code)?p.code:newFriendCode()};
+}
+function reachedLevel(){return Math.min(50,Math.max(1,...saved.wins.map(n=>n+1)));}
+function xpLevel(){return 1+Math.floor(saved.xp/500);}
+function effectOpen(effect){return effect==='none'||effect==='glitter'&&saved.rewards.glitter||effect==='splash'&&reachedLevel()>=15||effect==='boem'&&reachedLevel()>=40;}
+function effectiveEffect(){return effectOpen(saved.player.effect)?saved.player.effect:'none';}
+function renderPlayer(){
+ $('#playerName').textContent=saved.player.name||'Kies je racenaam';$('#playerAvatar').textContent=saved.player.avatar;
+ $('#playerXP').textContent=`XP ${xpLevel()} · ${saved.xp} XP${xpLevel()>=5?' · ✦ glimmende kart':''}`;
+ $('#racePlayer').textContent=`${saved.player.avatar} ${saved.player.name||'Coureur'}`;
+ $('#cosmetic').classList.toggle('hidden',effectiveEffect()!=='boem');
+}
+function profile(){
+ showModal(`<span class="eyebrow">JOUW COUREUR</span><h2>Wie zit er achter het stuur?</h2><p>Kies een bijnaam. Je echte naam is niet nodig. Alles blijft op dit apparaat.</p><label for="nickname">Racenaam</label><input id="nickname" maxlength="16" autocomplete="off" placeholder="Bijvoorbeeld TurboJay" value="${safeText(saved.player.name)}"><label for="avatarChoice">Poppetje</label><select id="avatarChoice">${AVATARS.map(v=>`<option ${saved.player.avatar===v?'selected':''}>${v}</option>`).join('')}</select><label for="helmetColor">Helmkleur in je kart</label><input id="helmetColor" type="color" value="${saved.player.helmet}"><div id="profileMessage" role="status"></div><button class="primary" id="savePlayer">Bewaar mijn coureur ›</button>`);
+ $('#savePlayer').onclick=()=>{const name=$('#nickname').value.replace(/[<>\u0000-\u001f]/g,'').trim();if(name.length<2){$('#profileMessage').textContent='Kies een bijnaam van minstens twee tekens.';return;}saved.player={...saved.player,name:name.slice(0,16),avatar:$('#avatarChoice').value,helmet:$('#helmetColor').value};persist();renderPlayer();closeModal();const action=pendingPlayerAction;pendingPlayerAction=null;if(action)action();};
+}
+let pendingPlayerAction=null;
+function requestRace(action){if(!saved.player.name){pendingPlayerAction=action;profile();}else action();}
+function garage(){
+ const effect=saved.player.effect;
+ showModal(`<span class="eyebrow">DE GARAGE</span><h2>Jouw kart. Jouw stijl.</h2><canvas id="garageArt" width="680" height="310" aria-label="Je gekozen kart"></canvas><label for="kartChoice">Kart kiezen</label><select id="kartChoice"><option value="classic">Jaylenns originele kart ✓</option></select><p class="saved-note">Dit is de bestaande spelerskart. Kleur en helm veranderen echt tijdens de race.</p><label for="kartColor">Kartkleur</label><input id="kartColor" type="color" value="${saved.player.color}"><div class="paint-row">${Object.values(PAINTS).map(v=>`<button aria-label="Kartkleur ${v}" data-paint="${v}" style="background:${v}"></button>`).join('')}</div><label for="effectChoice">Eén effect tegelijk</label><select id="effectChoice">${[['none','Geen effect'],['glitter','Glitters ✨ · beloning op de kaart'],['splash','Splash 💦 · vanaf level 15'],['boem','Boem 💥 · vanaf level 40']].map(([v,n])=>`<option value="${v}" ${effect===v&&effectOpen(v)?'selected':''} ${!effectOpen(v)?'disabled':''}>${n}${effectOpen(v)?'':' · vergrendeld'}</option>`).join('')}</select><p>XP-level ${xpLevel()} · ${saved.xp} XP. Elke eerste overwinning geeft 100 XP; elke 500 XP stijg je een XP-level. Op XP-level 5 glimt je kart. Boem is een vrolijk visueel effect, elke twee seconden.</p><button class="primary" id="saveGarage">Bewaar mijn kart ›</button><p id="garageMessage" role="status"></p>`);
+ const paint=()=>{const cv=$('#garageArt'),c=cv.getContext('2d');c.clearRect(0,0,680,310);c.fillStyle='#dfecc9';c.fillRect(0,0,680,310);kart(c,340,270,2,$('#kartColor').value,false,0,{...saved.player,color:$('#kartColor').value});};
+ $('#kartColor').oninput=paint;$$('[data-paint]').forEach(b=>b.onclick=()=>{$('#kartColor').value=b.dataset.paint;paint();});paint();
+ $('#saveGarage').onclick=()=>{saved.player.color=$('#kartColor').value;saved.player.effect=effectOpen($('#effectChoice').value)?$('#effectChoice').value:'none';const ok=persist();renderPlayer();$('#garageMessage').textContent=ok?'Je kart is opgeslagen. Klaar om te racen!':'Opslaan lukt niet. Bewaar je voortgang als bestand.';};
+}
+function friends(){
+ showModal(`<span class="eyebrow">SAMEN RACEN · VOORBEREIDING</span><h2>${safeText(saved.player.avatar)} ${safeText(saved.player.name||'Jouw coureur')}</h2><p><strong>Online vrienden en privéraces zijn nog niet aangesloten.</strong> Andere telefoons worden nog niet verbonden. Je kunt nu je lokale code bewaren en de QR bekijken.</p><label for="ownCode">Jouw lokale vriendencode</label><input id="ownCode" readonly value="${saved.player.code}"><button class="secondary" id="copyFriendCode">Kopieer code</button><div id="friendQR" aria-label="QR met alleen jouw anonieme code"></div><p id="friendMessage" role="status"></p><p class="saved-note">De QR bevat uitsluitend een willekeurige code, geen naam of andere profielgegevens. De code is nog niet online geregistreerd en verleent geen toegang tot je voortgang. Scanverzoeken, acceptatie, vrienden zoeken en lobby's volgen pas na een veilige online aansluiting met toestemming van een ouder.</p><div class="tip">Privéraces voor maximaal zes spelers zijn nog niet beschikbaar. Er zijn geen gesimuleerde vrienden, verzoeken of lobby's.</div>`);
+ const qr=qrcode(0,'M');qr.addData('KARTGO:FRIEND:'+saved.player.code);qr.make();$('#friendQR').innerHTML=qr.createSvgTag({cellSize:5,margin:20,scalable:true});
+ $('#copyFriendCode').onclick=async()=>{try{await navigator.clipboard.writeText(saved.player.code);$('#friendMessage').textContent='Code gekopieerd.';}catch{$('#ownCode').select();$('#friendMessage').textContent='Houd de geselecteerde code ingedrukt en kies Kopieer.';}};
+}
+function claimGlitter(){if(!saved.wins.length){showModal('<h2>Een glinsterende beloning!</h2><p>Win je eerste race en haal daarna hier je glitters op.</p>');return;}saved.rewards.glitter=true;const ok=persist();renderMap();showModal(`<h2>Glitters vrijgespeeld! ✨</h2><p>Kies Glitters in de garage om ze achter je kart te laten schitteren.</p><button class="primary" id="rewardGarage">Naar de garage ›</button><p>${ok?'Beloning opgeslagen.':'Bewaar je voortgang als bestand om je beloning te behouden.'}</p>`);$('#rewardGarage').onclick=garage;}
+function cosmeticBurst(){if(!state||state.paused||state.finished||state.count>0||effectiveEffect()!=='boem'||state.time<state.nextBoem)return;state.nextBoem=state.time+2;addEffect('boem');beep(160,.12,'triangle');}
+function initPlayerUI(){renderPlayer();$('#profile').onclick=profile;$('#garage').onclick=garage;$('#friends').onclick=friends;$('#claimGlitter').onclick=claimGlitter;$('#cosmetic').onclick=cosmeticBurst;}
