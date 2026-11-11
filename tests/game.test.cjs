@@ -14,7 +14,7 @@ function environment(initial={}){
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
  const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
  vm.createContext(sandbox);
- for(const file of ['vendor/qrcode.js','player.js','scenery.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
+ for(const file of ['vendor/qrcode.js','player.js','scenery.js','desert.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
  return{random:seededRandom,run:code=>vm.runInContext(code,sandbox),nodes,storage,math,events,sandbox};
 }
 const e=environment(),{run,nodes,storage}=e;const event=(id,x=65,y=65)=>({pointerId:id,clientX:x,clientY:y,button:0,pointerType:'touch',preventDefault(){}});
@@ -97,3 +97,18 @@ console.log('PASS: V4 prototype migration, safe profile, rewards 15/40, XP5, per
 run('start(1);state.count=0;state.d=10000;state.opponents.forEach(o=>o.d=0);state.inventory=[1,3,null];useItem(0)');assert.equal(run('state.inventory[0]'),null);assert.equal(run('state.opponents.some(o=>o.hyp===10)'),true,'hypnosis also works while leading');
 run('useItem(1);state.opponents[0].d=state.bananas[0].d;state.opponents[0].x=state.bananas[0].x;update(.001)');assert.equal(run('state.opponents[0].spin'),2);run('state.bananas=[]');for(let i=0;i<121;i++)run('update(1/60)');assert.equal(run('state.opponents[0].spin'),0);
 console.log('PASS: hypnose10s with leading player, purple feedback and banana spin2s ending automatically.');
+
+// All Sand World courses are actual races, not additional map labels.
+const sandTracks=new Set();let sandWinners=0;
+for(let level=21;level<=50;level++){
+ run(`start(${level});state.count=0;saved.auto=true;saved.assist=true;`);assert.equal(run('state.sand'),true);sandTracks.add(run('state.curves.map(v=>v.toFixed(3)).join()'));
+ for(let i=0;i<150;i++)assert.ok([1,3,5].includes(run('randomItem()')));
+ let steps=0;while(!run('state.finished')&&steps++<10000){run(`{const s=state;let tx=0;const upcoming=s.blocks.filter(b=>s.boss?b.lap<0:b.lap!==Math.floor(s.d/LENGTH)).map(b=>({x:b.x,gap:circularGap(b.d,s.d)})).filter(b=>b.gap>0&&b.gap<2200).sort((a,b)=>a.gap-b.gap)[0];if(upcoming&&s.inventory.includes(null))tx=upcoming.x;const hazard=s.obstacles.find(o=>{const gap=circularGap(o.d,s.d);return gap>0&&gap<2300});if(hazard)tx=hazard.x>=0?-.6:.6;const close=s.opponents.find(o=>o.d-s.d>0&&o.d-s.d<700&&Math.abs(o.x-tx)<.35);if(close)tx=close.x>=0?-.64:.64;const cv=s.curves[Math.floor((s.d%LENGTH)/SEG)];input.analog=clamp((tx-s.x)*4+cv*.055/1.35,-1,1);s.inventory.forEach((item,i)=>{if(item===1||item===5)useItem(i)});update(1/60);}`);}
+ assert.equal(run('state.finished'),true,`sand level${level} finishes`);assert.ok(run('state.time')<140);assert.ok(run('state.profile.difficulty')<=29);if(run('state.rank===1'))sandWinners++;run('draw()');
+}
+assert.equal(sandTracks.size,30);assert.ok(sandWinners>=27,`sand controller won${sandWinners}/30`);
+run('start(21);state.count=0;state.inventory=[5,2,1];useItem(0)');assert.equal(run('state.opponents[0].freeze'),2);run('useItem(1)');assert.equal(run('state.boost'),0,'Sand refuses manually inserted boost');const frozen=run('state.opponents[0].d');for(let i=0;i<119;i++)run('update(1/60)');assert.equal(run('state.opponents[0].d'),frozen);for(let i=0;i<3;i++)run('update(1/60)');assert.ok(run('state.opponents[0].d')>frozen);
+run('start(50);state.count=0;state.time=10;update(.01)');assert.equal(run('state.opponents[0].pizza'),true);assert.equal(run('state.shots.length'),0,'no invented Pizzaman ice attack');
+run('checkpoint()');const sandReopen=environment(storage);assert.equal(sandReopen.run('saved.session.level'),50);sandReopen.run('start(50,saved.session)');assert.equal(sandReopen.run('state.sand'),true);
+assert.equal(sandReopen.run('names.length'),50);assert.equal(sandReopen.run('saved.player.code'),JSON.parse(storage['kartgo-jaylenn-v1']).player.code);
+console.log(`PASS:30 unique Sand World tracks (${sandWinners}/30 controller wins), only3 allowed items, boost refused, freeze2s, Pizzaman without unapproved attacks and level50 save/reopen.`);

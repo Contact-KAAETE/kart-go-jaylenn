@@ -4,7 +4,7 @@ const sceneryCache=new Map();let sceneryLevel=1,landscapeCache=null;
 function shape(c,points,color){c.beginPath();points.forEach((p,i)=>i?c.lineTo(...p):c.moveTo(...p));c.closePath();c.fillStyle=color;c.fill();}
 function gradient(c,x,y,x2,y2,stops){const g=c.createLinearGradient(x,y,x2,y2);stops.forEach(([at,color])=>g.addColorStop(at,color));return g;}
 function scenicCanvas(w=400,h=440){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
-function buildScenery(level){sceneryLevel=level;landscapeCache=null;if(sceneryCache.size)return;
+function buildScenery(level){sceneryLevel=level;if(level>20)buildDesertScenery();landscapeCache=null;if(sceneryCache.size)return;
  for(const type of ['oak','pine','blossom','flowers','grass','rocks','fence','barn','mill','pond','hay','sign']){
   const cv=scenicCanvas(),c=cv.getContext('2d');c.translate(200,425);
   if(['oak','pine','blossom'].includes(type)){
@@ -27,8 +27,9 @@ function buildScenery(level){sceneryLevel=level;landscapeCache=null;if(sceneryCa
   sceneryCache.set(type,cv);
  }
 }
-function drawScenic(c,type,x,y,k){const image=sceneryCache.get(type);if(!image||k<.004)return;const factors={oak:1.5,pine:1.65,blossom:1.4,flowers:1.1,grass:1,rocks:1.2,fence:1.4,barn:2.2,mill:2.5,pond:2.5,hay:1.4,sign:1.2};const scale=k*(factors[type]||1);c.drawImage(image,x-200*scale,y-425*scale,400*scale,440*scale);}
+function drawScenic(c,type,x,y,k){if(sceneryLevel>20){drawDesertScenic(c,type,x,y,k);return;}const image=sceneryCache.get(type);if(!image||k<.004)return;const factors={oak:1.5,pine:1.65,blossom:1.4,flowers:1.1,grass:1,rocks:1.2,fence:1.4,barn:2.2,mill:2.5,pond:2.5,hay:1.4,sign:1.2};const scale=k*(factors[type]||1);c.drawImage(image,x-200*scale,y-425*scale,400*scale,440*scale);}
 function drawLandscape(c,w,h,s){
+ if(s.sand){drawDesertLandscape(c,w,h,s);return;}
  const hh=h*.40;if(!landscapeCache||landscapeCache.w!==w||landscapeCache.h!==h){
   const cv=scenicCanvas(Math.ceil(w*1.2),Math.ceil(hh+5)),p=cv.getContext('2d'),bw=cv.width,bh=cv.height;
   p.fillStyle=gradient(p,0,0,0,bh,[[0,'#73c8db'],[.65,'#b6e4dd'],[1,'#edf1bd']]);p.fillRect(0,0,bw,bh);

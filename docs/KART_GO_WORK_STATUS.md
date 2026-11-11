@@ -38,3 +38,11 @@ Fase1 GitHub-commit:9af1790cb7ff6ce1cf62bf32f4a566895fecaf9d.
 ## Fase3 — Wereld1 en items
 Alle oorspronkelijke20 circuits behouden. Hypnose werkt ook als je vooraan rijdt: eerstvolgende tegenstander vóór je, anders dichtstbijzijnde achter je. Geen schijnbaar dode knop meer. Duur10s volgensV4, paarse sprankels. Banaan geeft echte draai-animatie2s, ook bij bots, en eindigt automatisch. Onweer50%, Hypnose20%, Boost15%, Banaan10%, Jump5% blijven exact. Dog blijft9blocks/10sijs/2sfreeze/Jumpbescherming. Garage-effecten tekenen werkelijk tijdens rijden; Boem-knop toont2s cooldown. Geen effect schakelt de cosmetische deeltjes uit; gameplay-aanvallen blijven zichtbaar.
 Tests:20/20 circuits door de testcontroller gewonnen; bestaande multitouch/rotatie/pauzechecks groen. Nieuwe regressies bevestigen hypnose vanuit leidende positie en einde spin. Fase2 GitHub394389bf6c427c55afbb831451ee91f58504805c.
+
+## Fase4 — Zandwereld gebouwd
+Levels21–50 zijn echte, verschillende circuits in dezelfde engine, met oplopende bochten/duinhoogtes/obstakels en bots15–29%. Nieuwe gecachete procedurele duinen, palmen, cactussen, zandsteenbogen, rotsen, oases en zandweg. Wereldkeuzeknoppen, aparte kaart en doorlopende vrijspeelregel20→21 en49→50. Bestaande20 groene namen/circuits blijven intact.
+
+Zandwereld geeft uitsluitend Hypnose/IJs/Banaan; voorlopig gelijke kansen (Jaylenn heeft daarvoor geen kansen opgegeven). Geen boosts/Onweer/Jump; ook hervatten filtreert wereldvreemde inventaris en boost. IJs houdt tegenstander2s stil. Level50 heeft een grote pizzakart met asymmetrisch gezicht en tomatentong. Geen speciale Pizzaman-aanvallen bedacht. Open creatieve keuze: welke bijzondere aanval/mechaniek wil Jaylenn later? Tot die tijd is dit een volwaardige eindrace tegen Pizzaman met gewone race-AI.
+
+Tests: alle30 zandbanen voltooid,27/30 gewonnen door dezelfde begrensde testcontroller (20/20 groen);50 verschillende curvenreeksen totaal. Geen teleports of extra snelheid tijdens die rijtests. Freeze2s en herstel, boostweigering, toegestane items, geen ongoedgekeurde ijsaanval bij Pizzaman en sessie50 heropenen bevestigd. Grafische browsercontrole volgt. Lokale vriendencode wordt nu meteen opgeslagen, ook vóór eerste race.
+Fase3 GitHub:ace6394c6db3cf5ac216c9e44c3f278ee7af0256.
