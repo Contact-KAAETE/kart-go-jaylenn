@@ -12,7 +12,7 @@ function environment(initial={}){
  }return nodes.get(id);}
  const math=Object.create(Math);let seed=123456;const seededRandom=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};math.random=seededRandom;
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
- const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
+ const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},location:{hash:''},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
  vm.createContext(sandbox);
  for(const file of ['vendor/qrcode.js','player.js','scenery.js','desert.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
  return{random:seededRandom,run:code=>vm.runInContext(code,sandbox),nodes,storage,math,events,sandbox};
@@ -112,3 +112,7 @@ run('start(50);state.count=0;state.time=10;update(.01)');assert.equal(run('state
 run('checkpoint()');const sandReopen=environment(storage);assert.equal(sandReopen.run('saved.session.level'),50);sandReopen.run('start(50,saved.session)');assert.equal(sandReopen.run('state.sand'),true);
 assert.equal(sandReopen.run('names.length'),50);assert.equal(sandReopen.run('saved.player.code'),JSON.parse(storage['kartgo-jaylenn-v1']).player.code);
 console.log(`PASS:30 unique Sand World tracks (${sandWinners}/30 controller wins), only3 allowed items, boost refused, freeze2s, Pizzaman without unapproved attacks and level50 save/reopen.`);
+
+// Beginning a new race at a changed viewport must not trigger the rotation-pause path.
+e.sandbox.innerWidth=320;e.sandbox.innerHeight=568;run('start(1)');assert.equal(run('state.paused'),false);e.sandbox.innerWidth=844;e.sandbox.innerHeight=390;run('resize()');assert.equal(run('state.paused'),true);
+console.log('PASS: fresh race stays active after a viewport change; rotating an ongoing race still pauses safely.');

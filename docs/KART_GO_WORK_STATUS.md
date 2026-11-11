@@ -46,3 +46,10 @@ Zandwereld geeft uitsluitend Hypnose/IJs/Banaan; voorlopig gelijke kansen (Jayle
 
 Tests: alle30 zandbanen voltooid,27/30 gewonnen door dezelfde begrensde testcontroller (20/20 groen);50 verschillende curvenreeksen totaal. Geen teleports of extra snelheid tijdens die rijtests. Freeze2s en herstel, boostweigering, toegestane items, geen ongoedgekeurde ijsaanval bij Pizzaman en sessie50 heropenen bevestigd. Grafische browsercontrole volgt. Lokale vriendencode wordt nu meteen opgeslagen, ook vóór eerste race.
 Fase3 GitHub:ace6394c6db3cf5ac216c9e44c3f278ee7af0256.
+
+## Fase5/6 — eerlijk voorbereid, online open
+Code/QR zijn geïntegreerd en anoniem lokaal; geen werkend online vriendensysteem. Verzoeken/accepteren/verwijderen/naamzoeken/QR-scannen naar een verzoek en multiplayer zijn nog niet gerealiseerd. Alle bijbehorende nepacties uit het prototype ontbreken in het echte spel. Het vriendenmenu meldt dit expliciet.
+`docs/ONLINE_PLAN.md` vergelijkt gratis opties en beschrijft identiteit, ouderlijke toestemming, gegevensbeheer, beveiliging en een autoritatieve6speler-backend. Cloudflare Free is technisch kansrijk, maar nog geen goedgekeurde/geactiveerde dienst. Geen betaalde diensten of onnodige kindergegevens gekoppeld. Realtime2/3/6/7 tests zijn daarom niet uitgevoerd. De originele lokale proefcode blijft in de GitHub-back-up raadpleegbaar.
+
+## Fase7 — browsercontroles in uitvoering
+Alle echte items,9blocks/10s/2s/Jump, profielsaves, Boem2s en geen-effect getest in echte Chromium met synthetische PointerEvents. Browsercontrole vond dat een start bij veranderde viewport direct pauzeerde; start-resize slaat nu alleen voor de nieuwe race de rotatiepauze over. Een al lopende race pauzeert bij draaien nog steeds. Fase4 GitHub:dcb35d2100b44dc626768c0f59b57037109d62ae.
