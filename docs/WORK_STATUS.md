@@ -1,5 +1,23 @@
 # Kart Go V3 — voortgang
 
+## Actuele status — toegang hersteld, GitHub-opslag geslaagd
+
+De eigenaar heeft Kart Go toegevoegd aan de bestaande GitHub-koppeling. De toegangsfout hieronder is historische context en blokkeert het schrijven niet meer.
+
+- Back-up in GitHub: `backup/v2-before-v3-20261111`, op de ongewijzigde V2.1-commit `ebc396a09c4622716dbcc7250a5609dbd95f3b71`.
+- Alle voorbereide fasen zijn op de bestaande `main` opgeslagen, zonder force push. De boomhash van iedere fase is vergeleken met de lokaal geteste bronversie: exact gelijk.
+- Fase A: `58c5145a9cd45e0a4f724168a3dc7fd7a949e263` — .nojekyll en oorspronkelijke V2 behouden.
+- Fase B: `c9258466de7ea3283f42e46edb4a82a269d32bc5` — bediening/opslag.
+- Fase C: `a96f712735ed158e9cab993eb2e48b140a8a4a2a` — racewereld.
+- Fase D: `80311453008a84adcec00d35f7737db77740113a` — spelregels/tests.
+- Fase E-kandidaat: `a20cdc9638347632990e04cc477374e2bbd20f8b` — geteste V3.
+
+**Enige resterende blokkade:** GitHub repository-metadata meldt `has_pages: false`. De gewenste speellink geeft HTTP 404. De beschikbare GitHub-tools kunnen Pages niet inschakelen. De eigenaar moet bij Settings → Pages kiezen: Deploy from a branch → main → /(root) → Save.
+
+Na die instelling: wacht op de Pages-deploy, open de echte HTTPS-speellink, verifieer V3 en test start/race/wereldkaart online. Verklaar het project tot die controle niet volledig opgeleverd. De lokale Chromium- en simulatiecontroles staan in TEST_RESULTS.md.
+
+---
+
 Bedenker: Jaylenn. Hervat vanaf bestaande GitHub-commit ebc396a09c4622716dbcc7250a5609dbd95f3b71.
 
 ## Fase A

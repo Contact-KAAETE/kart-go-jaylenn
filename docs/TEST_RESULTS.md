@@ -44,7 +44,7 @@ Command: `node tests/game.test.cjs`.
 ## Nog niet geslaagd / niet beschikbaar
 
 - GitHub Pages: de gewenste online URL gaf bij controle 404. Nog niet gepubliceerd.
-- GitHub-back-up en fasecommits: nog niet naar de repository geschreven. De native GitHub-koppeling retourneert 403 bij het maken van een branch en somt alleen digitale-marco-native op als toegankelijke repository.
+- GitHub-back-up en fasecommits: inmiddels geslaagd. Na toevoegen van Kart Go aan de koppeling zijn de back-up en A–E op de bestaande repository opgeslagen; bronbomen exact geverifieerd. De eerdere 403 is opgelost.
 - Pages-configuratie heeft geen native GitHub-tool in deze sessie. De cloudbrowser was niet aangemeld. De gebruiker wees op gebruik van de plug-in; er wordt geen verdere browser-aanmelding aangevraagd.
 - Geen fysieke iPhone/Safari, fysieke Android/Chrome, native touch-apparaat of WebKit-browser beschikbaar. De touchcontrole betreft synthetische PointerEvents in Chromium, geen echte iOS-aanraking.
 - Geen meting van 60 FPS op echte telefoons. Automatische kwaliteitsverlaging is geïmplementeerd, maar geen prestatiegarantie.
@@ -52,9 +52,9 @@ Command: `node tests/game.test.cjs`.
 
 ## Publicatie hervatten
 
-1. Eigenaar voegt kart-go-jaylenn toe aan bestaande GitHub-installatie 179583608, zonder digitale-marco-native te verwijderen.
-2. Verifieer de actuele remote main; maak eerst backup/v2-before-v3-20261111 op de oorspronkelijke V2.1-commit. Geen force push.
-3. Activeer GitHub Pages: Deploy from a branch, main, /(root). Controleer de bestaande V2.1 online zoals fase A vraagt.
-4. Zet de opgeslagen lokale fasecommits vervolgens in de bestaande repository. Blijf dezelfde repository en index.html als ingang gebruiken.
+1. Gereed: eigenaar heeft kart-go-jaylenn toegevoegd aan de bestaande GitHub-installatie, met behoud van digitale-marco-native.
+2. Gereed: remote main gecontroleerd en backup/v2-before-v3-20261111 gemaakt op de oorspronkelijke V2.1-commit; geen force push.
+3. Nog nodig: eigenaar activeert GitHub Pages met Deploy from a branch, main, /(root). De eerdere publicatie van V2 in fase A kon door de uitgeschakelde Pages-configuratie niet worden uitgevoerd. De oorspronkelijke versie staat veilig op de back-upbranch; main bevat nu de geteste V3.
+4. Gereed: alle lokale faseversies staan als afzonderlijke commits in de bestaande repository; dezelfde index.html blijft de ingang.
 5. Open de echte HTTPS-speellink, controleer een unieke V3-bronmarkering en test opnieuw start, race, wereldkaart en assets zonder foutmeldingen.
 6. Rapporteer pas daarna een werkende publicatie en de werkelijk opgeslagen GitHub-SHA.
