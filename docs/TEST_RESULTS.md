@@ -41,9 +41,17 @@ Command: `node tests/game.test.cjs`.
 
 `node --check` slaagt voor game.js, scenery.js en browser-driver.js.
 
-## Nog niet geslaagd / niet beschikbaar
+## Online publicatie — geslaagd
 
-- GitHub Pages: de gewenste online URL gaf bij controle 404. Nog niet gepubliceerd.
+- GitHub Pages is ingeschakeld. De publieke URL is https://contact-kaaete.github.io/kart-go-jaylenn/.
+- Pages-run 43079220423 op commit 80051ef6f8eabf0b1b77cbb4427bba747a097c37 is succesvol afgerond.
+- HTTP 200 voor index.html, assets/style.css, assets/scenery.js en assets/game.js. De SHA-256 van elk online bestand is exact gelijk aan de geteste lokale bronversie.
+- Op de echte publieke URL in Chromium: de startknop opent de race, de snelheid loopt op tot 118 km/u, bots rijden mee, de stuurknop reageert en pauze werkt. Vanuit de wereldkaart opnieuw gestart; na pauze en herladen verschijnt Hervat race.
+- De gepubliceerde voetregel bevat V3.0.
+
+## Beperkingen en historische blokkades
+
+- GitHub Pages: de eerdere 404 is opgelost; V3 is nu publiek gepubliceerd en in de browser getest.
 - GitHub-back-up en fasecommits: inmiddels geslaagd. Na toevoegen van Kart Go aan de koppeling zijn de back-up en A–E op de bestaande repository opgeslagen; bronbomen exact geverifieerd. De eerdere 403 is opgelost.
 - Pages-configuratie heeft geen native GitHub-tool in deze sessie. De cloudbrowser was niet aangemeld. De gebruiker wees op gebruik van de plug-in; er wordt geen verdere browser-aanmelding aangevraagd.
 - Geen fysieke iPhone/Safari, fysieke Android/Chrome, native touch-apparaat of WebKit-browser beschikbaar. De touchcontrole betreft synthetische PointerEvents in Chromium, geen echte iOS-aanraking.
@@ -54,7 +62,7 @@ Command: `node tests/game.test.cjs`.
 
 1. Gereed: eigenaar heeft kart-go-jaylenn toegevoegd aan de bestaande GitHub-installatie, met behoud van digitale-marco-native.
 2. Gereed: remote main gecontroleerd en backup/v2-before-v3-20261111 gemaakt op de oorspronkelijke V2.1-commit; geen force push.
-3. Nog nodig: eigenaar activeert GitHub Pages met Deploy from a branch, main, /(root). De eerdere publicatie van V2 in fase A kon door de uitgeschakelde Pages-configuratie niet worden uitgevoerd. De oorspronkelijke versie staat veilig op de back-upbranch; main bevat nu de geteste V3.
+3. Gereed: eigenaar heeft Pages ingeschakeld met Deploy from a branch, main, /(root). De vroegere V2-publicatie in fase A was geblokkeerd; V2 staat veilig op de back-upbranch en main bevat V3.
 4. Gereed: alle lokale faseversies staan als afzonderlijke commits in de bestaande repository; dezelfde index.html blijft de ingang.
-5. Open de echte HTTPS-speellink, controleer een unieke V3-bronmarkering en test opnieuw start, race, wereldkaart en assets zonder foutmeldingen.
-6. Rapporteer pas daarna een werkende publicatie en de werkelijk opgeslagen GitHub-SHA.
+5. Gereed: echte HTTPS-speellink geopend; V3-markering, start, race, wereldkaart, opslag na herladen en assets gecontroleerd.
+6. Publicatie kan als werkend worden gerapporteerd, met behoud van de genoemde beperkingen op fysieke apparaten. Nieuwere documentatiecommits wijzigen de geteste spelassets niet.

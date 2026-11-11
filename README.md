@@ -2,6 +2,8 @@
 
 Het spelconcept, de power-ups, de 20 levels en de Hotdog-Hond zijn bedacht door **Jaylenn**. Technische uitwerking met hulp van AI.
 
+**Speel direct:** https://contact-kaaete.github.io/kart-go-jaylenn/
+
 Bestaand project, hervat vanaf `ebc396a09c4622716dbcc7250a5609dbd95f3b71`. De bestaande Canvas 2D / 2,5D-engine en spelregels zijn behouden.
 
 ## Spelen
@@ -55,4 +57,4 @@ De simulatie gebruikt de echte broncode en controleert alle twintig banen, multi
 
 `tests/browser-qa.html` en `tests/browser-driver.js` vormen een lokale zichtbare browser-testomgeving. De driver weigert uitvoering buiten localhost/127.0.0.1. Voor de gebruikte preview worden deze bestanden als `/qa.html` en `/qa-driver.js` aangeboden. Ze worden niet geladen door het normale spel.
 
-Zie `docs/WORK_STATUS.md` en `docs/TEST_RESULTS.md` voor feitelijk uitgevoerde controles en openstaande publicatie.
+Zie `docs/WORK_STATUS.md` en `docs/TEST_RESULTS.md` voor feitelijk uitgevoerde controles, publicatie en beperkingen.
