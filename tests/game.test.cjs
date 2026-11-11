@@ -45,7 +45,7 @@ run('state.speed=MAX;input.brake=true;update(.1)');assert.ok(run('state.speed')<
 run('start(1);state.count=0;state.inventory=[0,2,4];useItem(0)');assert.equal(run('state.opponents.every(o=>o.slow===3)'),true);
 run('useItem(1)');assert.equal(run('state.boost'),4);
 run('useItem(2)');assert.equal(run('state.jump'),1.4);
-run('state.inventory=[1,3,null];state.opponents.forEach(o=>o.d=5000);state.opponents[0].d=2000;useItem(0);useItem(1)');assert.equal(run('state.opponents[0].hyp'),4);assert.equal(run('state.bananas.length'),1);
+run('state.inventory=[1,3,null];state.opponents.forEach(o=>o.d=5000);state.opponents[0].d=2000;useItem(0);useItem(1)');assert.equal(run('state.opponents[0].hyp'),10);assert.equal(run('state.bananas.length'),1);
 run('state.inventory=[0,1,2];state.d=state.blocks[0].d;state.x=state.blocks[0].x;update(.001)');assert.equal(run('state.inventory.every(x=>x!==null)'),true);
 run('useItem(-1);useItem(10);useItem(undefined)');
 // Exact probability boundaries, independent of sampling noise.
@@ -93,3 +93,7 @@ assert.equal(v4.run("cleanPlayer({name:'<Turbo>',color:'javascript:x',avatar:'<i
 v4.run('start(1);state.count=0;cosmeticBurst()');assert.equal(v4.run("state.effects.filter(e=>e.type==='boem').length"),1);v4.run('cosmeticBurst()');assert.equal(v4.run('state.effects.length'),1);v4.run('state.time=2;cosmeticBurst()');assert.equal(v4.run('state.effects.length'),2);
 v4.run("saved.player.effect='none';state.time=4;cosmeticBurst()");assert.equal(v4.run('state.effects.length'),2);
 console.log('PASS: V4 prototype migration, safe profile, rewards 15/40, XP5, persistent paint/avatar/code and Boem 2-second cooldown.');
+
+run('start(1);state.count=0;state.d=10000;state.opponents.forEach(o=>o.d=0);state.inventory=[1,3,null];useItem(0)');assert.equal(run('state.inventory[0]'),null);assert.equal(run('state.opponents.some(o=>o.hyp===10)'),true,'hypnosis also works while leading');
+run('useItem(1);state.opponents[0].d=state.bananas[0].d;state.opponents[0].x=state.bananas[0].x;update(.001)');assert.equal(run('state.opponents[0].spin'),2);run('state.bananas=[]');for(let i=0;i<121;i++)run('update(1/60)');assert.equal(run('state.opponents[0].spin'),0);
+console.log('PASS: hypnose10s with leading player, purple feedback and banana spin2s ending automatically.');

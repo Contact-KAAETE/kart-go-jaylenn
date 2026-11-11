@@ -34,3 +34,7 @@ Opslag behoudt sleutel kartgo-jaylenn-v1 en maakt backup-before-v4. Alias, avata
 Tests: bestaande20leveltests nog groen; nieuwe tests voor profielvalidatie, prototypemigratie, blijvende code/kleur/effect, beloningen15/40, XP5 en Boem2s. Browsercontrole en tekenen van effecten volgen in volgende fase.
 
 Fase1 GitHub-commit:9af1790cb7ff6ce1cf62bf32f4a566895fecaf9d.
+
+## Fase3 — Wereld1 en items
+Alle oorspronkelijke20 circuits behouden. Hypnose werkt ook als je vooraan rijdt: eerstvolgende tegenstander vóór je, anders dichtstbijzijnde achter je. Geen schijnbaar dode knop meer. Duur10s volgensV4, paarse sprankels. Banaan geeft echte draai-animatie2s, ook bij bots, en eindigt automatisch. Onweer50%, Hypnose20%, Boost15%, Banaan10%, Jump5% blijven exact. Dog blijft9blocks/10sijs/2sfreeze/Jumpbescherming. Garage-effecten tekenen werkelijk tijdens rijden; Boem-knop toont2s cooldown. Geen effect schakelt de cosmetische deeltjes uit; gameplay-aanvallen blijven zichtbaar.
+Tests:20/20 circuits door de testcontroller gewonnen; bestaande multitouch/rotatie/pauzechecks groen. Nieuwe regressies bevestigen hypnose vanuit leidende positie en einde spin. Fase2 GitHub394389bf6c427c55afbb831451ee91f58504805c.
