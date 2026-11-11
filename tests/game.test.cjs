@@ -8,7 +8,7 @@ function environment(initial={}){
   nodes.set(id,{id,style:{},listeners:{},classList:{add:v=>classes.add(v),remove:v=>classes.delete(v),contains:v=>classes.has(v),toggle(v,force){if(force===true)classes.add(v);else if(force===false)classes.delete(v);else classes.has(v)?classes.delete(v):classes.add(v);}},
    addEventListener(type,fn){(this.listeners[type]??=[]).push(fn)},setAttribute(){},setPointerCapture(){},hasPointerCapture:()=>false,releasePointerCapture(){},
    getBoundingClientRect:()=>id==='#controls'?{left:12,top:710,width:366,height:118}:{left:0,top:0,width:130,height:130},
-   getContext:()=>paint,showModal(){this.open=true},close(){this.open=false},click(){},innerHTML:'',textContent:'',firstChild:{textContent:''}});
+   children:[],getContext:()=>paint,showModal(){this.open=true},close(){this.open=false},click(){},innerHTML:'',textContent:'',firstChild:{textContent:''}});
  }return nodes.get(id);}
  const math=Object.create(Math);let seed=123456;const seededRandom=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};math.random=seededRandom;
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
