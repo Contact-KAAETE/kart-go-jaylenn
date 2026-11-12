@@ -173,3 +173,5 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Productie2clients: IJs volledig uit, zelfde aftelling/gelijke uitslag/reconnectpositie; zelfde kamer naarParty74 en volledige5km/kat/checkpoint/identieke finish geslaagd. Productie stuurregressie/staleinputstop geslaagd.
 - Ook twee echte browsertabs: uitnodiging→Doe mee→beide namen/kleuren→beide klaar→Start→gezamenlijke ijsbaan, beiden daadwerkelijke beweging. Werkelijke browserQR exact rasterteruggelezen naar gekopieerde uitnodiging.
 - Volgend: fysieke iPhone-lange-aanraaktest en QR-camera/twee telefoons op aparte netwerken door gebruiker. Niet als al uitgevoerd rapporteren. Auditrapport en ruwe testresultaten in docs/tests/results opgeslagen.
+
+- Expliciete resterende gameplaybeperking: gedeelde Party/online verwerkt obstakels/power-ups/baanranden, maar nog geen fysieke onderlinge kart-/kipbotsing. Geen succesvolle test daarvan claimen; oorspronkelijke solo-botsrespons bestaat wel.

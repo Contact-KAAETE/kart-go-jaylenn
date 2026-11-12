@@ -53,6 +53,7 @@ Tests gebruiken echte gamecode; automatische stuurbesturing is geen menselijke m
 
 ## Openstaande grenzen
 
+- De gedeelde Party/online-simulatie verwerkt obstakel-, baanrand- en power-upbotsingen, maar heeft nog geen fysieke botsrespons tussen twee karts/kippen onderling. Zij kunnen elkaar daardoor overlappen. De oorspronkelijke singleplayer heeft wel een onderlinge botsrespons. Dit is een resterende beperking, geen in deze video bewezen netwerkfout.
 - Fysieke iPhone Safari, Android-camera, WhatsApp/Berichten en twee echte telefoons op wifi/mobiel internet kunnen vanuit deze sessie niet worden getest. Juist de iOS-selectie moet Martin nog op zijn toestel bevestigen. Geen claim dat die hardwaretest al is uitgevoerd.
 - De opname bereikt geen meteorieten, checkpoint, kat of finish. Die zijn daarom apart met de echte simulatie en twee clients getest.
 - Avontuur-co-op gebruikt aangeleverde lokale voortgang. Zonder accounts of serverhistorie is dit geen fraudebestendige verificatie van oude singleplayerwinsten. Privékamers zijn werkelijk online; het losse oude vriendenboek blijft lokaal.
