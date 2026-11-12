@@ -1,0 +1,2 @@
+// Kart Go visual enhancement: no changes to savegames or racing mechanics.
+document.addEventListener('DOMContentLoaded',()=>{const button=document.getElementById('partyExplore');button?.addEventListener('click',()=>{const open=document.getElementById('openWorldMap');open?.click();const panel=document.getElementById('worldPanel');if(panel&&!panel.classList.contains('hidden'))panel.scrollIntoView({behavior:'smooth',block:'start'});});});
