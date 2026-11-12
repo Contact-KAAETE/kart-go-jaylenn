@@ -30,3 +30,11 @@ Alle beelden: premium glossy animated-feature3D-kwaliteit, originele KartGo-onde
 
 ## Volgende concrete stap
 Stap3/4: rasterkarts+gekozenrugaanzichtcoureur in kart() aansluiten, echte rasterpanorama/decor/itemeffecten tijdens race1 valideren; daarna uitrollen50levels, garage en bosses. Alleen geteste stappen naar main publiceren. Publicatiebewijs/commit hieronder aanvullen.
+
+## Stap3/4/5 — echte racegraphics gebouwd
+Kart() gebruikt nu de rasteratlas met3stuurstanden, lak via gecachete kleurtint, gekozen3D-rugaanzichtcoureur op de stoel, bandenlichtjes en bestaande sprong/spin/shadows. Bots krijgen verschillende coureurs. Geselecteerde kleur en coureur blijven echte opgeslagen instellingen.
+Panorama’s,12decorstukken en nieuwe asfalt/gras/zand/materialen worden in dezelfde bestaande baanprojectie getekend. Dus echte bochten, hoogtes en alle50baanverschillen blijven behouden. LuckyBlocks,bananen,ijs en effectflitsen gebruiken echte sprites. Beide bosses gebruiken hun nieuwe rasters; hun aanvallen en timing zijn ongewijzigd.
+Een negende productieasset toegevoegd:terrain-v5.webp,4materiaaltegels(asfalt/gras/zand/zandweg). Geen sceneplaatje over de game gelegd: iedere kart/decor/block blijft afzonderlijk geprojecteerd, met originele physics en detectie.
+Lokaal echtbrowserbeeld vanlevel1 bekeken: rode glanzende kart met gekozen vos, gekleurde bots met coureurs, fotogedetailleerde bomen/barn/mill, rasterlucht, gras en asfalt en gouden blocks daadwerkelijk zichtbaar. Geen spel-JavaScriptfouten; alleen eigen cloudbrowser-metadatawaarschuwingen. Node50level/regressies blijven groen.
+Menu/karaktercommit:8a8ad31c51f008f95a25bd1b1e47cb72fa24eb24, veilig gepubliceerd naar main; herstelpunt backup/v5-menu-before-race-art-20261112.
+Volgende stap: garage composietpreview en mobiele controles; na bewezen tests volledige race-upgrade publiceren.

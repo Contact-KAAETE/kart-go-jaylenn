@@ -17,7 +17,7 @@
     "alpha": true,
     "bytes": 647940,
     "generator": "built-in image_gen",
-    "integration": "selection cards, profile preview, menu player portrait; race integration next"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "karts": {
     "file": "assets/graphics/karts-v5.webp",
@@ -27,7 +27,7 @@
     "alpha": true,
     "bytes": 412440,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "scenery": {
     "file": "assets/graphics/scenery-v5.webp",
@@ -37,7 +37,7 @@
     "alpha": true,
     "bytes": 841610,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "landscapes": {
     "file": "assets/graphics/landscapes-v5.webp",
@@ -47,7 +47,7 @@
     "alpha": false,
     "bytes": 260850,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "bosses": {
     "file": "assets/graphics/bosses-v5.webp",
@@ -57,7 +57,7 @@
     "alpha": true,
     "bytes": 478982,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "effects": {
     "file": "assets/graphics/effects-v5.webp",
@@ -67,7 +67,7 @@
     "alpha": true,
     "bytes": 659722,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active: actual race renderer, all matching levels"
   },
   "garage": {
     "file": "assets/graphics/garage-v5.webp",
@@ -78,5 +78,15 @@
     "bytes": 310298,
     "generator": "built-in image_gen",
     "integration": "pending"
+  },
+  "terrain": {
+    "file": "assets/graphics/terrain-v5.webp",
+    "source": "exec-aabb2dd7-b676-4ade-a73c-96a0f58376c7.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": false,
+    "bytes": 615266,
+    "generator": "built-in image_gen",
+    "integration": "projected grass/asphalt/sand/desertroad texture"
   }
 }

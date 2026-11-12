@@ -27,8 +27,9 @@ function buildScenery(level){sceneryLevel=level;if(level>20)buildDesertScenery()
   sceneryCache.set(type,cv);
  }
 }
-function drawScenic(c,type,x,y,k){if(sceneryLevel>20){drawDesertScenic(c,type,x,y,k);return;}const image=sceneryCache.get(type);if(!image||k<.004)return;const factors={oak:1.5,pine:1.65,blossom:1.4,flowers:1.1,grass:1,rocks:1.2,fence:1.4,barn:2.2,mill:2.5,pond:2.5,hay:1.4,sign:1.2};const scale=k*(factors[type]||1);c.drawImage(image,x-200*scale,y-425*scale,400*scale,440*scale);}
+function drawScenic(c,type,x,y,k){if(GFX.drawScenery(c,type,x,y,k))return;if(sceneryLevel>20){drawDesertScenic(c,type,x,y,k);return;}const image=sceneryCache.get(type);if(!image||k<.004)return;const factors={oak:1.5,pine:1.65,blossom:1.4,flowers:1.1,grass:1,rocks:1.2,fence:1.4,barn:2.2,mill:2.5,pond:2.5,hay:1.4,sign:1.2};const scale=k*(factors[type]||1);c.drawImage(image,x-200*scale,y-425*scale,400*scale,440*scale);}
 function drawLandscape(c,w,h,s){
+ if(GFX.landscape(c,w,h,s))return;
  if(s.sand){drawDesertLandscape(c,w,h,s);return;}
  const hh=h*.40;if(!landscapeCache||landscapeCache.w!==w||landscapeCache.h!==h){
   const cv=scenicCanvas(Math.ceil(w*1.2),Math.ceil(hh+5)),p=cv.getContext('2d'),bw=cv.width,bh=cv.height;
@@ -95,7 +96,7 @@ function drawRaceEffects(c,s,py){
  if(effectiveEffect()==='boem'){$('#cosmetic').disabled=s.count>0||s.time<s.nextBoem;$('#cosmetic').textContent=s.time<s.nextBoem?`💥 ${(s.nextBoem-s.time).toFixed(1)}s`:'💥 Boem';}
 
  for(const fx of s.effects){
-  const t=fx.age/fx.life;c.save();c.globalAlpha=1-t;
+  const t=fx.age/fx.life;const rasterIndex={boem:9,lightning:1,pickup:7,jump:6,boost:3,impact:9,ice:5}[fx.type];if(rasterIndex!==undefined&&GFX.effect(c,rasterIndex,W/2+(fx.type==='lightning'?Math.sin(t*12)*W*.12:0),py-95-t*35,(fx.type==='lightning'?130:70)+t*40,undefined,(1-t)*.8)){continue;}c.save();c.globalAlpha=1-t;
   if(fx.type==='boem'){const r=30+t*110;c.strokeStyle='#ffcf65';c.lineWidth=6*(1-t);c.beginPath();c.arc(W/2,py-30,r,0,Math.PI*2);c.stroke();c.fillStyle='#fff5ad';c.textAlign='center';c.font=`900 ${22+t*12}px system-ui`;c.fillText('BOEM!',W/2,py-45-t*35);
   }else if(fx.type==='lightning'){
    c.strokeStyle='#fff6ab';c.lineWidth=3;

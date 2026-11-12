@@ -12,7 +12,7 @@ function showHomeMenu(){
 }
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map();let loadingRace=false,allowFallback=false;
- const files={menu:'menu',characters:'characters',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage'};
+ const files={menu:'menu',characters:'characters',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain'};
  const source=name=>`./assets/graphics/${files[name]}-v5.webp?v=5.0`;
  function image(name){const im=pictures.get(name);return im?.naturalWidth?im:null;}
  function load(name){
@@ -34,8 +34,9 @@ const GFX=(()=>{
   const variant=angle===null?(steer<-.23?0:steer>.23?2:1):angle;
   const kart=coloredKart(variant,color),driver=tile('characters',3,4,racerIndex(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4])+(variant>=3?0:6));if(!kart||!driver)return false;
   c.save();c.translate(x,y);c.rotate(steer*.035);const bob=(typeof state!=='undefined'&&state?.speed>100)?Math.sin(performance.now()/53)*.65:0;c.translate(0,bob);ellipse(c,0,2*scale,57*scale,11*scale,'#071b2c4f');
-  c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
+  if(player&&typeof state!=='undefined'&&state?.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
   if(variant<3){c.drawImage(driver,-32*scale,-129*scale,64*scale,64*scale);}else{c.drawImage(driver,-31*scale,-129*scale,62*scale,62*scale);}
+  if(player?.helmet){c.strokeStyle=player.helmet;c.lineWidth=3*scale;c.beginPath();c.moveTo(-19*scale,-76*scale);c.lineTo(19*scale,-76*scale);c.stroke();}
   // Small moving highlights suggest tire rotation without regenerating or mutating the sprite.
   if(typeof state!=='undefined'&&state?.speed>100){c.globalAlpha=.22;const tick=performance.now()/45;for(const side of [-1,1]){for(let i=0;i<3;i++){c.fillStyle='#e8f7ff';c.fillRect(side*53*scale-2*scale,(-48+(i*9+tick)%27)*scale,3*scale,2*scale);}}c.globalAlpha=1;}
   if(player&&typeof xpLevel==='function'&&xpLevel()>=5){const t=performance.now()/900;c.globalAlpha=.75+Math.sin(t)*.2;c.strokeStyle='#fff5b5';c.lineWidth=1.8*scale;c.beginPath();c.moveTo(-47*scale,-76*scale);c.lineTo(-34*scale,-68*scale);c.lineTo(-47*scale,-60*scale);c.moveTo(-54*scale,-68*scale);c.lineTo(-34*scale,-68*scale);c.stroke();}
@@ -54,10 +55,20 @@ const GFX=(()=>{
   if(typeof quality==='undefined'||quality.level>0){c.save();c.globalAlpha=.12;for(let i=0;i<3;i++){const xx=((s.time*4+i*w*.42)%(w*1.4))-w*.15;ellipse(c,xx,h*(.08+i*.035),w*.08,5,'#fff9dc');}c.restore();}return true;
  }
  function effect(c,index,x,y,w,h=w,alpha=1,rotation=0){const fx=tile('effects',5,2,index);if(!fx)return false;c.save();c.globalAlpha=alpha;c.translate(x,y);c.rotate(rotation);c.drawImage(fx,-w/2,-h/2,w,h);c.restore();return true;}
- function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects',...(level===20||level===50?['bosses']:[])].every(image);}
+ function trackTexture(c,a,b,s,terrain){
+  if(terrain!=='road'||a.y<=b.y||a.y<view.horizon+4||b.y>H||a.w<5)return;
+  const road=tile('terrain',2,2,s.sand?3:0),ground=tile('terrain',2,2,s.sand?2:1);if(!road||!ground)return;
+  const y=Math.max(b.y,0),height=Math.min(H+2,a.y+1)-y;if(height<.3)return;
+  function stamp(points,im,left,width,opacity){if(width<1)return;c.save();c.beginPath();points.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();c.clip();c.globalAlpha=opacity;const sy=((a.segIndex%16+16)%16)*im.height/16;c.drawImage(im,0,sy,im.width,im.height/16,left,y,width,height+1);c.restore();}
+  stamp([[a.x-a.w,a.y+1],[a.x+a.w,a.y+1],[b.x+b.w,b.y],[b.x-b.w,b.y]],road,a.x-a.w,a.w*2,.32);
+  const opacity=typeof quality!=='undefined'&&quality.level===0?.3:.55;
+  stamp([[0,a.y+1],[a.x-a.w*1.1,a.y+1],[b.x-b.w*1.1,b.y],[0,b.y]],ground,0,W,opacity);
+  stamp([[a.x+a.w*1.1,a.y+1],[W,a.y+1],[W,b.y],[b.x+b.w*1.1,b.y]],ground,0,W,opacity);
+ }
+ function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...(level===20||level===50?['bosses']:[])].every(image);}
  function prepare(level,callback){
   if(loadingRace)return;loadingRace=true;showModal('<div class="loading-art"><span class="eyebrow">JE RACEWERELD WORDT KLAARGEZET</span><h2>Even de motor warmdraaien…</h2><div class="loading-wheel"></div><p>De nieuwe karts en omgeving worden geladen.</p></div>');
-  Promise.all(['characters','karts','scenery','landscapes','effects',...(level===20||level===50?['bosses']:[])].map(load)).then(()=>{loadingRace=false;callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
+  Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...(level===20||level===50?['bosses']:[])].map(load)).then(()=>{loadingRace=false;callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
  }
  function init(){
   $('#openWorldMap').onclick=showWorldMap;$('#closeWorldMap').onclick=showHomeMenu;$('#menuSettings').onclick=settings;
@@ -65,5 +76,5 @@ const GFX=(()=>{
   if(typeof Image==='undefined')return;$('#assetStatus').textContent='Nieuwe racegraphics laden…';
   Promise.all(['menu','characters'].map(load)).then(()=>{$('#assetStatus').textContent='';renderPlayer();}).catch(()=>{$('#assetStatus').textContent='Een beeldbestand ontbreekt. Herlaad bij een trage verbinding.';});
  }
- return {image,load,tile,drawKart,drawScenery,landscape,effect,canRace,prepare,init,source};
+ return {image,load,tile,drawKart,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
 })();
