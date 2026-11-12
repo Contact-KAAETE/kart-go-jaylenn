@@ -3,7 +3,7 @@
 Bedenker: Jaylenn. Martin heeft na spelen expliciet gevraagd om uit de bocht vliegen met stof en terugkeer na2s, waterplons3s en hogere snelheid met250/509/1000pk. Geen bestaande wereld/level/coureur/voortgang verwijderd.
 
 ## Herstelpunt
-backup/v6-1-before-engine-recovery-20261112 →201e6f46936549b50b88a1997913e7584ab4d7a6. Ontwikkeltak work/engine-recovery-v6-2-20261112. Nieuwe compacte module assets/race-adventure.js bovenop de bestaande engine. Cache6.2.0.
+backup/v6-1-before-engine-recovery-20261112 →201e6f46936549b50b88a1997913e7584ab4d7a6. Ontwikkeltak work/engine-recovery-v6-2-20261112. Nieuwe compacte module assets/race-adventure.js bovenop de bestaande engine. Cache6.2.1.
 
 ## Gebouwd en getest
 | Klasse | Speltopsnelheid zonder Boost | Interne afstand/s |
@@ -27,3 +27,6 @@ Dit zijn arcade-keuzes, geen natuurkundige omrekening van pk naar km/u. Oude max
 
 ## Volgende concrete stap
 Geteste ontwikkeltak naar main publiceren, Pages-build volgen en officiële game met nieuwe motor controleren. Nog geen claim van een voltooide livepublicatie in deze fase.
+
+## Eerste livecontrole
+Gamecommit d59fe0510f4b821cfb5e66be81f2c2a7cffaa0d3, Pages43191395429 succesvol. Zes gewijzigde spelbestanden HTTP200 en bytegelijk. In officiële390×844-game1000pk via garage gekozen/bewaard, pagina heropend en nog geselecteerd. Draak, turquoise lak,7000XP en alle70 overwinningen van het eerdere fictieve testprofiel blijven behouden. Nieuwe race1 gestart, werkelijk tot228km/u versneld. Met echte3,5s gehouden stuurknop uit de baan gereden; stofmelding2s en1s gezien, automatisch terug en weer versneld. Race12 eveneens live gestart. Geen testdriver actief. Waterplons3s is functioneel in browserfixture en Node getest; nog niet afzonderlijk met een fysieke/live handmatige waterbotsing bevestigd. Laatste kleine afwerking6.2.1 maakt de motorstatus na bewaren expliciet ‘bewaard’; die melding nog online verifiëren.
