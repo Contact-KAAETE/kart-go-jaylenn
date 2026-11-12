@@ -167,3 +167,9 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Lokale tests geslaagd: volledige oorspronkelijke70 levels; vijf Party-levels tot finish; multitouch/alle besturingen/rem/autogas/reset/pauze/orientatie; QR exact raster-teruggelezen; lokale echte Worker met twee clients IJs→Party5km/kat/checkpoint/gelijke finish, reconnect/zes plaatsen/hostoverdracht. Browser390×844 en844×390 gecontroleerd.
 - Publicatievoorbereiding: `video-audit-1`, Worker `ultimate-worlds-3.2`, protocol3/bestaande binding ongewijzigd. Volgende stap: geteste commit naar main, Pages en Cloudflare-success controleren, gepubliceerde bytes vergelijken en live twee-clientsrace uitvoeren.
 - Niet getest: fysieke iPhone/Android/twee telefoons/camera/netwerkwissel; niet als voltooid claimen.
+
+### Live audit afgerond
+- Code opgeslagen en uitgerold: `f5be5321a125406779137268890fa5a5e400eec5`; alle Pages-/Cloudflare-checks success, health3.2; negen publieke bestanden HTTP200 en exact gelijk.
+- Productie2clients: IJs volledig uit, zelfde aftelling/gelijke uitslag/reconnectpositie; zelfde kamer naarParty74 en volledige5km/kat/checkpoint/identieke finish geslaagd. Productie stuurregressie/staleinputstop geslaagd.
+- Ook twee echte browsertabs: uitnodiging→Doe mee→beide namen/kleuren→beide klaar→Start→gezamenlijke ijsbaan, beiden daadwerkelijke beweging. Werkelijke browserQR exact rasterteruggelezen naar gekopieerde uitnodiging.
+- Volgend: fysieke iPhone-lange-aanraaktest en QR-camera/twee telefoons op aparte netwerken door gebruiker. Niet als al uitgevoerd rapporteren. Auditrapport en ruwe testresultaten in docs/tests/results opgeslagen.

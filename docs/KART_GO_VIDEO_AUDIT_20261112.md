@@ -57,4 +57,22 @@ Tests gebruiken echte gamecode; automatische stuurbesturing is geen menselijke m
 - De opname bereikt geen meteorieten, checkpoint, kat of finish. Die zijn daarom apart met de echte simulatie en twee clients getest.
 - Avontuur-co-op gebruikt aangeleverde lokale voortgang. Zonder accounts of serverhistorie is dit geen fraudebestendige verificatie van oude singleplayerwinsten. Privékamers zijn werkelijk online; het losse oude vriendenboek blijft lokaal.
 - Party gebruikt de bestaande gedeelde 2,5D-presentatie met prerendered kippen/coureurs en kermisbeelden. Deze reparatie maakt geen nieuwe filmkwaliteit-wereld, verandert Jaylenns verhaal niet en vervangt de oorspronkelijke goede graphics niet.
-- Live publicatie en productieraces worden hieronder na controle vastgelegd.
+
+## Geslaagde live publicatie en online controles
+
+Codecommit: `f5be5321a125406779137268890fa5a5e400eec5`.
+GitHub Pages build/deploy/report en Cloudflare Workers Builds: **success**.
+Live backend `/health`: **ultimate-worlds-3.2**.
+Alle negen gewijzigde publieke HTML/JS/CSS-bestanden met HTTP200 geladen en byte-voor-byte gelijk aan de geteste broncode.
+
+- `node tests/party-controls-live.mjs`: twee onafhankelijke echte productieclients versnellen en sturen tegelijk tegengestelde kanten op; gelijke serverposities en automatisch stoppen bij verouderde invoer.
+- `node tests/worlds-live.mjs`: twee nieuwe clients direct in de IJs-Wereld zonder vorige levels, dezelfde starttijd, onderbreken/herverbinden met behoud identiteit/positie, allebei de finish met identieke uitslag. Daarna **dezelfde kamer naar Party74**, beide spelers rijden de volledige5km uit met gedeelde kat, checkpoint en identieke serveruitslag.
+- Twee afzonderlijke echte browsertabs op de gepubliceerde website: kamer gemaakt, uitnodiging gekopieerd/geopend, Doe mee, beide juiste namen/kleuren zichtbaar, beide klaar en organisator start; dezelfde ijsbaan, beide karts daadwerkelijk met toetsen bewogen (circa79m bij223km/u), posities/stand gedeeld. Dit zijn browserclients op één testcomputer, geen twee telefoons.
+- De **werkelijke QR uit deze productiekamer** naar raster omgezet en met ZXing-C++ exact teruggelezen naar de in de browser gekopieerde uitnodiging. Geen tweede sleutel overtypen. Geen scan met een fysieke telefooncamera geclaimd.
+- De gepubliceerde Party75-versie geopend in390×844; nieuwe besturingkeuze, startaftelling en HUD aanwezig. Oorspronkelijke naam- en voortgangsopslag intact.
+
+Speellink: https://contact-kaaete.github.io/kart-go-jaylenn/
+Party: https://contact-kaaete.github.io/kart-go-jaylenn/party/
+Samen: https://contact-kaaete.github.io/kart-go-jaylenn/multiplayer/
+
+Volgende concrete stap: Martin laat op zijn iPhone een stuurknop enkele seconden ingedrukt, stuurt daarna de andere kant op en controleert dat Kopieer/Zoeken wegblijft. Hardwaretest op twee netwerken en fysieke QR-camera blijven nog te doen. Bestaande gratis server en hosting zijn daadwerkelijk gepubliceerd; geen loginhandeling nodig.

@@ -56,3 +56,12 @@ PASS runtime: invitation and identity restored after full SQLite runtime restart
 
 QR raster exact teruggelezen met ZXing-C++.
 Browsercontroles en bewijsgrenzen: docs/KART_GO_VIDEO_AUDIT_20261112.md
+
+LIVE PRODUCTION
+PASS LIVE: two real clients accelerate and steer in opposite directions beyond the old ±0.24 wall, no penalty, synchronized positions and automatic stale-input stop.
+PASS LIVE: two clients directly race Ice, equal countdown, reconnect retains identity/position, both finish with identical result.
+PASS LIVE: same room Ice → Party, chosen chickens retained, shared cat/checkpoint, both finish full 5km with identical authoritative results. Not physical phones.
+
+Actual browser production QR raster decoded with ZXing-C++ exactly to copied invitation (credentials omitted).
+Pages/Workers checks all success; nine changed public frontend files HTTP200, exact local bytes; health ultimate-worlds-3.2.
+Two browser tabs: room invitation/join, identical roster, both ready, shared Ice start, both driven manually by held Up key (~79m,223km/h).
