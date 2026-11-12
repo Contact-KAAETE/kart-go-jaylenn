@@ -304,3 +304,4 @@ function restoreSession(session){
 }
 
 initPlayerUI();
+GFX.init();

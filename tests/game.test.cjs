@@ -14,7 +14,7 @@ function environment(initial={}){
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
  const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},location:{hash:''},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
  vm.createContext(sandbox);
- for(const file of ['vendor/qrcode.js','player.js','scenery.js','desert.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
+ for(const file of ['vendor/qrcode.js','graphics.js','player.js','scenery.js','desert.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
  return{random:seededRandom,run:code=>vm.runInContext(code,sandbox),nodes,storage,math,events,sandbox};
 }
 const e=environment(),{run,nodes,storage}=e;const event=(id,x=65,y=65)=>({pointerId:id,clientX:x,clientY:y,button:0,pointerType:'touch',preventDefault(){}});

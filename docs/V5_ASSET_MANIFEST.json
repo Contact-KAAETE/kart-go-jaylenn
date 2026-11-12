@@ -1,0 +1,82 @@
+{
+  "menu": {
+    "file": "assets/graphics/menu-v5.webp",
+    "source": "exec-f079ed72-8735-4d5b-9722-ff78c303c440.png",
+    "width": 1536,
+    "height": 1024,
+    "alpha": false,
+    "bytes": 324064,
+    "generator": "built-in image_gen",
+    "integration": "CSS main menu background"
+  },
+  "characters": {
+    "file": "assets/graphics/characters-v5.webp",
+    "source": "exec-1592f43b-83e7-4528-b01f-89bb5e869a18.png",
+    "width": 1086,
+    "height": 1448,
+    "alpha": true,
+    "bytes": 647940,
+    "generator": "built-in image_gen",
+    "integration": "selection cards, profile preview, menu player portrait; race integration next"
+  },
+  "karts": {
+    "file": "assets/graphics/karts-v5.webp",
+    "source": "exec-caf372cf-70e8-4bad-9cd3-4593a394f930.png",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true,
+    "bytes": 412440,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  },
+  "scenery": {
+    "file": "assets/graphics/scenery-v5.webp",
+    "source": "exec-379d3161-1c8f-4f36-8ec3-5d30d7720c02.png",
+    "width": 1448,
+    "height": 1086,
+    "alpha": true,
+    "bytes": 841610,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  },
+  "landscapes": {
+    "file": "assets/graphics/landscapes-v5.webp",
+    "source": "exec-f87a9336-d59c-459a-a33c-201d45ed252b.png",
+    "width": 1536,
+    "height": 1024,
+    "alpha": false,
+    "bytes": 260850,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  },
+  "bosses": {
+    "file": "assets/graphics/bosses-v5.webp",
+    "source": "exec-0dc2949c-7433-4087-9ce6-7b16c3d2b674.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "bytes": 478982,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  },
+  "effects": {
+    "file": "assets/graphics/effects-v5.webp",
+    "source": "exec-59794906-a613-4d7d-a7d7-9eeec2fdf13d.png",
+    "width": 1942,
+    "height": 809,
+    "alpha": true,
+    "bytes": 659722,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  },
+  "garage": {
+    "file": "assets/graphics/garage-v5.webp",
+    "source": "exec-fa1f1699-fc62-4689-907c-a612c685c0d5.png",
+    "width": 1536,
+    "height": 1024,
+    "alpha": false,
+    "bytes": 310298,
+    "generator": "built-in image_gen",
+    "integration": "pending"
+  }
+}
