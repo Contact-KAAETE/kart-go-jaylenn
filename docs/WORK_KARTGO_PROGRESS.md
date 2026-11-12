@@ -68,3 +68,13 @@ Bronnen: https://developers.cloudflare.com/durable-objects/platform/pricing/ en 
 ## Aanmeldblokkade bij hervatten
 
 De beveiligde Cloudflare-aanmeldflow liep vast/time-out. Een verse dashboardcontrole toonde opnieuw /login; er is geen bevestigde beheersessie en er is geen servercode gepubliceerd. De live frontendfase blijft werken. Handmatige overname van het Cloudflare-aanmeldvenster is de volgende vereiste stap voor serverbeheer. Vraag geen wachtwoorden of codes in de chat.
+
+## Serverreparatie klaargezet voor eigenaarspublicatie
+
+De eigenaar heeft gekozen voor publicatie vanuit zijn eigen werkende Cloudflare-browser. Handleiding: `docs/CLOUDFLARE_SERVER_REPAIR.md`. Zelfstandig Worker-modulebestand: `multiplayer/src/index.js`; versie `ultimate-repair-2`. Bijbehorende frontend-hervatting is meegeleverd op de ontwikkeltak. **Nog niet naar main/Pages of Cloudflare gezet.**
+
+Gebouwd: bestaande Durable Object-opslag voor kamer en identiteit; hibernation-sockets; privé hervattokens; expliciete organisatorrechten en hostwissel; geen dubbele spelers bij herverbinding; invoer-timeout en rem; kamerlevensduur en opslagopruiming. De Worker-naam in wrangler.toml gecorrigeerd naar het daadwerkelijk gebruikte `kart-go-jaylenn`; bestaande binding/class/migratie behouden.
+
+Tests geslaagd: `npm test` en `npm run test:server`. De servertest draait echte workerd/SQLite/WebSocketPair via Miniflare: twee spelers bewegen, hervatten met zelfde positie/id, finishen met identieke uitslag; verkeerde origin/uitnodiging en gaststart geweigerd; zes plekken/zevende geweigerd; organisatorwissel; na volledige runtimeherstart uitnodiging/id terug. Lokale runtime heeft maximaal compatibiliteitsdatum 2026-08-06, terwijl bestaande deploymentdatum 2026-11-12 behouden is. Geen nieuwe productie- of fysieke telefoontest geclaimd.
+
+Volgende stap: eigenaar kopieert de complete module naar **bestaande** Cloudflare Worker → Edit Code → Deploy. Geen nieuwe onderdelen of betaalde opties aanmaken. Na "Gedaan": /health versie controleren, echte tweespelertest, frontendwijzigingen veilig doorzetten naar main en Pages controleren. Online wereldkeuze en complete Party-uitbreiding blijven daarna open.
