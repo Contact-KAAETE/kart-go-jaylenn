@@ -1,4 +1,4 @@
-# Kart Go V6.2 — vermogen, uitvliegen en water
+# Kart Go V6.2.1 — vermogen, uitvliegen en water · LIVE
 
 Bedenker: Jaylenn. Martin heeft na spelen expliciet gevraagd om uit de bocht vliegen met stof en terugkeer na2s, waterplons3s en hogere snelheid met250/509/1000pk. Geen bestaande wereld/level/coureur/voortgang verwijderd.
 
@@ -25,8 +25,16 @@ Dit zijn arcade-keuzes, geen natuurkundige omrekening van pk naar km/u. Oude max
 - Echte Chrome-renderer in390×844,320×568 en844×390: motoren via echte garageknoppen gekozen/bewaard/heropend; echte baanrand/waterbotsing, geanimeerde verschuiving/zinken,2s/3s-terugkeer, pauze/checkpoint/heropenen, inventaris en3 besturingen zonder overlap. Visueel stof- en waterpassage gecontroleerd. Rapport tests/results/engine-v6-2-mobile.txt.
 - Geen fysieke iPhone-test of gemeten60FPS-claim.
 
-## Volgende concrete stap
-Geteste ontwikkeltak naar main publiceren, Pages-build volgen en officiële game met nieuwe motor controleren. Nog geen claim van een voltooide livepublicatie in deze fase.
+## Publicatie
+Geteste ontwikkeltak is samengevoegd met main. Zowel eerste publicatie als laatste bewaarstatuspatch zijn live geverifieerd; details hieronder.
 
 ## Eerste livecontrole
-Gamecommit d59fe0510f4b821cfb5e66be81f2c2a7cffaa0d3, Pages43191395429 succesvol. Zes gewijzigde spelbestanden HTTP200 en bytegelijk. In officiële390×844-game1000pk via garage gekozen/bewaard, pagina heropend en nog geselecteerd. Draak, turquoise lak,7000XP en alle70 overwinningen van het eerdere fictieve testprofiel blijven behouden. Nieuwe race1 gestart, werkelijk tot228km/u versneld. Met echte3,5s gehouden stuurknop uit de baan gereden; stofmelding2s en1s gezien, automatisch terug en weer versneld. Race12 eveneens live gestart. Geen testdriver actief. Waterplons3s is functioneel in browserfixture en Node getest; nog niet afzonderlijk met een fysieke/live handmatige waterbotsing bevestigd. Laatste kleine afwerking6.2.1 maakt de motorstatus na bewaren expliciet ‘bewaard’; die melding nog online verifiëren.
+Gamecommit d59fe0510f4b821cfb5e66be81f2c2a7cffaa0d3, Pages43191395429 succesvol. Zes gewijzigde spelbestanden HTTP200 en bytegelijk. In officiële390×844-game1000pk via garage gekozen/bewaard, pagina heropend en nog geselecteerd. Draak, turquoise lak,7000XP en alle70 overwinningen van het eerdere fictieve testprofiel blijven behouden. Nieuwe race1 gestart, werkelijk tot228km/u versneld. Met echte3,5s gehouden stuurknop uit de baan gereden; stofmelding2s en1s gezien, automatisch terug en weer versneld. Race12 eveneens live gestart. Geen testdriver actief. Waterplons3s is functioneel in browserfixture en Node getest; nog niet afzonderlijk met een fysieke/live handmatige waterbotsing bevestigd. Laatste kleine afwerking6.2.1 maakt de motorstatus na bewaren expliciet ‘bewaard’; die melding is daarna online geverifieerd.
+
+## Definitief livebewijs6.2.1
+- Codecommit9e09b042a14c0f213fca8d073db5c2d410625078. Pages-run43192312847 completed/success.
+- Geverifieerde speellink https://contact-kaaete.github.io/kart-go-jaylenn/?v=6.2.1 . Nieuwe motorselectie in echte onlinegarage,1000pk bewaard, duidelijke melding ‘1000pk bewaard · klaar voor je volgende nieuwe race’. Screenshot tests/results/engine-v6-2-live.jpg.
+- Laatste HTML/player/adventure-bestanden HTTP200 en bytegelijk aan lokale testversie; tests/results/engine-v6-2-final-assets.json. Eerdere zes volledige gewijzigde bestanden eveneens HTTP200/bytegelijk in engine-v6-2-live-assets.json. Geen game-origin consolefouten in laatste livecontrole.
+- Echte online-uitglijder met native gehouden stuurknop, stilvallen,2s/1s-aftelling en hervatten bevestigd. Nieuwe motor in nieuwe race actief; een oudere hervatte race behoudt bewust zijn eerdere klasse. Dat voorkomt onverwacht gewijzigde racephysics bij heropenen.
+- Geen fysieke iPhone-test; geen belofte dat frame-rate op hardware gemeten is. Water3s en ijswak3s functioneel getest in echte browserrenderer/Node; geen afzonderlijke handmatige livewater-treffer vastgelegd. Animaties omvatten werkelijk uitvliegen/kantelen, stofdeeltjes, zinken/waterspatten/kringen en terugkeren; geen Blender/Spine-productie geclaimd.
+- Hervatten vanaf actuele main. Herstelpunt blijft behouden. Volgende eventuele stap: één consistent kartmodel met een korte animatieset uitwerken volgens KART_GO_ANIMATION_OPTIONS.md. Geen aankoop/abonnement/kosten geactiveerd.

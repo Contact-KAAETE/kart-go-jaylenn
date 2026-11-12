@@ -1,0 +1,44 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 6683,
+    "sha256": "13a7812f124514f265abeddf2e25e620184ac46c6e2f80103f45e957e9f3b98d",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/game.js",
+    "status": 200,
+    "bytes": 59323,
+    "sha256": "2e7c8295d0a26bd252d33d9c5425affc70dfdab2a4355119764619b719b337ba",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/ice-world.js",
+    "status": 200,
+    "bytes": 14406,
+    "sha256": "79a934d82ee1061c32e54ba876d03ae7f07c01cb285e98aab2390a68906381a3",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/player.js",
+    "status": 200,
+    "bytes": 14573,
+    "sha256": "def76667089c3f757561eb41eab35bb1085b15489e2915490bb3e37266303089",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/race-adventure.js",
+    "status": 200,
+    "bytes": 6351,
+    "sha256": "e0264a349e601e2e9d397a9bac25a905bf1b4597623a90e0813799f11da327c8",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/visual-v5.css",
+    "status": 200,
+    "bytes": 23599,
+    "sha256": "d29f7898e01b7a4e0edf303d2ec2a57d187efd1bcd4b203c5e9f65e9a424a91c",
+    "matchesLocal": true
+  }
+]

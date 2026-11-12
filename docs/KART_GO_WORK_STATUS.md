@@ -1,6 +1,6 @@
-# Actueel: V6.2 vermogen en herstel gebouwd/getest
+# Actueel: V6.2.1 vermogen en herstel LIVE
 
-250/509/1000pk,2s stof en3s water. Zie KART_GO_ENGINE_RECOVERY_STATUS.md. Alle70 levels,12 coureurs,20 kleuren en voortgang behouden. Kandidatenversie, livecontrole volgt. Animatieadvies in KART_GO_ANIMATION_OPTIONS.md.
+250/509/1000pk,2s stof en3s water. Zie KART_GO_ENGINE_RECOVERY_STATUS.md. Alle70 levels,12 coureurs,20 kleuren en voortgang behouden. Live1000pk, bewaren/heropenen en echte uitglijder/automatische terugkeer bevestigd. Codecommit9e09b042a14c0f213fca8d073db5c2d410625078; Pages43192312847 succesvol. Animatieadvies in KART_GO_ANIMATION_OPTIONS.md.
 
 ---
 

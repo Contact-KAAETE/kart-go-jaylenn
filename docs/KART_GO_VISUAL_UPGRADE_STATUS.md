@@ -1,3 +1,9 @@
+# Actueel V6.2.1 — vermogen, stofwolken en waterplons LIVE
+
+Drie motoren, werkelijk uitvliegen/kantelen met2s stof en3s waterspatten/zinken/terugkeer. Bestaande70 levels,12 coureurs,20 kleuren en voortgang behouden. Details, tests, livecommit en vervolgadvies: KART_GO_ENGINE_RECOVERY_STATUS.md en KART_GO_ANIMATION_OPTIONS.md.
+
+---
+
 # Actueel V6.1 — twaalf coureurs en twintig kleuren LIVE
 
 Zes nieuwe echte coureurs met front- en rugsprites en twintig lakknoppen gebouwd en live getest, inclusief bewaren/heropenen en draak in turquoise kart tijdens race70. Details en verificatie: KART_GO_CHOICES_V6_1_STATUS.md.

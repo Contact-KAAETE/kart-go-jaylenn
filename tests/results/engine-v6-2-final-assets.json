@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/index.html?v=6.2.1",
+    "status": 200,
+    "sha256": "9fe8f37077965316f7d64a64094434524478bc45f79c9dce0c3b0b7e1193fc90",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/player.js?v=6.2.1",
+    "status": 200,
+    "sha256": "f76a1e81d727de7c574d5350aa4dbe3872b447f2208d29cea3d835e5247dac70",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/race-adventure.js?v=6.2.1",
+    "status": 200,
+    "sha256": "e0264a349e601e2e9d397a9bac25a905bf1b4597623a90e0813799f11da327c8",
+    "matchesLocal": true
+  }
+]
