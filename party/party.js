@@ -10,7 +10,9 @@ const levels=[
 const $=s=>document.querySelector(s), canvas=$('#game'),ctx=canvas.getContext('2d');
 let chosen=0,game=null,keys={left:false,right:false},last=0,frame=0,completed=[];
 try{completed=JSON.parse(localStorage.getItem('kartgo-party-jaylenn-v1')||'[]');if(!Array.isArray(completed))completed=[]}catch{completed=[]}
-function unlocked(i){return i===0||completed.includes(i-1)}
+let freeRace=new URLSearchParams(location.search).get('mode')==='free';
+function unlocked(i){return freeRace||i===0||completed.includes(i)||completed.includes(i-1)}
+$('#partyMode').value=freeRace?'free':'adventure';$('#partyMode').onchange=()=>{freeRace=$('#partyMode').value==='free';renderCards();};
 function menu(){game=null;$('#stage').style.display='none';$('#menu').style.display='block';renderCards()}
 function renderCards(){$('#cards').innerHTML=levels.map((l,i)=>'<button class="card '+(chosen===i?'active ':'')+(!unlocked(i)?'locked':'')+'" data-level="'+i+'"><b>'+l.emoji+'</b>Level '+(i+1)+'<small>'+l.title+(completed.includes(i)?' ★':'')+'</small></button>').join('');document.querySelectorAll('[data-level]').forEach(b=>b.onclick=()=>{chosen=+b.dataset.level;renderCards()});$('#descriptionTitle').textContent='Level '+(chosen+1)+' — '+levels[chosen].title;$('#description').textContent=levels[chosen].desc;$('#play').disabled=!unlocked(chosen);$('#play').textContent=unlocked(chosen)?'🏁 Start race!':'🔒 Win eerst level '+chosen;}
 function random(seed){let x=seed>>>0;return()=>{x=(1664525*x+1013904223)>>>0;return x/4294967296}}
@@ -57,7 +59,7 @@ function draw(){
 }
 function banner(t,w,h){ctx.save();ctx.textAlign='center';ctx.shadowColor='#f52bff';ctx.shadowBlur=10;ctx.fillStyle='#fff4ac';ctx.font='bold '+Math.max(13,Math.min(21,w/21))+'px system-ui';ctx.fillText(t,w/2,h*.17);ctx.restore()}
 function loop(now){if(!game)return;let dt=last?Math.min(.05,(now-last)/1000):0;last=now;const g=game;if(!g.finished){g.elapsed+=dt;if(g.penalty>0)g.penalty=Math.max(0,g.penalty-dt);else{if(keys.left)g.x-=dt*2.2;if(keys.right)g.x+=dt*2.2;g.x=Math.max(0,Math.min(2,g.x));let old=g.d;g.d+=g.speed*dt;for(const o of g.objects){if(!o.hit&&o.d>=old&&o.d<g.d+6&&Math.abs(g.x-o.lane)<.34){o.hit=true;if(o.type==='star'||o.type==='block'){g.score+=o.type==='block'?50:20}else if(o.type==='ramp'){g.score+=10}else{g.penalty=6;g.score=Math.max(0,g.score-10);break}}}if(g.d>=levels[g.level].length){g.d=levels[g.level].length;g.finished=true;complete()}}}draw();if(game)requestAnimationFrame(loop)}
-function complete(){const g=game;if(!g)return;if(!completed.includes(g.level))completed.push(g.level);try{localStorage.setItem('kartgo-party-jaylenn-v1',JSON.stringify(completed))}catch{}setTimeout(()=>{if(!game)return;alert('🏆 GEWONNEN! Level '+(g.level+1)+' gehaald! ✨ '+g.score+' punten.');chosen=Math.min(4,g.level+1);menu()},100)}
+function complete(){const g=game;if(!g)return;if(!freeRace){if(!completed.includes(g.level))completed.push(g.level);try{localStorage.setItem('kartgo-party-jaylenn-v1',JSON.stringify(completed))}catch{}}setTimeout(()=>{if(!game)return;alert('🏆 GEWONNEN! Level '+(g.level+1)+' gehaald! ✨ '+g.score+' punten.');chosen=Math.min(4,g.level+1);menu()},100)}
 function bind(id,key){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();keys[key]=true;try{el.setPointerCapture(e.pointerId)}catch{}});for(const type of ['pointerup','pointercancel','lostpointercapture'])el.addEventListener(type,()=>keys[key]=false)}
 bind('#left','left');bind('#right','right');window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=true;if(e.key==='ArrowRight'||e.key==='d')keys.right=true});window.addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=false;if(e.key==='ArrowRight'||e.key==='d')keys.right=false});window.addEventListener('blur',()=>{keys.left=keys.right=false});
 $('#play').onclick=init;$('#restart').onclick=init;$('#back').onclick=menu;renderCards();
