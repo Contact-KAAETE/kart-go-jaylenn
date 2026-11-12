@@ -16,7 +16,7 @@ Tests: volledige Node-regressie slaagt: alle 50 races voltooid; controller wint 
 
 Wereld 3 en de drie nieuwe startstemmen: uitsluitend als Jaylenns nieuwe ontwerp vastgelegd in `WORLD_3_JAYLENN_DESIGN.md`, nog niet ingebouwd. Geen nieuwe actieve knop of misleidende wereldselectie toegevoegd. De sla-tsunami, wasmandstraf en gevolgen van brekend ijs vereisen nog precieze spelregels. Geen definitieve eigenschappen namens Jaylenn verzonnen.
 
-Geen nieuwe gegenereerde beelden, betaalde diensten, accounts of gewijzigde opslagkey. Cacheversie 5.2.0. Publicatiebewijs volgt na de geteste samenvoeging.
+Geen nieuwe gegenereerde beelden, betaalde diensten, accounts of gewijzigde opslagkey. Cacheversie 5.2.0. Live geverifieerd: gamecommit `3c53b624277676f2ac1d74ddb311aba28749e49d`, Pages-run `43175918470` success. Index, game.js, course.js, player.js en V5-CSS geven HTTP 200 en zijn bytegelijk aan de geteste bestanden. Officiële URL toont V5.2; nieuwe lokale testcoureur Papa/Kikker opgeslagen, echte race gestart en 90 km/u gereden. Nieuwe camera/decor zichtbaar, pauze/kaart/hoofdmenu werken. Alleen browserextensie-metadatawaarschuwingen, geen gamefout gezien. Laatste documentatiecommit bewaart dit bewijs.
 
 ---
 
