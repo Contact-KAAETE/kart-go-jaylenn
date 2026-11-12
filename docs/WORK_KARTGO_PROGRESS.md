@@ -148,3 +148,12 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Tests geslaagd: `npm test` inclusief nieuwe projectie-/stuurregressies (gelijke schaal bij gelijke positie, juiste diepte en rijrichting, gedeelde botsingscoördinaten, trein niet in 74, alle vijf Party-levels bij alle drie motoren, onafhankelijke aanrakingen, pauze/opslag); `tests/worlds-simulation.mjs`; `tests/worlds-runtime.mjs` met twee clients, IJs en volledige 5 km Party, gezamenlijke kat/finish, wereldwissel en Avontuur-regel.
 - Browser lokaal: spoor/trein en gelijke kipmaten bekeken; rodeo op 390×844 gecontroleerd. Fysieke iPhone-test niet door ons uitgevoerd; de aangeleverde iPhonebeelden zijn de aanleiding.
 - Publicatie in voorbereiding: assets cache `party-fix-1`; backendversie `ultimate-worlds-3.1`. Na main-update actuele Pages-bestanden en live server/rodeo controleren.
+
+
+### Live verificatie van de reparatie
+- Codecommit `baaf7882285bea1d13f27a7ee777df56a3da7120`: GitHub Pages build/deploy/report en Cloudflare Workers Builds succesvol. Live `/health` meldt `ultimate-worlds-3.1`.
+- Gepubliceerde Party-HTML, simulatielogica, renderer en controller met HTTP 200 opgehaald en byte-voor-byte identiek aan geteste bestanden.
+- `tests/party-controls-live.mjs` geslaagd: twee onafhankelijke echte productieclients geven gas, sturen gelijktijdig tegengestelde kanten op voorbij ±0,4 (oude grens ±0,24), zien gesynchroniseerde posities, zonder straf en stoppen na verouderde invoer. Geen uitnodigingsgegevens gelogd.
+- Lokale Party-integratietest uitgebreid: echte controller + gedeelde simulatie over 150 animatieframes, pointer rechts/links verandert de daadwerkelijke racepositie, vervolgens onafhankelijke release/cancel en pauzereset.
+- Mobiel browserformaat 390×844 en gedraaid 844×390 gecontroleerd: geen pagina-overloop, onderbreken pauzeert en maakt de knoppen vrij. Live browser toont de nieuwe schaal en geen trein in level 74.
+- Fysieke Safari/iPhone is niet door ons getest. Gebruiker kan dezelfde race opnieuw openen of één keer herladen; nieuwe scriptcacheversies vereisen geen wissen van opslag.
