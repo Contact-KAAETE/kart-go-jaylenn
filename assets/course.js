@@ -3,7 +3,7 @@
 const smoothCourse=t=>{t=Math.max(0,Math.min(1,t));return t*t*t*(t*(t*6-15)+10);};
 const courseWrap=(v,period)=>(v%period+period)%period;
 function courseCorners(level){
- const n=level>20?level-20+6:level;
+ const n=level>50?level-50+2:level>20?level-20+6:level;
  if(n<3)return[];
  const strength=Math.min(4.8,.9+n*.17),sections=[{from:75+level%3*5,length:23,dir:level%2?1:-1}];
  if(n>=9)sections.push({from:172+level%3*4,length:23,dir:level%2?-1:1});

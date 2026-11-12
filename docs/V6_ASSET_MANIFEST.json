@@ -1,0 +1,35 @@
+[
+  {
+    "path": "assets/graphics/winter-v6.webp",
+    "bytes": 327346,
+    "base64Length": 436464,
+    "gitSha": "2f5218e873a96d8815379254c00a4fe968dd904b",
+    "width": 1536,
+    "height": 1024,
+    "alpha": false
+  },
+  {
+    "path": "assets/graphics/iceprops-v6.webp",
+    "bytes": 456672,
+    "base64Length": 608896,
+    "gitSha": "c76e71cff8c00d0d28a7f36cec4222e25438e988",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "assets/graphics/burger-v6.webp",
+    "bytes": 310910,
+    "base64Length": 414548,
+    "gitSha": "08b6102dea55c9e63c1e2009aa6a7e49fd71343f",
+    "width": 1536,
+    "height": 1024,
+    "alpha": true
+  },
+  {
+    "path": "assets/audio/ho-ho-ho-v6.wav",
+    "bytes": 75452,
+    "base64Length": 100604,
+    "gitSha": "37ce59cde99547ef7c8fe54d6d462ca5cf9bb0b9"
+  }
+]

@@ -4,7 +4,7 @@ const sceneryCache=new Map();let sceneryLevel=1,landscapeCache=null;
 function shape(c,points,color){c.beginPath();points.forEach((p,i)=>i?c.lineTo(...p):c.moveTo(...p));c.closePath();c.fillStyle=color;c.fill();}
 function gradient(c,x,y,x2,y2,stops){const g=c.createLinearGradient(x,y,x2,y2);stops.forEach(([at,color])=>g.addColorStop(at,color));return g;}
 function scenicCanvas(w=400,h=440){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
-function buildScenery(level){sceneryLevel=level;if(level>20)buildDesertScenery();landscapeCache=null;if(sceneryCache.size)return;
+function buildScenery(level){sceneryLevel=level;if(level>20&&level<=50)buildDesertScenery();landscapeCache=null;if(sceneryCache.size)return;
  for(const type of ['oak','pine','blossom','flowers','grass','rocks','fence','barn','mill','pond','hay','sign']){
   const cv=scenicCanvas(),c=cv.getContext('2d');c.translate(200,425);
   if(['oak','pine','blossom'].includes(type)){
@@ -54,7 +54,7 @@ function elevation(d){return courseElevation(d,sceneryLevel);}
 // Road furniture is projected with the same points as the track.
 function drawRoadFurniture(c,a,b,terrain){
  if(terrain==='ramp'){
-  const color=a.segIndex%2?'#f7b942':'#ffc958';
+  const color=state?.ice?(a.segIndex%2?'#69b9e1':'#92dcf4'):(a.segIndex%2?'#f7b942':'#ffc958');
   shape(c,[[a.x-a.w*.96,a.y],[a.x+a.w*.96,a.y],[b.x+b.w*.96,b.y],[b.x-b.w*.96,b.y]],color);
   for(const lane of [-.64,0,.64]){
    shape(c,[[a.x+a.w*(lane-.22),a.y],[b.x+b.w*lane,b.y],[a.x+a.w*(lane+.22),a.y],[a.x+a.w*(lane+.13),a.y],[b.x+b.w*lane,b.y+(a.y-b.y)*.36],[a.x+a.w*(lane-.13),a.y]],'#fff5cf');
@@ -63,18 +63,18 @@ function drawRoadFurniture(c,a,b,terrain){
   // Deck edge, supports, double timber rails and water glints share the road projection.
   for(const side of [-1,1]){
    const ax=a.x+side*a.w*1.08,bx=b.x+side*b.w*1.08,depthA=a.scale*220*H*.62,depthB=b.scale*220*H*.62;
-   shape(c,[[ax,a.y],[ax+side*a.w*.045,a.y+depthA],[bx+side*b.w*.045,b.y+depthB],[bx,b.y]],side<0?'#715335':'#967348');
-   if(a.segIndex%4===0){c.strokeStyle='#644d38';c.lineWidth=Math.max(1,a.w*.045);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y+depthA*1.9);c.stroke();}
+   shape(c,[[ax,a.y],[ax+side*a.w*.045,a.y+depthA],[bx+side*b.w*.045,b.y+depthB],[bx,b.y]],side<0?(state?.ice?'#4787a5':'#715335'):(state?.ice?'#86cbe0':'#967348'));
+   if(a.segIndex%4===0){c.strokeStyle=(state?.ice?'#63a7bf':'#644d38');c.lineWidth=Math.max(1,a.w*.045);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y+depthA*1.9);c.stroke();}
    const ax2=a.x+side*a.w*1.10,bx2=b.x+side*b.w*1.10,railA=a.scale*80*H*.62,railB=b.scale*80*H*.62;
-   c.strokeStyle='#a47a44';c.lineWidth=Math.max(1,a.w*.012);c.beginPath();c.moveTo(ax2,a.y-railA);c.lineTo(bx2,b.y-railB);c.stroke();
+   c.strokeStyle=(state?.ice?'#a3e9f4':'#a47a44');c.lineWidth=Math.max(1,a.w*.012);c.beginPath();c.moveTo(ax2,a.y-railA);c.lineTo(bx2,b.y-railB);c.stroke();
    if(a.segIndex%3===0){c.strokeStyle='#c6fbf277';c.lineWidth=Math.max(1,a.w*.006);c.beginPath();c.moveTo(a.x+side*a.w*1.42,a.y+depthA*.35);c.lineTo(a.x+side*a.w*1.92,a.y+depthA*.35);c.stroke();}
   }
   for(const side of [-1,1]){
    const ax=a.x+side*a.w*1.10,bx=b.x+side*b.w*1.10,ah=a.scale*150*H*.62,bh=b.scale*150*H*.62;
-   shape(c,[[ax-4,a.y-ah],[ax+4,a.y-ah],[bx+2,b.y-bh],[bx-2,b.y-bh]],'#e5ce96');
-   if(a.segIndex%2===0){c.strokeStyle='#786447';c.lineWidth=Math.max(1,a.w*.018);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y-ah-3);c.stroke();}
+   shape(c,[[ax-4,a.y-ah],[ax+4,a.y-ah],[bx+2,b.y-bh],[bx-2,b.y-bh]],(state?.ice?'#d5f8ff':'#e5ce96'));
+   if(a.segIndex%2===0){c.strokeStyle=(state?.ice?'#5e9fbe':'#786447');c.lineWidth=Math.max(1,a.w*.018);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y-ah-3);c.stroke();}
   }
-  c.strokeStyle='#876e4e44';c.lineWidth=1;c.beginPath();c.moveTo(a.x-a.w,a.y);c.lineTo(a.x+a.w,a.y);c.stroke();
+  c.strokeStyle=(state?.ice?'#6dbddd66':'#876e4e44');c.lineWidth=1;c.beginPath();c.moveTo(a.x-a.w,a.y);c.lineTo(a.x+a.w,a.y);c.stroke();
  }else if(terrain==='tunnel'){
   for(const side of [-1,1]){
    const heightA=a.scale*720*H*.62,heightB=b.scale*720*H*.62;
