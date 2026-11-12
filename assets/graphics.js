@@ -42,6 +42,7 @@ const GFX=(()=>{
  }
  function coloredKart(index,color){const key=index+':'+color;if(tinted.has(key))return tinted.get(key);const base=tile('karts',3,2,index);if(!base)return null;const cv=document.createElement('canvas');cv.width=base.width;cv.height=base.height;const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(base,0,0);const pixels=c.getImageData(0,0,cv.width,cv.height);recolorKartPixels(pixels.data,color);c.putImageData(pixels,0,0);if(tinted.size>30)tinted.delete(tinted.keys().next().value);tinted.set(key,cv);return cv;}
  function driverSprite(avatar,rear=false){const i=racerIndex(avatar);return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
+ const kartFx={lastAir:0};
  function drawKart(c,x,y,scale,color,dog,steer,player,angle=null){
   if(scale<.015)return true;
   if(dog){const boss=dog==='burger'?tile('burger',2,1,1):tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.rotate(steer*.035);c.drawImage(boss,-80*scale,-157*scale,160*scale,170*scale);c.restore();return true;}
@@ -57,6 +58,40 @@ const GFX=(()=>{
   const suspension=racing?Math.sin(t*(12+speed*23))*(.35+speed*1.3):0;
   const lift=airborne*15;
   c.save();c.translate(x,y);
+  // Drift dust and landing burst are visual-only and never alter steering physics.
+  // Draw in road space, before the body moves with the suspension.
+  if(isPlayer&&racing&&speed>.18){
+   const corner=Math.abs(lean);
+   const drifting=corner>.32&&speed>.32&&airborne<.12;
+   const landing=airborne<.09&&kartFx.lastAir>.28;
+   const dust=drifting?Math.min(1,(corner-.25)*1.4)*speed:0;
+   const count=drifting?8:landing?13:0;
+   if(count){
+    c.save();
+    for(let i=0;i<count;i++){
+     const seed=i*2.39996+t*(drifting?3.4:7);
+     const phase=(t*(drifting?2.3:4.8)+i*.173)%1;
+     const side=i%2?-1:1;
+     const radius=(drifting?5+phase*26:8+phase*47)*scale;
+     const px=(side*(34+phase*35)+Math.sin(seed)*9)*scale;
+     const py=(14+phase*(drifting?43:30))*scale;
+     const alpha=(1-phase)*(drifting?.29*dust:.42);
+     c.globalAlpha=alpha;
+     c.fillStyle=i%3===0?'#f6e5c2':i%3===1?'#c9b28a':'#e8e4da';
+     c.beginPath();c.ellipse(px,py,radius,radius*.64,0,0,Math.PI*2);c.fill();
+    }
+    c.restore();
+   }
+   // Short-lived sparks when taking a fast, hard corner.
+   if(drifting&&corner>.7&&speed>.55){
+    c.save();c.strokeStyle='#ffd46a';c.lineWidth=1.5*scale;c.globalAlpha=.6;
+    for(let i=0;i<3;i++){const sx=(lean>0?-48:48)*scale;const sy=(12+i*5)*scale;
+     c.beginPath();c.moveTo(sx,sy);c.lineTo(sx+(lean>0?-1:1)*(10+i*6)*scale,sy+(4+i*3)*scale);c.stroke();}
+    c.restore();
+   }
+  }
+  if(isPlayer&&racing)kartFx.lastAir=airborne;
+  else if(isPlayer)kartFx.lastAir=0;
   // Shadow stays on the road while the chassis lifts over jumps.
   ellipse(c,0,3*scale,57*scale*(1-airborne*.14),11*scale*(1-airborne*.14),'#071b2c4f');
   c.translate(0,(-lift+suspension)*scale);
