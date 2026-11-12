@@ -8,11 +8,27 @@ function layout(){const ids=['brake','left','right','wheel','joystick','gas'];co
 window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
- try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
+ try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage','charactersExtra'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
  if(action.startsWith('winter')){
   try{await Promise.all(['winter','iceprops','burger'].map(GFX.load));}catch(err){result(false,'ijsbeelden: '+err.message);return;}
  }
- if(action==='winterSuite'){
+ if(action==='choiceSuite'){
+  const prior=JSON.parse(JSON.stringify(saved)),fronts=[],backs=[];
+  const hash=cv=>{const d=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;let h=2166136261;for(let i=0;i<d.length;i+=19)h=Math.imul(h^d[i],16777619);return h>>>0;};
+  try{
+   saved.player.name='KeuzeTester';
+   for(const avatar of AVATARS){
+    profile();document.querySelector('[data-avatar="'+avatar+'"]').click();document.querySelector('#savePlayer').click();
+    result(saved.player.avatar===avatar&&cleanProgress(JSON.parse(localStorage.getItem(STORAGE_KEY))).player.avatar===avatar,'echte selectie/opslaan: '+RACER_NAMES[racerIndex(avatar)]);
+    profile();result(document.querySelector('[data-avatar="'+avatar+'"]').getAttribute('aria-pressed')==='true','heropenen: '+RACER_NAMES[racerIndex(avatar)]);
+    result(modal.scrollWidth<=modal.clientWidth+1,'geen horizontale profiel-overflow '+innerWidth);closeModal();
+    start(1);state.count=0;draw();fronts.push(hash(GFX.driverSprite(avatar,false)));backs.push(hash(GFX.driverSprite(avatar,true)));
+   }
+   result(new Set(fronts).size===12&&new Set(backs).size===12,'12 unieke vooraanzichten EN12 unieke race-rugaanzichten');
+   result(cleanProgress(JSON.parse(progressText())).player.avatar===saved.player.avatar,'nieuwe coureur overleeft voortgangsexport/import');
+   const swatches=Object.values(PAINTS).map(color=>{const p=new Uint8ClampedArray([220,30,50,255]);recolorKartPixels(p,color);return [...p].join();});result(new Set(swatches).size===20,'20 verschillende lakpixels inclusief wit/zwart');
+  }catch(err){result(false,'keuzes: '+err.message);}finally{saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE:12 coureurs en20 kleuren '+innerWidth+'×'+innerHeight);}
+ }else if(action==='winterSuite'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
    for(let level=51;level<=70;level++){start(level);state.count=0;state.time=2;draw();result(state.ice&&GFX.canRace(level),'echte ijsrace/beelden klaar '+level);}
@@ -48,9 +64,9 @@ window.addEventListener('message',async e=>{
     click(document.querySelector('#saveGarage'));closeModal();garage();
     result(saved.player.color===color&&document.querySelector('#kartColor').value===color&&JSON.parse(localStorage.getItem(STORAGE_KEY)).player.color===color,'kleur blijft bewaard en heropent: '+PAINT_NAMES[color]);
    }
-   result(new Set(hashes).size===5,'vijf verschillende echte kartvoorvertoningen zonder Canvas filter');
+   result(new Set(hashes).size===Object.values(PAINTS).length,'twintig verschillende echte kartvoorvertoningen zonder Canvas filter');
    closeModal();start(1);state.count=0;const c=document.createElement('canvas');c.width=300;c.height=300;const ctx=c.getContext('2d'),raceHashes=[];
-   for(const color of Object.values(PAINTS)){ctx.clearRect(0,0,300,300);GFX.drawKart(ctx,150,275,1.8,color,false,0,saved.player);raceHashes.push(hash(c));}result(new Set(raceHashes).size===5,'vijf echte racekarts hebben verschillende lak zonder Canvas filter');
+   for(const color of Object.values(PAINTS)){ctx.clearRect(0,0,300,300);GFX.drawKart(ctx,150,275,1.8,color,false,0,saved.player);raceHashes.push(hash(c));}result(new Set(raceHashes).size===Object.values(PAINTS).length,'twintig echte racekarts hebben verschillende lak zonder Canvas filter');
   }catch(err){result(false,'garage: '+err.message);}finally{if(desc)Object.defineProperty(CanvasRenderingContext2D.prototype,'filter',desc);else delete CanvasRenderingContext2D.prototype.filter;saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE: garagekleuren');}
  }else if(action==='v52suite'){
   const prior=JSON.parse(JSON.stringify(saved));
@@ -94,7 +110,7 @@ window.addEventListener('message',async e=>{
    start(1);state.count=0;state.speed=0;saved.xp=0;GFX.resetMetrics();draw();const m=GFX.metrics();
    result(m.karts>=4&&m.drivers>=4,'rasterkarts EN gekozen coureurs worden in echte race getekend');result(m.scenery>0&&m.landscapes>0&&m.terrain>0,'echte rasteromgeving, panorama en wegtextuur actief');
    const hash=cv=>{const d=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;let h=2166136261;for(let i=0;i<d.length;i+=29)h=Math.imul(h^d[i],16777619);return h>>>0;};
-   const heads=AVATARS.map((_,i)=>hash(GFX.tile('characters',3,4,i+6)));result(new Set(heads).size===6,'zes werkelijk verschillende rugaanzichtsprites');
+   const heads=AVATARS.map(avatar=>hash(GFX.driverSprite(avatar,true)));result(new Set(heads).size===AVATARS.length,'twaalf werkelijk verschillende rugaanzichtsprites');
    const cv=document.createElement('canvas');cv.width=300;cv.height=300;const c=cv.getContext('2d'),paints=[];
    for(const color of ['#f56a48','#579be4','#78b747']){c.clearRect(0,0,300,300);GFX.drawKart(c,150,265,1.8,color,false,0,saved.player);paints.push(hash(cv));}result(new Set(paints).size===3,'kartkleur verandert werkelijk de racepixels');
    for(const avatar of AVATARS){saved.player.avatar=avatar;persist();const copy=cleanProgress(JSON.parse(localStorage.getItem(STORAGE_KEY)));result(copy.player.avatar===avatar,'coureur blijft bewaard: '+RACER_NAMES[racerIndex(avatar)]);}

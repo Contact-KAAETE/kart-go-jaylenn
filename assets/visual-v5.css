@@ -64,3 +64,10 @@ dialog#modal{color:#eff8ff;background:linear-gradient(145deg,#143954,#081e34 70%
 #startLights[data-phase="3"] i:first-child{background:#ff6559;box-shadow:0 0 17px #ff5f4c}#startLights[data-phase="1"] i:nth-child(2){background:#ffd770;box-shadow:0 0 17px #ffd770}#startLights[data-phase="0"] i:last-child{background:#9df582;box-shadow:0 0 17px #8dff65}
 #startVoice{position:fixed;z-index:11;top:51%;left:50%;transform:translateX(-50%);width:90%;text-align:center;color:#e6fbff;text-shadow:0 2px 6px #102f49;font-size:clamp(17px,4vw,30px);font-weight:900;pointer-events:none}
 @media(max-height:510px){#startLights{top:31%;padding:7px 12px;gap:9px}#startLights i{width:16px;height:16px}#startVoice{font-size:17px;top:60%}}
+
+/* V6.1: additive driver atlas, original indices and saved choices stay valid. */
+.portrait-sprite.extra-racer{background-image:url('./graphics/characters-extra-v6-1.webp?v=6.1.0')}
+.portrait-sprite[data-character="6"]{background-position:0 0}.portrait-sprite[data-character="7"]{background-position:50% 0}.portrait-sprite[data-character="8"]{background-position:100% 0}.portrait-sprite[data-character="9"]{background-position:0 33.3333%}.portrait-sprite[data-character="10"]{background-position:50% 33.3333%}.portrait-sprite[data-character="11"]{background-position:100% 33.3333%}
+#modal .avatar-option:nth-child(n+7){background:radial-gradient(ellipse at 50% 20%,#638ead,#132b45)}#modal .avatar-option:nth-child(3n+7){background:radial-gradient(ellipse at 50% 20%,#59b999,#173e43)}#modal .avatar-option:nth-child(3n+8){background:radial-gradient(ellipse at 50% 20%,#c98fa5,#4d2d51)}
+#modal .paint-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));gap:13px 10px;margin:16px 0}#modal .paint-row button{width:44px;height:44px;min-width:0;justify-self:center}#modal .paint-row button[aria-pressed=true]::after{color:#fff;text-shadow:0 1px 3px #000,0 0 4px #000}
+#modal .racer-count{font-size:12px;color:#aedbe7;margin-top:-5px}@media(max-width:560px){#garageControls{grid-template-columns:minmax(0,1fr)}#garageControls>div{min-width:0}}

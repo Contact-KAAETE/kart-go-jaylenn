@@ -1,8 +1,8 @@
 /* V5 raster presentation. Physics, level rules and saved avatar IDs stay in the original engine. */
 'use strict';
-const RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot'];
+const RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat'];
 function racerIndex(avatar){return Math.max(0,AVATARS.indexOf(avatar));}
-function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);return `<span class="portrait-sprite ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
+function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);return `<span class="portrait-sprite ${i>=6?'extra-racer':''} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
 function powerMarkup(item){const i=[1,2,3,4,6,5][item]??0;return `<span class="power-sprite" style="background-position:${(i%5)*25}% ${i>=5?100:0}%" aria-hidden="true"></span>`;}
 function showWorldMap(){
  $('#worldPanel').classList.remove('hidden');$('#home .hero').classList.add('hidden');$('#home .player-hub').classList.add('hidden');$('#home .menu-tools').classList.add('hidden');renderMap();window.scrollTo?.({top:0,behavior:'smooth'});
@@ -21,15 +21,16 @@ function recolorKartPixels(data,color){
   const sr=data[i]/255,sg=data[i+1]/255,sb=data[i+2]/255,hi=Math.max(sr,sg,sb),lo=Math.min(sr,sg,sb),d=hi-lo;
   if(d<.06||hi!==sr)continue;
   const sourceHue=((sg-sb)/d*60+360)%360;if(sourceHue>22&&sourceHue<338)continue;
-  const l=Math.max(0,Math.min(1,(hi+lo)/2*(.55+light*.9))),chroma=(1-Math.abs(2*l-1))*sat,offset=l-chroma/2;
+  const sourceLight=(hi+lo)/2,base=.62,adjusted=light<.3||light>.85?(sourceLight<base?sourceLight/base*light:light+(sourceLight-base)/(1-base)*(1-light)):sourceLight*(.55+light*.9);
+  const l=Math.max(0,Math.min(1,adjusted)),chroma=(1-Math.abs(2*l-1))*sat,offset=l-chroma/2;
   for(let c=0;c<3;c++)data[i+c]=Math.round((offset+chroma*unit[c])*255);
  }
  return data;
 }
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map(),counts={karts:0,drivers:0,scenery:0,landscapes:0,effects:0,terrain:0};let loadingRace=false,allowFallback=false;
- const files={menu:'menu',characters:'characters',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain',winter:'winter',iceprops:'iceprops',burger:'burger'};
- const source=name=>`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
+ const files={menu:'menu',characters:'characters',charactersExtra:'characters-extra',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain',winter:'winter',iceprops:'iceprops',burger:'burger'};
+ const source=name=>name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
  function image(name){const im=pictures.get(name);return im?.naturalWidth?im:null;}
  function load(name){
   if(typeof Image==='undefined')return Promise.resolve(null);if(pending.has(name))return pending.get(name);
@@ -40,11 +41,12 @@ const GFX=(()=>{
   const sw=im.naturalWidth/columns,sh=im.naturalHeight/rows,cv=document.createElement('canvas');cv.width=Math.round(sw);cv.height=Math.round(sh);cv.getContext('2d').drawImage(im,index%columns*sw,Math.floor(index/columns)*sh,sw,sh,0,0,cv.width,cv.height);frames.set(key,cv);return cv;
  }
  function coloredKart(index,color){const key=index+':'+color;if(tinted.has(key))return tinted.get(key);const base=tile('karts',3,2,index);if(!base)return null;const cv=document.createElement('canvas');cv.width=base.width;cv.height=base.height;const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(base,0,0);const pixels=c.getImageData(0,0,cv.width,cv.height);recolorKartPixels(pixels.data,color);c.putImageData(pixels,0,0);if(tinted.size>30)tinted.delete(tinted.keys().next().value);tinted.set(key,cv);return cv;}
+ function driverSprite(avatar,rear=false){const i=racerIndex(avatar);return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
  function drawKart(c,x,y,scale,color,dog,steer,player,angle=null){
   if(scale<.015)return true;
   if(dog){const boss=dog==='burger'?tile('burger',2,1,1):tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.rotate(steer*.035);c.drawImage(boss,-80*scale,-157*scale,160*scale,170*scale);c.restore();return true;}
   const variant=angle===null?(steer<-.23?0:steer>.23?2:1):angle;
-  const kart=coloredKart(variant,color),driver=tile('characters',3,4,racerIndex(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4])+(variant>=3?0:6));if(!kart||!driver)return false;counts.karts++;counts.drivers++;
+  const kart=coloredKart(variant,color),driver=driverSprite(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4],variant<3);if(!kart||!driver)return false;counts.karts++;counts.drivers++;
   c.save();c.translate(x,y);c.rotate(steer*.035);const bob=(typeof state!=='undefined'&&state?.speed>100)?Math.sin(performance.now()/53)*.65:0;c.translate(0,bob);ellipse(c,0,2*scale,57*scale,11*scale,'#071b2c4f');
   if(player&&typeof state!=='undefined'&&state?.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
   if(variant<3){c.drawImage(driver,-32*scale,-129*scale,64*scale,64*scale);}else{c.drawImage(driver,-31*scale,-129*scale,62*scale,62*scale);}
@@ -78,10 +80,10 @@ const GFX=(()=>{
   stamp([[0,a.y+1],[a.x-a.w*1.1,a.y+1],[b.x-b.w*1.1,b.y],[0,b.y]],ground,0,W,opacity);
   stamp([[a.x+a.w*1.1,a.y+1],[W,a.y+1],[W,b.y],[b.x+b.w*1.1,b.y]],ground,0,W,opacity);
  }
- function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...(level===20||level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
+ function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...(racerIndex(saved.player.avatar)>=6?['charactersExtra']:[]),...(level===20||level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
  function prepare(level,callback){
   if(loadingRace)return;loadingRace=true;showModal('<div class="loading-art"><span class="eyebrow">JE RACEWERELD WORDT KLAARGEZET</span><h2>Even de motor warmdraaien…</h2><div class="loading-wheel"></div><p>De nieuwe karts en omgeving worden geladen.</p></div>');
-  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...(level===20||level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
+  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...(racerIndex(saved.player.avatar)>=6?['charactersExtra']:[]),...(level===20||level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
  }
  function init(){
   $('#openWorldMap').onclick=showWorldMap;$('#closeWorldMap').onclick=showHomeMenu;$('#menuSettings').onclick=settings;
@@ -90,5 +92,5 @@ const GFX=(()=>{
   Promise.all(['menu','characters'].map(load)).then(()=>{$('#assetStatus').textContent='';renderPlayer();}).catch(()=>{$('#assetStatus').textContent='Een beeldbestand ontbreekt. Herlaad bij een trage verbinding.';});
  }
  function metrics(){return{...counts,loaded:[...pictures.keys()],frameCache:frames.size,tintCache:tinted.size,decodedBytes:[...pictures.values()].reduce((n,im)=>n+im.naturalWidth*im.naturalHeight*4,0)};}function resetMetrics(){for(const k of Object.keys(counts))counts[k]=0;}
- return {metrics,resetMetrics,image,load,tile,drawKart,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
+ return {metrics,resetMetrics,image,load,tile,driverSprite,drawKart,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
 })();

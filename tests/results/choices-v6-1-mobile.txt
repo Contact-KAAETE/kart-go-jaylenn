@@ -1,0 +1,289 @@
+PASS: echte selectie/opslaan: Astronaut
+PASS: heropenen: Astronaut
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Ninja
+PASS: heropenen: Ninja
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Vos
+PASS: heropenen: Vos
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Panda
+PASS: heropenen: Panda
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Kikker
+PASS: heropenen: Kikker
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Robot
+PASS: heropenen: Robot
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Draak
+PASS: heropenen: Draak
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Konijn
+PASS: heropenen: Konijn
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Tijger
+PASS: heropenen: Tijger
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Pinguïn
+PASS: heropenen: Pinguïn
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Kat
+PASS: heropenen: Kat
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Piraat
+PASS: heropenen: Piraat
+PASS: geen horizontale profiel-overflow 390
+PASS: 12 unieke vooraanzichten EN12 unieke race-rugaanzichten
+PASS: nieuwe coureur overleeft voortgangsexport/import
+PASS: 20 verschillende lakpixels inclusief wit/zwart
+DONE:12 coureurs en20 kleuren 390×844
+PASS: kleurknop selecteert Rood
+PASS: exact één vinkje bij Rood
+PASS: kleur blijft bewaard en heropent: Rood
+PASS: kleurknop selecteert Blauw
+PASS: exact één vinkje bij Blauw
+PASS: kleur blijft bewaard en heropent: Blauw
+PASS: kleurknop selecteert Groen
+PASS: exact één vinkje bij Groen
+PASS: kleur blijft bewaard en heropent: Groen
+PASS: kleurknop selecteert Geel
+PASS: exact één vinkje bij Geel
+PASS: kleur blijft bewaard en heropent: Geel
+PASS: kleurknop selecteert Paars
+PASS: exact één vinkje bij Paars
+PASS: kleur blijft bewaard en heropent: Paars
+PASS: kleurknop selecteert Oranje
+PASS: exact één vinkje bij Oranje
+PASS: kleur blijft bewaard en heropent: Oranje
+PASS: kleurknop selecteert Roze
+PASS: exact één vinkje bij Roze
+PASS: kleur blijft bewaard en heropent: Roze
+PASS: kleurknop selecteert Turquoise
+PASS: exact één vinkje bij Turquoise
+PASS: kleur blijft bewaard en heropent: Turquoise
+PASS: kleurknop selecteert Lime
+PASS: exact één vinkje bij Lime
+PASS: kleur blijft bewaard en heropent: Lime
+PASS: kleurknop selecteert Nachtblauw
+PASS: exact één vinkje bij Nachtblauw
+PASS: kleur blijft bewaard en heropent: Nachtblauw
+PASS: kleurknop selecteert Lavendel
+PASS: exact één vinkje bij Lavendel
+PASS: kleur blijft bewaard en heropent: Lavendel
+PASS: kleurknop selecteert Mint
+PASS: exact één vinkje bij Mint
+PASS: kleur blijft bewaard en heropent: Mint
+PASS: kleurknop selecteert Petrol
+PASS: exact één vinkje bij Petrol
+PASS: kleur blijft bewaard en heropent: Petrol
+PASS: kleurknop selecteert Bordeaux
+PASS: exact één vinkje bij Bordeaux
+PASS: kleur blijft bewaard en heropent: Bordeaux
+PASS: kleurknop selecteert Koraal
+PASS: exact één vinkje bij Koraal
+PASS: kleur blijft bewaard en heropent: Koraal
+PASS: kleurknop selecteert Zand
+PASS: exact één vinkje bij Zand
+PASS: kleur blijft bewaard en heropent: Zand
+PASS: kleurknop selecteert Wit
+PASS: exact één vinkje bij Wit
+PASS: kleur blijft bewaard en heropent: Wit
+PASS: kleurknop selecteert Zilver
+PASS: exact één vinkje bij Zilver
+PASS: kleur blijft bewaard en heropent: Zilver
+PASS: kleurknop selecteert Grafiet
+PASS: exact één vinkje bij Grafiet
+PASS: kleur blijft bewaard en heropent: Grafiet
+PASS: kleurknop selecteert Zwart
+PASS: exact één vinkje bij Zwart
+PASS: kleur blijft bewaard en heropent: Zwart
+PASS: twintig verschillende echte kartvoorvertoningen zonder Canvas filter
+PASS: twintig echte racekarts hebben verschillende lak zonder Canvas filter
+DONE: garagekleuren
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: echte selectie/opslaan: Astronaut
+PASS: heropenen: Astronaut
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Ninja
+PASS: heropenen: Ninja
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Vos
+PASS: heropenen: Vos
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Panda
+PASS: heropenen: Panda
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Kikker
+PASS: heropenen: Kikker
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Robot
+PASS: heropenen: Robot
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Draak
+PASS: heropenen: Draak
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Konijn
+PASS: heropenen: Konijn
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Tijger
+PASS: heropenen: Tijger
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Pinguïn
+PASS: heropenen: Pinguïn
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Kat
+PASS: heropenen: Kat
+PASS: geen horizontale profiel-overflow 320
+PASS: echte selectie/opslaan: Piraat
+PASS: heropenen: Piraat
+PASS: geen horizontale profiel-overflow 320
+PASS: 12 unieke vooraanzichten EN12 unieke race-rugaanzichten
+PASS: nieuwe coureur overleeft voortgangsexport/import
+PASS: 20 verschillende lakpixels inclusief wit/zwart
+DONE:12 coureurs en20 kleuren 320×568
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: echte selectie/opslaan: Astronaut
+PASS: heropenen: Astronaut
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Ninja
+PASS: heropenen: Ninja
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Vos
+PASS: heropenen: Vos
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Panda
+PASS: heropenen: Panda
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Kikker
+PASS: heropenen: Kikker
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Robot
+PASS: heropenen: Robot
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Draak
+PASS: heropenen: Draak
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Konijn
+PASS: heropenen: Konijn
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Tijger
+PASS: heropenen: Tijger
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Pinguïn
+PASS: heropenen: Pinguïn
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Kat
+PASS: heropenen: Kat
+PASS: geen horizontale profiel-overflow 390
+PASS: echte selectie/opslaan: Piraat
+PASS: heropenen: Piraat
+PASS: geen horizontale profiel-overflow 390
+PASS: 12 unieke vooraanzichten EN12 unieke race-rugaanzichten
+PASS: nieuwe coureur overleeft voortgangsexport/import
+PASS: 20 verschillende lakpixels inclusief wit/zwart
+DONE:12 coureurs en20 kleuren 390×844
+PASS: kleurknop selecteert Rood
+PASS: exact één vinkje bij Rood
+PASS: kleur blijft bewaard en heropent: Rood
+PASS: kleurknop selecteert Blauw
+PASS: exact één vinkje bij Blauw
+PASS: kleur blijft bewaard en heropent: Blauw
+PASS: kleurknop selecteert Groen
+PASS: exact één vinkje bij Groen
+PASS: kleur blijft bewaard en heropent: Groen
+PASS: kleurknop selecteert Geel
+PASS: exact één vinkje bij Geel
+PASS: kleur blijft bewaard en heropent: Geel
+PASS: kleurknop selecteert Paars
+PASS: exact één vinkje bij Paars
+PASS: kleur blijft bewaard en heropent: Paars
+PASS: kleurknop selecteert Oranje
+PASS: exact één vinkje bij Oranje
+PASS: kleur blijft bewaard en heropent: Oranje
+PASS: kleurknop selecteert Roze
+PASS: exact één vinkje bij Roze
+PASS: kleur blijft bewaard en heropent: Roze
+PASS: kleurknop selecteert Turquoise
+PASS: exact één vinkje bij Turquoise
+PASS: kleur blijft bewaard en heropent: Turquoise
+PASS: kleurknop selecteert Lime
+PASS: exact één vinkje bij Lime
+PASS: kleur blijft bewaard en heropent: Lime
+PASS: kleurknop selecteert Nachtblauw
+PASS: exact één vinkje bij Nachtblauw
+PASS: kleur blijft bewaard en heropent: Nachtblauw
+PASS: kleurknop selecteert Lavendel
+PASS: exact één vinkje bij Lavendel
+PASS: kleur blijft bewaard en heropent: Lavendel
+PASS: kleurknop selecteert Mint
+PASS: exact één vinkje bij Mint
+PASS: kleur blijft bewaard en heropent: Mint
+PASS: kleurknop selecteert Petrol
+PASS: exact één vinkje bij Petrol
+PASS: kleur blijft bewaard en heropent: Petrol
+PASS: kleurknop selecteert Bordeaux
+PASS: exact één vinkje bij Bordeaux
+PASS: kleur blijft bewaard en heropent: Bordeaux
+PASS: kleurknop selecteert Koraal
+PASS: exact één vinkje bij Koraal
+PASS: kleur blijft bewaard en heropent: Koraal
+PASS: kleurknop selecteert Zand
+PASS: exact één vinkje bij Zand
+PASS: kleur blijft bewaard en heropent: Zand
+PASS: kleurknop selecteert Wit
+PASS: exact één vinkje bij Wit
+PASS: kleur blijft bewaard en heropent: Wit
+PASS: kleurknop selecteert Zilver
+PASS: exact één vinkje bij Zilver
+PASS: kleur blijft bewaard en heropent: Zilver
+PASS: kleurknop selecteert Grafiet
+PASS: exact één vinkje bij Grafiet
+PASS: kleur blijft bewaard en heropent: Grafiet
+PASS: kleurknop selecteert Zwart
+PASS: exact één vinkje bij Zwart
+PASS: kleur blijft bewaard en heropent: Zwart
+PASS: twintig verschillende echte kartvoorvertoningen zonder Canvas filter
+PASS: twintig echte racekarts hebben verschillende lak zonder Canvas filter
+DONE: garagekleuren
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: echte selectie/opslaan: Astronaut
+PASS: heropenen: Astronaut
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Ninja
+PASS: heropenen: Ninja
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Vos
+PASS: heropenen: Vos
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Panda
+PASS: heropenen: Panda
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Kikker
+PASS: heropenen: Kikker
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Robot
+PASS: heropenen: Robot
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Draak
+PASS: heropenen: Draak
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Konijn
+PASS: heropenen: Konijn
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Tijger
+PASS: heropenen: Tijger
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Pinguïn
+PASS: heropenen: Pinguïn
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Kat
+PASS: heropenen: Kat
+PASS: geen horizontale profiel-overflow 844
+PASS: echte selectie/opslaan: Piraat
+PASS: heropenen: Piraat
+PASS: geen horizontale profiel-overflow 844
+PASS: 12 unieke vooraanzichten EN12 unieke race-rugaanzichten
+PASS: nieuwe coureur overleeft voortgangsexport/import
+PASS: 20 verschillende lakpixels inclusief wit/zwart
+DONE:12 coureurs en20 kleuren 844×390

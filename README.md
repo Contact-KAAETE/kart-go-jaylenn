@@ -1,8 +1,12 @@
-# KART GO — Jaylenns Racewereld · V6.0
+# KART GO — Jaylenns Racewereld · V6.1
 
 **KART GO — Een spel bedacht door Jaylenn.** AI is uitsluitend hulpmiddel voor programmeren, vormgeving en testen.
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
+
+## V6.1 — meer keuze
+
+Twaalf coureurs, twintig kartkleuren en een vrije kleurkiezer. Nieuwe coureurs zijn ook zichtbaar achter het stuur, in de garage en op het podium. Bestaande keuzes en voortgang blijven behouden. Zie [status](docs/KART_GO_CHOICES_V6_1_STATUS.md).
 
 ## V6.0 — complete IJs-Wereld
 

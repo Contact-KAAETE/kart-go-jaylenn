@@ -1,3 +1,9 @@
+# Actueel: V6.1 meer keuze gebouwd en getest
+
+Twaalf coureurs en twintig kartkleuren. Zie KART_GO_CHOICES_V6_1_STATUS.md. Bestaande70 levels en voortgang behouden. Livepublicatie nog controleren.
+
+---
+
 # Actueel: V6.0.1 complete IJs-Wereld LIVE
 
 70 levels, drie werelden en drie eindbazen. Volledige implementatie, regels, assets en testresultaten: KART_GO_ICE_WORLD_STATUS.md. Gamecommit700d99d96b1c8bf5e28ee9190b7baa52391684eb, succesvolle Pages-run43183938063. Officiële HTTPS-link met6.0.1 daadwerkelijk getest, inclusief ijsrace51 en Burgerkoning70. Alle70 circuits en mobiele Chrome-frames/touchsimulatie gecontroleerd. Geen fysieke iPhone-test. Naam/coureur/kleur/garage/voortgang behouden; kleurenreparatie werkt nog. Back-up backup/v5-2-1-before-ice-world-20261112 blijft beschikbaar. Hervat vanaf actuele main, niet opnieuw beginnen. Online vrienden/multiplayer blijven afzonderlijk open.
