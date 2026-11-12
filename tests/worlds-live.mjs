@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 const api='https://kart-go-jaylenn.thijs30051970.workers.dev',clients=[];let timer;
 const wait=async(f,label,ms=12000)=>{const until=Date.now()+ms;while(!f()){if(Date.now()>until)throw Error('Timeout '+label);await new Promise(r=>setTimeout(r,40));}},last=(c,t)=>c.messages.filter(m=>m.type===t).at(-1);
-const health=await(await fetch(api+'/health')).json();assert.equal(health.version,'ultimate-worlds-3');
+const health=await(await fetch(api+'/health')).json();assert.equal(health.version,'ultimate-worlds-3.1');
 const invite=await(await fetch(api+'/rooms',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({selection:{level:51,mode:'free'}})})).json();
 async function open(resume){const c={messages:[]};c.ws=new WebSocket(api.replace('https:','wss:')+'/rooms/'+invite.room+'/connect?secret='+invite.secret+(resume?'&resume='+resume:''));c.send=m=>c.ws.send(JSON.stringify(m));c.ws.onmessage=e=>c.messages.push(JSON.parse(e.data));clients.push(c);await wait(()=>last(c,'welcome'),'welcome');return c;}
 function organizer(a,b){const id=last(a,'snapshot')?.hostId||last(a,'lobby')?.hostId;return[a,b].find(c=>last(c,'welcome').id===id)||a;}

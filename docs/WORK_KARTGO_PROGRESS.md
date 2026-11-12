@@ -136,3 +136,15 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Open vervolg: verdere grafische verfijning richting de voorbeeldbeelden, speelsessies met de kinderen op echte telefoons; een echt online vriendenverzoekensysteem is niet in deze fase gebouwd. Het losse vliegende-kasteelverhaal is nog geen spelonderdeel.
 
 - Aanvullende integratiecontrole: de knop Samen in de Party-Wereld neemt nu het gekozen Party-level én Vrij/Avontuur mee. `tests/party-riders.mjs` toegevoegd aan `npm test`: behoud bestaande wins/XP/best/session/naam en Party-save, kipkeuze, toegang, start/pauze/menu en correcte online link geslaagd.
+
+
+## 2026-11-12 — Herstel na iPhone-melding: trein, schaal en sturen
+- Uitgangspunt `b716b6eee31918d5b038750504c7638d840aa531`; herstelbranch `backup/pre-party-controls-b716b6e-20261112`, ontwikkeltak `fix/party-controls-projection-20261112`.
+- Oorzaken: eigen rijder had factor 1,35 terwijl tegenstanders een andere schaal/grondlijn gebruikten; de trein werd telkens vóór de camera geplaatst en had geen spoor; rodeo begrensde x onzichtbaar op ±0,24 rond de huidige baan.
+- Herstel: één camera/projectie en dezelfde basismaat voor alle rijders, echte dieptevolgorde en dezelfde coördinaten als obstakels. De weg loopt door onder de voeten. Startposities van computerkippen verdeeld.
+- Trein blijft uitsluitend in 72 en 75; niet in de Kippen-Rodeo 74. Hij rijdt in wereldmeters over een apart spoor, met ballast, dwarsliggers, rails en uitgelijnde wiel-/grondpositie. Geen zweven of meebewegen met de camera.
+- Party-sturen: onzichtbare begrenzing verwijderd, minder ongevraagde bochtdrift. Jump blijft handmatig beschikbaar; reparatie verleent geen automatische power-ups. Aanraakeigendom apart per vinger; pauze wist gas/rem/stuurinput en knopmarkering.
+- Bewaard: beide opslagkeys, alle bestaande namen/avatars/kleuren/voortgang, oorspronkelijke 70-levelgame, inventaris, zes seconden straf, kat/checkpoint en gratis hosting. Geen nieuwe assets/diensten/kosten.
+- Tests geslaagd: `npm test` inclusief nieuwe projectie-/stuurregressies (gelijke schaal bij gelijke positie, juiste diepte en rijrichting, gedeelde botsingscoördinaten, trein niet in 74, alle vijf Party-levels bij alle drie motoren, onafhankelijke aanrakingen, pauze/opslag); `tests/worlds-simulation.mjs`; `tests/worlds-runtime.mjs` met twee clients, IJs en volledige 5 km Party, gezamenlijke kat/finish, wereldwissel en Avontuur-regel.
+- Browser lokaal: spoor/trein en gelijke kipmaten bekeken; rodeo op 390×844 gecontroleerd. Fysieke iPhone-test niet door ons uitgevoerd; de aangeleverde iPhonebeelden zijn de aanleiding.
+- Publicatie in voorbereiding: assets cache `party-fix-1`; backendversie `ultimate-worlds-3.1`. Na main-update actuele Pages-bestanden en live server/rodeo controleren.

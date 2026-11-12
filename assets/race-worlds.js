@@ -42,8 +42,8 @@ function step(room,p,dt,now,active=true){const level=room.selection.level,w=worl
  for(const k of ['boost','jump','freeze','spin','hyp','slow','penalty','splash','invincible'])p[k]=Math.max(0,(p[k]||0)-dt);
  const old=p.d;if(!active){p.speed=0;return;}let max=({250:62,509:76,1000:90}[p.engine]||62);if(!level)max=85;const inputSteer=p.hyp>0?Math.sin(room.elapsed*8)*.6:p.steer||0;
  let target=p.gas&&!p.brake?max:0;if(p.boost>0)target*=1.42;if(p.slow>0||p.spin>0)target*=.4;if(p.freeze>0||p.penalty>0)target=0;
- p.speed+=clamp(target-p.speed,-(p.brake?150:90)*dt,55*dt);const shape=geometry(level,p.d),ratio=p.speed/max;let lateral=p.speed>1?(inputSteer*1.2-shape.curve*.055*ratio*ratio):0;if(p.penalty>0||p.freeze>0)lateral=0;if(w===3){p.slide=mix(p.slide||0,lateral,1-Math.exp(-dt*(p.brake?10:3.5)));lateral=p.slide;}
- const oldLane=Math.round(p.x/.62)*.62;p.x=clamp(p.x+lateral*dt,-1.65,1.65);if((level===74||level===75)&&p.jump<=0)p.x=clamp(p.x,oldLane-.24,oldLane+.24);p.d=Math.min(total,p.d+Math.max(0,p.speed)*dt);
+ p.speed+=clamp(target-p.speed,-(p.brake?150:90)*dt,55*dt);const shape=geometry(level,p.d),ratio=p.speed/max;let lateral=p.speed>1?(inputSteer*(w===4?1.1:1.2)-shape.curve*(w===4?.018:.055)*ratio*ratio):0;if(p.penalty>0||p.freeze>0)lateral=0;if(w===3){p.slide=mix(p.slide||0,lateral,1-Math.exp(-dt*(p.brake?10:3.5)));lateral=p.slide;}
+ p.x=clamp(p.x+lateral*dt,-1.65,1.65);p.d=Math.min(total,p.d+Math.max(0,p.speed)*dt);
  if(Math.abs(p.x)>1.23&&p.invincible<=0){effect(room,p,'penalty',w===3?3:2);p.splash=w===3?3:0;p.x=clamp(p.x,-.8,.8);}
  if((level===74||level===75)&&p.d>=2500)p.checkpoint=Math.max(2500,p.checkpoint);
  if((level===74||level===75)&&room.event.cat&&room.elapsed>=room.event.catAt+2.5){p.catHit=true;if(Math.abs(p.x-room.event.removedLane)<.3&&p.jump<=0&&p.invincible<=0){effect(room,p,'penalty',6);p.x=0;p.d=Math.max(p.checkpoint,Math.min(p.d,2500));}}
