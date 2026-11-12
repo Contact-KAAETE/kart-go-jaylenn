@@ -108,3 +108,15 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Getest: bestaande DOM/multitouch/QR-tests en Miniflare-regressietests slagen; Party-race met vos op Disco Tok in de browser gezien. Nieuwe wereldspecifieke tests en mobiele controle zijn nog vereist vóór samenvoegen.
 - Nog open: uitgebreidere feestomgeving, tests nieuwe spelregels en werkelijke live uitrol/controle. Dit checkpoint is geen oplevering.
 - Volgende stap: nieuwe simulatie- en twee-clienttests afronden; daarna gecontroleerd main publiceren en Pages én Worker controleren.
+
+
+## Wereld- en kippenuitrol — klaar voor gecontroleerde publicatie
+- Ontwikkelcheckpoint `6ec0b53134d2b3d8018e5f570aac461f8f25d271`; daarna extra oorspronkelijke Blender-feestomgeving en Lucky Block-trein toegevoegd (negen WebP-bestanden samen minder dan 300 kB). Bronnen staan in `tools/blender/`.
+- Feestomgeving, trein, kippen met coureur, kat en het verdwijnen van een kip worden door de echte race-renderer gebruikt. Party staat na IJs als wereld 4, levels 71–75.
+- Party 71: startramp en schansen; 72: trein met direct herbruikbare Lucky Blocks; 73: vier bewegende hinderniszones; 74: 5 km, wiebelen, meteoren, checkpoint en kat; 75: gezamenlijke mix. De stijl blijft een lichte 2,5D-renderer met voorgerenderde Blender-sprites. Geen volledige 3D-herbouw.
+- Mobiele raceweergave in portret 390×844 en landschap 844×390: geen horizontaal of verticaal pagina-scrollen; pedalen, springen, pauze en menu bereikbaar. Draaien/blur onderbreekt lokale Party-race veilig.
+- Tests geslaagd: `npm test` (pointereigendom incl. wiel/joystick, behoud wins/XP/best/session, QR SVG); QR decode via ZXing; `tests/worlds-simulation.mjs` (alle 75 parcoursen, originele kansverdeling, zandregels, timers, zes seconden, kat/checkpoint/jump, ijs, hond); `tests/worlds-runtime.mjs` (twee echte Worker-runtimeclients, IJs tot finish, dezelfde kamer naar 5 km Party tot finish, gezamenlijke kat, Adventure-toegang, organisatorrechten); `npm run test:server` (hervatten, SQLite-herstart, zes plaatsen/zevende geweigerd).
+- De bestaande 70-levelsingleplayerengine blijft behouden. Online gebruikt dezelfde parcoursrecepten in een gedeelde server-simulatie; dit is geen één-op-één port van elk detail van de oorspronkelijke lokale engine.
+- Avontuur controleert aangeleverde lokale overwinningen serverzijdig op vorm/level. Zonder accounts zijn die lokale claims niet cryptografisch te bewijzen; beweren dat dit fraudevrij is zou onjuist zijn. Vrij racen schrijft geen avontuursoverwinningen.
+- Nieuwe build nog niet op fysieke iPhone/Android of twee netwerken getest. De gebruiker bevestigde de eerdere online basis op twee telefoons. Geen camera-/WhatsApp-/hardwaretest door ons geclaimd.
+- Resterend na publicatie: actuele Worker-versie en Pages-assets verifiëren, `tests/worlds-live.mjs` op productie uitvoeren, browserflow live nalopen. Vriendenlijst met online verzoekbeheer blijft buiten deze fase; private QR-racekamers zijn wel echt online. Het vliegende-kasteelverhaal is een los toekomstidee, niet toegevoegd als nieuwe wereld.

@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node tests/online-controls.mjs && node tests/qr-roundtrip.mjs",
     "test:live": "node tests/multiplayer-live.mjs",
-    "test:server": "node tests/server-repair.mjs"
+    "test:server": "node tests/server-repair.mjs",
+    "test:worlds": "node tests/worlds-simulation.mjs && node tests/worlds-runtime.mjs"
   },
   "devDependencies": {
     "jsdom": "31.0.0",
