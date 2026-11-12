@@ -134,3 +134,5 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Niet door ons fysiek getest: iPhone/Android, camera-QR, WhatsApp/Berichten of twee aparte netwerken. De gebruiker bevestigde wel de eerdere online tweetelefoontest.
 - Werkende ingangen: oorspronkelijke hoofdpagina, `/multiplayer/` en `/party/`. Party komt na IJs. Vrij racen geeft direct toegang tot alle 75 bestaande/geïntegreerde levels; Avontuur behoudt oorspronkelijke lokale voortgang.
 - Open vervolg: verdere grafische verfijning richting de voorbeeldbeelden, speelsessies met de kinderen op echte telefoons; een echt online vriendenverzoekensysteem is niet in deze fase gebouwd. Het losse vliegende-kasteelverhaal is nog geen spelonderdeel.
+
+- Aanvullende integratiecontrole: de knop Samen in de Party-Wereld neemt nu het gekozen Party-level én Vrij/Avontuur mee. `tests/party-riders.mjs` toegevoegd aan `npm test`: behoud bestaande wins/XP/best/session/naam en Party-save, kipkeuze, toegang, start/pauze/menu en correcte online link geslaagd.
