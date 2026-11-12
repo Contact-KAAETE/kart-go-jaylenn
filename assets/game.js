@@ -106,7 +106,35 @@ function kart(c,x,y,s,color='#f66545',dog=false,steer=0,player=null){
   rr(c,-31,-8,62,10,4,'#edeac9');rr(c,-26,-14,12,5,2,'#f5bc6b');rr(c,14,-14,12,5,2,'#f5bc6b');
   c.strokeStyle='#fff5cb88';c.lineWidth=2;c.beginPath();c.moveTo(-32,-48);c.lineTo(-28,-24);c.moveTo(31,-49);c.lineTo(27,-24);c.stroke();
  }
- if(player){c.font='21px system-ui';c.textAlign='center';c.fillText(player.avatar,0,-106);if(xpLevel()>=5){c.strokeStyle='#fff7a6';c.lineWidth=3;c.beginPath();c.moveTo(-30,-57);c.lineTo(-22,-50);c.lineTo(-30,-43);c.moveTo(-37,-50);c.lineTo(-23,-50);c.stroke();}}
+ // Race-car upgrade: polished bodywork, front splitter, vents and headlights.
+ if(!dog){
+  c.save();
+  rr(c,-37,-17,74,11,4,'#101c2c');rr(c,-32,-20,64,5,2,'#a7c9e4');
+  rr(c,-32,-55,9,28,4,'#ffffff55');rr(c,23,-55,9,28,4,'#08182966');
+  rr(c,-32,-26,16,8,3,'#e9faff');rr(c,16,-26,16,8,3,'#e9faff');
+  rr(c,-31,-24,12,3,1,'#5ddaff');rr(c,19,-24,12,3,1,'#5ddaff');
+  rr(c,-10,-26,20,14,4,'#102539');rr(c,-7,-24,14,9,3,'#e9f7ff');
+  c.strokeStyle='#ffffffb0';c.lineWidth=2;c.beginPath();c.moveTo(-28,-57);c.lineTo(-25,-39);c.moveTo(28,-57);c.lineTo(25,-39);c.stroke();
+  c.restore();
+ }
+ if(player){
+  // Character silhouettes are rendered in the kart, not as floating emoji.
+  const avatar=player.avatar;const isFox=avatar==='🦊',isPanda=avatar==='🐼',isFrog=avatar==='🐸',isRobot=avatar==='🤖',isNinja=avatar==='🥷';
+  c.save();c.translate(0,-89);
+  const head=isFox?'#ef9747':isPanda?'#f6f6f6':isFrog?'#78c96b':isRobot?'#8ed5e5':isNinja?'#1a273d':'#f2bf8e';
+  if(isFox||isPanda){const ear=isFox?'#c36d35':'#253247';ellipse(c,-15,-13,8,13,ear);ellipse(c,15,-13,8,13,ear);}
+  if(isFrog){ellipse(c,-13,-12,8,8,head);ellipse(c,13,-12,8,8,head);}
+  ellipse(c,0,0,21,20,head);
+  if(isRobot){rr(c,-20,-16,40,32,8,'#8bd4e7');rr(c,-14,-8,28,15,4,'#1d496a');}
+  if(isNinja){rr(c,-20,-6,40,14,4,'#101928');rr(c,-14,-3,28,8,3,'#e5b58b');}
+  if(avatar==='🧑‍🚀'){rr(c,-22,-19,44,38,15,'#e4f2ff');rr(c,-18,-12,36,21,9,'#5bb9e0');}
+  const eye=isRobot?'#a9fffc':'#152b35';
+  ellipse(c,-8,-2,3.5,4.5,eye);ellipse(c,8,-2,3.5,4.5,eye);
+  if(isFox){ellipse(c,0,8,10,7,'#fff3d9');ellipse(c,0,5,4,3,'#202632');}
+  if(isPanda){ellipse(c,-8,-2,7,9,'#29303d');ellipse(c,8,-2,7,9,'#29303d');ellipse(c,-8,-2,2.5,3,'#fff');ellipse(c,8,-2,2.5,3,'#fff');}
+  c.strokeStyle=isRobot?'#a9fffc':'#633c37';c.lineWidth=2;c.beginPath();c.arc(0,5,5,0,Math.PI);c.stroke();
+  c.restore();
+  if(xpLevel()>=5){c.strokeStyle='#fff7a6';c.lineWidth=3;c.beginPath();c.moveTo(-30,-57);c.lineTo(-22,-50);c.lineTo(-30,-43);c.moveTo(-37,-50);c.lineTo(-23,-50);c.stroke();}}
  c.restore();
 }
 
