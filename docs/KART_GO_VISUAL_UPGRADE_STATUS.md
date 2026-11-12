@@ -1,6 +1,6 @@
-# Actueel V6.1 — extra coureurs en kartkleuren
+# Actueel V6.1 — twaalf coureurs en twintig kleuren LIVE
 
-Zes nieuwe echte coureurs met front- en rugsprites en twintig lakknoppen gebouwd. Details en verificatie: KART_GO_CHOICES_V6_1_STATUS.md.
+Zes nieuwe echte coureurs met front- en rugsprites en twintig lakknoppen gebouwd en live getest, inclusief bewaren/heropenen en draak in turquoise kart tijdens race70. Details en verificatie: KART_GO_CHOICES_V6_1_STATUS.md.
 
 ---
 

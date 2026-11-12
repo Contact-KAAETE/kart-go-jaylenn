@@ -1,6 +1,6 @@
-# Actueel: V6.1 meer keuze gebouwd en getest
+# Actueel: V6.1 twaalf coureurs en twintig kleuren LIVE
 
-Twaalf coureurs en twintig kartkleuren. Zie KART_GO_CHOICES_V6_1_STATUS.md. Bestaande70 levels en voortgang behouden. Livepublicatie nog controleren.
+Twaalf coureurs en twintig kartkleuren. Zie KART_GO_CHOICES_V6_1_STATUS.md. Bestaande70 levels en voortgang behouden. Livegame met nieuwe draak/turquoise lak, bewaren/heropenen en echte race gecontroleerd. Gamecommit eb446a08a63ff482b48d5f2a46a5ce414f0b2cb1; Pages43186596692 succesvol.
 
 ---
 

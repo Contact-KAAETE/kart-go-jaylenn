@@ -1,0 +1,37 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 6542,
+    "matchesLocal": true,
+    "sha256": "94d095a2f4cab92ae74a4d995d1875414712e9416a7320ec4cf458e0494671b4"
+  },
+  {
+    "path": "assets/player.js",
+    "status": 200,
+    "bytes": 14166,
+    "matchesLocal": true,
+    "sha256": "a463a809b5f58e2ca3818b0586c3d0459efee006755562461d22293a6083ff57"
+  },
+  {
+    "path": "assets/graphics.js",
+    "status": 200,
+    "bytes": 11696,
+    "matchesLocal": true,
+    "sha256": "a778ab8b7bf65ac4dd0cc806bdd0e930dfaf970016b7dd4b1e42f4aad022422b"
+  },
+  {
+    "path": "assets/visual-v5.css",
+    "status": 200,
+    "bytes": 22304,
+    "matchesLocal": true,
+    "sha256": "09a7b5162c6308b0eefea0165e2aa8bbf7a64f9ec789438182205101362a93d5"
+  },
+  {
+    "path": "assets/graphics/characters-extra-v6-1.webp",
+    "status": 200,
+    "bytes": 591662,
+    "matchesLocal": true,
+    "sha256": "490fd0de643512458a5dd7023a36cb9aa170a54c2843dc24c739c194c0f7cb80"
+  }
+]

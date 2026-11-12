@@ -1,4 +1,4 @@
-# V6.1 — twaalf coureurs en twintig kartkleuren
+# V6.1 — twaalf coureurs en twintig kartkleuren · LIVE
 
 Opdracht Martin: meer keuze dan zes karakters/vijf kleuren. Bedenker Kart Go: Jaylenn. Uitbreiding van bestaande game, geen herbouw. Alle70 levels/werelden/eindbazen/spelregels en opslagsleutel blijven behouden.
 
@@ -17,7 +17,12 @@ Herstelpunt backup/v6-0-1-before-more-choices-20261112 →6882529029af5588011c72
 - Echte Chrome-game in390×844,320×568 en844×390: alle12 coureurs via werkelijke selecteer/bewaarknoppen gekozen, opgeslagen en heropend. Geen horizontale profiel-overflow.12 unieke frontsprites en12 unieke rearsprites gecontroleerd; nieuwe coureur overleeft export/import.
 - Alle20 kleurknoppen, selectie-vinkjes, opslaan/heropenen,20 verschillende echte garagebeelden en20 verschillende echte racekarts slagen zonder Canvas.filter. Twintig verschillende lakpixelkleuren bevestigd.
 - Garage-overflow op320px gevonden en gerepareerd; daarna modal.scrollWidth=modal.clientWidth=264. Visueel losse44px bolletjes, geen overlap. QA-rapport tests/results/choices-v6-1-mobile.txt.
-- Geen fysieke iPhone-test. Live Pages-controle volgt na samenvoegen; op dit moment is dit document geen claim van een voltooide livepublicatie.
+- Geen fysieke iPhone-test. Mobiele Chrome-frames en echte Pages-publicatie zijn wel gecontroleerd.
 
-## Volgende concrete stap
-Ontwikkeltak naar main, Pages laten publiceren en officiële game controleren: nieuwe coureur kiezen, kleur opslaan, heropenen en werkelijk racen met de nieuwe coureur.
+## Definitieve livepublicatie
+- Gamecommit eb446a08a63ff482b48d5f2a46a5ce414f0b2cb1; Pages-run43186596692 succesvol. Officiële gecontroleerde URL https://contact-kaaete.github.io/kart-go-jaylenn/?v=6.1.0 .
+- Alle vijf gewijzigde HTML/JS/CSS/WebP-bestanden HTTP200 en bytegelijk aan geteste checkout, SHA256 in tests/results/choices-v6-1-live-assets.json.
+- In echte online390×844-game via gewone profielknop Draak gekozen/bewaard, via garage Turquoise gekozen/bewaard. Pagina opnieuw geopend: Draak nog geselecteerd, twaalf echte karakterknoppen, kleur nog#22c7bd. Bestaand testprofiel,6900XP en69 overwinningen behouden. Geen testdriver actief; dit betreft geïsoleerde QA-browser, geen echte iPhonegegevens veranderd.
+- Bestaande ijsrace70 via Hervat race geopend: echte draak-rugsprite achter het stuur van echte turquoise kart, live rijdend. Nieuwe coureur dus geen losse profielafbeelding.
+- Desktopprofiel toont alle twaalf kaarten met echte sprites; geen game-origin console errors in laatste controle. Screenshot tests/results/choices-v6-1-live.jpg is de gepubliceerde karakterselectie, geen concept.
+- Hervatten vanaf actuele main; herstelpunt en ontwikkeltak blijven beschikbaar. Eventuele volgende stap: feedback van fysieke iPhone verwerken. Geen betaalde dienst geactiveerd,70 levels/voortgang behouden.
