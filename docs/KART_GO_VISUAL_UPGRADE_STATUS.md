@@ -12,7 +12,7 @@ Back-up: `backup/v5-2-before-paint-fix-20261112`; ontwikkeltak `fix/garage-paint
 
 Tests: Node-regressies voor alle 50 races blijven groen, plus pixeltesten voor blauw/groen met behoud van neutrale materialen, goud en transparantie. Echte mobiele Chromium op 390×844 en 320×568: de Canvas-filtersetter expres laten gooien zodat afhankelijkheid van dit filter een testfout zou geven. Alle vijf kleuren hebben verschillende echte garage- en racepixels. Pointeraanraking/klik, één selectie, opslaan en opnieuw openen slagen. Bestaande V5-rastertest en avataropslag opnieuw geslaagd. Geen fysieke iPhone/Safari-test; dit is doelbewuste filterloze browserverificatie, geen claim dat Safari op een toestel is getest.
 
-Cacheversie 5.2.1. Liveverificatie volgt na publiceren. Onder dezelfde commit zijn, op Martins expliciete creatieve mandaat, de sla-tsunami, wasmand en brekend ijs als ontwerp uitgewerkt in `WORLD_3_JAYLENN_DESIGN.md`. Die wereld is nog niet gebouwd en krijgt geen misleidende actieve knop.
+Cacheversie 5.2.1. Live geverifieerd: gamecommit `5f5997586779fd141d7960afc8461904f1eeb176`, Pages-run `43178130188` success. Index, graphics.js, player.js en V5-CSS geven HTTP 200 en zijn bytegelijk aan de geteste checkout. De officiële URL met alleen cachequery `?v=5.2.1` toont de nieuwe garage. Blauw geselecteerd en bewaard; na volledig herladen opnieuw geopend: #579be4, vinkje bij Blauw en tekst “Blauw geselecteerd · bewaard”. Werkelijke blauwe kart in de garage zichtbaar en browseropname vastgelegd. Onder dezelfde commit zijn, op Martins expliciete creatieve mandaat, de sla-tsunami, wasmand en brekend ijs als ontwerp uitgewerkt in `WORLD_3_JAYLENN_DESIGN.md`. Die wereld is nog niet gebouwd en krijgt geen misleidende actieve knop.
 
 ---
 
