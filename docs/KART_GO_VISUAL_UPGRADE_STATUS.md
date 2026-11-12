@@ -8,7 +8,7 @@ Gebruikersopname van 57 seconden onderzocht. Herstelpunt `backup/v5-1-before-ste
 
 Tests: volledige Node-regressie slaagt (50 races voltooid; 20/20 groen en 29/30 zand gewonnen). Nieuwe end-to-end regressie volgt echte pointerinput via knoppen, stuurwiel en joystick tot laterale beweging EN het argument van de daadwerkelijke kart-renderer, in beide richtingen. Alle zes richtingschecks en terugcentreren slagen, ook in echte Chromium op 390×844 met geladen rasterassets. Links en rechts visueel bekeken. Rapport: `V5_1_1_STEERING_TEST_RESULTS.txt`. Cacheversie 5.1.1. Geen fysieke iPhone-test; de aangeleverde opname is het bewijs van het oorspronkelijke probleem.
 
-Publicatiecontrole wordt na de geslaagde build vastgelegd.
+Live geverifieerd: gamecommit `1f609486eadc714950f8dc74d573ea5ae11834d8`, Pages-run `43169633353` success. Root/index en game.js geven HTTP 200 en zijn bytegelijk aan de geteste checkout. Officiële URL toont V5.1.1; de bewaarde coureur, XP en race blijven beschikbaar en de race opent. Geen fysieke iPhone-test; beide richtingen zijn met echte rasterweergave in mobiele Chromium gecontroleerd.
 
 ---
 
