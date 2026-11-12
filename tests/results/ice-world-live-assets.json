@@ -1,0 +1,93 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 6542,
+    "sha256": "d6cf1e9311e251f9c02c25571fc39d1efd655657e86b6647b545b337bb286ff6",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/game.js",
+    "status": 200,
+    "bytes": 57382,
+    "sha256": "bf8500d4000fc15059d3c8af1e0ab4086a46d9d53354a6fe0a26a183ccb67a52",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/ice-world.js",
+    "status": 200,
+    "bytes": 14216,
+    "sha256": "b4acdf73f39ad821ff864e4959c4db62176406cb715988188a00ed8845519281",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/graphics.js",
+    "status": 200,
+    "bytes": 11088,
+    "sha256": "1b96650b2d6f9eaf465aa7c836c04b1074c20416089c9585a9b517af8c2af57b",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/player.js",
+    "status": 200,
+    "bytes": 13323,
+    "sha256": "abff41bfc1733a0e1e5878c8ce96918ff6f13316d3a7d0fa47f2f46303b8dd03",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/scenery.js",
+    "status": 200,
+    "bytes": 15742,
+    "sha256": "f205a36b841e5ee63b9d2d4e2d16c6cf08b538e78244bd8bef34a2bd9ed0b1c9",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/course.js",
+    "status": 200,
+    "bytes": 4209,
+    "sha256": "ce1fb2f8f992509939c5408f8fcb456e19229db814232decc9f7eccda1354449",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/style.css",
+    "status": 200,
+    "bytes": 22865,
+    "sha256": "12771b3b98508f245753db8d0a0b704590fddcf6ea84e392797eeaae2ebe8cf0",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/visual-v5.css",
+    "status": 200,
+    "bytes": 20945,
+    "sha256": "baf1ea82e1c3c8f53672ca37b293bd6a4e2bd2bd6a7b538617cdd799b0390e92",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/graphics/winter-v6.webp",
+    "status": 200,
+    "bytes": 327346,
+    "sha256": "403724bfebf5ca258d5d7f8c32e28405e1a1e99fc2c737121672adee1fd442d3",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/graphics/iceprops-v6.webp",
+    "status": 200,
+    "bytes": 456672,
+    "sha256": "fe900acf97f6527f46b19cfb09fd1b92bdac7a776b22fa328072fa27f3c624ea",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/graphics/burger-v6.webp",
+    "status": 200,
+    "bytes": 310910,
+    "sha256": "3399ee36d18847d9590c36179e5e79a5d297ec7030ba4ab922515b6b743f4769",
+    "matchesLocal": true
+  },
+  {
+    "path": "assets/audio/ho-ho-ho-v6.wav",
+    "status": 200,
+    "bytes": 75452,
+    "sha256": "40ae2a1691b25158f6ebbcb5a328fcc49b8bdde5942a1d41b20bfadcaedd16e4",
+    "matchesLocal": true
+  }
+]

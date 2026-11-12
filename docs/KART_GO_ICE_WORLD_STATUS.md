@@ -29,8 +29,17 @@ Bedenker: Jaylenn. Gebouwd als uitbreiding van de bestaande game, niet als herbo
 - Alle Node-regressies opnieuw geslaagd na laatste HUD-aanpassing. QA-rapport: tests/results/ice-world-mobile.txt.
 - Fase1 op ontwikkeltak veilig opgeslagen als07760d524c990e67518f50e4059741c300c3a580 (spelregels+productiebeelden+audio).
 
-## Publicatie nog te verifiëren
-Browsercontroles zijn geslaagd. Volgende concrete stap: geteste ontwikkeltak naar main, GitHub Pages-build volgen en daadwerkelijke HTTPS-versie met level51/70 en assets controleren. Tot die livecontrole geen claim dat V6 definitief online is.
+## Fase 3 — eerste livepublicatie gecontroleerd
+- Geteste gamecommit caccc9977584deb1a2f38869ce97252820ff3708 naar main gebracht. Pages-run43183106301 geslaagd.
+- Officiële HTTPS-versie toont V6.0/70 levels/3 werelden. In echte gepubliceerde game via normale importknop een fictieve QA-back-up met50 overwinningen ingelezen: alleen51 open,52–70 dicht, geheim63 correct verborgen. Dit is uitsluitend geïsoleerde browser-QA, geen voortgang op Martins iPhone aangepast.
+- Live390×844: race51 gestart, lokale assets geladen, bots rijden mee, Lucky Block leverde Hypnose, item gebruikt, sturen en pauze getest, na heropenen naam IJsTester en hervatknop aanwezig. Startlicht/Ho-ho-ho-ondertitel en online race actief. Naar844×390 draaien pauzeert veilig.
+- Met tweede fictieve back-up69 overwinningen live70 gestart: Burgerkoning zichtbaar, HUD1/1, IJs-item verzameld, ijspaleis bereikt. Geen testdriver actief in deze livegame.
+-13 hoofdgame-/asset-URLs HTTP200 en bytegelijk aan geteste checkout, inclusief alle drie nieuwe WebPs en WAV. Volledig rapport volgt onder tests/results/ice-world-live-assets.json.
+- Laatste afwerking V6.0.1: panorama behoudt beeldverhouding op brede schermen (visueel gecontroleerd); bots behouden hun basissnelheid na redding uit een wak en rijden na opslaan/heropenen weer echt verder. Nieuwe regressietest daarvoor slaagt; volledige70-levelset opnieuw geslaagd.
+- Cacheversies6.0.1 om eerdere iPhone-scriptcache te vervangen. Definitieve publicatiecontrole van deze kleine afwerking volgt hierna.
+
+## Grenzen en vervolg
+Geen fysieke iPhone/Safari- of Android-hardwaretest; mobiele Chrome-frames en synthetische multitouch zijn gecontroleerd. Geen gemeten60FPS-belofte. Wereld4, online vrienden en multiplayer zijn geen onderdeel van deze uitbreiding en blijven open zoals voorheen. Geen betaalde dienst geactiveerd. Volgende concrete stap: V6.0.1 publiceren en alleen de laatste bestanden/livegame opnieuw verifiëren.
 
 ## Promptbrief productiebeelden
 Winter: premium vrolijke glossy3D-achtergrond met sneeuwbergen, bevroren waterval, ver ijspaleis en aurora; geen weg/UI/karts zodat bestaande engine de echte route tekent. Iceprops:3×3 transparante atlas met sneeuwden/ijspaleis/holle ijsdeur, kristal/vloerspikes/dakpegels, wasmand/slatsunami/IJs Lucky Block. Burger:2kolommen met dezelfde originele vrolijke burgerkoning in burgerkart, kroon/kaascape/sla-snor, voor en achter, geen merknamen/logos. Bestanden geoptimaliseerd naar WebP met behoud van alpha; geen los conceptbeeld als game gepresenteerd.

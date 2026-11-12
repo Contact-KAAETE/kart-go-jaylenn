@@ -20,7 +20,7 @@ const Ice=(()=>{
  }
  function crack(s,d=s.d,x=s.x){if(!s.ice)return;const h={d,x:clamp(x,-.66,.66),born:s.time,opens:s.time+2,closes:s.time+5};s.iceData.holes.push(h);s.iceData.holes=s.iceData.holes.slice(-28);}
  function penalty(s,racer,kind){if(racer.iceShield>0||racer.rescue>0)return false;
-  if(kind==='hole'){racer.rescue=2;racer.iceShield=4;racer.rescueTo=Math.min(s.finishDistance-600,racer.d+500);racer.rescueLane=racer.x>0?-.52:.52;racer.speed=0;}
+  if(kind==='hole'){racer.rescue=2;racer.iceShield=4;racer.rescueTo=Math.min(s.finishDistance-600,racer.d+500);racer.rescueLane=racer.x>0?-.52:.52;if(racer===s)racer.speed=0;}
   if(kind==='lettuce'){racer.lettuce=2;racer.iceShield=4;if(racer===s)racer.speed=Math.min(racer.speed,MAX*.6);}
   if(kind==='basket'){racer.basket=3;racer.iceShield=5;if(racer===s)racer.speed=Math.min(racer.speed,MAX*.5);}
   if(kind==='spike'){racer.slow=Math.max(racer.slow||0,1);racer.iceShield=2;}
@@ -68,7 +68,7 @@ const Ice=(()=>{
  }
  function prop(c,index,x,y,w,h=w){const im=GFX.tile('iceprops',3,3,index);if(!im)return false;c.drawImage(im,x-w/2,y-h,w,h);return true;}
  function scenery(c,type,x,y,k){const index={oak:0,pine:0,blossom:0,barn:1,mill:1,rocks:3,hay:3,fence:3,flowers:3,grass:3,pond:3,sign:3}[type]??0;const factor=index===1?2.1:index===0?1.4:.8;return prop(c,index,x,y,340*k*factor,370*k*factor);}
- function landscape(c,w,h,s){const im=GFX.image('winter');if(!im)return false;const drift=Math.sin(s.d/20000)*w*.025-s.x*w*.012;c.drawImage(im,-w*.04+drift,-h*.01,w*1.08,h*.42);return true;}
+ function landscape(c,w,h,s){const im=GFX.image('winter');if(!im)return false;const drift=Math.sin(s.d/20000)*w*.025-s.x*w*.012,dw=w*1.08,dh=h*.42,scale=Math.max(dw/im.naturalWidth,dh/im.naturalHeight),sw=dw/scale,sh=dh/scale;c.drawImage(im,(im.naturalWidth-sw)/2,(im.naturalHeight-sh)/2,sw,sh,-w*.04+drift,-h*.01,dw,dh);return true;}
  function road(c,a,b,s,terrain){
   const gradient=c.createLinearGradient(a.x-a.w,a.y,a.x+a.w,b.y);gradient.addColorStop(0,'#68b8d5');gradient.addColorStop(.45,'#c0edf6');gradient.addColorStop(.65,'#85c7e3');gradient.addColorStop(1,'#acdbe9');
   shape(c,[[a.x-a.w,a.y+1],[a.x+a.w,a.y+1],[b.x+b.w,b.y],[b.x-b.w,b.y]],gradient);
