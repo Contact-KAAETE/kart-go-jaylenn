@@ -1,6 +1,6 @@
 # Serverreparatie publiceren — bestaande Kart Go
 
-Status: lokaal gebouwd en getest, **nog niet op Cloudflare gepubliceerd**.
+Status: **automatisch gepubliceerd via de reeds bestaande GitHub-koppeling**. Cloudflare en Pages succesvol. Twee echte productieclients hebben na herverbinden dezelfde finishuitslag ontvangen. De handmatige route hieronder is alleen een terugvaloptie en hoeft niet uitgevoerd te worden.
 Versie die na publicatie zichtbaar moet worden: `ultimate-repair-2`.
 Bedenker: Jaylenn. Geen nieuwe dienst of betaald abonnement nodig.
 

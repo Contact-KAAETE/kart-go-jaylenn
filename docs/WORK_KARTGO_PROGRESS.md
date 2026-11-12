@@ -78,3 +78,15 @@ Gebouwd: bestaande Durable Object-opslag voor kamer en identiteit; hibernation-s
 Tests geslaagd: `npm test` en `npm run test:server`. De servertest draait echte workerd/SQLite/WebSocketPair via Miniflare: twee spelers bewegen, hervatten met zelfde positie/id, finishen met identieke uitslag; verkeerde origin/uitnodiging en gaststart geweigerd; zes plekken/zevende geweigerd; organisatorwissel; na volledige runtimeherstart uitnodiging/id terug. Lokale runtime heeft maximaal compatibiliteitsdatum 2026-08-06, terwijl bestaande deploymentdatum 2026-11-12 behouden is. Geen nieuwe productie- of fysieke telefoontest geclaimd.
 
 Volgende stap: eigenaar kopieert de complete module naar **bestaande** Cloudflare Worker → Edit Code → Deploy. Geen nieuwe onderdelen of betaalde opties aanmaken. Na "Gedaan": /health versie controleren, echte tweespelertest, frontendwijzigingen veilig doorzetten naar main en Pages controleren. Online wereldkeuze en complete Party-uitbreiding blijven daarna open.
+
+## Automatische productiepublicatie geslaagd
+
+De Cloudflare GitHub-koppeling bleek **al actief** op main. De eerdere build bij 0ace7e5 was succesvol; handmatig code plakken of opnieuw aanmelden was niet nodig. Dit had eerder via GitHub-checks vastgesteld kunnen worden. De eigenaar liet de bestaande repository/main-configuratie zien.
+
+Herstelpunt vóór doorzetten: `backup/pre-server-repair-0ace7e5-20261112`. Geteste commit `7d374127b9424c8eac8493ec2778145fc8d62468` naar main doorgezet. Cloudflare Workers Builds en GitHub Pages build/deploy alle succesvol. Live /health geeft `ultimate-repair-2`, protocol 2 en resume/durable-rooms/explicit-host terug.
+
+Nieuwe **echte productietest** `node tests/multiplayer-reconnect-live.mjs`: twee onafhankelijke WebSocket-clients; dezelfde starttijd; beide bewegen; speler A verbreekt verbinding, hervat met dezelfde id en minstens dezelfde afgelegde afstand; exact twee spelers, geen duplicaat; beide finishen op 1800 m en ontvangen dezelfde uitslag. Geslaagd. Geen fysieke tweetelefoon- of verschillende-netwerktest geclaimd.
+
+Tijdens browsercontrole één aanvullende frontendfout gevonden: de organisator kreeg na aanmaken nog geen room-query in de eigen adresbalk. Daardoor kon herladen de kameringang verliezen. Nu wordt na de protocol-2-welcome de room-query opgeslagen, naast de private sleutel en resume-identiteit in sessionStorage. Synthetische DOM-regressietest toegevoegd. Cacheversie 2.1.
+
+Volgende stap: deze kleine frontendcorrectie doorzetten en de productie-QR/uitnodiging/browserherlading controleren. Daarna verdere online wereldkeuze/Party-uitbreiding uit de hoofdopdracht, zonder de oorspronkelijke 70 levels te vervangen. Voor normale publicatie is geen nieuw Cloudflare-loginvenster of handmatig plakken meer nodig: commits naar main activeren de bestaande pipeline.
