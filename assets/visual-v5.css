@@ -33,3 +33,18 @@ dialog#modal{color:#eff8ff;background:linear-gradient(145deg,#143954,#081e34 70%
 #modal .avatar-option:nth-child(1){background:radial-gradient(ellipse at 50% 20%,#579cca,#143657)}#modal .avatar-option:nth-child(2){background:radial-gradient(ellipse at 50% 20%,#9276c8,#2e2257)}#modal .avatar-option:nth-child(3){background:radial-gradient(ellipse at 50% 20%,#d5a15f,#653821)}#modal .avatar-option:nth-child(4){background:radial-gradient(ellipse at 50% 20%,#9caec0,#374558)}#modal .avatar-option:nth-child(5){background:radial-gradient(ellipse at 50% 20%,#6ba95a,#1e4a32)}#modal .avatar-option:nth-child(6){background:radial-gradient(ellipse at 50% 20%,#56a9c4,#16465b)}
 
 #home .secondary{color:#dcf1ff;background:linear-gradient(#24516e,#102d46);border:1px solid #77afca;box-shadow:0 3px 0 #03101e}#home .map-tools .secondary{color:#ffe79a;border-color:#d3b163}#modal .garage-effect-note{color:#afdfef}
+/* V5.2: keep every touch target, soften visual chrome and leave the kart breathing room. */
+#controls .pedal,#steering>button{border-color:#b8e2cd80;box-shadow:0 2px 0 #091b2499;background-color:#183c38b8}
+#inventory .slot.empty{opacity:.36}#racebottom .auto{font-size:8px;background:#173f35b8;box-shadow:none}#modeSwitch{background:#133d39b8;box-shadow:none;font-size:8px}
+#toast{font-size:10px;padding:7px 12px;max-width:min(340px,calc(100% - 28px));background:#102b36dc;box-shadow:0 3px 12px #001b2844}#racePlayer{opacity:.75}
+.victory-scene{height:214px;position:relative;overflow:hidden;margin:10px 0 0;background:radial-gradient(ellipse at 50% 60%,#5288a455,transparent 70%);border-radius:20px}
+.podium{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:flex;align-items:end;width:min(290px,90%);text-align:center;gap:4px}
+.podium>span,.podium>strong{flex:1;border-radius:9px 9px 0 0;background:linear-gradient(#406f8b,#20334f);padding:12px 4px;font-size:27px;border:1px solid #95c4d766}
+.podium>span:first-child{height:55px}.podium>span:last-child{height:42px}.podium>strong{height:80px;background:linear-gradient(#ffe197,#d5912b);color:#392812;font-size:30px}.podium small{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.podium-racer{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);width:112px;height:112px;z-index:2}.podium-racer .portrait-sprite{width:100%;height:100%}.victory-cup{position:absolute;right:-27px;bottom:-3px;width:55px;height:65px;filter:drop-shadow(0 3px 5px #51341199)}.victory-cup svg{width:100%;height:100%}
+.finish-confetti{position:absolute;inset:0;pointer-events:none}.finish-confetti i{position:absolute;left:var(--x);top:-12px;width:6px;height:11px;background:var(--tone);animation:finish-fall 2.4s var(--delay) ease-out 2 both}
+@keyframes finish-fall{to{transform:translateY(240px) rotate(450deg);opacity:0}}
+@media(max-height:620px){.victory-scene{height:155px}.podium-racer{width:83px;height:83px;bottom:63px}.podium>strong{height:65px}.podium>span:first-child{height:43px}.podium>span:last-child{height:34px}}
+@media(prefers-reduced-motion:reduce){.finish-confetti i{animation:none;top:18%;transform:rotate(25deg)}.finish-confetti i:nth-child(2n){top:48%}}
+.victory-scene + .result-big{display:none}
+#modal p br{display:initial}

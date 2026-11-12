@@ -9,7 +9,15 @@ window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
  try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
- if(action==='steerCheck'){
+ if(action==='v52suite'){
+  const prior=JSON.parse(JSON.stringify(saved));
+  try{
+   start(12);state.count=0;draw();const top=document.querySelector('#controls').getBoundingClientRect().top;result(view.playerY<=top-(innerWidth/innerHeight<.8?35:18),'meer ruimte tussen kart en bediening');
+   for(const mode of ['buttons','wheel','joystick']){saved.mode=mode;modeUI();layout();}
+   state.d=0;state.opponents[0].d=1000;state.opponents[0].x=-.54;state.opponents[1].d=1800;state.opponents[1].x=-.54;state.opponents[2].d=10000;result(botTactic(state,state.opponents[0],0).ideal>-.4,'bot kiest echt een vrije inhaalstrook');
+   saved.player.name='Papa';saved.player.avatar=AVATARS[4];start(1);state.d=LENGTH*2;state.opponents.forEach(o=>o.d=state.d-3000);finish();result(document.querySelector('.victory-scene')!==null,'winnaars-podium wordt echt geopend');result(document.querySelector('.podium strong small').textContent==='Papa','eigen naam op podium');result(document.querySelector('.podium-racer [data-character="4"]')!==null,'eigen kikker en beker op podium');result(document.querySelector('#nextRace')!==null&&document.querySelector('#backMap')!==null,'vervolgknoppen blijven beschikbaar');
+  }catch(err){result(false,'V5.2: '+err.message);}finally{saved=prior;persist();send('result','DONE: V5.2');}
+ }else if(action==='steerCheck'){
   const prior=JSON.parse(JSON.stringify(saved)),original=GFX.drawKart;
   try{for(const mode of ['buttons','wheel','joystick']){for(const direction of [-1,1]){
    start(1);state.count=0;state.speed=MAX;state.curves.fill(0);saved.mode=mode;modeUI();resetInput();

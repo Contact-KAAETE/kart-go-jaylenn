@@ -52,3 +52,9 @@ function friends(){
 function claimGlitter(){if(!saved.wins.length){showModal('<h2>Een glinsterende beloning!</h2><p>Win je eerste race en haal daarna hier je glitters op.</p>');return;}saved.rewards.glitter=true;const ok=persist();renderMap();showModal(`<h2>Glitters vrijgespeeld! ✨</h2><p>Kies Glitters in de garage om ze achter je kart te laten schitteren.</p><button class="primary" id="rewardGarage">Naar de garage ›</button><p>${ok?'Beloning opgeslagen.':'Bewaar je voortgang als bestand om je beloning te behouden.'}</p>`);$('#rewardGarage').onclick=garage;}
 function cosmeticBurst(){if(!state||state.paused||state.finished||state.count>0||effectiveEffect()!=='boem'||state.time<state.nextBoem)return;state.nextBoem=state.time+2;addEffect('boem');beep(160,.12,'triangle');}
 function initPlayerUI(){renderPlayer();$('#profile').onclick=profile;$('#garage').onclick=garage;$('#friends').onclick=friends;$('#claimGlitter').onclick=claimGlitter;$('#cosmetic').onclick=cosmeticBurst;if(location.hash==='#friends')friends();}
+
+function victoryMarkup(){
+ const cup='<svg viewBox="0 0 80 90" aria-hidden="true"><path d="M20 9H60V30Q60 53 40 57Q20 53 20 30ZM20 16H7V29Q7 44 26 44M60 16H73V29Q73 44 54 44M40 57V73M24 79H56" fill="#ffd96b" stroke="#fff1b1" stroke-width="5" stroke-linejoin="round"/></svg>';
+ const confetti=Array.from({length:18},(_,i)=>`<i style="--x:${(i*37)%100}%;--delay:${i%6*.13}s;--tone:${['#ffd46c','#91deff','#c2a1ff','#9ce5ad'][i%4]}"></i>`).join('');
+ return `<div class="victory-scene" role="img" aria-label="${safeText(saved.player.name||'Jouw coureur')} op het winnaars­podium met een beker"><div class="finish-confetti" aria-hidden="true">${confetti}</div><div class="podium-racer">${portraitMarkup(saved.player.avatar)}<span class="victory-cup">${cup}</span></div><div class="podium"><span>2</span><strong>1<small>${safeText(saved.player.name||'Coureur')}</small></strong><span>3</span></div></div>`;
+}

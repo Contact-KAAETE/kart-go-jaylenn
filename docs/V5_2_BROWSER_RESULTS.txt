@@ -1,0 +1,67 @@
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: meer ruimte tussen kart en bediening
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+PASS: bot kiest echt een vrije inhaalstrook
+PASS: winnaars-podium wordt echt geopend
+PASS: eigen naam op podium
+PASS: eigen kikker en beker op podium
+PASS: vervolgknoppen blijven beschikbaar
+DONE: V5.2
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: meer ruimte tussen kart en bediening
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+PASS: bot kiest echt een vrije inhaalstrook
+PASS: winnaars-podium wordt echt geopend
+PASS: eigen naam op podium
+PASS: eigen kikker en beker op podium
+PASS: vervolgknoppen blijven beschikbaar
+DONE: V5.2
+PASS: bots rijden mee level 1
+PASS: Lucky Blocks level 1
+PASS: bots rijden mee level 20
+PASS: Lucky Blocks level 20
+PASS: bots rijden mee level 21
+PASS: Lucky Blocks level 21
+PASS: bots rijden mee level 35
+PASS: Lucky Blocks level 35
+PASS: bots rijden mee level 50
+PASS: Lucky Blocks level 50
+PASS: inventarisknoppen blijven stabiel
+PASS: Onweer Boost Jump reageren via touch
+PASS: hypnose10s werkt ook vooraan
+PASS: banaan wordt echt neergelegd
+PASS: Zandwereld ijs bevriest2s
+PASS: Zandwereld heeft uitsluitend hypnose ijs banaan
+PASS: Boem heeft2s afkoeling
+PASS: Boem werkt na2s opnieuw
+PASS: Geen effect schakelt Boem uit
+PASS: voortgang profiel en garage worden echt opgeslagen
+PASS: Hotdog-Hond vuurt op10s
+PASS: Hotdog-ijs bevriest2s
+PASS: Jump ontwijkt ijs
+PASS: Pizzaman heeft eigen uiterlijk en geen verzonnen ijsaanval
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: alle items bereikbaar via hit-test buttons
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: alle items bereikbaar via hit-test wheel
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+PASS: alle items bereikbaar via hit-test joystick
+PASS: buttons: links input/physics/rasterrichting gelijk
+PASS: buttons: loslaten centreert kart
+PASS: buttons: rechts input/physics/rasterrichting gelijk
+PASS: buttons: loslaten centreert kart
+PASS: wheel: links input/physics/rasterrichting gelijk
+PASS: wheel: loslaten centreert kart
+PASS: wheel: rechts input/physics/rasterrichting gelijk
+PASS: wheel: loslaten centreert kart
+PASS: joystick: links input/physics/rasterrichting gelijk
+PASS: joystick: loslaten centreert kart
+PASS: joystick: rechts input/physics/rasterrichting gelijk
+PASS: joystick: loslaten centreert kart
+DONE: stuurrichting
+
+Additional 390×844 finish/podium pass and Next Race → level 2 manually confirmed.

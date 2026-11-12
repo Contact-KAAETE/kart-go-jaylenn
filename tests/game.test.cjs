@@ -161,3 +161,12 @@ for(const mode of ['buttons','wheel','joystick']){
  }
 }
 console.log('PASS: left/right touch input, lateral physics and kart renderer agree for buttons, wheel and joystick; release recentres.');
+
+run('start(12);state.count=0;state.d=0;state.opponents[0].d=1000;state.opponents[0].x=-.54;state.opponents[1].d=1800;state.opponents[1].x=-.54;state.opponents[2].d=10000;state.time=3');
+assert.ok(run('botTactic(state,state.opponents[0],0).ideal')>-.4,'bot selects free overtaking lane');
+run('state.time=19-12*.61');assert.ok(run('botTactic(state,state.opponents[0],0).factor')<.9,'recoverable mistake slows bot');
+run('state.time+=2;botTactic(state,state.opponents[0],0)');assert.equal(run('state.opponents[0].mistake'),0,'mistake ends');
+for(let t=0;t<60;t++){run(`state.time=${t}`);assert.ok(run('botTactic(state,state.opponents[0],0).factor')<=1,'traffic never exceeds original bot speed');}
+run('start(20)');assert.equal(run('botTactic(state,state.opponents[0],0).factor'),1,'boss speed unchanged');
+run("saved.player.name='Papa';saved.player.avatar=AVATARS[4]");assert.ok(run('victoryMarkup()').includes('Papa'));assert.ok(run('victoryMarkup()').includes('data-character="4"'),'podium uses selected actual driver');
+console.log('PASS: overtaking free lane, temporary recoverable mistakes, original speed cap and bosses, selected Papa/driver podium.');

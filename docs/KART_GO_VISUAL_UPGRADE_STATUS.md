@@ -1,5 +1,25 @@
 # Kart Go V5 — echte grafische upgrade
 
+## V5.2 — levendig racen en feestelijke finish
+
+Hervat vanaf main `5d9f2de64e696abe54f90fdc460d534797ea64b7`; herstelpunt `backup/v5-1-1-before-lively-racing-20261112`. Ontwikkeltak `work/kart-go-lively-v5-2-20261112`.
+
+Gebouwd: bots zoeken een vrije strook bij langzamer verkeer, wisselen tempo binnen hun oorspronkelijke snelheidslimiet en maken soms een klein herstelbaar foutje. Hun getekende kart volgt de rijrichting; Onweer krijgt een zichtbare flits bij het getroffen voertuig. De twee eindbazen behouden hun oorspronkelijke snelheid en aanvallen. Moeilijkheidspercentage blijft maximaal 29%.
+
+Meer omgevingsverschil: bloesem in de weide, boerderijen/molens in het boerenland, meer dennen in het bos en meer water/decor in de vallei. De 50 bestaande routes en beide werelden blijven behouden.
+
+Kart hoger in beeld, met extra afstand tot de bediening; cameraprojectie volgt die nieuwe plaats. Touchdoelen en drie besturingsmethoden blijven bestaan. Rustigere randen/labels en lege inventarisvakjes; melding over volle inventaris verschijnt eenmaal totdat je weer een item gebruikt.
+
+Bij winst: eigen opgeslagen coureur en naam op een gouden podium, beker en beperkte confetti-animatie. Reduced motion wordt gerespecteerd. De bestaande finishknoppen blijven echt werken.
+
+Tests: volledige Node-regressie slaagt: alle 50 races voltooid; controller wint 20/20 groen en 29/30 zand. Extra checks voor inhaalstrook, tijdelijke fout, snelheidslimiet, eindbaaslimiet en eigen naam/coureur op podium. Echte Chromium 390×844, 320×568 en 844×390: ruimte rond kart, geen overlap bij drie besturingen, eigen podium/beker en vervolgknoppen. Volgende race daadwerkelijk aangeklikt: level 2 opent. Eerdere item-, boss- en opslagtests opnieuw in browser gecontroleerd. Geen fysieke iPhone of hardware-FPS-test.
+
+Wereld 3 en de drie nieuwe startstemmen: uitsluitend als Jaylenns nieuwe ontwerp vastgelegd in `WORLD_3_JAYLENN_DESIGN.md`, nog niet ingebouwd. Geen nieuwe actieve knop of misleidende wereldselectie toegevoegd. De sla-tsunami, wasmandstraf en gevolgen van brekend ijs vereisen nog precieze spelregels. Geen definitieve eigenschappen namens Jaylenn verzonnen.
+
+Geen nieuwe gegenereerde beelden, betaalde diensten, accounts of gewijzigde opslagkey. Cacheversie 5.2.0. Publicatiebewijs volgt na de geteste samenvoeging.
+
+---
+
 ## V5.1.1 — stuurrichting van de kart gerepareerd
 
 De fysieke links/rechts-beweging was correct, maar `draw()` gaf `-steer` door aan de rasterkart. Daardoor werd bij links sturen de rechter sprite getoond en andersom. De atlas is visueel gecontroleerd: vak 0 wijst links, vak 1 rechtuit, vak 2 rechts. Alleen het omgekeerde teken bij de renderaanroep verwijderd; physics, camera, stuurgevoeligheid, saves, parcoursen en items blijven gelijk.

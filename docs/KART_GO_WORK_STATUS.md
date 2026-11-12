@@ -1,3 +1,7 @@
+# Actueel: V5.2 race-afwerking
+
+Bots, omgevingsvariatie, ruimte rond de kart, rustige meldingen en podium gebouwd. Zie `KART_GO_VISUAL_UPGRADE_STATUS.md`. Wereld 3 en startstemmen zijn nog ontwerp, zie `WORLD_3_JAYLENN_DESIGN.md`. Onderstaande versies blijven als geschiedenis behouden.
+
 # Huidige versie: Kart Go V5.1
 
 **12 november 2026: V5.1 voegt hoogtes, extra bruggen, scherpere bochten en echte springschansen toe.** Details en actuele publicatiestatus staan in het visuele statusdocument.

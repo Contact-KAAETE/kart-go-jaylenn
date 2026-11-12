@@ -54,3 +54,26 @@ function updateRampFlight(racer,previousDistance,dt,isPlayer=false){
   }
  }
 }
+
+// Deterministic traffic decisions: readable overtakes and occasional recoverable mistakes.
+function botTactic(s,o,i){
+ let ideal=[-.54,0,.54][i]+Math.sin(s.time*.34+i)*.12;
+ if(o.boss)return {ideal,factor:1};
+ const traffic=[...s.opponents.filter(other=>other!==o),{d:s.d,x:s.x}];
+ const ahead=traffic.find(other=>other.d-o.d>0&&other.d-o.d<1700&&Math.abs(other.x-o.x)<.34);
+ if(ahead){
+  const lanes=[-.66,0,.66].map(x=>({x,cost:traffic.reduce((n,other)=>n+(Math.abs(other.d-o.d)<1800&&Math.abs(other.x-x)<.38?3:0),0)+Math.abs(x-o.x)*.25})).sort((a,b)=>a.cost-b.cost);
+  ideal=lanes[0].x;
+ }
+ if(s.profile.difficulty>9){const hazard=s.obstacles.find(b=>{const gap=circularGap(b.d,o.d);return gap>0&&gap<2200&&Math.abs(ideal-b.x)<.42;});if(hazard)ideal=hazard.x>0?-.56:.56;}
+ const phase=(s.time+i*5.7+s.level*.61)%19;
+ o.mistake=s.time>5&&phase<1.2?1-phase/1.2:0;
+ if(o.mistake)ideal+=Math.sin(s.time*8+i)*.12*o.mistake;
+ return {ideal:clamp(ideal,-.78,.78),factor:(.98+.02*Math.sin(s.time*.6+i*2))*(1-o.mistake*.18)};
+}
+function courseTree(s,index,side){
+ if(s.profile.theme==='forest')return (index+side)%3?'pine':'oak';
+ if(s.profile.theme==='farm')return 'oak';
+ if(s.profile.theme==='valley')return index%3?'pine':'blossom';
+ return index%3?'blossom':'oak';
+}
