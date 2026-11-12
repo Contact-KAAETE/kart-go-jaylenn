@@ -25,3 +25,25 @@ Status: ontwerp vastgelegd; nog NIET als speelbare wereld of knop gepubliceerd. 
 Startstemmen moeten geluid-uit respecteren en betrouwbaar op iPhone werken. Geen externe stemdienst/credits activeren. Talen pas als daadwerkelijk ondersteund rapporteren; geen belofte van automatisch “elke taal”.
 
 De los aangeleverde bestaande-gameverbeteringen (bots, cameraruimte, rustige meldingen, podium en decorvariatie) worden afzonderlijk in V5.2 gebouwd, zonder op deze nieuwe ontwerpkeuzes te wachten.
+
+## Uitgewerkte gevolgen — mandaat van Martin, 12 november 2026
+
+Martin gaf expliciet toestemming om de sla-tsunami, wasmandstraf en gevolgen van brekend ijs zelf mooi uit te werken terwijl Jaylenn op school is. Onderstaande technische keuzes zijn door het programmeerhulpmiddel uitgewerkt binnen Jaylenns concept. Het zijn vastgelegde implementatieregels, nog geen gebouwde Wereld 3.
+
+### Sla-tsunami
+De Burgerkoning kondigt met een groene golf en een pijl twee seconden vooraf aan welke twee rijstroken worden geraakt. Eén rijstrook blijft altijd vrij en zichtbaar aangegeven. Iedere twaalf seconden kan een aanval plaatsvinden; er zit minimaal vier seconden tussen het raken/activeren van verschillende eindbaasgevaren. Een treffer geeft twee seconden sla aan de kart en beperkt de snelheid tot 60% van normaal. Sturen en zicht blijven bruikbaar; daarna verdwijnt de sla automatisch. Geen verloren items of reset.
+
+### Wasmandstraf
+De koning kan een wasmand op een aangekondigde rijstrook zetten. Een botsing laat de kart drie seconden in een komische rijdende wasmand rijden, op maximaal 50% snelheid. De speler blijft sturen, het zicht op de baan blijft vrij. Daarna springt de kart vanzelf uit de mand. Een mand verschijnt hoogstens iedere twintig seconden, nooit tegelijk met de sla-golf; zo nodig wordt de aanval uitgesteld. Twee seconden bescherming na afloop voorkomen een onvermijdelijke kettingstraf. Strafduur telt alleen tijdens actief racen, niet tijdens pauze of in een menu.
+
+### Openbrekend ijs
+Jump maakt op de plek van afzetten een duidelijk zichtbare barst. Precies twee seconden na gebruik opent het ijs daar; het wak blijft drie seconden open en vriest dan dicht. Dit maakt vooral de route voor achtervolgers gevaarlijk. Boost tekent dezelfde waarschuwende breuklijn in het spoor achter de kart; delen openen eveneens na twee seconden en vriezen na drie seconden weer dicht. Er blijft altijd een veilige lijn over de baan; nooit alle rijstroken tegelijk verwijderen.
+Een kart die in een wak rijdt krijgt een grappige plons en wordt binnen twee seconden op het eerstvolgende veilige baanpunt gezet, met twee seconden bescherming tegen een nieuwe treffer. Plaatsing is buiten het wak, op dezelfde ronde, zonder levelreset, XP-verlies of gewiste voortgang. Jump kan over een bestaand wak heen. Geen extra rem/uitklimknop nodig.
+
+### Gezamenlijke eerlijkheidsregels
+- Dezelfde ijsgevaren gelden voor gewone bots en speler. Bossspecifieke aanvallen blijven bij level 70.
+- Geen blijvende straf en geen strafstapeling die de speler langer dan drie seconden de controle afneemt; besturing blijft waar mogelijk actief.
+- Visuele waarschuwingen en geluid-uit respecteren. Waarschuwing is nooit alleen een geluid.
+- Alle timers en bescherming moeten bewaren/hervatten en schermrotatie aankunnen.
+- Oorspronkelijk bevestigd: level 70 blijft één lang rondje tegen de Koning van de Burgers.
+- Punten 1–3 uit de eerdere vragenlijst zijn hiermee als ontwerp ingevuld. Geheim level, itemverdeling, spike-details en paleisbreedte blijven afzonderlijk uit te werken; geen onzichtbare aanname in de huidige 50-levelgame.

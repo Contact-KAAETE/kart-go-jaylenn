@@ -48,3 +48,7 @@ dialog#modal{color:#eff8ff;background:linear-gradient(145deg,#143954,#081e34 70%
 @media(prefers-reduced-motion:reduce){.finish-confetti i{animation:none;top:18%;transform:rotate(25deg)}.finish-confetti i:nth-child(2n){top:48%}}
 .victory-scene + .result-big{display:none}
 #modal p br{display:initial}
+#modal .paint-row button{position:relative;min-width:44px;min-height:44px;touch-action:manipulation;flex-shrink:0}
+#modal .paint-row button[aria-pressed=true]{outline:3px solid #ffe283;outline-offset:3px;box-shadow:0 0 12px #ffdb7366}
+#modal .paint-row button[aria-pressed=true]::after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;font-size:24px;font-weight:900;color:white;text-shadow:0 1px 3px #102638}
+#paintStatus{font-size:11px;line-height:1.5;color:#ffe7a1;margin:10px 0 0;min-height:32px}

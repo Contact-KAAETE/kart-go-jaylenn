@@ -170,3 +170,9 @@ for(let t=0;t<60;t++){run(`state.time=${t}`);assert.ok(run('botTactic(state,stat
 run('start(20)');assert.equal(run('botTactic(state,state.opponents[0],0).factor'),1,'boss speed unchanged');
 run("saved.player.name='Papa';saved.player.avatar=AVATARS[4]");assert.ok(run('victoryMarkup()').includes('Papa'));assert.ok(run('victoryMarkup()').includes('data-character="4"'),'podium uses selected actual driver');
 console.log('PASS: overtaking free lane, temporary recoverable mistakes, original speed cap and bosses, selected Papa/driver podium.');
+
+// Safari-independent tinting: red lacquer changes, chrome/tires/gold/alpha stay intact.
+run("globalThis.paintSample=new Uint8ClampedArray([220,30,50,255,180,180,180,255,25,25,25,255,220,170,30,255,220,30,50,0]);recolorKartPixels(paintSample,'#579be4')");
+const paintPixels=Array.from(run('paintSample'));assert.ok(paintPixels[2]>paintPixels[0],'blue lacquer');assert.deepEqual(paintPixels.slice(4),[180,180,180,255,25,25,25,255,220,170,30,255,220,30,50,0],'neutral materials and alpha preserved');
+run("globalThis.greenSample=new Uint8ClampedArray([220,30,50,255]);recolorKartPixels(greenSample,'#78b747')");assert.ok(run('greenSample[1]>greenSample[0]&&greenSample[1]>greenSample[2]'),'green lacquer');
+console.log('PASS: pixel tint without Canvas filters; blue/green paint changes while neutral materials, gold and transparency remain unchanged.');

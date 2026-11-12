@@ -10,6 +10,22 @@ function showWorldMap(){
 function showHomeMenu(){
  $('#worldPanel').classList.add('hidden');$('#home .hero').classList.remove('hidden');$('#home .player-hub').classList.remove('hidden');$('#home .menu-tools').classList.remove('hidden');window.scrollTo?.({top:0,behavior:'smooth'});
 }
+// Tint only the red lacquer. Pixel operations work without Canvas 2D filters.
+function recolorKartPixels(data,color){
+ const hex=/^#[\da-f]{6}$/i.test(color)?color:'#f56a48';
+ const r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255,max=Math.max(r,g,b),min=Math.min(r,g,b),delta=max-min,light=(max+min)/2;
+ let hue=0;if(delta){hue=max===r?((g-b)/delta)%6:max===g?(b-r)/delta+2:(r-g)/delta+4;hue=(hue*60+360)%360;}
+ const sat=delta===0?0:delta/(1-Math.abs(2*light-1)),sector=hue/60,x=1-Math.abs(sector%2-1),unit=sector<1?[1,x,0]:sector<2?[x,1,0]:sector<3?[0,1,x]:sector<4?[0,x,1]:sector<5?[x,0,1]:[1,0,x];
+ for(let i=0;i<data.length;i+=4){
+  if(!data[i+3])continue;
+  const sr=data[i]/255,sg=data[i+1]/255,sb=data[i+2]/255,hi=Math.max(sr,sg,sb),lo=Math.min(sr,sg,sb),d=hi-lo;
+  if(d<.06||hi!==sr)continue;
+  const sourceHue=((sg-sb)/d*60+360)%360;if(sourceHue>22&&sourceHue<338)continue;
+  const l=Math.max(0,Math.min(1,(hi+lo)/2*(.55+light*.9))),chroma=(1-Math.abs(2*l-1))*sat,offset=l-chroma/2;
+  for(let c=0;c<3;c++)data[i+c]=Math.round((offset+chroma*unit[c])*255);
+ }
+ return data;
+}
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map(),counts={karts:0,drivers:0,scenery:0,landscapes:0,effects:0,terrain:0};let loadingRace=false,allowFallback=false;
  const files={menu:'menu',characters:'characters',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain'};
@@ -23,11 +39,7 @@ const GFX=(()=>{
   const key=`${name}:${index}`;if(frames.has(key))return frames.get(key);const im=image(name);if(!im)return null;
   const sw=im.naturalWidth/columns,sh=im.naturalHeight/rows,cv=document.createElement('canvas');cv.width=Math.round(sw);cv.height=Math.round(sh);cv.getContext('2d').drawImage(im,index%columns*sw,Math.floor(index/columns)*sh,sw,sh,0,0,cv.width,cv.height);frames.set(key,cv);return cv;
  }
- function paintColor(color){
-  const hex=/^#[\da-f]{6}$/i.test(color)?color:'#f56a48',r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255,max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;
-  let hue=0;if(d){hue=max===r?((g-b)/d)%6:max===g?(b-r)/d+2:(r-g)/d+4;hue*=60;}return {hue:(hue+360)%360,saturation:d===0?0:Math.min(1.6,d/Math.max(.05,1-Math.abs(max+min-1))),light:(max+min)/2};
- }
- function coloredKart(index,color){const key=index+':'+color;if(tinted.has(key))return tinted.get(key);const base=tile('karts',3,2,index);if(!base)return null;const cv=document.createElement('canvas');cv.width=base.width;cv.height=base.height;const c=cv.getContext('2d'),p=paintColor(color);c.filter=`hue-rotate(${p.hue-355}deg) saturate(${p.saturation*1.05}) brightness(${.75+p.light*.5})`;c.drawImage(base,0,0);if(tinted.size>30)tinted.delete(tinted.keys().next().value);tinted.set(key,cv);return cv;}
+ function coloredKart(index,color){const key=index+':'+color;if(tinted.has(key))return tinted.get(key);const base=tile('karts',3,2,index);if(!base)return null;const cv=document.createElement('canvas');cv.width=base.width;cv.height=base.height;const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(base,0,0);const pixels=c.getImageData(0,0,cv.width,cv.height);recolorKartPixels(pixels.data,color);c.putImageData(pixels,0,0);if(tinted.size>30)tinted.delete(tinted.keys().next().value);tinted.set(key,cv);return cv;}
  function drawKart(c,x,y,scale,color,dog,steer,player,angle=null){
   if(scale<.015)return true;
   if(dog){const boss=tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.rotate(steer*.035);c.drawImage(boss,-80*scale,-157*scale,160*scale,170*scale);c.restore();return true;}

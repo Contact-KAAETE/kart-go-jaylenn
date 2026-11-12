@@ -1,3 +1,7 @@
+# Actueel: V5.2.1 garagekleurreparatie
+
+Kleurkeuze zichtbaar met vinkje/naam, filterloze lakpixels in garage en races, opslag behouden. Details en publicatiebewijs in KART_GO_VISUAL_UPGRADE_STATUS.md. Martins mandaat voor de drie ijswereldgevolgen is als concreet ontwerp vastgelegd in WORLD_3_JAYLENN_DESIGN.md; Wereld 3 nog niet gebouwd.
+
 # Actueel: V5.2 race-afwerking
 
 Bots, omgevingsvariatie, ruimte rond de kart, rustige meldingen en podium gebouwd. Zie `KART_GO_VISUAL_UPGRADE_STATUS.md`. Wereld 3 en startstemmen zijn nog ontwerp, zie `WORLD_3_JAYLENN_DESIGN.md`. Onderstaande versies blijven als geschiedenis behouden.

@@ -1,0 +1,62 @@
+PASS: kleurknop selecteert Rood
+PASS: exact één vinkje bij Rood
+PASS: kleur blijft bewaard en heropent: Rood
+PASS: kleurknop selecteert Blauw
+PASS: exact één vinkje bij Blauw
+PASS: kleur blijft bewaard en heropent: Blauw
+PASS: kleurknop selecteert Groen
+PASS: exact één vinkje bij Groen
+PASS: kleur blijft bewaard en heropent: Groen
+PASS: kleurknop selecteert Geel
+PASS: exact één vinkje bij Geel
+PASS: kleur blijft bewaard en heropent: Geel
+PASS: kleurknop selecteert Paars
+PASS: exact één vinkje bij Paars
+PASS: kleur blijft bewaard en heropent: Paars
+PASS: vijf verschillende echte kartvoorvertoningen zonder Canvas filter
+PASS: vijf echte racekarts hebben verschillende lak zonder Canvas filter
+DONE: garagekleuren
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: kleurknop selecteert Rood
+PASS: exact één vinkje bij Rood
+PASS: kleur blijft bewaard en heropent: Rood
+PASS: kleurknop selecteert Blauw
+PASS: exact één vinkje bij Blauw
+PASS: kleur blijft bewaard en heropent: Blauw
+PASS: kleurknop selecteert Groen
+PASS: exact één vinkje bij Groen
+PASS: kleur blijft bewaard en heropent: Groen
+PASS: kleurknop selecteert Geel
+PASS: exact één vinkje bij Geel
+PASS: kleur blijft bewaard en heropent: Geel
+PASS: kleurknop selecteert Paars
+PASS: exact één vinkje bij Paars
+PASS: kleur blijft bewaard en heropent: Paars
+PASS: vijf verschillende echte kartvoorvertoningen zonder Canvas filter
+PASS: vijf echte racekarts hebben verschillende lak zonder Canvas filter
+DONE: garagekleuren
+PASS: rasterkarts EN gekozen coureurs worden in echte race getekend
+PASS: echte rasteromgeving, panorama en wegtextuur actief
+PASS: zes werkelijk verschillende rugaanzichtsprites
+PASS: kartkleur verandert werkelijk de racepixels
+PASS: coureur blijft bewaard: Astronaut
+PASS: coureur blijft bewaard: Ninja
+PASS: coureur blijft bewaard: Vos
+PASS: coureur blijft bewaard: Panda
+PASS: coureur blijft bewaard: Kikker
+PASS: coureur blijft bewaard: Robot
+PASS: grafische race klaar op level 1
+PASS: grafische race klaar op level 5
+PASS: grafische race klaar op level 10
+PASS: grafische race klaar op level 15
+PASS: grafische race klaar op level 20
+PASS: grafische race klaar op level 21
+PASS: grafische race klaar op level 30
+PASS: grafische race klaar op level 40
+PASS: grafische race klaar op level 50
+PASS: alle negen productie-assets gedecodeerd
+PASS: atlasgeheugen onder64MB exclusief rendercaches
+PASS: wereldkaart opent werkelijk
+PASS: wereldkaart opent werkelijk
+DONE: V5 rastercontrole 320×568
+

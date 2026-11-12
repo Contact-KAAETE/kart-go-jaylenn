@@ -1,5 +1,21 @@
 # Kart Go V5 — echte grafische upgrade
 
+## V5.2.1 — garagekleuren zonder Canvas-filter
+
+Melding: kleuren lijken niet selecteerbaar op iPhone. Onderzoek: de presetknoppen schreven wel naar het kleurveld, maar er was geen zichtbare geselecteerde toestand. De kart werd met CanvasRenderingContext2D.filter verkleurd; die browserafhankelijkheid is volledig verwijderd.
+
+Nieuwe pixelbewerking kleurt alleen rode lakpixels met behoud van licht/donker. Neutrale banden/chroom, goud en alpha blijven behouden. Gecachete kartafbeeldingen worden in garage én race gebruikt; de bestaande cache blijft begrensd. Er zijn geen nieuwe beelden gegenereerd.
+
+Elke kleurknop is minimaal 44×44, heeft een kleurnaam, aria-pressed, een goudkleurige selectiering en vinkje. Bij kiezen verschijnt bijvoorbeeld “Blauw geselecteerd · nog bewaren”; na opslaan “Blauw geselecteerd · bewaard”. Vrije kleurkeuze werkt via input en change. De opslagsleutel en oorspronkelijke vijf kleuren blijven gelijk.
+
+Back-up: `backup/v5-2-before-paint-fix-20261112`; ontwikkeltak `fix/garage-paint-safari-20261112`.
+
+Tests: Node-regressies voor alle 50 races blijven groen, plus pixeltesten voor blauw/groen met behoud van neutrale materialen, goud en transparantie. Echte mobiele Chromium op 390×844 en 320×568: de Canvas-filtersetter expres laten gooien zodat afhankelijkheid van dit filter een testfout zou geven. Alle vijf kleuren hebben verschillende echte garage- en racepixels. Pointeraanraking/klik, één selectie, opslaan en opnieuw openen slagen. Bestaande V5-rastertest en avataropslag opnieuw geslaagd. Geen fysieke iPhone/Safari-test; dit is doelbewuste filterloze browserverificatie, geen claim dat Safari op een toestel is getest.
+
+Cacheversie 5.2.1. Liveverificatie volgt na publiceren. Onder dezelfde commit zijn, op Martins expliciete creatieve mandaat, de sla-tsunami, wasmand en brekend ijs als ontwerp uitgewerkt in `WORLD_3_JAYLENN_DESIGN.md`. Die wereld is nog niet gebouwd en krijgt geen misleidende actieve knop.
+
+---
+
 ## V5.2 — levendig racen en feestelijke finish
 
 Hervat vanaf main `5d9f2de64e696abe54f90fdc460d534797ea64b7`; herstelpunt `backup/v5-1-1-before-lively-racing-20261112`. Ontwikkeltak `work/kart-go-lively-v5-2-20261112`.

@@ -9,7 +9,26 @@ window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
  try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
- if(action==='v52suite'){
+ if(action==='paintSuite'){
+  const prior=JSON.parse(JSON.stringify(saved)),desc=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'filter');
+  const click=el=>{el.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',pointerId:81,bubbles:true}));el.dispatchEvent(new PointerEvent('pointerup',{pointerType:'touch',pointerId:81,bubbles:true}));el.click();};
+  const hashes=[];const hash=cv=>{const data=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;let n=2166136261;for(let i=0;i<data.length;i+=19)n=Math.imul(n^data[i],16777619);return n>>>0;};
+  try{
+   Object.defineProperty(CanvasRenderingContext2D.prototype,'filter',{configurable:true,get:()=> 'none',set:()=>{throw new Error('Canvas filter used');}});
+   state=null;garage();
+   for(const color of Object.values(PAINTS)){
+    click(document.querySelector('[data-paint="'+color+'"]'));
+    result(document.querySelector('#kartColor').value===color,'kleurknop selecteert '+PAINT_NAMES[color]);
+    result(document.querySelectorAll('[data-paint][aria-pressed="true"]').length===1,'exact één vinkje bij '+PAINT_NAMES[color]);
+    hashes.push(hash(document.querySelector('#garageArt')));
+    click(document.querySelector('#saveGarage'));closeModal();garage();
+    result(saved.player.color===color&&document.querySelector('#kartColor').value===color&&JSON.parse(localStorage.getItem(STORAGE_KEY)).player.color===color,'kleur blijft bewaard en heropent: '+PAINT_NAMES[color]);
+   }
+   result(new Set(hashes).size===5,'vijf verschillende echte kartvoorvertoningen zonder Canvas filter');
+   closeModal();start(1);state.count=0;const c=document.createElement('canvas');c.width=300;c.height=300;const ctx=c.getContext('2d'),raceHashes=[];
+   for(const color of Object.values(PAINTS)){ctx.clearRect(0,0,300,300);GFX.drawKart(ctx,150,275,1.8,color,false,0,saved.player);raceHashes.push(hash(c));}result(new Set(raceHashes).size===5,'vijf echte racekarts hebben verschillende lak zonder Canvas filter');
+  }catch(err){result(false,'garage: '+err.message);}finally{if(desc)Object.defineProperty(CanvasRenderingContext2D.prototype,'filter',desc);else delete CanvasRenderingContext2D.prototype.filter;saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE: garagekleuren');}
+ }else if(action==='v52suite'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
    start(12);state.count=0;draw();const top=document.querySelector('#controls').getBoundingClientRect().top;result(view.playerY<=top-(innerWidth/innerHeight<.8?35:18),'meer ruimte tussen kart en bediening');
