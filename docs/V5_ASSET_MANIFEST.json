@@ -77,7 +77,7 @@
     "alpha": false,
     "bytes": 310298,
     "generator": "built-in image_gen",
-    "integration": "pending"
+    "integration": "active garage CSS background + live composited selected kart/driver/paint + animated effect preview"
   },
   "terrain": {
     "file": "assets/graphics/terrain-v5.webp",

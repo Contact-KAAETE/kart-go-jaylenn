@@ -5,10 +5,25 @@ const send=(type,value)=>parent.postMessage(type==='result'?{type,text:value}:{t
 const pointer=(selector,type,id,x=0)=>{const el=document.querySelector(selector),r=el.getBoundingClientRect();el.dispatchEvent(new PointerEvent(type,{pointerId:id,pointerType:'touch',isPrimary:id===81,button:0,buttons:type==='pointerdown'||type==='pointermove'?1:0,clientX:r.left+r.width/2+x,clientY:r.top+r.height/2,bubbles:true,cancelable:true}));};
 function result(ok,text){send('result',(ok?'PASS: ':'FAIL: ')+text)}
 function layout(){const ids=['brake','left','right','wheel','joystick','gas'];const boxes=ids.map(id=>document.getElementById(id)).filter(el=>el.getClientRects().length&&getComputedStyle(el).display!=='none').map(el=>({id:el.id,r:el.getBoundingClientRect()}));let overlaps=[];for(let a=0;a<boxes.length;a++)for(let b=a+1;b<boxes.length;b++){const p=boxes[a],q=boxes[b];if(p.r.left<q.r.right&&p.r.right>q.r.left&&p.r.top<q.r.bottom&&p.r.bottom>q.r.top)overlaps.push(p.id+'/'+q.id)}const outside=boxes.filter(p=>p.r.left<0||p.r.right>innerWidth||p.r.top<0||p.r.bottom>innerHeight);result(!overlaps.length&&!outside.length,`${innerWidth}×${innerHeight}: geen overlap/buiten beeld (${saved.mode})`);}
-window.addEventListener('message',e=>{
+window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
- if(action==='v4suite'){
+ try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
+ if(action==='v5visual'){
+  const prior=JSON.parse(JSON.stringify(saved));
+  try{
+   start(1);state.count=0;state.speed=0;saved.xp=0;GFX.resetMetrics();draw();const m=GFX.metrics();
+   result(m.karts>=4&&m.drivers>=4,'rasterkarts EN gekozen coureurs worden in echte race getekend');result(m.scenery>0&&m.landscapes>0&&m.terrain>0,'echte rasteromgeving, panorama en wegtextuur actief');
+   const hash=cv=>{const d=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;let h=2166136261;for(let i=0;i<d.length;i+=29)h=Math.imul(h^d[i],16777619);return h>>>0;};
+   const heads=AVATARS.map((_,i)=>hash(GFX.tile('characters',3,4,i+6)));result(new Set(heads).size===6,'zes werkelijk verschillende rugaanzichtsprites');
+   const cv=document.createElement('canvas');cv.width=300;cv.height=300;const c=cv.getContext('2d'),paints=[];
+   for(const color of ['#f56a48','#579be4','#78b747']){c.clearRect(0,0,300,300);GFX.drawKart(c,150,265,1.8,color,false,0,saved.player);paints.push(hash(cv));}result(new Set(paints).size===3,'kartkleur verandert werkelijk de racepixels');
+   for(const avatar of AVATARS){saved.player.avatar=avatar;persist();const copy=cleanProgress(JSON.parse(localStorage.getItem(STORAGE_KEY)));result(copy.player.avatar===avatar,'coureur blijft bewaard: '+RACER_NAMES[racerIndex(avatar)]);}
+   for(const level of [1,5,10,15,20,21,30,40,50]){start(level);state.count=0;draw();result(GFX.canRace(level),'grafische race klaar op level '+level);}
+   result(GFX.metrics().loaded.length===9,'alle negen productie-assets gedecodeerd');result(GFX.metrics().decodedBytes<64000000,'atlasgeheugen onder64MB exclusief rendercaches');
+   for(const world of [1,2]){selectedWorld=world;backMap();result(!document.querySelector('#worldPanel').classList.contains('hidden'),'wereldkaart opent werkelijk');}
+  }catch(err){result(false,'V5: '+err.message);}finally{saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE: V5 rastercontrole '+innerWidth+'×'+innerHeight);}
+ }else if(action==='v4suite'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
    for(const level of [1,20,21,35,50]){start(level);state.count=0;state.speed=MAX;const d=state.opponents[0].d;update(.1);result(state.opponents[0].d>d,'bots rijden mee level '+level);draw();result(state.blocks.length===(level===20?9:10),'Lucky Blocks level '+level);}
@@ -30,7 +45,8 @@ window.addEventListener('message',e=>{
   start(1);state.count=0;saved.auto=false;saved.mode='buttons';modeUI();
   pointer('#right','pointerdown',81);pointer('#gas','pointerdown',82);
   result(input.right&&input.gas,'sturen en gas tegelijk');pointer('#gas','pointerup',99);result(input.gas,'andere pointer kan gas niet loslaten');
-  setTimeout(()=>{result(state.speed>0&&state.x>0,'echte race reageert op touch');pointer('#gas','pointerup',82);result(input.right&&!input.gas,'alleen gas wordt losgelaten');pointer('#right','pointercancel',81);result(!input.right&&!input.gas&&activePointers.size===0,'pointercancel maakt bediening vrij');pointer('#left','pointerdown',83);pointer('#brake','pointerdown',84);result(input.left&&input.brake,'sturen en remmen tegelijk');pause();result(activePointers.size===0&&!input.left&&!input.brake,'pauze wist alle aanrakingen');},650);
+  // Fixed simulation steps isolate input/physics from cloud-browser RAF throttling.
+  {for(let i=0;i<40;i++)update(1/60);result(state.speed>0&&state.x>0,'echte racephysics reageert op touch (40 vaste stappen)');pointer('#gas','pointerup',82);result(input.right&&!input.gas,'alleen gas wordt losgelaten');pointer('#right','pointercancel',81);result(!input.right&&!input.gas&&activePointers.size===0,'pointercancel maakt bediening vrij');pointer('#left','pointerdown',83);pointer('#brake','pointerdown',84);result(input.left&&input.brake,'sturen en remmen tegelijk');pause();result(activePointers.size===0&&!input.left&&!input.brake,'pauze wist alle aanrakingen');}
  }else if(action==='analog'){
   start(1);state.count=0;
   for(const mode of ['wheel','joystick']){saved.mode=mode;modeUI();pointer('#'+mode,'pointerdown',85);pointer('#'+mode,'pointermove',85,45);pointer('#gas','pointerdown',86);result(input.analog>.3&&input.gas,mode+' met gelijktijdig gas');pointer('#'+mode,'pointerup',85);pointer('#gas','pointerup',86);result(input.analog===0&&!input.gas,mode+' keert terug na loslaten');pointer('#'+mode,'pointerdown',87);pointer('#'+mode,'pointermove',87,-45);resetInput();pointer('#'+mode,'pointerdown',88);pointer('#'+mode,'pointermove',88,45);result(input.analog>.3,mode+' werkt opnieuw na reset');resetInput();layout();}
@@ -44,5 +60,5 @@ window.addEventListener('message',e=>{
  }else if(action==='layout'){setTimeout(layout,100);}
  if(state&&state.count<=0)document.querySelector('#countdown').textContent='';
 });
-setInterval(()=>send('status',{viewport:`${innerWidth}×${innerHeight}`,mode:saved.mode,input:{...input},activePointers:activePointers.size,level:state?.level,paused:state?.paused,finished:state?.finished,distance:Math.round(state?.d||0),speed:Math.round(state?.speed||0),position:state?.rank,inventory:state?.inventory,boost:state?.boost,jump:state?.jump,freeze:state?.freeze,time:state?.time?.toFixed(2),shots:state?.shots?.length,nextIce:state?.nextShot,won:saved.wins,quality:quality.level}),200);
+setInterval(()=>send('status',{viewport:`${innerWidth}×${innerHeight}`,mode:saved.mode,input:{...input},activePointers:activePointers.size,level:state?.level,paused:state?.paused,finished:state?.finished,distance:Math.round(state?.d||0),speed:Math.round(state?.speed||0),position:state?.rank,inventory:state?.inventory,boost:state?.boost,jump:state?.jump,freeze:state?.freeze,time:state?.time?.toFixed(2),shots:state?.shots?.length,nextIce:state?.nextShot,won:saved.wins,quality:quality.level,raster:GFX.metrics()}),200);
 })();
