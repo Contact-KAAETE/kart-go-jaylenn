@@ -64,3 +64,7 @@ Bijgewerkt: 12 november 2026. Bedenker: **Jaylenn**. Budget: €0.
 Cloudflare officiële documentatie (12-11-2026): SQLite Durable Objects beschikbaar op Workers Free. Free-quota 100.000 requests/dag en 13.000 GB-s/dag; limieten blokkeren verkeer in plaats van automatisch betaald verbruik. Actieve intervals verhinderen hibernation. Beschouw gratis hosting als begrensd, niet onbeperkt. Geen betaalde dienst geactiveerd.
 
 Bronnen: https://developers.cloudflare.com/durable-objects/platform/pricing/ en https://developers.cloudflare.com/durable-objects/best-practices/websockets/ .
+
+## Aanmeldblokkade bij hervatten
+
+De beveiligde Cloudflare-aanmeldflow liep vast/time-out. Een verse dashboardcontrole toonde opnieuw /login; er is geen bevestigde beheersessie en er is geen servercode gepubliceerd. De live frontendfase blijft werken. Handmatige overname van het Cloudflare-aanmeldvenster is de volgende vereiste stap voor serverbeheer. Vraag geen wachtwoorden of codes in de chat.
