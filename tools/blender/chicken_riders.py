@@ -45,7 +45,8 @@ def chicken(i):
  orb('racing saddle',(0,-.13,2.0),(.48,.5,.13),seat);orb('cyan saddle trim',(0,-.18,1.99),(.51,.52,.075),aqua)
  for side in [-1,1]:orb('saddle strap',(side*.62,-.2,1.6),(.055,.13,.44),seat,(0,side*.3,0));orb('saddle buckle',(side*.68,-.26,1.5),(.06,.15,.1),gold)
  if i==1:
-  for side in [-1,1]:orb('aviator goggle rim',(.14+side*.28,-.035,2.8-side*.09),(.27,.055,.29),gold)
+  for side in [-1,1]:
+   bpy.ops.mesh.primitive_torus_add(major_radius=.255,minor_radius=.025,major_segments=32,minor_segments=10,location=(.14+side*.27,-.075,2.78-side*.09),rotation=(math.pi/2,0,0));bpy.context.object.name='open aviator goggle frame';bpy.context.object.data.materials.append(gold)
  if i==2:
   for k in range(4):orb('disco crest',(.14,.39+k*.12,3.15-k*.02),(.075,.14,.29),tip,(.4,0,0))
  objects=list(set(bpy.data.objects)-before)
@@ -54,7 +55,7 @@ def lighting():
   bpy.ops.object.light_add(type='AREA',location=loc);l=bpy.context.object;l.name=name;l.data.energy=power;l.data.shape='DISK';l.data.size=size;l.data.color=col;l.rotation_euler=(Vector((0,0,1.5))-l.location).to_track_quat('-Z','Y').to_euler()
 bpy.ops.object.camera_add();cam=bpy.context.object;bpy.context.scene.camera=cam
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=40;scene.cycles.use_denoising=False;scene.render.resolution_x=512;scene.render.resolution_y=640;scene.render.resolution_percentage=100;scene.render.film_transparent=True;scene.render.image_settings.file_format='PNG';scene.world.color=(.14,.16,.2);scene.view_settings.view_transform='AgX';lighting()
-for i in range(3):
+for i in ([int(os.environ['KART_CHICKEN_INDEX'])] if 'KART_CHICKEN_INDEX' in os.environ else range(3)):
  chicken(i)
  for view,loc in [('rear',(0,-8.5,4.9)),('card',(4,-7.7,4.3))]:
   cam.location=loc;cam.rotation_euler=(Vector((0,0,1.65))-cam.location).to_track_quat('-Z','Y').to_euler();cam.data.type='ORTHO';cam.data.ortho_scale=4.4;scene.render.filepath=f'{OUT}/chicken-{i}-{view}.png';bpy.ops.render.render(write_still=True)

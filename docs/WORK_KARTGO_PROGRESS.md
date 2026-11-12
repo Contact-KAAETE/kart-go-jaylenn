@@ -120,3 +120,17 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Avontuur controleert aangeleverde lokale overwinningen serverzijdig op vorm/level. Zonder accounts zijn die lokale claims niet cryptografisch te bewijzen; beweren dat dit fraudevrij is zou onjuist zijn. Vrij racen schrijft geen avontuursoverwinningen.
 - Nieuwe build nog niet op fysieke iPhone/Android of twee netwerken getest. De gebruiker bevestigde de eerdere online basis op twee telefoons. Geen camera-/WhatsApp-/hardwaretest door ons geclaimd.
 - Resterend na publicatie: actuele Worker-versie en Pages-assets verifiëren, `tests/worlds-live.mjs` op productie uitvoeren, browserflow live nalopen. Vriendenlijst met online verzoekbeheer blijft buiten deze fase; private QR-racekamers zijn wel echt online. Het vliegende-kasteelverhaal is een los toekomstidee, niet toegevoegd als nieuwe wereld.
+
+
+## Live gecontroleerd — 2026-11-12
+- Gameplay-uitrolcommit: `edf049d3a709adb59db25bc2177cb657bbe36e83`. GitHub Pages build/deploy/report en Cloudflare Workers Builds alle vier succesvol.
+- Werkelijke `/health`: `ultimate-worlds-3`, protocol 3, worlds/items/chicken-riders/resume/durable-rooms/explicit-host. Geen nieuwe Cloudflare-login of handmatige editoractie nodig.
+- Alle negen gepubliceerde WebP-assets en zeven belangrijkste HTML/JS-bestanden met HTTP 200 opgehaald; SHA-256 identiek aan de lokale geteste bestanden.
+- `node tests/worlds-live.mjs` op productie GESLAAGD: twee onafhankelijke WebSocket-clients openen direct IJs 51, dezelfde aftelling, beide rijden/finishen 2600 m; tussentijds verbreken/herverbinden behoudt id en afstand, geen duplicaat. Daarna dezelfde kamer naar Party 74, kipkeuzes behouden, dezelfde kat bij 3 km, checkpoint en beide finishen de volledige 5000 m met identieke uitslag.
+- De eerste testaanname dat A na disconnect organisator bleef, was onjuist. De server droeg organisatorrechten correct over aan B; de test kiest nu de daadwerkelijk actieve organisator. Dit was een testcorrectie, geen versoepeling van serverrechten.
+- Echte Chromium-browserflow: kamer gemaakt in IJs, gekopieerde uitnodiging opent deelnemer zonder sleutel overtypen; dezelfde kamer omgezet naar Party 74; beide zien de nieuwe selectie; deelnemer verandert kip naar Disco Tok; beide klaar; organisator start; beide racebeelden met gekozen coureur/kip en bewegende posities bekeken.
+- Rootgame live gestart in level 1 en gepauzeerd. Party live met gekozen vos en kip gestart. Portret/landschap in responsive browser gecontroleerd; drie besturingsmethoden/multitouch-eigendom aanvullend via DOM-tests.
+- Laatste visuele afwerking: open gouden brilrand van Professor Tok zodat zijn ogen zichtbaar blijven; eigen rijderpositie afgestemd op baanprojectie; cacheversie worlds3.1. Deze afwerking wijzigt geen server-simulatie.
+- Niet door ons fysiek getest: iPhone/Android, camera-QR, WhatsApp/Berichten of twee aparte netwerken. De gebruiker bevestigde wel de eerdere online tweetelefoontest.
+- Werkende ingangen: oorspronkelijke hoofdpagina, `/multiplayer/` en `/party/`. Party komt na IJs. Vrij racen geeft direct toegang tot alle 75 bestaande/geïntegreerde levels; Avontuur behoudt oorspronkelijke lokale voortgang.
+- Open vervolg: verdere grafische verfijning richting de voorbeeldbeelden, speelsessies met de kinderen op echte telefoons; een echt online vriendenverzoekensysteem is niet in deze fase gebouwd. Het losse vliegende-kasteelverhaal is nog geen spelonderdeel.
