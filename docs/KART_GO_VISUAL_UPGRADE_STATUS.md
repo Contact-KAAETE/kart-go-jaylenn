@@ -1,5 +1,17 @@
 # Kart Go V5 — echte grafische upgrade
 
+## V5.1.1 — stuurrichting van de kart gerepareerd
+
+De fysieke links/rechts-beweging was correct, maar `draw()` gaf `-steer` door aan de rasterkart. Daardoor werd bij links sturen de rechter sprite getoond en andersom. De atlas is visueel gecontroleerd: vak 0 wijst links, vak 1 rechtuit, vak 2 rechts. Alleen het omgekeerde teken bij de renderaanroep verwijderd; physics, camera, stuurgevoeligheid, saves, parcoursen en items blijven gelijk.
+
+Gebruikersopname van 57 seconden onderzocht. Herstelpunt `backup/v5-1-before-steering-fix-20261112`, ontwikkeltak `fix/kart-steering-presentation-20261112`.
+
+Tests: volledige Node-regressie slaagt (50 races voltooid; 20/20 groen en 29/30 zand gewonnen). Nieuwe end-to-end regressie volgt echte pointerinput via knoppen, stuurwiel en joystick tot laterale beweging EN het argument van de daadwerkelijke kart-renderer, in beide richtingen. Alle zes richtingschecks en terugcentreren slagen, ook in echte Chromium op 390×844 met geladen rasterassets. Links en rechts visueel bekeken. Rapport: `V5_1_1_STEERING_TEST_RESULTS.txt`. Cacheversie 5.1.1. Geen fysieke iPhone-test; de aangeleverde opname is het bewijs van het oorspronkelijke probleem.
+
+Publicatiecontrole wordt na de geslaagde build vastgelegd.
+
+---
+
 ## V5.1 — hoogtes, bruggen, scherpe bochten en echte springschansen
 
 12 november 2026, vervolg op de goedgekeurde V5. Herstelpunt `backup/v5-before-height-upgrade-20261112` → `adbb6f4eb6893fdf3c8ff92c2c9a431318a8d4ba`. Ontwikkeltak `work/kart-go-heights-v5-1-20261112`.

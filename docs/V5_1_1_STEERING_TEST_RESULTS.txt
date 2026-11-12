@@ -1,0 +1,14 @@
+PASS: buttons: links input/physics/rasterrichting gelijk
+PASS: buttons: loslaten centreert kart
+PASS: buttons: rechts input/physics/rasterrichting gelijk
+PASS: buttons: loslaten centreert kart
+PASS: wheel: links input/physics/rasterrichting gelijk
+PASS: wheel: loslaten centreert kart
+PASS: wheel: rechts input/physics/rasterrichting gelijk
+PASS: wheel: loslaten centreert kart
+PASS: joystick: links input/physics/rasterrichting gelijk
+PASS: joystick: loslaten centreert kart
+PASS: joystick: rechts input/physics/rasterrichting gelijk
+PASS: joystick: loslaten centreert kart
+DONE: stuurrichting
+

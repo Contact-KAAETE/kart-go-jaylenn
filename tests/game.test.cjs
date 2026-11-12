@@ -147,3 +147,17 @@ run("start(5);state.count=0;state.opponents[0].d=state.features.find(f=>f.kind==
 run("start(5);state.count=0;state.rampAir=.8;state.rampDuration=1;state.shots=[{d:state.d+1,x:state.x,speed:-3000,life:5}];update(.01)");assert.equal(run('state.freeze'),0,'physical airborne kart clears ice');
 run('state.inventory=[4,null,null];useItem(0)');assert.equal(run('state.jump'),1.4,'original Jump remains 1.4 seconds');
 console.log('PASS: V5.1 all50 terrain profiles/seams and finite projections, extra bridges, sharper curves, real player/bot ramps, pause/save/reopen/landing, slow and off-road rejection, ice clearance, unchanged Jump duration.');
+
+// Real input -> lateral motion -> actual renderer argument must agree for every control mode.
+for(const mode of ['buttons','wheel','joystick']){
+ for(const direction of [-1,1]){
+  run(`start(1);state.count=0;state.speed=MAX;state.curves.fill(0);saved.mode='${mode}';modeUI();resetInput();`);
+  if(mode==='buttons')dispatch(direction<0?'#left':'#right','pointerdown',event(401));
+  else{dispatch('#'+mode,'pointerdown',event(401));dispatch('#'+mode,'pointermove',event(401,65+direction*50));}
+  run(`{const original=GFX.drawKart;let rendered=null;GFX.drawKart=(...args)=>{if(args[7]===saved.player)rendered=args[6];return original(...args);};for(let i=0;i<12;i++)update(1/60);draw();GFX.drawKart=original;globalThis.lastRenderedSteer=rendered;}`);
+  assert.ok(run('state.x')*direction>0,mode+' moves with input');
+  assert.ok(run('lastRenderedSteer')*direction>0,mode+' artwork points with lateral movement');
+  run('resetInput();for(let i=0;i<60;i++)update(1/60)');assert.ok(Math.abs(run('state.steer'))<.001,'released steering recentres');
+ }
+}
+console.log('PASS: left/right touch input, lateral physics and kart renderer agree for buttons, wheel and joystick; release recentres.');

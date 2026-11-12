@@ -9,7 +9,18 @@ window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
  try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
- if(action==='terrainSuite'){
+ if(action==='steerCheck'){
+  const prior=JSON.parse(JSON.stringify(saved)),original=GFX.drawKart;
+  try{for(const mode of ['buttons','wheel','joystick']){for(const direction of [-1,1]){
+   start(1);state.count=0;state.speed=MAX;state.curves.fill(0);saved.mode=mode;modeUI();resetInput();
+   if(mode==='buttons')pointer(direction<0?'#left':'#right','pointerdown',81);else{pointer('#'+mode,'pointerdown',81);pointer('#'+mode,'pointermove',81,direction*45);}
+   let drawn=null;GFX.drawKart=(...args)=>{if(args[7]===saved.player)drawn=args[6];return original(...args);};
+   for(let i=0;i<12;i++)update(1/60);draw();result(state.x*direction>0&&drawn*direction>0,mode+': '+(direction<0?'links':'rechts')+' input/physics/rasterrichting gelijk');
+   GFX.drawKart=original;resetInput();for(let i=0;i<60;i++)update(1/60);result(Math.abs(state.steer)<.001,mode+': loslaten centreert kart');
+  }}}catch(err){result(false,'sturen: '+err.message);}finally{GFX.drawKart=original;saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE: stuurrichting');}
+ }else if(action==='steerLeft'||action==='steerRight'){
+  start(1);state.count=0;state.speed=MAX;state.curves.fill(0);saved.mode='buttons';modeUI();const dir=action==='steerLeft'?-1:1;pointer(dir<0?'#left':'#right','pointerdown',81);for(let i=0;i<12;i++)update(1/60);state.paused=true;draw();
+ }else if(action==='terrainSuite'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
    for(const level of [1,5,12,20,21,35,50]){start(level);state.count=0;
