@@ -1,6 +1,6 @@
-# Actueel: V6 IJs-Wereld gebouwd en live gecontroleerd
+# Actueel: V6.0.1 complete IJs-Wereld LIVE
 
-Zie KART_GO_ICE_WORLD_STATUS.md. Levels51–70, productiebeelden, lokale startstem, ijsgevaren en Burgerkoning gebouwd. Eerste50 en garage-opslag blijven behouden. Fase1 veilig op ontwikkeltak opgeslagen als07760d524c990e67518f50e4059741c300c3a580. Mobiele browsercontroles en eerste livepublicatie geslaagd (caccc9977584deb1a2f38869ce97252820ff3708, Pages43183106301). Laatste afwerking6.0.1: panorama zonder vervorming en bots rijden door na wakredding. Die afwerking nog publiceren/verifiëren. Online vrienden/multiplayer blijven open.
+70 levels, drie werelden en drie eindbazen. Volledige implementatie, regels, assets en testresultaten: KART_GO_ICE_WORLD_STATUS.md. Gamecommit700d99d96b1c8bf5e28ee9190b7baa52391684eb, succesvolle Pages-run43183938063. Officiële HTTPS-link met6.0.1 daadwerkelijk getest, inclusief ijsrace51 en Burgerkoning70. Alle70 circuits en mobiele Chrome-frames/touchsimulatie gecontroleerd. Geen fysieke iPhone-test. Naam/coureur/kleur/garage/voortgang behouden; kleurenreparatie werkt nog. Back-up backup/v5-2-1-before-ice-world-20261112 blijft beschikbaar. Hervat vanaf actuele main, niet opnieuw beginnen. Online vrienden/multiplayer blijven afzonderlijk open.
 
 ---
 

@@ -1,3 +1,9 @@
+# Actueel V6.0.1 — complete IJs-Wereld gepubliceerd
+
+Nieuwe echte winterachtergrond, negen decor/effectsprites en Burgerkoning met voor-/achteraanzicht geïntegreerd in levels51–70. Lokale startstem, ijspaleis, glijden, spikes, barsten, geheim level en lange finale. Geen herbouw; V5-graphics, garagekleuren en eerste50 levels behouden. Gecontroleerde gamecommit700d99d96b1c8bf5e28ee9190b7baa52391684eb en Pages43183938063. Zie KART_GO_ICE_WORLD_STATUS.md voor details, screenshots en tests. Onderstaande V5-notities zijn historie.
+
+---
+
 # Kart Go V5 — echte grafische upgrade
 
 ## V5.2.1 — garagekleuren zonder Canvas-filter

@@ -1,0 +1,86 @@
+[
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/index.html?v=6.0.1",
+    "status": 200,
+    "bytes": 6542,
+    "sha256": "3f3bd755ba1f735cfbd37fca16a29482442d7bc6e1d907eb753e4ed1c924ce47",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/ice-world.js?v=6.0.1",
+    "status": 200,
+    "bytes": 14373,
+    "sha256": "6e155579643768cc0d23c77c53a733a0bbffdb84796a6d3c7e1dd03af177f5a4",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/game.js?v=6.0.1",
+    "status": 200,
+    "bytes": 57382,
+    "sha256": "bf8500d4000fc15059d3c8af1e0ab4086a46d9d53354a6fe0a26a183ccb67a52",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/graphics.js?v=6.0.1",
+    "status": 200,
+    "bytes": 11088,
+    "sha256": "1b96650b2d6f9eaf465aa7c836c04b1074c20416089c9585a9b517af8c2af57b",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/player.js?v=6.0.1",
+    "status": 200,
+    "bytes": 13323,
+    "sha256": "abff41bfc1733a0e1e5878c8ce96918ff6f13316d3a7d0fa47f2f46303b8dd03",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/scenery.js?v=6.0.1",
+    "status": 200,
+    "bytes": 15742,
+    "sha256": "f205a36b841e5ee63b9d2d4e2d16c6cf08b538e78244bd8bef34a2bd9ed0b1c9",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/course.js?v=6.0.1",
+    "status": 200,
+    "bytes": 4209,
+    "sha256": "ce1fb2f8f992509939c5408f8fcb456e19229db814232decc9f7eccda1354449",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/visual-v5.css?v=6.0.1",
+    "status": 200,
+    "bytes": 20945,
+    "sha256": "baf1ea82e1c3c8f53672ca37b293bd6a4e2bd2bd6a7b538617cdd799b0390e92",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/graphics/winter-v6.webp?v=6.0.1",
+    "status": 200,
+    "bytes": 327346,
+    "sha256": "403724bfebf5ca258d5d7f8c32e28405e1a1e99fc2c737121672adee1fd442d3",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/graphics/iceprops-v6.webp?v=6.0.1",
+    "status": 200,
+    "bytes": 456672,
+    "sha256": "fe900acf97f6527f46b19cfb09fd1b92bdac7a776b22fa328072fa27f3c624ea",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/graphics/burger-v6.webp?v=6.0.1",
+    "status": 200,
+    "bytes": 310910,
+    "sha256": "3399ee36d18847d9590c36179e5e79a5d297ec7030ba4ab922515b6b743f4769",
+    "matchesLocal": true
+  },
+  {
+    "url": "https://contact-kaaete.github.io/kart-go-jaylenn/assets/audio/ho-ho-ho-v6.wav?v=6.0.1",
+    "status": 200,
+    "bytes": 75452,
+    "sha256": "40ae2a1691b25158f6ebbcb5a328fcc49b8bdde5942a1d41b20bfadcaedd16e4",
+    "matchesLocal": true
+  }
+]
