@@ -1,3 +1,9 @@
+# Actueel: V6.2 vermogen en herstel gebouwd/getest
+
+250/509/1000pk,2s stof en3s water. Zie KART_GO_ENGINE_RECOVERY_STATUS.md. Alle70 levels,12 coureurs,20 kleuren en voortgang behouden. Kandidatenversie, livecontrole volgt. Animatieadvies in KART_GO_ANIMATION_OPTIONS.md.
+
+---
+
 # Actueel: V6.1 twaalf coureurs en twintig kleuren LIVE
 
 Twaalf coureurs en twintig kartkleuren. Zie KART_GO_CHOICES_V6_1_STATUS.md. Bestaande70 levels en voortgang behouden. Livegame met nieuwe draak/turquoise lak, bewaren/heropenen en echte race gecontroleerd. Gamecommit eb446a08a63ff482b48d5f2a46a5ce414f0b2cb1; Pages43186596692 succesvol.

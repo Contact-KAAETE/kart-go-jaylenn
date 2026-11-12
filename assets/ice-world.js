@@ -19,8 +19,8 @@ const Ice=(()=>{
   for(const racer of [s,...s.opponents]){racer.lettuce=0;racer.basket=0;racer.rescue=0;racer.iceShield=0;racer.slide=0;racer.rescueTo=racer.d;racer.rescueLane=0;}
  }
  function crack(s,d=s.d,x=s.x){if(!s.ice)return;const h={d,x:clamp(x,-.66,.66),born:s.time,opens:s.time+2,closes:s.time+5};s.iceData.holes.push(h);s.iceData.holes=s.iceData.holes.slice(-28);}
- function penalty(s,racer,kind){if(racer.iceShield>0||racer.rescue>0)return false;
-  if(kind==='hole'){racer.rescue=2;racer.iceShield=4;racer.rescueTo=Math.min(s.finishDistance-600,racer.d+500);racer.rescueLane=racer.x>0?-.52:.52;if(racer===s)racer.speed=0;}
+ function penalty(s,racer,kind){if(racer.iceShield>0||racer.rescue>0||racer.recovery>0)return false;
+  if(kind==='hole'){racer.rescue=3;racer.iceShield=5;racer.rescueTo=Math.min(s.finishDistance-600,racer.d+500);racer.rescueLane=racer.x>0?-.52:.52;if(racer===s)racer.speed=0;}
   if(kind==='lettuce'){racer.lettuce=2;racer.iceShield=4;if(racer===s)racer.speed=Math.min(racer.speed,MAX*.6);}
   if(kind==='basket'){racer.basket=3;racer.iceShield=5;if(racer===s)racer.speed=Math.min(racer.speed,MAX*.5);}
   if(kind==='spike'){racer.slow=Math.max(racer.slow||0,1);racer.iceShield=2;}
@@ -64,7 +64,7 @@ const Ice=(()=>{
   for(const k of ['nextBoostCrack','nextLettuce','nextBasket','lastAttack','palaceLap'])if(Number.isFinite(source[k]))data[k]=source[k];
   if(Array.isArray(source.holes))data.holes=source.holes.filter(h=>['d','x','born','opens','closes'].every(k=>Number.isFinite(h[k]))&&h.opens>=h.born&&h.closes>h.opens).slice(-28).map(h=>({d:Math.max(0,h.d),x:clamp(h.x,-.8,.8),born:h.born,opens:h.opens,closes:h.closes}));
   const a=source.attack;if(a&&['lettuce','basket'].includes(a.kind)&&['at','safe','lane'].every(k=>Number.isFinite(a[k])))data.attack={kind:a.kind,at:a.at,safe:clamp(a.safe,-.62,.62),lane:clamp(a.lane,-.62,.62)};
-  const p=source.player||{};for(const k of ['lettuce','basket','rescue','iceShield'])if(Number.isFinite(p[k]))s[k]=clamp(p[k],0,5);if(Number.isFinite(p.slide))s.slide=clamp(p.slide,-2,2);if(Number.isFinite(p.rescueTo))s.rescueTo=clamp(p.rescueTo,0,s.finishDistance-600);if(Number.isFinite(p.rescueLane))s.rescueLane=clamp(p.rescueLane,-.62,.62);
+  const p=source.player||{};for(const k of ['lettuce','basket','rescue','iceShield'])if(Number.isFinite(p[k]))s[k]=clamp(p[k],0,k==='rescue'?3:5);if(Number.isFinite(p.slide))s.slide=clamp(p.slide,-2,2);if(Number.isFinite(p.rescueTo))s.rescueTo=clamp(p.rescueTo,0,s.finishDistance-600);if(Number.isFinite(p.rescueLane))s.rescueLane=clamp(p.rescueLane,-.62,.62);
  }
  function prop(c,index,x,y,w,h=w){const im=GFX.tile('iceprops',3,3,index);if(!im)return false;c.drawImage(im,x-w/2,y-h,w,h);return true;}
  function scenery(c,type,x,y,k){const index={oak:0,pine:0,blossom:0,barn:1,mill:1,rocks:3,hay:3,fence:3,flowers:3,grass:3,pond:3,sign:3}[type]??0;const factor=index===1?2.1:index===0?1.4:.8;return prop(c,index,x,y,340*k*factor,370*k*factor);}

@@ -1,0 +1,214 @@
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 390px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 390px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 390px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 390×844
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 320px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 320px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 320px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 320×568
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 844px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 844px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 844px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 844×390
+
+Laatste codecontrole:
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 390px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 390px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 390px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 390×844
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 320px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 320px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 320px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 320×568
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 844px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 844px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 844px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 844×390
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 390px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 390px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 390px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 390×844
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 390px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 390px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 390px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 390×844
+PASS: garage bewaart 250pk
+PASS: heropenen 250pk
+PASS: garage past 390px
+PASS: garage bewaart 509pk
+PASS: heropenen 509pk
+PASS: garage past 390px
+PASS: garage bewaart 1000pk
+PASS: heropenen 1000pk
+PASS: garage past 390px
+PASS: 250/509/1000 rijden werkelijk steeds sneller
+PASS: echte baanrand veroorzaakt2s stofwolk
+PASS: kart vliegt zichtbaar opzij en stopt tijdens herstel
+PASS: item blijft tijdens herstel behouden
+PASS: pauze stopt hersteltimer
+PASS: herstel overleeft opslaan/heropenen
+PASS: kart komt vanzelf terug op baan
+PASS: zichtbaar brugwater veroorzaakt3s plons
+PASS: kart zinkt zichtbaar in water
+PASS: na3s weer op de baan
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: motoren/herstel 390×844

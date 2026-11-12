@@ -1,8 +1,12 @@
-# KART GO — Jaylenns Racewereld · V6.1
+# KART GO — Jaylenns Racewereld · V6.2
 
 **KART GO — Een spel bedacht door Jaylenn.** AI is uitsluitend hulpmiddel voor programmeren, vormgeving en testen.
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
+
+## V6.2 — motoren en terug op de baan
+
+Kies250,509 of1000pk in garage/instellingen. Uit de bocht:2s stof; in water:3s plons, daarna vanzelf terug. Bestaande70 levels,12 coureurs,20 kleuren en lokale voortgang blijven bewaard. [Details en tests](docs/KART_GO_ENGINE_RECOVERY_STATUS.md).
 
 ## V6.1 — meer keuze
 

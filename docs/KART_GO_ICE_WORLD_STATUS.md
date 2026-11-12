@@ -1,3 +1,5 @@
+> V6.2-update op Martins verzoek: water/wakredding duurt nu3s. Details en huidige tests in KART_GO_ENGINE_RECOVERY_STATUS.md; onderstaande V6.0.1-beschrijving blijft als historie behouden.
+
 # Kart Go V6.0.1 — complete IJs-Wereld · LIVE
 
 Bedenker: Jaylenn. Gebouwd als uitbreiding van de bestaande game, niet als herbouw. Ontwikkeltak `work/world3-ice-v6-20261112`; herstelpunt `backup/v5-2-1-before-ice-world-20261112` → `c6e9d3e35003c04e55c76520d9d25980fb762c83`.
