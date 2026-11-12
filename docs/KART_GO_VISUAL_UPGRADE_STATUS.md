@@ -16,7 +16,11 @@
 Tests: `node tests/game.test.cjs` slaagt. Alle 50 races voltooid door dezelfde begrensde controller; 20/20 groen en 29/30 zand gewonnen. Alle 50 hoogteprofielen sluiten vloeiend aan op de rondegrens; geteste projecties blijven eindig en de weg zichtbaar. Speler/bot-schans, langzaam/offroad, landing, pauze, bewaren/hervatten, ijsontwijking en ongewijzigde Jump-duur gecontroleerd.
 Echte Chromium-controles: 390×844, 320×568 en 844×390; schansvlucht/landing, crestmasker, drie besturingen, multitouch, V5-rasterintegratie, power-ups en beide eindbazen geslaagd. Brug, schans en sprong visueel bekeken met de echte spelrenderer. Geen fysieke iPhone-test of hardware-FPS-claim.
 
-Publicatie: getest, gereed voor samenvoegen; livecontrole volgt na Pages-build. De volgende commit legt het publicatiebewijs vast.
+**Gepubliceerd en live geverifieerd.** Gamecommit `9637c8d8f1c6960557e863b2678c56b63e4f9c3b`; Pages-run `43167523684` afgerond met success. De root en gewijzigde `course.js`, `game.js`, `scenery.js` geven HTTP 200 en zijn bytegelijk aan de geteste versie.
+
+Officiële URL in Chromium herladen: footer V5.1 zichtbaar, bestaande 20 overwinningen, XP5, Robot en paarse kart bewaard. Via de echte wereldkaart level 5 gestart, gereden, scherpe bocht en gele schans zichtbaar; Lucky Blocks verzameld en Hypnose gebruikt. De schans activeerde tijdens normaal rijden de melding “Springschans! Houd je koers vast.”, waarna de kart weer op de baan reed. Inventaris bleef behouden, topsnelheid bleef 120 km/u. Pauze → kaart → hoofdmenu werkt. Screenshots van live schans en lokale gepauzeerde vliegcontrole gemaakt. Geen gamefout waargenomen.
+
+De laatste documentatiecommit bewaart dit bewijs. Volgende stap bij vervolg: hervat vanaf actuele main; een eventuele fysieke iPhone-terugmelding gericht onderzoeken. Geen nieuwe installatie nodig: herlaad dezelfde speellink.
 
 ---
 

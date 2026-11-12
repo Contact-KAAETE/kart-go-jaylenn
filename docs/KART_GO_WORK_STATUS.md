@@ -2,7 +2,7 @@
 
 **12 november 2026: V5.1 voegt hoogtes, extra bruggen, scherpere bochten en echte springschansen toe.** Details en actuele publicatiestatus staan in het visuele statusdocument.
 Lees eerst [KART_GO_VISUAL_UPGRADE_STATUS.md](KART_GO_VISUAL_UPGRADE_STATUS.md). Hervat vanaf de actuele main-commit; begin niet opnieuw.
-Gamecommit `32d0dbd03431694ef8d57a9e35c8323113b9379b`, succesvolle Pages-run `43162873160`.
+Gamecommit `9637c8d8f1c6960557e863b2678c56b63e4f9c3b`, succesvolle Pages-run `43167523684`. V5.1 is ook live gecontroleerd, inclusief de automatische springschans in level 5.
 Nieuwe echte rastergraphics zijn geïntegreerd in menu, coureurs, races, beide werelden, garage en eindbazen.
 Alle 50 levels en bestaande lokale opslag behouden. Online vrienden/multiplayer blijven afzonderlijk open.
 
