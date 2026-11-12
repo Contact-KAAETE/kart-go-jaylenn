@@ -1,3 +1,15 @@
+# Huidige versie: Kart Go V5.0
+
+**12 november 2026: de grafische V5 is gepubliceerd en live getest.**
+Lees eerst [KART_GO_VISUAL_UPGRADE_STATUS.md](KART_GO_VISUAL_UPGRADE_STATUS.md). Hervat vanaf de actuele main-commit; begin niet opnieuw.
+Gamecommit `32d0dbd03431694ef8d57a9e35c8323113b9379b`, succesvolle Pages-run `43162873160`.
+Nieuwe echte rastergraphics zijn geïntegreerd in menu, coureurs, races, beide werelden, garage en eindbazen.
+Alle 50 levels en bestaande lokale opslag behouden. Online vrienden/multiplayer blijven afzonderlijk open.
+
+Onderstaande V4-notities zijn de bewaarde historische onderbouwing.
+
+---
+
 # KART GO V4.0 — voortgang
 
 **Actueel 12 november 2026: singleplayer V4 staat live en is online getest.** Online vrienden/multiplayer zijn niet gerealiseerd en blijven afzonderlijk open. Speellink: https://contact-kaaete.github.io/kart-go-jaylenn/ . Gepubliceerde gamecommit:8f0fab77859279f04cdc335bede7f14877379093. Laatste main-commit bevat dit verificatieverslag.

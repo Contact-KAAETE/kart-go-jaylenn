@@ -1,0 +1,111 @@
+{
+  "verified_at": "2026-11-12T05:41:00Z",
+  "url": "https://contact-kaaete.github.io/kart-go-jaylenn/",
+  "game_commit": "32d0dbd03431694ef8d57a9e35c8323113b9379b",
+  "pages_run": 43162873160,
+  "comparison": "Downloaded live dependency bytes equal tested local files (SHA-256 comparison).",
+  "files": [
+    {
+      "path": "./assets/style.css?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 22865
+    },
+    {
+      "path": "./assets/visual-v5.css?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 15940
+    },
+    {
+      "path": "./assets/vendor/qrcode.js?v=1.4.4",
+      "http": 200,
+      "same": true,
+      "bytes": 56694
+    },
+    {
+      "path": "./assets/graphics.js?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 9792
+    },
+    {
+      "path": "./assets/player.js?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 11725
+    },
+    {
+      "path": "./assets/scenery.js?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 13551
+    },
+    {
+      "path": "./assets/desert.js?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 4636
+    },
+    {
+      "path": "./assets/game.js?v=5.0.3",
+      "http": 200,
+      "same": true,
+      "bytes": 51878
+    },
+    {
+      "path": "assets/graphics/menu-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 324064
+    },
+    {
+      "path": "assets/graphics/characters-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 647940
+    },
+    {
+      "path": "assets/graphics/karts-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 412440
+    },
+    {
+      "path": "assets/graphics/scenery-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 841610
+    },
+    {
+      "path": "assets/graphics/landscapes-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 260850
+    },
+    {
+      "path": "assets/graphics/bosses-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 478982
+    },
+    {
+      "path": "assets/graphics/effects-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 659722
+    },
+    {
+      "path": "assets/graphics/garage-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 310298
+    },
+    {
+      "path": "assets/graphics/terrain-v5.webp?v=5.0",
+      "http": 200,
+      "same": true,
+      "bytes": 615266
+    }
+  ]
+}

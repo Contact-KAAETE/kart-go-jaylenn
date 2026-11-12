@@ -1,8 +1,15 @@
-# KART GO — Jaylenns Racewereld · V4.0
+# KART GO — Jaylenns Racewereld · V5.0
 
 **KART GO — Een spel bedacht door Jaylenn.** AI is uitsluitend hulpmiddel voor programmeren, vormgeving en testen.
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
+
+## Grafische V5
+
+Nieuw gamehoofdmenu, zes geïllustreerde coureurs, glanzende rasterkarts tijdens races, twee gedetailleerde landschappen, losse decorstukken, wegtexturen, power-upeffecten, beide eindbazen en een werkende gamegarage. De oorspronkelijke 50 levels en lokale voortgang blijven behouden.
+
+Negen AI-gegenereerde productieassets staan daadwerkelijk in `assets/graphics/` en zijn aangesloten op de game. Geen betaalde externe dienst geactiveerd.
+[Volledige V5-status en livecontrole](docs/KART_GO_VISUAL_UPGRADE_STATUS.md) · [Assetmanifest](docs/V5_ASSET_MANIFEST.json).
 
 ## Spelen
 Start je motor, kies bij eerste keer een bijnaam en poppetje. Rem links, gas rechts. Besturing: knoppen, stuurwiel of groene joystick. Autogas optioneel. Desktop:pijltjes/WASD,1–3 voor items, P/Escape pauze. Drie inventarisslots reageren direct op aanraking. Win om volgende level vrij te spelen; eerdere levels blijven herspeelbaar.
@@ -21,4 +28,4 @@ Start je motor, kies bij eerste keer een bijnaam en poppetje. Rem links, gas rec
 - Geen fysieke iPhone/Androidtest; mobiele Chromium-layouts en synthetische PointerEvents zijn getest.60FPS op hardware niet gegarandeerd.
 - Back-ups: backup/v3-working-before-v4-20261111 en backup/main-before-v4-20261111.
 - Oude preview-vrienden-links verwijzen naar echte geïntegreerde game. Oude prototypes blijven in Gitgeschiedenis/back-up te vinden.
-- Alle illustraties procedureel getekend; QR-library qrcode-generator1.4.4 onderMIT, copyright Kazuhiko Arase; licentie in assets/vendor.
+- Nieuwe V5-rasterillustraties gegenereerd met de ingebouwde image_gen; oude procedurele rendering blijft noodweergave. QR-library qrcode-generator1.4.4 onderMIT, copyright Kazuhiko Arase; licentie in assets/vendor.

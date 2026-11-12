@@ -1,5 +1,15 @@
 # Kart Go V5 — echte grafische upgrade
 
+**Afgerond en live gecontroleerd op 12 november 2026.**
+
+Speel: https://contact-kaaete.github.io/kart-go-jaylenn/
+
+De grafische gamecode staat op main in commit `32d0dbd03431694ef8d57a9e35c8323113b9379b`.
+GitHub Pages-run `43162873160` is succesvol afgerond. De laatste documentatiecommit verandert geen spelbestanden.
+Alle negen nieuwe rasterassets zijn daadwerkelijk geladen door de gepubliceerde game, inclusief de raceweergave.
+De 50 levels, twee werelden, twee eindbazen, besturing en lokale voortgang zijn behouden.
+Online vrienden en multiplayer zijn, net als voor V5, niet aangesloten. Dit staat duidelijk in het vriendenmenu.
+
 Bedenker: Jaylenn. Hervat bestaande50levelgame, geen herbouw. Ontwikkeltak work/kart-go-visual-v5-20261112.
 
 ## Herstelpunt / audit
@@ -8,28 +18,35 @@ Herstelbare GitHub-back-up: backup/v4-2-before-v5-20261112. Geen opslag gereset.
 
 ## Beelden en kosten
 OpenArt-account gecontroleerd: Free,0credits, geen betaalbare generatiemodellen. Eerdere OpenArt-generatie QCKMh9hxS4oqEChztWI9 bestaat, maar CDN-download gaf403. Geen betaalde generatie gestart. Twee eerder goedgekeurde menuafbeeldingen teruggevonden als stijlreferentie; ze bevatten niet-functionele in-afbeeldingknoppen en zijn daarom niet als complete UI ingeplakt.
-Acht nieuwe productiebeelden gemaakt met de beschikbare ingebouwde image_gen, zonder externe betaalde API/abonnement. Geoptimaliseerd naar WebP (beeldinhoud niet gewijzigd). Eindbestanden in assets/graphics, bronafmetingen/alpha/bytes in V5_ASSET_MANIFEST.json.
+Negen nieuwe productiebeelden gemaakt met de beschikbare ingebouwde image_gen, zonder externe betaalde API/abonnement. Geoptimaliseerd naar WebP (beeldinhoud niet gewijzigd). Eindbestanden in assets/graphics, bronafmetingen/alpha/bytes in V5_ASSET_MANIFEST.json.
 
 ## Stap1/2 — gebouwd en lokaal getest
 Nieuw werkelijk spelmenu met rasterracebeeld, HTMLKARTGO-titel, echte Spelen/Garage/Mijncoureur/Vrienden/Wereldkaart/Instellingen-knoppen en subtiele camera/lichtanimatie. Wereldkaart is een apart scherm; bestaandeback-upknoppen blijven beschikbaar.
 Zes eigen3D-gerenderde portretten: Astronaut/Ninja/Vos/Panda/Kikker/Robot. Kaarten, grote selectievoorvertoning en menuprofiel gebruiken de echte atlas. Bestaande avatarIDs, naam, helm/teamkleur en saves blijven behouden. Rasterloader laadt menubeeld/portretten eerst; racebestanden kunnen apart worden geladen.
 Tests: Node alle50banen en eerdere regels/migratie slagen. Echte browser: hoofdmenu visueel bekeken, Spelen→Vos→TurboVijf→opslaan→race1 werkt. Geen fysieke iPhone-test.
 
-## Gegenereerde bestanden / integratie
-- menu-v5.webp: daadwerkelijk als hoofdmenuachtergrond geladen.
-- characters-v5.webp:12sprites(6portretten+6achteraanzichten); selectie/profiel/menu actief, race volgt.
-- karts-v5.webp:6aanzichten, renderer gereed maar nog niet aangesloten op kart().
-- scenery-v5.webp:12decorstukken; raceaansluiting volgt.
-- landscapes-v5.webp:2panorama’s(groen/zand); raceaansluiting volgt.
-- bosses-v5.webp:Hotdog-Hond/Pizzaman, beide voor/achteraanzicht; aansluiting volgt.
-- effects-v5.webp:10item/effectsprites; aansluiting volgt.
-- garage-v5.webp:garageachtergrond; aansluiting volgt.
+## Definitieve bestanden / daadwerkelijke integratie
+
+Alle bestanden staan onder `assets/graphics/`. Samen 4.551.172 bytes (circa 4,34 MiB).
+
+| Bestand | Daadwerkelijk gebruik |
+| --- | --- |
+| menu-v5.webp | Hoofdmenu, achter echte HTML-knoppen |
+| characters-v5.webp | Zes kaarten/portretten; profiel, menu, vrienden, garage en gekozen coureur op de racekart |
+| karts-v5.webp | Speler en bots tijdens races; drie stuurstanden, drie garagevooraanzichten, opgeslagen lak |
+| scenery-v5.webp | Twaalf losse geprojecteerde decorstukken in beide werelden |
+| landscapes-v5.webp | Twee bewegende panorama’s voor groen en zand |
+| bosses-v5.webp | Hotdog-Hond en Pizzaman in hun echte racelevels |
+| effects-v5.webp | Lucky Blocks, power-ups, inventaris en garage-effecten |
+| garage-v5.webp | Garagewerkplaats achter het werkelijk gekozen voertuig |
+| terrain-v5.webp | Geprojecteerde asfalt-, gras-, zand- en zandwegtexturen |
+
+Alleen menu en coureurportretten laden meteen. Racebestanden, garage en eindbazen worden naar behoefte geladen.
+De race wacht op benodigde graphics, met een laadvenster en herstelkeuze bij laadfouten.
+De oude procedurele tekenfuncties blijven als expliciete noodweergave behouden.
 
 ## Promptbriefs
 Alle beelden: premium glossy animated-feature3D-kwaliteit, originele KartGo-onderdelen, warme heldere belichting, geen UI/labels/watermerken. Hoofdmenu: dynamische rode kart/astronaut, vos/frog op achtergrond, groene heuvels/molens/barn, open blauwe lucht voor HTMLtitel. Karakteratlas3×4:6frontale borstportretten en6overeenkomende rugaanzichten. Kartatlas3×2:dezelfde lege rode sportkart in3rear/3frontaanzichten; echte rijdende kart wordt later composiet met gekozen coureur, geen extra voertuigtypes. Decoratlas4×3:oak/pine/blossom/barn,mill/fence/flowers/rocks,palm/cactus/arch/oasis. Panorama2rijen:groeneheuvels en zandduinen, geen vaste weg zodat bestaande bochten behouden blijven. Bossatlas2×2:hondinhotdog en pizzamanmettomatentong, geen nieuwe aanvallen. Effectatlas5×2:block,onweer,hypnose,boost,banaan/ijs,jump,glitter,splash,boem. Garage:lege belichte werkplaats met displayplatform voor de daadwerkelijk gekozen kart.
-
-## Volgende concrete stap
-Stap3/4: rasterkarts+gekozenrugaanzichtcoureur in kart() aansluiten, echte rasterpanorama/decor/itemeffecten tijdens race1 valideren; daarna uitrollen50levels, garage en bosses. Alleen geteste stappen naar main publiceren. Publicatiebewijs/commit hieronder aanvullen.
 
 ## Stap3/4/5 — echte racegraphics gebouwd
 Kart() gebruikt nu de rasteratlas met3stuurstanden, lak via gecachete kleurtint, gekozen3D-rugaanzichtcoureur op de stoel, bandenlichtjes en bestaande sprong/spin/shadows. Bots krijgen verschillende coureurs. Geselecteerde kleur en coureur blijven echte opgeslagen instellingen.
@@ -55,5 +72,29 @@ Verouderde V4.1/V4.2-stijlbestanden blijven in repository maar worden niet meer 
 - Geen fysieke iPhone ofAndroidtoestel beschikbaar. Mobiele viewporttest is geen Safarihardwaretest. Automatische kwaliteitsverlaging blijft actief; het testbrowserrapport schakelde naar niveau1.
 Racerendercommit:a52aaa11c304f404246db1a84318717358b7b0fe. Herstelpunt:backup/v5-race-before-garage-20261112.
 
-## Volgende stap
-Geteste volledigeV5 naar main samenvoegen, GitHubPages-run controleren, alle9assetbytes op liveURL vergelijken, echte online race met nieuwe sprites/gekozen coureur spelen en screenshots vastleggen. Daarna laatstecommit/publicatiebewijs hieraan toevoegen.
+## Definitieve livecontrole
+
+- Officiële root-URL geopend in Chromium: werkelijk V5-menu en functionerende knoppen zichtbaar.
+- Alle 17 gekoppelde code-/stijl-/beeldbestanden gaven HTTP 200 en waren bytegelijk aan de geteste checkout. Alle negen WebP’s zijn inbegrepen. Zie `V5_PUBLICATION_CHECK.json`.
+- Bestaande V4-testbrowservoortgang bleef aanwezig: 20 gewonnen levels, XP 5 / 2000 XP en ontgrendelde Zandwereld. Geen reset, opslagkey of avatar-ID gewijzigd.
+- Online profiel: Robot en bijnaam TurboJay gekozen en opgeslagen. Garage: paarse lak en Splash opgeslagen. Race 21 toont daadwerkelijk de gekozen Robot in een paarse rasterkart met Splash, duinen, cactussen en palmen. Race reed op 120 km/u; drie inventarisslots verzamelden ijs/hypnose.
+- Via Pauze → Wereldkaart → Groene Wereld → level 1 gestart. Echte groene rasteromgeving, drie bots met verschillende coureurs en gekozen Robot/paarse kart zichtbaar. Gas gaf 102 km/u; pauze en terugkeer naar hoofdmenu werkten.
+- Geen game-JavaScriptfout waargenomen. De browserextensie zelf logde metadatawaarschuwingen; die kwamen niet uit de game.
+- Screenshots van werkelijk gepubliceerde hoofdmenu, groene race en zandrace gemaakt. Dit zijn browseropnamen, geen conceptbeelden.
+
+## Grenzen en hervatten
+
+Geen fysieke iPhone/Android/Safari-hardwaretest uitgevoerd; geen claim van bewezen 60 FPS of gemeten toestelgeheugen. Wel vijf mobiele formaten, touchsimulatie, echte Chromium-rendering en live races gecontroleerd.
+Geen nieuwe betaalde dienst, account, tracking of advertentie toegevoegd. OpenArt had geen credits; de ingebouwde beeldgeneratie leverde de geïntegreerde assets.
+
+De V5-opdracht voor de grafische singleplayer is uitgevoerd. Volgende concrete stap bij een vervolg: controleer de actuele main-commit en lees dit document; bouw niet opnieuw. Eventuele terugmelding vanaf een fysieke iPhone gericht reproduceren. Voor online vrienden/multiplayer blijft issue #1 / `ONLINE_PLAN.md` afzonderlijk open en is nog een veilige backend nodig.
+
+## Opgeslagen fases
+
+| Remote commit | Afgeronde fase |
+| --- | --- |
+| 8a8ad31c51f008f95a25bd1b1e47cb72fa24eb24 | Echt rasterhoofdmenu, zes coureurkaarten en productieassets |
+| a52aaa11c304f404246db1a84318717358b7b0fe | Rasterkarts, coureurs, panorama’s, decor, wegtextuur en effecten in races |
+| 32d0dbd03431694ef8d57a9e35c8323113b9379b | Garage, mobiele afwerking en geslaagde functionele/rastertests; live game |
+
+Herstelpunten: `backup/v4-2-before-v5-20261112`, `backup/v5-menu-before-race-art-20261112` en `backup/v5-race-before-garage-20261112`. De laatste documentatiecommit na bovenstaande gamecommit legt deze livecontrole vast.
