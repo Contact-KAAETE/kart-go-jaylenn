@@ -90,3 +90,9 @@ Nieuwe **echte productietest** `node tests/multiplayer-reconnect-live.mjs`: twee
 Tijdens browsercontrole één aanvullende frontendfout gevonden: de organisator kreeg na aanmaken nog geen room-query in de eigen adresbalk. Daardoor kon herladen de kameringang verliezen. Nu wordt na de protocol-2-welcome de room-query opgeslagen, naast de private sleutel en resume-identiteit in sessionStorage. Synthetische DOM-regressietest toegevoegd. Cacheversie 2.1.
 
 Volgende stap: deze kleine frontendcorrectie doorzetten en de productie-QR/uitnodiging/browserherlading controleren. Daarna verdere online wereldkeuze/Party-uitbreiding uit de hoofdopdracht, zonder de oorspronkelijke 70 levels te vervangen. Voor normale publicatie is geen nieuw Cloudflare-loginvenster of handmatig plakken meer nodig: commits naar main activeren de bestaande pipeline.
+
+### Definitieve browsercontrole bij live 1b825d9
+
+Live commit `1b825d91da91b4b90c40a5a742855de50b97a2d4`: Cloudflare Workers Builds en alle Pages-checks succesvol. Nieuwste HTML laadt assetversie ultimate-repair-2.1. In echte Chromium-browser: organisator maakt kamer, krijgt room-query; herladen en Doe mee herstelt precies één organisator; uitnodiging gekopieerd via spelknop opent juiste kamer zonder sleutelveld; tweede speler kiest Vos/blauw en verschijnt bij beide clients; herladen van tweede speler herstelt dezelfde naam/kart en houdt exact twee spelers over. Tijdelijke browsertestverbindingen netjes verlaten. Screenshot van geteste QR-wachtruimte vastgelegd; geen echte kindernamen of uitnodigingssleutels in de repository opgeslagen.
+
+Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer nodig. Resterend uit Ultimate: online vrije wereld/levelkeuze en Adventure-co-opregel, oorspronkelijke items/botsingen in online races, de complete Party-uitbreiding, fysieke iPhone/Android/camera/wifi-versus-mobieltesten. Noem het totale Ultimate-project dus nog niet afgerond.
