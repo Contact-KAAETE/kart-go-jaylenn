@@ -1,7 +1,7 @@
 # Jaylenns Wereld 3 — Ijs-Wereld
 
 Bron: nieuw spelplan aangeleverd 12 november 2026. Bedenker: Jaylenn.
-Status: ontwerp vastgelegd; nog NIET als speelbare wereld of knop gepubliceerd. Bestaande game bevat 50 levels. Geen nieuwe eindbaasregels verzonnen.
+Status V6: uitgevoerd als levels51–70; zie KART_GO_ICE_WORLD_STATUS.md voor implementatie, gekozen details en tests. Onderstaande oorspronkelijke vragen en aanvullingen blijven als ontwerphistorie bewaard. Martin heeft de nadere uitwerking en complete bouw goedgekeurd.
 
 ## Bevestigde ideeën
 - Wereld 3: 20 levels, nummers 51–70. IJs, sneeuw, bevroren landschappen en glibberige ijsbanen.

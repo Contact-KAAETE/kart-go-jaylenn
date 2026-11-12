@@ -19,8 +19,18 @@ Bedenker: Jaylenn. Gebouwd als uitbreiding van de bestaande game, niet als herbo
 ## Uitgevoerde verificatie
 `node tests/game.test.cjs` slaagt: eerste50 regressies, daarna20 unieke ijsroutes met begrensde stuurcontroller,20/20 gewonnen en20/20 voltooid. Los getest: glijtraagheid/remmen, Jump/Boost-barsten2s/3s, redding2s/bescherming/paus­­e/heropenen, spike-teruggroei3s, veilige bossstrook, sla2s en wasmand3s, werkelijk lange ene ronde, level70 opslaan. Geen fysieke iPhone-test.
 
-## Nog vóór publicatie
-Browsercontrole met echte rasterassets, mobiele formaten, touch, geluid/stoplicht, paleis/secret/king, finale en bestaande garage. Daarna pas samenvoegen naar main, Pages-build en echte HTTPS-link verifiëren. Deze ontwikkelfase is geen claim dat V6 al live is.
+## Fase 2 — echte browsercontrole geslaagd (12 november 2026)
+- Chrome met echte game in mobiele iframes390×844,320×568 en844×390. Iedere keer20 levels gestart met echte renderer/geladen beelden; paleisversmalling, geheime blokken, Jump/Boost-barsten, redding/pauze/opslaan/heropenen, beide bossstraffen en lange ronde bevestigd.
+- Alle drie besturingen zonder overlap/buitenbeeld; synthetische tweevinger-PointerEvents: sturen+gas, sturen+rem, pointerownership, loslaten/cancel/pauze; stuurwiel/joystick opnieuw bruikbaar na reset. Dit is touchsimulatie, geen fysiek toestel.
+- Visuele inspectie sneeuwrace51, reusachtige paleispoort54, Burgerkoning70 met veilige-strookmelding en podium/finish70. Dubbele gevarenmeldingen voorkomen: ijswaarschuwing heeft voorrang, gewone achterwaarschuwing keert vanzelf terug wanneer ijswaarschuwing verdwijnt.
+- Alle vijf lakknoppen/garagevoorbeelden/racekarts en opslag/heropenen opnieuw getest zonder Canvas.filter; geslaagd.
+- Geluid met echte gebruikersklik aangezet: lokale WAV gedecodeerd1,709s, AudioContext running en bron gestart tijdens ijsstart. Stilte-instelling blijft bewaard; start wordt gestopt bij pauze. Geen fysieke luistertest of Safari-hardwaretest.
+-12 geladen atlassen geven75.483.464 bytes geraamde gedecodeerde pixels (exclusief caches). Winter en Burgerkoning laden pas bij relevante race; geen claim van gemeten telefoon-RAM of60FPS.
+- Alle Node-regressies opnieuw geslaagd na laatste HUD-aanpassing. QA-rapport: tests/results/ice-world-mobile.txt.
+- Fase1 op ontwikkeltak veilig opgeslagen als07760d524c990e67518f50e4059741c300c3a580 (spelregels+productiebeelden+audio).
+
+## Publicatie nog te verifiëren
+Browsercontroles zijn geslaagd. Volgende concrete stap: geteste ontwikkeltak naar main, GitHub Pages-build volgen en daadwerkelijke HTTPS-versie met level51/70 en assets controleren. Tot die livecontrole geen claim dat V6 definitief online is.
 
 ## Promptbrief productiebeelden
 Winter: premium vrolijke glossy3D-achtergrond met sneeuwbergen, bevroren waterval, ver ijspaleis en aurora; geen weg/UI/karts zodat bestaande engine de echte route tekent. Iceprops:3×3 transparante atlas met sneeuwden/ijspaleis/holle ijsdeur, kristal/vloerspikes/dakpegels, wasmand/slatsunami/IJs Lucky Block. Burger:2kolommen met dezelfde originele vrolijke burgerkoning in burgerkart, kroon/kaascape/sla-snor, voor en achter, geen merknamen/logos. Bestanden geoptimaliseerd naar WebP met behoud van alpha; geen los conceptbeeld als game gepresenteerd.

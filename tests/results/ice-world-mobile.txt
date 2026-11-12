@@ -1,0 +1,147 @@
+PASS: echte ijsrace/beelden klaar 51
+PASS: echte ijsrace/beelden klaar 52
+PASS: echte ijsrace/beelden klaar 53
+PASS: echte ijsrace/beelden klaar 54
+PASS: echte ijsrace/beelden klaar 55
+PASS: echte ijsrace/beelden klaar 56
+PASS: echte ijsrace/beelden klaar 57
+PASS: echte ijsrace/beelden klaar 58
+PASS: echte ijsrace/beelden klaar 59
+PASS: echte ijsrace/beelden klaar 60
+PASS: echte ijsrace/beelden klaar 61
+PASS: echte ijsrace/beelden klaar 62
+PASS: echte ijsrace/beelden klaar 63
+PASS: echte ijsrace/beelden klaar 64
+PASS: echte ijsrace/beelden klaar 65
+PASS: echte ijsrace/beelden klaar 66
+PASS: echte ijsrace/beelden klaar 67
+PASS: echte ijsrace/beelden klaar 68
+PASS: echte ijsrace/beelden klaar 69
+PASS: echte ijsrace/beelden klaar 70
+PASS: paleis wordt werkelijk smaller
+PASS: geheim level heeft negen eenmalige ijsblokken
+PASS: Jump maakt echte barst met2s waarschuwing
+PASS: Boost trekt een breuklijn
+PASS: wak geeft2s veilige redding
+PASS: pauze stopt reddingstimer
+PASS: heropenen en veilig landen buiten wak
+PASS: sla-golf echt aangekondigd
+PASS: sla raakt en vertraagt2s
+PASS: wasmandstraf duurt3s
+PASS: Burgerkoning heeft één echt lange ronde
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+PASS: bestaande profiel/voortgang behouden
+PASS: atlasgeheugen onder96MB inclusief winter (exclusief caches)
+DONE: IJs-Wereld 390×844
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: echte ijsrace/beelden klaar 51
+PASS: echte ijsrace/beelden klaar 52
+PASS: echte ijsrace/beelden klaar 53
+PASS: echte ijsrace/beelden klaar 54
+PASS: echte ijsrace/beelden klaar 55
+PASS: echte ijsrace/beelden klaar 56
+PASS: echte ijsrace/beelden klaar 57
+PASS: echte ijsrace/beelden klaar 58
+PASS: echte ijsrace/beelden klaar 59
+PASS: echte ijsrace/beelden klaar 60
+PASS: echte ijsrace/beelden klaar 61
+PASS: echte ijsrace/beelden klaar 62
+PASS: echte ijsrace/beelden klaar 63
+PASS: echte ijsrace/beelden klaar 64
+PASS: echte ijsrace/beelden klaar 65
+PASS: echte ijsrace/beelden klaar 66
+PASS: echte ijsrace/beelden klaar 67
+PASS: echte ijsrace/beelden klaar 68
+PASS: echte ijsrace/beelden klaar 69
+PASS: echte ijsrace/beelden klaar 70
+PASS: paleis wordt werkelijk smaller
+PASS: geheim level heeft negen eenmalige ijsblokken
+PASS: Jump maakt echte barst met2s waarschuwing
+PASS: Boost trekt een breuklijn
+PASS: wak geeft2s veilige redding
+PASS: pauze stopt reddingstimer
+PASS: heropenen en veilig landen buiten wak
+PASS: sla-golf echt aangekondigd
+PASS: sla raakt en vertraagt2s
+PASS: wasmandstraf duurt3s
+PASS: Burgerkoning heeft één echt lange ronde
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+PASS: bestaande profiel/voortgang behouden
+PASS: atlasgeheugen onder96MB inclusief winter (exclusief caches)
+DONE: IJs-Wereld 320×568
+PASS: sturen en gas tegelijk
+PASS: andere pointer kan gas niet loslaten
+PASS: echte racephysics reageert op touch (40 vaste stappen)
+PASS: alleen gas wordt losgelaten
+PASS: pointercancel maakt bediening vrij
+PASS: sturen en remmen tegelijk
+PASS: pauze wist alle aanrakingen
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: echte ijsrace/beelden klaar 51
+PASS: echte ijsrace/beelden klaar 52
+PASS: echte ijsrace/beelden klaar 53
+PASS: echte ijsrace/beelden klaar 54
+PASS: echte ijsrace/beelden klaar 55
+PASS: echte ijsrace/beelden klaar 56
+PASS: echte ijsrace/beelden klaar 57
+PASS: echte ijsrace/beelden klaar 58
+PASS: echte ijsrace/beelden klaar 59
+PASS: echte ijsrace/beelden klaar 60
+PASS: echte ijsrace/beelden klaar 61
+PASS: echte ijsrace/beelden klaar 62
+PASS: echte ijsrace/beelden klaar 63
+PASS: echte ijsrace/beelden klaar 64
+PASS: echte ijsrace/beelden klaar 65
+PASS: echte ijsrace/beelden klaar 66
+PASS: echte ijsrace/beelden klaar 67
+PASS: echte ijsrace/beelden klaar 68
+PASS: echte ijsrace/beelden klaar 69
+PASS: echte ijsrace/beelden klaar 70
+PASS: paleis wordt werkelijk smaller
+PASS: geheim level heeft negen eenmalige ijsblokken
+PASS: Jump maakt echte barst met2s waarschuwing
+PASS: Boost trekt een breuklijn
+PASS: wak geeft2s veilige redding
+PASS: pauze stopt reddingstimer
+PASS: heropenen en veilig landen buiten wak
+PASS: sla-golf echt aangekondigd
+PASS: sla raakt en vertraagt2s
+PASS: wasmandstraf duurt3s
+PASS: Burgerkoning heeft één echt lange ronde
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+PASS: bestaande profiel/voortgang behouden
+PASS: atlasgeheugen onder96MB inclusief winter (exclusief caches)
+DONE: IJs-Wereld 844×390
+PASS: wheel met gelijktijdig gas
+PASS: wheel keert terug na loslaten
+PASS: wheel werkt opnieuw na reset
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: joystick met gelijktijdig gas
+PASS: joystick keert terug na loslaten
+PASS: joystick werkt opnieuw na reset
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: kleurknop selecteert Rood
+PASS: exact één vinkje bij Rood
+PASS: kleur blijft bewaard en heropent: Rood
+PASS: kleurknop selecteert Blauw
+PASS: exact één vinkje bij Blauw
+PASS: kleur blijft bewaard en heropent: Blauw
+PASS: kleurknop selecteert Groen
+PASS: exact één vinkje bij Groen
+PASS: kleur blijft bewaard en heropent: Groen
+PASS: kleurknop selecteert Geel
+PASS: exact één vinkje bij Geel
+PASS: kleur blijft bewaard en heropent: Geel
+PASS: kleurknop selecteert Paars
+PASS: exact één vinkje bij Paars
+PASS: kleur blijft bewaard en heropent: Paars
+PASS: vijf verschillende echte kartvoorvertoningen zonder Canvas filter
+PASS: vijf echte racekarts hebben verschillende lak zonder Canvas filter
+DONE: garagekleuren

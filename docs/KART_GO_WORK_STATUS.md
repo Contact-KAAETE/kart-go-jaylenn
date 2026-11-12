@@ -1,3 +1,9 @@
+# Actueel: V6 complete IJs-Wereld gebouwd en lokaal getest
+
+Zie KART_GO_ICE_WORLD_STATUS.md. Levels51–70, productiebeelden, lokale startstem, ijsgevaren en Burgerkoning gebouwd. Eerste50 en garage-opslag blijven behouden. Fase1 veilig op ontwikkeltak opgeslagen als07760d524c990e67518f50e4059741c300c3a580. Mobiele browsercontroles geslaagd; livepublicatie is de volgende concrete stap. Online vrienden/multiplayer blijven open.
+
+---
+
 # Actueel: V5.2.1 garagekleurreparatie
 
 Kleurkeuze zichtbaar met vinkje/naam, filterloze lakpixels in garage en races, opslag behouden. Details en publicatiebewijs in KART_GO_VISUAL_UPGRADE_STATUS.md. Martins mandaat voor de drie ijswereldgevolgen is als concreet ontwerp vastgelegd in WORLD_3_JAYLENN_DESIGN.md; Wereld 3 nog niet gebouwd.

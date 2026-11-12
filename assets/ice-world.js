@@ -57,7 +57,7 @@ const Ice=(()=>{
   else if(s.lettuce>0)text=`Sla op je kart · nog ${Math.ceil(s.lettuce)}s`;
   else if(s.iceData.holes.some(h=>h.d>s.d&&h.d-s.d<5000))text='BARST IN HET IJS · kies een vrije strook!';
   else if(s.obstacles.some(o=>o.kind==='icicle'&&o.brokenUntil<=s.time&&circularGap(o.d,s.d)>0&&circularGap(o.d,s.d)<3000))text='LAGE IJSPEGELS · blijf op de grond!';
-  const el=$('#iceCue');if(el){el.classList.toggle('hidden',!text);if(el.textContent!==text)el.textContent=text;}
+  const el=$('#iceCue');if(el){el.classList.toggle('hidden',!text);if(el.textContent!==text)el.textContent=text;}if(text)$('#danger').classList.add('hidden');
  }
  function snapshot(s){return{...s.iceData,player:{lettuce:s.lettuce,basket:s.basket,rescue:s.rescue,iceShield:s.iceShield,slide:s.slide,rescueTo:s.rescueTo??s.d,rescueLane:s.rescueLane??0}};}
  function restore(s,source){if(!source||typeof source!=='object')return;const data=s.iceData;
@@ -81,7 +81,7 @@ const Ice=(()=>{
   for(const wave of s.iceData.waves){const p=projectDist(wave.d);if(p){if(wave.kind==='basket')out.push({p,x:wave.lane,type:'king-prop',kind:6});else for(const x of lanes)if(x!==wave.safe)out.push({p,x,type:'king-prop',kind:7});}}
  }
  function drawSprite(c,v,x,y,k,s){
-  if(v.type==='ice-gate'){const fw=v.p.fullW||v.p.w;prop(c,2,v.p.x,y,fw*4,v.p.scale*29700*H*.62);return true;}
+  if(v.type==='ice-gate'){const fw=v.p.fullW||v.p.w;prop(c,2,v.p.x,y,fw*8,v.p.scale*29700*H*.62);return true;}
   if(v.type==='king-prop'){prop(c,v.kind,x,y,160*k,160*k);return true;}
   if(v.type==='frozen-hole'){const open=s.time>=v.hole.opens;c.save();c.strokeStyle=open?'#efffff':'#146685';c.lineWidth=Math.max(1,3*k);ellipse(c,x,y,Math.max(3,90*k),Math.max(2,24*k),open?'#10385c':'#8acbd888');c.beginPath();c.ellipse(x,y,Math.max(3,90*k),Math.max(2,24*k),0,0,Math.PI*2);c.stroke();if(!open){c.beginPath();c.moveTo(x-60*k,y);c.lineTo(x-10*k,y-12*k);c.lineTo(x+7*k,y+9*k);c.lineTo(x+55*k,y-5*k);c.stroke();}c.restore();return true;}
   if(v.type==='spike'||v.type==='icicle'){const o=v.obstacle;if(o?.brokenUntil>s.time)return true;prop(c,v.type==='spike'?4:5,x,v.type==='icicle'?y-600*k:y,100*k,110*k);return true;}
@@ -108,5 +108,5 @@ const RaceAudio=(()=>{
  function caption(level){if(level>50)return 'Ho ho ho!';if(level<=20)return 'IAAAA!';const lang=typeof navigator!=='undefined'?(navigator.language||'nl').split('-')[0]:'nl';return sentences[lang]||sentences.nl;}
  function lights(phase){const el=$('#startLights');if(el){el.classList.remove('hidden');el.setAttribute('data-phase',String(phase));}}
  function go(){if(!saved.sound)return;stop();unlock();tone(196,.65);tone(294,.55,.03);tone(392,.5,.06);}
- return{unlock,prepare,start,stop,go,caption,lights};
+ return{unlock,prepare,start,stop,go,caption,lights,status:()=>({ready:!!ho,context:context?.state||'closed',duration:ho?.duration||0,active:sources.length})};
 })();

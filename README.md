@@ -1,14 +1,18 @@
-# KART GO — Jaylenns Racewereld · V5.2
+# KART GO — Jaylenns Racewereld · V6.0
 
 **KART GO — Een spel bedacht door Jaylenn.** AI is uitsluitend hulpmiddel voor programmeren, vormgeving en testen.
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
 
+## V6.0 — complete IJs-Wereld
+
+De oorspronkelijke vijftig levels, garage, naam, coureur, kleur en voortgang blijven behouden. Voor V6 is een herstelpunt gemaakt; de bestaande opslagsleutel blijft gelijk.
+
 ## V5.2 — levendiger racen
 
 Bots halen elkaar in, reageren zichtbaar en maken soms een herstelbaar foutje. Meer decorverschil per omgeving, meer ruimte rond de kart, rustigere meldingen en bij winst een podium met je eigen coureur, naam, beker en confetti. De 50 levels en lokale voortgang blijven behouden.
 
-De IJs-Wereld en nieuwe startstemmen zijn nog ontwerp, niet speelbaar; zie [Jaylenns nieuwe spelplan](docs/WORLD_3_JAYLENN_DESIGN.md).
+Wereld 3 is nu gebouwd: levels51–70, sneeuw, glijden, ijspaleis, ijsschansen, spikes, geheim level63 met negen blokken en de Burgerkoning in één lange finale. Vrijspelen door level50 te winnen. Geluid aan voor de lokale Ho-ho-ho-startstem. Details en toetsbare spelregels: [IJs-Wereld-status](docs/KART_GO_ICE_WORLD_STATUS.md).
 
 ## V5.1 — meer avontuur op de baan
 
