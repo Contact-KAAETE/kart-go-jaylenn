@@ -157,3 +157,13 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Lokale Party-integratietest uitgebreid: echte controller + gedeelde simulatie over 150 animatieframes, pointer rechts/links verandert de daadwerkelijke racepositie, vervolgens onafhankelijke release/cancel en pauzereset.
 - Mobiel browserformaat 390×844 en gedraaid 844×390 gecontroleerd: geen pagina-overloop, onderbreken pauzeert en maakt de knoppen vrij. Live browser toont de nieuwe schaal en geen trein in level 74.
 - Fysieke Safari/iPhone is niet door ons getest. Gebruiker kan dezelfde race opnieuw openen of één keer herladen; nieuwe scriptcacheversies vereisen geen wissen van opslag.
+
+
+## 2026-11-12 — Grondige audit van iPhone-opname 21:09
+- Hervat vanaf `3c72e6985525da92b6ad8438ba21e71170711a06`; herstelpunt `backup/pre-video-audit-3c72e69-20261112`, ontwikkeltak `fix/iphone-video-audit-20261112`.
+- Volledige visuele tijdlijn 56,13 s geanalyseerd; concrete tijdstippen, oorzaken en bewijsgrenzen in `docs/KART_GO_VIDEO_AUDIT_20261112.md`. Opname toont Party75, geen root-stuurwiel/multiplayer.
+- Herstel: native tekstselectie/aanraakmenu op raceknoppen blokkeren; na uitvliegen terug naar midden; duidelijke pauze, één RAF-keten, Party-aftelling; strafmelding buiten de weg; correcte Megamix-zone. Oorspronkelijke rem accelereert niet meer en stuurwielbereik blijft tijdens draaien constant.
+- Party: drie instelbare besturingen, blijvend autogas, compacte positie/ronde/tijd/snelheid; originele profiel- en avonturenopslag behouden. Geen nieuwe betaalde assets of diensten.
+- Lokale tests geslaagd: volledige oorspronkelijke70 levels; vijf Party-levels tot finish; multitouch/alle besturingen/rem/autogas/reset/pauze/orientatie; QR exact raster-teruggelezen; lokale echte Worker met twee clients IJs→Party5km/kat/checkpoint/gelijke finish, reconnect/zes plaatsen/hostoverdracht. Browser390×844 en844×390 gecontroleerd.
+- Publicatievoorbereiding: `video-audit-1`, Worker `ultimate-worlds-3.2`, protocol3/bestaande binding ongewijzigd. Volgende stap: geteste commit naar main, Pages en Cloudflare-success controleren, gepubliceerde bytes vergelijken en live twee-clientsrace uitvoeren.
+- Niet getest: fysieke iPhone/Android/twee telefoons/camera/netwerkwissel; niet als voltooid claimen.

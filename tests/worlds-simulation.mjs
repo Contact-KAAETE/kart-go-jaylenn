@@ -14,3 +14,6 @@ r=room(20);r.course=[];for(const t of [...r.players,...r.npcs])t.lastInput=10000
 r=room(20);p=r.npcs[0];r.course=[{id:1,type:'block',d:71,x:0}];p.d=70;p.gas=true;p.speed=60;K.step(r,p,.05,50);assert.deepEqual(p.inventory,[null,null,null]);
 r=room(72);p=r.players[0];q=r.players[1];r.course=[{id:1,type:'block',d:101,x:0}];for(const t of [p,q]){t.d=100;t.gas=true;t.speed=60;K.step(r,t,.05,50);assert.ok(t.inventory.some(v=>v!==null));}assert.deepEqual(r.claimed,[]);
 console.log('PASS 75 deterministic courses, exact World 1 odds, sand rules, timed inventory, six-second hazards, safe collectibles, shared cat/checkpoint/jump, ice cracks, dog 10-second shot and no blocks, instant train respawn.');
+
+// Video regression: recovery returns to the centre rather than the dangerous outer lane.
+r=room(75);r.course=[];p=r.players[0];p.x=1.4;p.speed=60;p.gas=true;p.slide=1;K.step(r,p,.05,50);assert.equal(p.penalty,2);assert.equal(p.x,0);assert.equal(p.slide,0);for(let i=0;i<70;i++){r.elapsed+=.05;K.step(r,p,.05,i*50);}assert.equal(p.penalty,0);assert.ok(Math.abs(p.x)<.2);assert.match(K.eventText(r,p),/WERKBANK/);console.log('PASS centre recovery and correct Megamix zone label.');

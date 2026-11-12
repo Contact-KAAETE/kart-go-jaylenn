@@ -1,0 +1,58 @@
+root-audit-test.log
+PASS: 20 unique playable tracks (20/20 controller wins), multitouch ownership, all 3 controls, simultaneous pedals, cancellation, rotation, pause/resume, exact item thresholds, 9-block boss, 10-second ice, 2-second freeze, jump, legacy save migration, checkpoints and scenery.
+PASS: V4 prototype migration, safe profile, rewards 15/40, XP5, persistent paint/avatar/code and Boem 2-second cooldown.
+PASS: hypnose10s with leading player, purple feedback and banana spin2s ending automatically.
+PASS:30 unique Sand World tracks (29/30 controller wins), only3 allowed items, boost refused, freeze2s, Pizzaman without unapproved attacks and level50 save/reopen.
+PASS: fresh race stays active after a viewport change; rotating an ongoing race still pauses safely.
+PASS: export/import roundtrip preserves wins, best time, profile, garage, XP, code, rewards and settings; invalid imports rejected.
+PASS: V5.1 all50 terrain profiles/seams and finite projections, extra bridges, sharper curves, real player/bot ramps, pause/save/reopen/landing, slow and off-road rejection, ice clearance, unchanged Jump duration.
+PASS: left/right touch input, lateral physics and kart renderer agree for buttons, wheel and joystick; release recentres.
+PASS: overtaking free lane, temporary recoverable mistakes, original speed cap and bosses, selected Papa/driver podium.
+PASS: pixel tint without Canvas filters; blue/green paint changes while neutral materials, gold and transparency remain unchanged.
+PASS:20 unique Ice World courses (20/20 controller wins), all completed, nine secret blocks, gradual difficulty<=29, palace projection and narrowing.
+PASS: ice momentum/brake, Jump and Boost cracks2s/open3s, rescue3s/shield/save/pause, spike regrowth3s, king warning2s/safe lane/lettuce2s/basket3s, genuine long single lap and level70 progression.
+PASS:250/509/1000 real acceleration, safe engine import/save/resume, real dust2s and water3s collisions, pause/items/progress protection, bot recovery and15 full-course engine tests.
+
+
+npm-audit-test.log
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test
+> node tests/online-controls.mjs && node tests/party-riders.mjs && node tests/party-projection.mjs && node tests/qr-roundtrip.mjs
+
+PASS: organizer start, stored progress preserved on profile edits, simultaneous pointers, independent release, cancel, capture loss, orientation and blur reset. DOM simulation, not physical multitouch.
+PASS actual Party 71–75 start/countdown, steer, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.
+PASS shared player/rival sizes and ground points, monotonic perspective, visual/physics lane agreement, world-bound train, no train in Rodeo, steering both ways in all five Party levels and all motors.
+QR generated with error correction Q and 24px quiet margin. Decode check runs separately.
+
+
+party-audit-test.log
+PASS actual Party 71–75 start/countdown, steer, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.
+
+
+worlds-audit-test.log
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test:worlds
+> node tests/worlds-simulation.mjs && node tests/worlds-runtime.mjs
+
+PASS 75 deterministic courses, exact World 1 odds, sand rules, timed inventory, six-second hazards, safe collectibles, shared cat/checkpoint/jump, ice cracks, dog 10-second shot and no blocks, instant train respawn.
+PASS centre recovery and correct Megamix zone label.
+PASS two independent runtime clients: free Ice first visit, shared actual race and identical finish; adventure gating and guest configuration rejection.
+PASS same room switches Ice → Party, ready reset, chosen mounts synchronized, shared cat/checkpoint and actual 5km race to identical finish.
+PASS adventure boss admitted when one participant attests previous win; authoritative boss present.
+
+
+server-audit-test.log
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test:server
+> node tests/server-repair.mjs
+
+PASS runtime: both players finish after reconnect, identical authoritative results.
+PASS runtime: CORS, invitation checks, explicit host/guest rights, shared countdown/movement, no token leakage, mid-race reconnect preserving position, no duplicate, stale input stop.
+PASS runtime: six seats, seventh refused, host transfer.
+PASS runtime: invitation and identity restored after full SQLite runtime restart.
+
+QR raster exact teruggelezen met ZXing-C++.
+Browsercontroles en bewijsgrenzen: docs/KART_GO_VIDEO_AUDIT_20261112.md

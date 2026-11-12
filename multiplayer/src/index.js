@@ -2,7 +2,7 @@ import '../../assets/race-worlds.js';
 const Worlds=globalThis.KartWorlds;
 // KART GO — Bedacht door Jaylenn. Shared online worlds, protocol 3.
 // One self-contained module for the existing Cloudflare Worker and RaceRoom binding.
-const VERSION='ultimate-worlds-3.1', MAX=6, LENGTH=1800, TICK_MS=100;
+const VERSION='ultimate-worlds-3.2', MAX=6, LENGTH=1800, TICK_MS=100;
 const MAX_AGE=7200000, REJOIN=90000, ORIGIN='https://contact-kaaete.github.io';
 const clean=x=>String(x??'').replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,18);
 const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':ORIGIN}});

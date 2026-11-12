@@ -65,3 +65,5 @@ el('controlMode').onchange=()=>{try{const p=JSON.parse(localStorage.getItem('kar
 const pad=el('analogSteer');pad.onpointerdown=e=>{if(analogOwner!==null)return;e.preventDefault();analogOwner=e.pointerId;pad.setPointerCapture(e.pointerId);};pad.onpointermove=e=>{if(e.pointerId!==analogOwner)return;e.preventDefault();const r=pad.getBoundingClientRect();analog=Math.max(-1,Math.min(1,(e.clientX-r.left-r.width/2)/(r.width*.4)));pad.querySelector('i').style.transform=el('controlMode').value==='wheel'?'rotate('+analog*75+'deg)':'translateX('+analog*35+'px)';pad.setAttribute('aria-valuenow',String(Math.round(analog*100)));};for(const type of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(type,e=>{if(e.pointerId!==analogOwner)return;analogOwner=null;analog=0;pad.querySelector('i').style.transform='';sendInput();});
 syncSelection(selectedConfig);controlUI();
 draw();
+
+for(const type of ['contextmenu','selectstart'])el('race').addEventListener(type,e=>{if(e.target.closest('button,canvas,.drive-controls,.online-inventory,#standings'))e.preventDefault();});

@@ -42,6 +42,8 @@ run('input.right=false;update(1/60)');assert.ok(run('state.steer')>0&&run('state
 // Braking takes priority over simultaneous throttle, and acceleration is gradual.
 run('start(1);state.count=0;saved.auto=false;input.gas=true;update(.1)');assert.ok(run('state.speed')>0&&run('state.speed')<500);
 run('state.speed=MAX;input.brake=true;update(.1)');assert.ok(run('state.speed')<2650);
+run('state.speed=0;input.brake=true;input.gas=true;saved.auto=true;update(.1)');assert.equal(run('state.speed'),0,'brake never accelerates at rest, even with autogas and throttle');
+run('saved.mode="wheel";modeUI();resetInput();');dispatch('#wheel','pointerdown',event(75));dispatch('#wheel','pointermove',event(75,95));const wheelBefore=run('input.analog');const wheelEl=nodes.get('#wheel');const oldBounds=wheelEl.getBoundingClientRect;wheelEl.getBoundingClientRect=()=>({...oldBounds(),width:260});dispatch('#wheel','pointermove',event(75,95));assert.equal(run('input.analog'),wheelBefore,'wheel rotation cannot change steering sensitivity');wheelEl.getBoundingClientRect=oldBounds;run('resetInput()');
 run('start(1);state.count=0;state.inventory=[0,2,4];useItem(0)');assert.equal(run('state.opponents.every(o=>o.slow===3)'),true);
 run('useItem(1)');assert.equal(run('state.boost'),4);
 run('useItem(2)');assert.equal(run('state.jump'),1.4);

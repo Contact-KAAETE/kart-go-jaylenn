@@ -58,7 +58,7 @@ const WorldRace=(()=>{
    if(!own&&p.name){c.fillStyle='#fff';c.textAlign='center';c.font='700 '+Math.max(10,13*q.k)+'px system-ui';c.fillText(p.name,q.x,q.y-150*q.k);}
   }
   if(rodeo&&s.event?.d>2700){const cat=images.get('cat');if(cat){const swipe=s.event.cat?Math.min(1,(time-s.event.catAt)/2.5):0;const size=w*(.7+swipe*.35);c.save();c.globalAlpha=.9;c.translate(w*.60,h*.20+Math.sin(time)*3*unit);c.rotate(Math.sin(time*2)*.025);c.drawImage(cat,-size/2,-size*.48,size,size);c.restore();}}
-  slowFrames=Math.max(0,Math.min(150,slowFrames+(performance.now()-renderStart>21?2:-.3)));if(me.penalty>0||me.freeze>0){c.fillStyle=me.freeze>0?'#4597c5aa':'#6f2146dd';c.fillRect(10,h*.43,w-20,42*unit);c.fillStyle='#fff4c4';c.textAlign='center';c.font='900 '+Math.round(16*unit)+'px system-ui';c.fillText(K.eventText({...s,selection},me),w/2,h*.43+27*unit);}
+  slowFrames=Math.max(0,Math.min(150,slowFrames+(performance.now()-renderStart>21?2:-.3)));
  }
  function drawRacer(c,x,y,k,p,world,time,own){const jump=(p.jump||0)>0?Math.sin(Math.PI*(1-Math.min(1,p.jump/1.4)))*35*k:0;c.save();c.translate(x,y-jump);if(world===4)c.rotate((p.steer||0)*.07);if(p.spin>0)c.rotate(time*12);if(p.penalty>0)c.rotate(Math.sin(time*8)*.12);
   if(world===4)chicken(c,0,0,k,p.chicken,AVATARS[p.avatar]||AVATARS[0],false,time);else GFX.drawKart(c,0,0,k,p.color===undefined?'#579be4':typeof p.color==='string'?p.color:Object.keys(PAINT_NAMES)[p.color],p.boss===20?true:p.boss===50?'pizza':p.boss===70?'burger':false,p.steer||0,{avatar:AVATARS[p.avatar]||AVATARS[0]});
