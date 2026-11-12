@@ -1,0 +1,72 @@
+/* KART GO V4.1 — cinematic racing menu, mobile-first visual polish. Gameplay untouched. */
+:root{--ink:#eef8ff;--cream:#081423;--green:#c7ff39;--muted:#a6b8c7}
+body:has(#home:not(.hidden)){background:radial-gradient(ellipse at 83% 5%,#19385d 0,transparent 50%),linear-gradient(145deg,#07121e,#101e30 56%,#070e19);color:#edf8ff}
+body:has(#home:not(.hidden)) p{color:#afc2d2}
+#home{max-width:1440px}
+#home header{border-color:#ffffff1c}
+#home .brand{font:1000 34px/1 system-ui,sans-serif;letter-spacing:-2px;font-style:italic;color:#fff;text-shadow:0 4px 20px #0008}
+#home .brand span{color:#d5ff45}
+#home .byline{color:#b7d0e3}
+#home .round{border-color:#ffffff40;color:white;background:#ffffff10}
+#home .hero{gap:clamp(20px,4vw,70px);padding-top:35px}
+#home .hero-copy{position:relative;z-index:1}
+#home .eyebrow{color:#b9ff67}
+#home .hero h1{font:1000 clamp(50px,6vw,92px)/.98 system-ui,sans-serif;letter-spacing:-3.5px;text-transform:uppercase;text-shadow:0 8px 30px #0007}
+#home .hero h1 em{color:#d1ff45}
+#home .hero-copy>p{font-size:clamp(14px,1.4vw,18px);line-height:1.6;max-width:500px}
+#home .primary,#modal .primary{background:linear-gradient(135deg,#d7ff45,#8bdc2e);color:#112214;border-radius:14px;box-shadow:0 7px 0 #42661e,0 16px 32px #0007;font-weight:900;text-transform:uppercase;letter-spacing:.3px;min-height:55px}
+#home .primary:active,#modal .primary:active{transform:translateY(4px);box-shadow:0 3px 0 #42661e}
+#home .text-button{color:#e4f4ff}
+#home .hero-facts{color:#aec4d3}
+#home .hero-facts strong{color:#fff;font-size:25px}
+#home .hero-facts>span+span{border-color:#ffffff32}
+#home .hero-art{border:2px solid #b4ff7c70;border-radius:26px;box-shadow:0 25px 70px #0009,0 0 60px #87ff3a18;transform:perspective(1000px) rotateY(-2deg)}
+#home .hero-art:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#071d3a00 65%,#071d3a7d)}
+#home .art-tag{z-index:1;background:#071d2ce9;border:1px solid #c2ff6380;color:#fff;backdrop-filter:blur(14px)}
+#home .art-tag small{color:#c6d6e4}
+#home .float-tag{z-index:1;background:#d7ff43;color:#17330b;border:2px solid #122e16;box-shadow:0 8px 25px #0007}
+#home .player-hub{gap:16px}
+#home .hub-card{background:linear-gradient(155deg,#1c3550,#0b1b2b);border:1px solid #9acbff3e;color:white;border-radius:20px;box-shadow:0 12px 30px #0005;transition:transform .2s,box-shadow .2s}
+#home .hub-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px #0008}
+#home .hub-card>span{filter:drop-shadow(0 5px 8px #0009)}
+#home .hub-card strong{color:white}
+#home .hub-card small{color:#b8cce0}
+#home .world{border-color:#ffffff24}
+#home h2{color:#fff}
+#home .progress-text,#home .world-tabs button{background:#1d3245;color:#d6e8f5;border:1px solid #ffffff30}
+#home .world-tabs button.selected{background:#c8ff4b;color:#17301b}
+#home .level{background:#193149;color:#f1f8ff;border-color:#547b9460;box-shadow:0 4px 15px #0003}
+#home .level.next{background:linear-gradient(145deg,#d6ff56,#87cf37);color:#16321d;border-color:#eaff9b;box-shadow:0 0 25px #a9ff4b50}
+#home .level.won{background:#315b46}
+#home .level.boss{background:#74492d}
+#home .level.locked{opacity:.52}
+#home .route-line{color:#b4c7d7}
+#home footer{border-color:#ffffff25;color:#b7c5d2}
+#home footer .text-button{color:#d8f0ff}
+#modal{background:linear-gradient(160deg,#112a3f,#071724);color:#f4f9ff;border:1px solid #8cc2dd5c;box-shadow:0 40px 110px #000d;max-width:560px}
+#modal::backdrop{background:#020913d9;backdrop-filter:blur(12px)}
+#modal h2{color:white;font:900 clamp(27px,5vw,39px)/1.1 system-ui,sans-serif;letter-spacing:-1px}
+#modal p{color:#b7c9d8}
+#modal label{color:#eaf7ff;font-weight:800}
+#modal input:not([type=color]),#modal select{background:#0c2033;color:white;border:1px solid #5d859e;border-radius:13px;min-height:52px;padding:12px}
+#modal input[type=color]{background:#102a3c;border:2px solid #a2e95e;border-radius:14px;height:65px;width:100%;padding:7px}
+#modal .close{color:#fff;background:#ffffff19;border-radius:50%;width:40px;height:40px}
+#modal .eyebrow{color:#b5ff59}
+#modal .tip,#modal .items-guide div{background:#18384a;color:#e5f6ff}
+#modal .choice{background:#1b3a4f;color:#fff}
+#modal .choice.selected{background:#c4f95a;color:#14301d}
+#modal .saved-note{color:#a5c2d1}
+#modal .avatar-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 20px}
+#modal .avatar-option{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:linear-gradient(160deg,#26455d,#112a3c);border:2px solid #52758b;border-radius:16px;min-height:104px;color:#eaf6ff;box-shadow:inset 0 1px #ffffff25;transition:transform .15s}
+#modal .avatar-option .portrait{font-size:45px;line-height:1.25;filter:drop-shadow(0 6px 4px #0007)}
+#modal .avatar-option small{font-size:11px;font-weight:800;letter-spacing:.4px}
+#modal .avatar-option[aria-pressed=true]{border-color:#d4ff58;background:linear-gradient(160deg,#386b4c,#143d33);box-shadow:0 0 0 2px #d4ff5850,0 0 20px #9aff3a30;transform:translateY(-2px)}
+#modal .avatar-option:focus-visible{outline:3px solid #fff}
+#modal #avatarChoice{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+#modal #profilePreview{display:flex;align-items:center;gap:15px;padding:12px 16px;margin:15px 0;border:1px solid #d4ff5880;border-radius:17px;background:#122f37}
+#modal #profilePreview .portrait{font-size:55px}
+#modal #profilePreview strong{font-size:18px}
+#modal #profilePreview small{display:block;color:#b9cad9;margin-top:4px}
+@media(max-width:800px){#home .hero{display:flex;flex-direction:column;align-items:stretch;gap:20px;padding:26px 0}#home .hero-art{height:clamp(260px,53vw,430px);transform:none}#home .hero h1{font-size:clamp(45px,10vw,76px)}#home .player-hub{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}#home .hub-card{padding:15px 6px;min-width:0}#home .hub-card strong{font-size:clamp(12px,2.8vw,16px)}#home .hub-card small{font-size:10px}#home .hero-facts{justify-content:space-between}#modal{padding:26px 20px}}
+@media(max-width:450px){#home .hero h1{letter-spacing:-2.5px}#home .hero-actions{gap:12px;flex-wrap:wrap}#home .hero-art{height:290px}#home .hub-card>span{font-size:30px}#modal .avatar-option{min-height:88px}#modal .avatar-option .portrait{font-size:36px}}
+@media(prefers-reduced-motion:reduce){#home .hub-card,#modal .avatar-option{transition:none}}
