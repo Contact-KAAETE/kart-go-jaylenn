@@ -37,24 +37,25 @@ function checkpoint(){
  saved.session=session;persist();
 }
 function renderResume(){const b=$('#resumeRace');b.classList.toggle('hidden',!saved.session);if(saved.session){b.textContent=`Hervat race · level ${saved.session.level}`;b.onclick=()=>requestRace(()=>start(saved.session.level,saved.session));}}
+function progressText(){return JSON.stringify({format:'kart-go-progress',version:4,created:new Date().toISOString(),...cleanProgress(saved)},null,2);}
+function mergeProgress(text){
+ if(typeof text!=='string'||text.length>300000)throw new Error('Bestand is te groot.');
+ const source=JSON.parse(text);if(!source||!Array.isArray(source.wins)||!source.best||typeof source.best!=='object')throw new Error('Geen Kart Go-voortgang.');
+ const incoming=cleanProgress(source);saved.wins=[...new Set([...saved.wins,...incoming.wins])];
+ for(const key of Object.keys(incoming.best))saved.best[key]=Math.min(saved.best[key]||Infinity,incoming.best[key]);
+ if(!saved.session&&incoming.session)saved.session=incoming.session;saved.xp=Math.max(saved.xp,incoming.xp,saved.wins.length*100);saved.rewards.glitter ||= incoming.rewards.glitter;if(source.player)saved.player=incoming.player;
+ for(const k of ['mode','auto','sound','assist','sensitivity','quality'])if(k in source)saved[k]=incoming[k];
+ const ok=persist();renderPlayer();renderMap();soundLabel();applyQuality(saved.quality==='low'?0:2);return ok;
+}
+function importText(text){try{const ok=mergeProgress(text);showModal(`<h2>Je voortgang staat klaar.</h2><p>Je ingelezen en bestaande overwinningen zijn samengevoegd.</p><p>${ok?'Opgeslagen op dit apparaat.':'Opslaan is geblokkeerd. Bewaar de tekst als back-up.'}</p>`);}catch{showModal('<h2>Dit bestand lukt niet.</h2><p>Kies een Kart Go-voortgangsbestand of plak de complete back-uptekst.</p>');}}
 $('#exportProgress').onclick=()=>{
- checkpoint();const payload={format:'kart-go-progress',version:4,created:new Date().toISOString(),...cleanProgress(saved)};
- const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
- const a=document.createElement('a');a.href=url;a.download='Kart_Go_voortgang.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ checkpoint();const text=progressText();
+ showModal('<h2>Bewaar je racewereld.</h2><p>Bewaar het bestand, of kopieer de back-uptekst naar je eigen notities. Zo kun je je voortgang later weer inlezen.</p><button class="primary" id="downloadProgress">Bewaar bestand</button> <button class="secondary" id="copyProgress">Kopieer back-uptekst</button><label for="backupText">Jouw complete back-up</label><textarea id="backupText" rows="6" readonly></textarea><p id="backupMessage" role="status"></p>');$('#backupText').value=text;
+ $('#downloadProgress').onclick=()=>{const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='Kart_Go_voortgang.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);$('#backupMessage').textContent='Bestand aangeboden. Geen download zichtbaar? Gebruik Kopieer back-uptekst.';};
+ $('#copyProgress').onclick=async()=>{try{await navigator.clipboard.writeText(text);$('#backupMessage').textContent='Back-uptekst gekopieerd. Bewaar hem in je eigen notities.';}catch{$('#backupText').select();$('#backupMessage').textContent='Selecteer de tekst en kies Kopieer.';}};
 };
-$('#importProgress').onclick=()=>$('#progressFile').click();
-$('#progressFile').addEventListener('change',async e=>{
- const file=e.target.files?.[0];if(!file)return;
- try{
-  if(file.size>300000)throw new Error();const source=JSON.parse(await file.text());
-  if(!Array.isArray(source.wins)||!source.best||typeof source.best!=='object')throw new Error();
-  const incoming=cleanProgress(source);saved.wins=[...new Set([...saved.wins,...incoming.wins])];
-  for(const key of Object.keys(incoming.best))saved.best[key]=Math.min(saved.best[key]||Infinity,incoming.best[key]);
-  if(!saved.session&&incoming.session)saved.session=incoming.session;saved.xp=Math.max(saved.xp,incoming.xp,saved.wins.length*100);saved.rewards.glitter ||= incoming.rewards.glitter;if(source.player)saved.player=incoming.player;for(const k of ['mode','auto','sound','assist','sensitivity','quality'])saved[k]=incoming[k];renderPlayer();
-  persist();renderMap();showModal('<h2>Je voortgang staat klaar.</h2><p>Je ingelezen en bestaande overwinningen zijn samengevoegd.</p>');
- }catch{showModal('<h2>Dit bestand lukt niet.</h2><p>Kies een voortgangsbestand dat je in Kart Go hebt bewaard.</p>');}
- e.target.value='';
-});
+$('#importProgress').onclick=()=>{showModal('<h2>Verder met je racewereld.</h2><p>Bestaande overwinningen blijven bewaard. Je profiel en instellingen worden overgenomen uit de back-up die je kiest.</p><button class="secondary" id="chooseProgress">Kies bestand</button><label for="restoreText">Of plak je complete back-uptekst</label><textarea id="restoreText" rows="6" placeholder="Plak hier je Kart Go-back-up"></textarea><button class="primary" id="restoreProgress">Lees back-uptekst in</button>');$('#chooseProgress').onclick=()=>$('#progressFile').click();$('#restoreProgress').onclick=()=>importText($('#restoreText').value);};
+$('#progressFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>300000)throw new Error();importText(await file.text());}catch{showModal('<h2>Dit bestand lukt niet.</h2><p>Kies een Kart Go-bestand kleiner dan 300 kB.</p>');}e.target.value='';});
 
 let audioCtx;
 function beep(freq=500,dur=.09,type='sine',vol=.06){if(!saved.sound)return;try{audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.setValueAtTime(freq,audioCtx.currentTime);g.gain.setValueAtTime(vol,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur);}catch{}}

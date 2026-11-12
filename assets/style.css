@@ -84,3 +84,5 @@ h1,h2,.brand,.hero-facts strong,.level b,.race-label strong,.race-stats b,.speed
 @media(max-width:560px){.player-hub{gap:7px;margin-bottom:22px}.hub-card{padding:13px 8px;display:flex;flex-direction:column;text-align:center;gap:6px}.hub-card strong{font-size:11px}.hub-card small{font-size:8px}.hub-card>span{font-size:26px}}
 
 .world-tabs{display:flex;gap:10px;margin-top:22px}.world-tabs button{flex:1;border:1px solid #c4d1b0;background:#e9eedf;padding:16px 10px;border-radius:13px;font-weight:700;font-size:13px}.world-tabs small{display:block;font-weight:400;font-size:10px;margin-top:5px}.world-tabs .selected{background:#cdeb8f;box-shadow:inset 0 0 0 1px #96b862}.world-tabs button[data-world="2"].selected{background:#f4db9f;box-shadow:inset 0 0 0 1px #c79b50}#worldHint{font-size:12px}.levels .boss{border-color:#d0a858}.level small{white-space:normal;min-height:20px;line-height:1.3}
+
+dialog textarea{width:100%;padding:12px;border:1px solid #b9c7a5;border-radius:10px;background:#fffdf5;color:#233f31;font:12px ui-monospace,monospace;resize:vertical;margin-bottom:14px}#backupMessage{font-size:12px;line-height:1.6}

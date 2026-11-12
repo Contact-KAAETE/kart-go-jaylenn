@@ -53,3 +53,12 @@ Code/QR zijn geïntegreerd en anoniem lokaal; geen werkend online vriendensystee
 
 ## Fase7 — browsercontroles in uitvoering
 Alle echte items,9blocks/10s/2s/Jump, profielsaves, Boem2s en geen-effect getest in echte Chromium met synthetische PointerEvents. Browsercontrole vond dat een start bij veranderde viewport direct pauzeerde; start-resize slaat nu alleen voor de nieuwe race de rotatiepauze over. Een al lopende race pauzeert bij draaien nog steeds. Fase4 GitHub:dcb35d2100b44dc626768c0f59b57037109d62ae.
+
+
+## Fase7 afgerond — klaar voor publicatie
+12november hervat vanaf4f9f9efc5e158efde185ffe5a6e79b34c187fba3 nadat externe browserbestandstest vastliep. Geen code verloren; alle afgeronde fasen stonden in GitHub.
+Nu exportdialoog met download én complete kopieerbare back-uptekst; import ondersteunt zowel bestand als plakken. Parser/merge hebben één gedeelde functie, met grootte/validatie en behoud van bestaande wins/beste tijden. Browser heeft kopiëren→plakken→import→opgeslagen bevestigd; bestandskiezer op fysieke iPhone blijft onbevestigd.
+`docs/V4_TEST_RESULTS.md` bevat resultaten en eerlijke beperkingen. Alle50 banen/regressies opnieuw geslaagd. Oude previewroutes leiden naar geïntegreerde game; geen aparte nepvrienden of proeflobby meer actief.
+
+## Fase8 — volgende concrete stap
+Geteste ontwikkeltak veilig fast-forwarden naar main (verwachte oudehead1359ca4), Pages-build afwachten en de daadwerkelijke officiële URL openen/spelen. Daarna exacte publicatiecommit en live-resultaat hieronder vastleggen. Onlinewerk blijft open als afzonderlijke vervolgfase in issue1.
