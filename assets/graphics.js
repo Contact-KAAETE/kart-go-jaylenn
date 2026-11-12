@@ -47,9 +47,29 @@ const GFX=(()=>{
   if(dog){const boss=dog==='burger'?tile('burger',2,1,1):tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.rotate(steer*.035);c.drawImage(boss,-80*scale,-157*scale,160*scale,170*scale);c.restore();return true;}
   const variant=angle===null?(steer<-.23?0:steer>.23?2:1):angle;
   const kart=coloredKart(variant,color),driver=driverSprite(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4],variant<3);if(!kart||!driver)return false;counts.karts++;counts.drivers++;
-  c.save();c.translate(x,y);c.rotate(steer*.035);const bob=(typeof state!=='undefined'&&state?.speed>100)?Math.sin(performance.now()/53)*.65:0;c.translate(0,bob);ellipse(c,0,2*scale,57*scale,11*scale,'#071b2c4f');
-  if(player&&typeof state!=='undefined'&&state?.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
+  // Lightweight suspension, steering lean and driver reactions. No new assets or engine.
+  const t=performance.now()/1000;
+  const racing=typeof state!=='undefined'&&state&&!state.paused&&!state.finished;
+  const speed=racing?Math.max(0,Math.min(1,(state.speed||0)/350)):0;
+  const isPlayer=Boolean(player);
+  const lean=Math.max(-1,Math.min(1,steer||0));
+  const airborne=isPlayer&&racing?Math.max(0,Math.min(1,(state.rampAir||state.jump||0))):0;
+  const suspension=racing?Math.sin(t*(12+speed*23))*(.35+speed*1.3):0;
+  const lift=airborne*15;
+  c.save();c.translate(x,y);
+  // Shadow stays on the road while the chassis lifts over jumps.
+  ellipse(c,0,3*scale,57*scale*(1-airborne*.14),11*scale*(1-airborne*.14),'#071b2c4f');
+  c.translate(0,(-lift+suspension)*scale);
+  c.rotate(lean*(.025+speed*.055));
+  c.transform(1,0,lean*.035,1,0,0);
+  if(isPlayer&&racing&&state.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);
+  c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
+  // Driver leans a little into turns, with independent spring motion.
+  const driverLean=lean*4*scale;
+  const driverBob=racing?Math.sin(t*(10+speed*16))*.8*scale:0;
+  c.save();c.translate(driverLean,driverBob);
   if(variant<3){c.drawImage(driver,-32*scale,-129*scale,64*scale,64*scale);}else{c.drawImage(driver,-31*scale,-129*scale,62*scale,62*scale);}
+  c.restore();
   if(player?.helmet){c.strokeStyle=player.helmet;c.lineWidth=3*scale;c.beginPath();c.moveTo(-19*scale,-76*scale);c.lineTo(19*scale,-76*scale);c.stroke();}
   // Small moving highlights suggest tire rotation without regenerating or mutating the sprite.
   if(typeof state!=='undefined'&&state?.speed>100){c.globalAlpha=.22;const tick=performance.now()/45;for(const side of [-1,1]){for(let i=0;i<3;i++){c.fillStyle='#e8f7ff';c.fillRect(side*53*scale-2*scale,(-48+(i*9+tick)%27)*scale,3*scale,2*scale);}}c.globalAlpha=1;}
