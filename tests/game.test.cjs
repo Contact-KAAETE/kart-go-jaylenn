@@ -14,7 +14,7 @@ function environment(initial={}){
  const win={addEventListener(type,fn){(events[type]??=[]).push(fn)}};
  const sandbox={document:{querySelector:element,querySelectorAll:()=>[],addEventListener(type,fn){(events[type]??=[]).push(fn)},createElement:tag=>element(tag+(nextCanvas++)),hidden:false},window:win,localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>storage[k]=v},location:{hash:''},innerWidth:390,innerHeight:844,devicePixelRatio:2,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},performance:{now:()=>0},crypto:require('node:crypto').webcrypto,console,Math:math,URL,Blob,Date};
  vm.createContext(sandbox);
- for(const file of ['vendor/qrcode.js','graphics.js','player.js','scenery.js','desert.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
+ for(const file of ['vendor/qrcode.js','graphics.js','player.js','scenery.js','desert.js','course.js','game.js'])vm.runInContext(fs.readFileSync('assets/'+file,'utf8'),sandbox,{filename:file});
  return{random:seededRandom,run:code=>vm.runInContext(code,sandbox),nodes,storage,math,events,sandbox};
 }
 const e=environment(),{run,nodes,storage}=e;const event=(id,x=65,y=65)=>({pointerId:id,clientX:x,clientY:y,button:0,pointerType:'touch',preventDefault(){}});
@@ -119,3 +119,31 @@ console.log('PASS: fresh race stays active after a viewport change; rotating an 
 
 const roundtrip=environment({'kartgo-jaylenn-v1':legacy});roundtrip.run("saved.player.name='TurboRoundtrip';saved.player.color='#ab75d0';saved.player.effect='splash';saved.wins=[1,14,20,40];saved.rewards.glitter=true;saved.mode='wheel';saved.xp=2000");const backup=roundtrip.run('progressText()');roundtrip.run("saved.wins=[2];saved.best={1:30};saved.mode='joystick'");roundtrip.sandbox.backup=backup;assert.equal(roundtrip.run('mergeProgress(backup)'),true);assert.equal(roundtrip.run('saved.wins.length'),5);assert.equal(roundtrip.run('saved.best[1]'),30);assert.equal(roundtrip.run('saved.player.color'),'#ab75d0');assert.equal(roundtrip.run('saved.mode'),'wheel');assert.throws(()=>roundtrip.run("mergeProgress('{}')"));assert.throws(()=>roundtrip.run("mergeProgress('x'.repeat(300001))"));
 console.log('PASS: export/import roundtrip preserves wins, best time, profile, garage, XP, code, rewards and settings; invalid imports rejected.');
+
+// V5.1: real, repeatable terrain changes and gameplay launches without changing item timers.
+for(let level=1;level<=50;level++){
+ run(`start(${level});state.count=0;`);
+ const heights=run('Array.from({length:COUNT},(_,i)=>courseElevation(i*SEG,state.level))');
+ assert.ok(heights.every(Number.isFinite));
+ assert.ok(Math.max(...heights)-Math.min(...heights)>200,'terrain has visible elevation');
+ assert.ok(Math.abs(run('courseElevation(0,state.level)-courseElevation(LENGTH,state.level)'))<1e-8,'lap seam matches');
+ assert.ok(Math.abs(run('courseElevation(-1,state.level)-courseElevation(LENGTH-1,state.level)'))<1e-8,'negative camera distance wraps');
+ if(level>=7)assert.ok(run("state.features.filter(f=>f.kind==='bridge').length")>=2);
+ if(level>=3)assert.ok(run('courseCorners(state.level).length')>0);
+ if(level===20||level===50)assert.equal(run("state.features.some(f=>f.kind==='ramp')"),false,'boss rules stay unchanged');
+ for(let segment=0;segment<260;segment+=13){run(`state.d=${segment}*SEG;draw()`);assert.ok(run('projection.every(p=>[p.x,p.y,p.w,p.clipY].every(Number.isFinite))'),'finite hill projection');assert.ok(run('projection.some(p=>p.visible)'), 'road stays visible');}
+}
+run("start(5);state.count=0;saved.auto=true;state.speed=MAX;state.d=state.features.find(f=>f.kind==='ramp').to*SEG-2;state.x=0;update(1/60)");
+assert.ok(run('state.rampAir>1&&state.jump===0'),'ramp launches kart without spending or changing Jump');
+assert.equal(run('state.inventory.every(i=>i===null)'),true);
+run('update(.3);');assert.ok(run('rampLift(state)>.6'),'airborne animation has height');
+const during=run('state.rampAir');run('pause();update(.2)');assert.equal(run('state.rampAir'),during,'pause freezes flight');
+run('state.paused=false;checkpoint()');const rampSave=run('JSON.parse(JSON.stringify(saved.session))');
+run(`start(5,${JSON.stringify(rampSave)});state.count=0`);assert.equal(run('state.rampAir'),during,'flight resumes after reopen');
+run('for(let i=0;i<100;i++)update(1/60)');assert.equal(run('state.rampAir'),0,'lands automatically');
+run("start(5);state.count=0;saved.auto=false;state.speed=MAX*.2;state.d=state.features.find(f=>f.kind==='ramp').to*SEG-1;update(.01)");assert.equal(run('state.rampAir'),0,'slow kart rolls over ramp');
+run("start(5);state.count=0;state.speed=MAX;state.x=1.4;state.d=state.features.find(f=>f.kind==='ramp').to*SEG-1;update(.01)");assert.equal(run('state.rampAir'),0,'off-road kart cannot launch');
+run("start(5);state.count=0;state.opponents[0].d=state.features.find(f=>f.kind==='ramp').to*SEG-1;update(.01)");assert.ok(run('state.opponents[0].rampAir>0'),'bots use the same launch ramps');
+run("start(5);state.count=0;state.rampAir=.8;state.rampDuration=1;state.shots=[{d:state.d+1,x:state.x,speed:-3000,life:5}];update(.01)");assert.equal(run('state.freeze'),0,'physical airborne kart clears ice');
+run('state.inventory=[4,null,null];useItem(0)');assert.equal(run('state.jump'),1.4,'original Jump remains 1.4 seconds');
+console.log('PASS: V5.1 all50 terrain profiles/seams and finite projections, extra bridges, sharper curves, real player/bot ramps, pause/save/reopen/landing, slow and off-road rejection, ice clearance, unchanged Jump duration.');

@@ -1,5 +1,25 @@
 # Kart Go V5 — echte grafische upgrade
 
+## V5.1 — hoogtes, bruggen, scherpe bochten en echte springschansen
+
+12 november 2026, vervolg op de goedgekeurde V5. Herstelpunt `backup/v5-before-height-upgrade-20261112` → `adbb6f4eb6893fdf3c8ff92c2c9a431318a8d4ba`. Ontwikkeltak `work/kart-go-heights-v5-1-20261112`.
+
+- De bestaande 50 circuits behouden hun namen, voortgang en oorspronkelijke basisbochten. Daarbovenop komen vloeiende bergkammen en dalen, verhoogde brugopritten en zichtbare scherpe bochten. Level 1–2 blijven rustig; bochtwaarschuwingen vanaf level 3.
+- Tweede brug vanaf level 7. Bruggen hebben een hoger gelegen dek, dubbele houten leuningen, randbalken, steunpalen en waterreflecties. Bomen staan niet meer op het brugwater.
+- Eerste echte schans in level 5, daarna in gewone races; vanaf level 14 twee schansen per ronde. Beide eindbaasraces krijgen geen schans, zodat hun oorspronkelijke aanval/ontwijkregels behouden blijven.
+- Schans lanceert automatisch bij voldoende snelheid op de baan. Speler EN bots vliegen circa 0,9–1,2 seconde, met hoogteanimatie, grondschaduw en een zachte landing. Geen extra knop, valkuil of verplichte Jump. Langzaam rijden rolt veilig over de schans. Geen snelheidsbonus toegevoegd.
+- Het bestaande Jump-item blijft exact 1,4 seconde actief. Werelden, itemkansen, moeilijkheidspercentage, inventaris en eindbaastimers blijven gelijk. De Zandwereld krijgt geen Boost- of Jump-item.
+- Nieuwe nabij-verafmaskering houdt wegen, karts en decor achter een heuveltop uit beeld, terwijl uitstekende boomtoppen zichtbaar mogen blijven. Alle kwaliteitsstanden gebruiken dezelfde route en schansphysics.
+- Lokale opslagsleutel en saveversie behouden. Lopende schansvlucht wordt meegenomen bij bewaren/hervatten; oude saves zonder deze velden werken met veilige standaardwaarden.
+- Geen nieuwe beelden of diensten gegenereerd/geactiveerd; de bestaande V5-assets blijven in gebruik. Extra geometrie en projectie zijn JavaScript/Canvas. Assetcacheversie voor code: `5.1.0`.
+
+Tests: `node tests/game.test.cjs` slaagt. Alle 50 races voltooid door dezelfde begrensde controller; 20/20 groen en 29/30 zand gewonnen. Alle 50 hoogteprofielen sluiten vloeiend aan op de rondegrens; geteste projecties blijven eindig en de weg zichtbaar. Speler/bot-schans, langzaam/offroad, landing, pauze, bewaren/hervatten, ijsontwijking en ongewijzigde Jump-duur gecontroleerd.
+Echte Chromium-controles: 390×844, 320×568 en 844×390; schansvlucht/landing, crestmasker, drie besturingen, multitouch, V5-rasterintegratie, power-ups en beide eindbazen geslaagd. Brug, schans en sprong visueel bekeken met de echte spelrenderer. Geen fysieke iPhone-test of hardware-FPS-claim.
+
+Publicatie: getest, gereed voor samenvoegen; livecontrole volgt na Pages-build. De volgende commit legt het publicatiebewijs vast.
+
+---
+
 **Afgerond en live gecontroleerd op 12 november 2026.**
 
 Speel: https://contact-kaaete.github.io/kart-go-jaylenn/

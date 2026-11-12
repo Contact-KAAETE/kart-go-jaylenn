@@ -1,0 +1,229 @@
+Chromium QA — 12 November 2026
+Synthetic PointerEvents and fixed update steps; not physical iPhone hardware.
+
+Initial mobile/landscape checks:
+PASS: geen ongeldige projectie 1/0
+PASS: geen ongeldige projectie 1/9000
+PASS: geen ongeldige projectie 1/21000
+PASS: geen ongeldige projectie 1/32000
+PASS: geen ongeldige projectie 1/43000
+PASS: geen ongeldige projectie 1/51800
+PASS: geen ongeldige projectie 5/0
+PASS: geen ongeldige projectie 5/9000
+PASS: geen ongeldige projectie 5/21000
+PASS: geen ongeldige projectie 5/32000
+PASS: geen ongeldige projectie 5/43000
+PASS: geen ongeldige projectie 5/51800
+PASS: geen ongeldige projectie 12/0
+PASS: geen ongeldige projectie 12/9000
+PASS: geen ongeldige projectie 12/21000
+PASS: geen ongeldige projectie 12/32000
+PASS: geen ongeldige projectie 12/43000
+PASS: geen ongeldige projectie 12/51800
+PASS: geen ongeldige projectie 20/0
+PASS: geen ongeldige projectie 20/9000
+PASS: geen ongeldige projectie 20/21000
+PASS: geen ongeldige projectie 20/32000
+PASS: geen ongeldige projectie 20/43000
+PASS: geen ongeldige projectie 20/51800
+PASS: geen ongeldige projectie 21/0
+PASS: geen ongeldige projectie 21/9000
+PASS: geen ongeldige projectie 21/21000
+PASS: geen ongeldige projectie 21/32000
+PASS: geen ongeldige projectie 21/43000
+PASS: geen ongeldige projectie 21/51800
+PASS: geen ongeldige projectie 35/0
+PASS: geen ongeldige projectie 35/9000
+PASS: geen ongeldige projectie 35/21000
+PASS: geen ongeldige projectie 35/32000
+PASS: geen ongeldige projectie 35/43000
+PASS: geen ongeldige projectie 35/51800
+PASS: geen ongeldige projectie 50/0
+PASS: geen ongeldige projectie 50/9000
+PASS: geen ongeldige projectie 50/21000
+PASS: geen ongeldige projectie 50/32000
+PASS: geen ongeldige projectie 50/43000
+PASS: geen ongeldige projectie 50/51800
+PASS: springschans lanceert werkelijk zonder Jump-item
+PASS: zichtbare hoogte tijdens sprong
+PASS: pauzeren stopt de sprong
+PASS: sprong blijft correct na heropenen
+PASS: kart landt vanzelf
+PASS: twee echte brugpassages
+PASS: heuveltop verbergt achterliggende weg
+PASS: 320×568: geen overlap/buiten beeld (buttons)
+PASS: 320×568: geen overlap/buiten beeld (wheel)
+PASS: 320×568: geen overlap/buiten beeld (joystick)
+DONE: hoogtes/springschans
+PASS: sturen en gas tegelijk
+PASS: andere pointer kan gas niet loslaten
+PASS: echte racephysics reageert op touch (40 vaste stappen)
+PASS: alleen gas wordt losgelaten
+PASS: pointercancel maakt bediening vrij
+PASS: sturen en remmen tegelijk
+PASS: pauze wist alle aanrakingen
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: geen ongeldige projectie 1/0
+PASS: geen ongeldige projectie 1/9000
+PASS: geen ongeldige projectie 1/21000
+PASS: geen ongeldige projectie 1/32000
+PASS: geen ongeldige projectie 1/43000
+PASS: geen ongeldige projectie 1/51800
+PASS: geen ongeldige projectie 5/0
+PASS: geen ongeldige projectie 5/9000
+PASS: geen ongeldige projectie 5/21000
+PASS: geen ongeldige projectie 5/32000
+PASS: geen ongeldige projectie 5/43000
+PASS: geen ongeldige projectie 5/51800
+PASS: geen ongeldige projectie 12/0
+PASS: geen ongeldige projectie 12/9000
+PASS: geen ongeldige projectie 12/21000
+PASS: geen ongeldige projectie 12/32000
+PASS: geen ongeldige projectie 12/43000
+PASS: geen ongeldige projectie 12/51800
+PASS: geen ongeldige projectie 20/0
+PASS: geen ongeldige projectie 20/9000
+PASS: geen ongeldige projectie 20/21000
+PASS: geen ongeldige projectie 20/32000
+PASS: geen ongeldige projectie 20/43000
+PASS: geen ongeldige projectie 20/51800
+PASS: geen ongeldige projectie 21/0
+PASS: geen ongeldige projectie 21/9000
+PASS: geen ongeldige projectie 21/21000
+PASS: geen ongeldige projectie 21/32000
+PASS: geen ongeldige projectie 21/43000
+PASS: geen ongeldige projectie 21/51800
+PASS: geen ongeldige projectie 35/0
+PASS: geen ongeldige projectie 35/9000
+PASS: geen ongeldige projectie 35/21000
+PASS: geen ongeldige projectie 35/32000
+PASS: geen ongeldige projectie 35/43000
+PASS: geen ongeldige projectie 35/51800
+PASS: geen ongeldige projectie 50/0
+PASS: geen ongeldige projectie 50/9000
+PASS: geen ongeldige projectie 50/21000
+PASS: geen ongeldige projectie 50/32000
+PASS: geen ongeldige projectie 50/43000
+PASS: geen ongeldige projectie 50/51800
+PASS: springschans lanceert werkelijk zonder Jump-item
+PASS: zichtbare hoogte tijdens sprong
+PASS: pauzeren stopt de sprong
+PASS: sprong blijft correct na heropenen
+PASS: kart landt vanzelf
+PASS: twee echte brugpassages
+PASS: heuveltop verbergt achterliggende weg
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+DONE: hoogtes/springschans
+PASS: bots rijden mee level 1
+PASS: Lucky Blocks level 1
+PASS: bots rijden mee level 20
+PASS: Lucky Blocks level 20
+PASS: bots rijden mee level 21
+PASS: Lucky Blocks level 21
+PASS: bots rijden mee level 35
+PASS: Lucky Blocks level 35
+PASS: bots rijden mee level 50
+PASS: Lucky Blocks level 50
+PASS: inventarisknoppen blijven stabiel
+PASS: Onweer Boost Jump reageren via touch
+PASS: hypnose10s werkt ook vooraan
+PASS: banaan wordt echt neergelegd
+PASS: Zandwereld ijs bevriest2s
+PASS: Zandwereld heeft uitsluitend hypnose ijs banaan
+PASS: Boem heeft2s afkoeling
+PASS: Boem werkt na2s opnieuw
+PASS: Geen effect schakelt Boem uit
+PASS: voortgang profiel en garage worden echt opgeslagen
+PASS: Hotdog-Hond vuurt op10s
+PASS: Hotdog-ijs bevriest2s
+PASS: Jump ontwijkt ijs
+PASS: Pizzaman heeft eigen uiterlijk en geen verzonnen ijsaanval
+PASS: 844×390: geen overlap/buiten beeld (buttons)
+PASS: alle items bereikbaar via hit-test buttons
+PASS: 844×390: geen overlap/buiten beeld (wheel)
+PASS: alle items bereikbaar via hit-test wheel
+PASS: 844×390: geen overlap/buiten beeld (joystick)
+PASS: alle items bereikbaar via hit-test joystick
+
+
+Final V5.1 geometry / raster checks after curve tuning:
+PASS: rasterkarts EN gekozen coureurs worden in echte race getekend
+PASS: echte rasteromgeving, panorama en wegtextuur actief
+PASS: zes werkelijk verschillende rugaanzichtsprites
+PASS: kartkleur verandert werkelijk de racepixels
+PASS: coureur blijft bewaard: Astronaut
+PASS: coureur blijft bewaard: Ninja
+PASS: coureur blijft bewaard: Vos
+PASS: coureur blijft bewaard: Panda
+PASS: coureur blijft bewaard: Kikker
+PASS: coureur blijft bewaard: Robot
+PASS: grafische race klaar op level 1
+PASS: grafische race klaar op level 5
+PASS: grafische race klaar op level 10
+PASS: grafische race klaar op level 15
+PASS: grafische race klaar op level 20
+PASS: grafische race klaar op level 21
+PASS: grafische race klaar op level 30
+PASS: grafische race klaar op level 40
+PASS: grafische race klaar op level 50
+PASS: alle negen productie-assets gedecodeerd
+PASS: atlasgeheugen onder64MB exclusief rendercaches
+PASS: wereldkaart opent werkelijk
+PASS: wereldkaart opent werkelijk
+DONE: V5 rastercontrole 390×844
+PASS: geen ongeldige projectie 1/0
+PASS: geen ongeldige projectie 1/9000
+PASS: geen ongeldige projectie 1/21000
+PASS: geen ongeldige projectie 1/32000
+PASS: geen ongeldige projectie 1/43000
+PASS: geen ongeldige projectie 1/51800
+PASS: geen ongeldige projectie 5/0
+PASS: geen ongeldige projectie 5/9000
+PASS: geen ongeldige projectie 5/21000
+PASS: geen ongeldige projectie 5/32000
+PASS: geen ongeldige projectie 5/43000
+PASS: geen ongeldige projectie 5/51800
+PASS: geen ongeldige projectie 12/0
+PASS: geen ongeldige projectie 12/9000
+PASS: geen ongeldige projectie 12/21000
+PASS: geen ongeldige projectie 12/32000
+PASS: geen ongeldige projectie 12/43000
+PASS: geen ongeldige projectie 12/51800
+PASS: geen ongeldige projectie 20/0
+PASS: geen ongeldige projectie 20/9000
+PASS: geen ongeldige projectie 20/21000
+PASS: geen ongeldige projectie 20/32000
+PASS: geen ongeldige projectie 20/43000
+PASS: geen ongeldige projectie 20/51800
+PASS: geen ongeldige projectie 21/0
+PASS: geen ongeldige projectie 21/9000
+PASS: geen ongeldige projectie 21/21000
+PASS: geen ongeldige projectie 21/32000
+PASS: geen ongeldige projectie 21/43000
+PASS: geen ongeldige projectie 21/51800
+PASS: geen ongeldige projectie 35/0
+PASS: geen ongeldige projectie 35/9000
+PASS: geen ongeldige projectie 35/21000
+PASS: geen ongeldige projectie 35/32000
+PASS: geen ongeldige projectie 35/43000
+PASS: geen ongeldige projectie 35/51800
+PASS: geen ongeldige projectie 50/0
+PASS: geen ongeldige projectie 50/9000
+PASS: geen ongeldige projectie 50/21000
+PASS: geen ongeldige projectie 50/32000
+PASS: geen ongeldige projectie 50/43000
+PASS: geen ongeldige projectie 50/51800
+PASS: springschans lanceert werkelijk zonder Jump-item
+PASS: zichtbare hoogte tijdens sprong
+PASS: pauzeren stopt de sprong
+PASS: sprong blijft correct na heropenen
+PASS: kart landt vanzelf
+PASS: twee echte brugpassages
+PASS: heuveltop verbergt achterliggende weg
+PASS: 390×844: geen overlap/buiten beeld (buttons)
+PASS: 390×844: geen overlap/buiten beeld (wheel)
+PASS: 390×844: geen overlap/buiten beeld (joystick)
+DONE: hoogtes/springschans
+

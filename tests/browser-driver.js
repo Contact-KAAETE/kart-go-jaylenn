@@ -9,7 +9,24 @@ window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
  try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
- if(action==='v5visual'){
+ if(action==='terrainSuite'){
+  const prior=JSON.parse(JSON.stringify(saved));
+  try{
+   for(const level of [1,5,12,20,21,35,50]){start(level);state.count=0;
+    for(const d of [0,9000,21000,32000,43000,51800]){state.d=d;draw();result(projection.every(p=>[p.x,p.y,p.w,p.clipY].every(Number.isFinite)),'geen ongeldige projectie '+level+'/'+d);}
+   }
+   start(12);state.count=0;state.speed=MAX;saved.auto=true;const lip=state.features.find(f=>f.kind==='ramp').to*SEG;state.d=lip-2;update(1/60);result(state.rampAir>0&&state.jump===0,'springschans lanceert werkelijk zonder Jump-item');
+   update(.3);draw();result(rampLift(state)>.6,'zichtbare hoogte tijdens sprong');const air=state.rampAir;pause();update(.2);result(state.rampAir===air,'pauzeren stopt de sprong');state.paused=false;closeModal();checkpoint();const stored=JSON.parse(localStorage.getItem(STORAGE_KEY));start(12,stored.session);state.count=0;result(state.rampAir===air,'sprong blijft correct na heropenen');for(let i=0;i<100;i++)update(1/60);result(state.rampAir===0,'kart landt vanzelf');
+   result(state.features.filter(f=>f.kind==='bridge').length===2,'twee echte brugpassages');
+   result(projection.some(p=>p.visible===false),'heuveltop verbergt achterliggende weg');
+   for(const mode of ['buttons','wheel','joystick']){saved.mode=mode;modeUI();layout();}
+  }catch(err){result(false,'terrein: '+err.message);}finally{saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE: hoogtes/springschans');}
+ }else if(['viewHill','viewCorner','viewRamp','viewAir'].includes(action)){
+  start(12);state.count=0;saved.auto=true;state.speed=MAX;
+  const f=action==='viewCorner'?courseCorners(12)[0]:state.features.find(f=>f.kind===(action==='viewHill'?'bridge':'ramp'));state.d=(f.from-(action==='viewHill'?12:action==='viewCorner'?-3:9))*SEG;
+  if(action==='viewAir'){state.d=f.to*SEG-2;update(1/60);for(let i=0;i<30;i++)update(1/60);}
+  state.opponents.forEach((o,i)=>{o.d=state.d+900+i*1100;o.x=[-.5,0,.5][i];});state.paused=true;draw();send('result','SNAPSHOT: '+action+' (gepauzeerde echte renderer)');
+ }else if(action==='v5visual'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
    start(1);state.count=0;state.speed=0;saved.xp=0;GFX.resetMetrics();draw();const m=GFX.metrics();
@@ -60,5 +77,5 @@ window.addEventListener('message',async e=>{
  }else if(action==='layout'){setTimeout(layout,100);}
  if(state&&state.count<=0)document.querySelector('#countdown').textContent='';
 });
-setInterval(()=>send('status',{viewport:`${innerWidth}×${innerHeight}`,mode:saved.mode,input:{...input},activePointers:activePointers.size,level:state?.level,paused:state?.paused,finished:state?.finished,distance:Math.round(state?.d||0),speed:Math.round(state?.speed||0),position:state?.rank,inventory:state?.inventory,boost:state?.boost,jump:state?.jump,freeze:state?.freeze,time:state?.time?.toFixed(2),shots:state?.shots?.length,nextIce:state?.nextShot,won:saved.wins,quality:quality.level,raster:GFX.metrics()}),200);
+setInterval(()=>send('status',{viewport:`${innerWidth}×${innerHeight}`,mode:saved.mode,input:{...input},activePointers:activePointers.size,level:state?.level,paused:state?.paused,finished:state?.finished,distance:Math.round(state?.d||0),speed:Math.round(state?.speed||0),position:state?.rank,inventory:state?.inventory,boost:state?.boost,jump:state?.jump,rampAir:state?.rampAir,freeze:state?.freeze,time:state?.time?.toFixed(2),shots:state?.shots?.length,nextIce:state?.nextShot,won:saved.wins,quality:quality.level,raster:GFX.metrics()}),200);
 })();

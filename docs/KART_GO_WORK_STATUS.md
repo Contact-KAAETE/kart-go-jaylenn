@@ -1,6 +1,6 @@
-# Huidige versie: Kart Go V5.0
+# Huidige versie: Kart Go V5.1
 
-**12 november 2026: de grafische V5 is gepubliceerd en live getest.**
+**12 november 2026: V5.1 voegt hoogtes, extra bruggen, scherpere bochten en echte springschansen toe.** Details en actuele publicatiestatus staan in het visuele statusdocument.
 Lees eerst [KART_GO_VISUAL_UPGRADE_STATUS.md](KART_GO_VISUAL_UPGRADE_STATUS.md). Hervat vanaf de actuele main-commit; begin niet opnieuw.
 Gamecommit `32d0dbd03431694ef8d57a9e35c8323113b9379b`, succesvolle Pages-run `43162873160`.
 Nieuwe echte rastergraphics zijn geïntegreerd in menu, coureurs, races, beide werelden, garage en eindbazen.

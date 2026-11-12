@@ -49,11 +49,26 @@ function drawLandscape(c,w,h,s){
  // A few birds move above the distant hills.
  c.strokeStyle='#4f827680';c.lineWidth=1.4;for(let i=0;i<4;i++){const x=w*.40+i*17+Math.sin(s.time*.2)*25,y=h*.15+Math.sin(i*3)*12;c.beginPath();c.moveTo(x-5,y);c.quadraticCurveTo(x-2,y-4,x,y);c.quadraticCurveTo(x+3,y-4,x+6,y);c.stroke();}
 }
-function elevation(d){const profile=trackProfile(sceneryLevel);return Math.sin(d/LENGTH*Math.PI*4+sceneryLevel*.2)*profile.hill+Math.sin(d/LENGTH*Math.PI*8)*profile.hill*.28;}
+function elevation(d){return courseElevation(d,sceneryLevel);}
 
 // Road furniture is projected with the same points as the track.
 function drawRoadFurniture(c,a,b,terrain){
- if(terrain==='bridge'){
+ if(terrain==='ramp'){
+  const color=a.segIndex%2?'#f7b942':'#ffc958';
+  shape(c,[[a.x-a.w*.96,a.y],[a.x+a.w*.96,a.y],[b.x+b.w*.96,b.y],[b.x-b.w*.96,b.y]],color);
+  for(const lane of [-.64,0,.64]){
+   shape(c,[[a.x+a.w*(lane-.22),a.y],[b.x+b.w*lane,b.y],[a.x+a.w*(lane+.22),a.y],[a.x+a.w*(lane+.13),a.y],[b.x+b.w*lane,b.y+(a.y-b.y)*.36],[a.x+a.w*(lane-.13),a.y]],'#fff5cf');
+  }
+ }else if(terrain==='bridge'){
+  // Deck edge, supports, double timber rails and water glints share the road projection.
+  for(const side of [-1,1]){
+   const ax=a.x+side*a.w*1.08,bx=b.x+side*b.w*1.08,depthA=a.scale*220*H*.62,depthB=b.scale*220*H*.62;
+   shape(c,[[ax,a.y],[ax+side*a.w*.045,a.y+depthA],[bx+side*b.w*.045,b.y+depthB],[bx,b.y]],side<0?'#715335':'#967348');
+   if(a.segIndex%4===0){c.strokeStyle='#644d38';c.lineWidth=Math.max(1,a.w*.045);c.beginPath();c.moveTo(ax,a.y);c.lineTo(ax,a.y+depthA*1.9);c.stroke();}
+   const ax2=a.x+side*a.w*1.10,bx2=b.x+side*b.w*1.10,railA=a.scale*80*H*.62,railB=b.scale*80*H*.62;
+   c.strokeStyle='#a47a44';c.lineWidth=Math.max(1,a.w*.012);c.beginPath();c.moveTo(ax2,a.y-railA);c.lineTo(bx2,b.y-railB);c.stroke();
+   if(a.segIndex%3===0){c.strokeStyle='#c6fbf277';c.lineWidth=Math.max(1,a.w*.006);c.beginPath();c.moveTo(a.x+side*a.w*1.42,a.y+depthA*.35);c.lineTo(a.x+side*a.w*1.92,a.y+depthA*.35);c.stroke();}
+  }
   for(const side of [-1,1]){
    const ax=a.x+side*a.w*1.10,bx=b.x+side*b.w*1.10,ah=a.scale*150*H*.62,bh=b.scale*150*H*.62;
    shape(c,[[ax-4,a.y-ah],[ax+4,a.y-ah],[bx+2,b.y-bh],[bx-2,b.y-bh]],'#e5ce96');
@@ -67,6 +82,16 @@ function drawRoadFurniture(c,a,b,terrain){
    if(a.segIndex%4===0){c.fillStyle='#ffed9a';const size=Math.max(1,a.w*.025);c.fillRect(a.x+side*a.w*1.17-size,a.y-heightA*.6,size*2,size*.55);}
   }
  }
+}
+function drawCourseSign(c,x,y,k,direction){
+ if(k<.018)return;
+ const w=86*k,h=49*k,top=y-105*k;
+ c.save();c.strokeStyle='#536b77';c.lineWidth=Math.max(1,7*k);c.beginPath();c.moveTo(x,y);c.lineTo(x,top);c.stroke();
+ rr(c,x-w/2,top-h,w,h,5*k,'#ffd259','#fff3a8');
+ c.strokeStyle='#473c2c';c.lineWidth=Math.max(1,7*k);c.lineJoin='round';c.lineCap='round';c.beginPath();
+ if(direction){for(const offset of [-.22,.19]){const cx=x+offset*w;c.moveTo(cx-direction*w*.1,top-h*.78);c.lineTo(cx+direction*w*.08,top-h*.5);c.lineTo(cx-direction*w*.1,top-h*.22);}}
+ else{c.moveTo(x-w*.3,top-h*.25);c.lineTo(x+w*.15,top-h*.25);c.lineTo(x+w*.3,top-h*.72);c.moveTo(x+w*.16,top-h*.61);c.lineTo(x+w*.3,top-h*.72);c.lineTo(x+w*.4,top-h*.49);}
+ c.stroke();c.restore();
 }
 function drawTunnelPortal(c,p){
  if(p.w<4)return;const x=p.x,y=p.y,w=p.w;c.save();
@@ -102,7 +127,7 @@ function drawRaceEffects(c,s,py){
    c.strokeStyle='#fff6ab';c.lineWidth=3;
    for(let j=0;j<3;j++){const x=W*(.25+j*.25);c.beginPath();c.moveTo(x,H*.08);c.lineTo(x-14,H*.23);c.lineTo(x+8,H*.21);c.lineTo(x-12,H*.42);c.stroke();}
   }else{
-   const color={pickup:'#fff4a2',jump:'#eaffaa',boost:'#ffcb65',impact:'#f3d09b',ice:'#b7f1ff'}[fx.type]||'#efffcf';
+   const color={pickup:'#fff4a2',jump:'#eaffaa',boost:'#ffcb65',impact:'#f3d09b',ice:'#b7f1ff',landing:'#e2d1a0'}[fx.type]||'#efffcf';
    for(let j=0;j<(quality.level>0?12:7);j++){const a=j/12*Math.PI*2,r=(18+t*75)*Math.min(W/400,1.5);ellipse(c,W/2+Math.cos(a)*r,py-35+Math.sin(a)*r*.5,Math.max(1,4*(1-t)),Math.max(1,4*(1-t)),color);}
   }c.restore();
  }
