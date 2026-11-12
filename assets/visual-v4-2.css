@@ -1,0 +1,27 @@
+/* V4.2 illustrated race presentation */
+#home .hero-art{background:#0b2448 url('./kart-go-race-scene.svg') center 45%/cover no-repeat;border:3px solid #64d9ff;box-shadow:0 0 0 3px #061827,0 20px 70px #000b,0 0 45px #2cafff4a;min-height:390px}
+#home .hero-art canvas{opacity:0;pointer-events:none}
+#home .hero-art:after{background:linear-gradient(180deg,transparent 42%,#051323ba 100%)}
+#home .art-tag{background:linear-gradient(135deg,#071c32f2,#102e45f0);border:1px solid #ffcb63;color:#fff;box-shadow:0 8px 30px #0008}
+#home .art-tag strong{font-size:clamp(13px,1.4vw,18px);text-transform:uppercase;letter-spacing:.4px}
+#home .art-tag small{color:#d9e5ef}
+#home .float-tag{background:linear-gradient(130deg,#ffeb4e,#ff9e15);border:2px solid #fff4aa;box-shadow:0 7px 24px #0008;color:#1a2540;font-weight:1000}
+#home .hub-card{position:relative;overflow:hidden;border:2px solid #45bfff75;background:linear-gradient(145deg,#174e7b,#091e3b 70%);min-height:135px}
+#home .hub-card:nth-child(2){border-color:#ca68ff85;background:linear-gradient(145deg,#6532a5,#191044 70%)}
+#home .hub-card:nth-child(3){border-color:#8bff5c85;background:linear-gradient(145deg,#2d7d4d,#092f28 70%)}
+#home .hub-card:before{content:'';position:absolute;inset:0;background:linear-gradient(125deg,#ffffff25,transparent 38%,#ffffff0c 65%,transparent);pointer-events:none}
+#home .hub-card>span{font-size:clamp(34px,4vw,52px);line-height:1.3}
+#home .hub-card strong{font-size:clamp(12px,1.5vw,17px);text-transform:uppercase}
+#home .hero h1{font-weight:1000}
+#modal .avatar-option{position:relative;min-height:118px;border-radius:20px;overflow:hidden}
+#modal .avatar-option:nth-child(1){background:radial-gradient(circle at 50% 20%,#79dbff,#153a75 80%)}
+#modal .avatar-option:nth-child(2){background:radial-gradient(circle at 50% 20%,#b2a8ff,#261c55 80%)}
+#modal .avatar-option:nth-child(3){background:radial-gradient(circle at 50% 20%,#ffca75,#7c391d 80%)}
+#modal .avatar-option:nth-child(4){background:radial-gradient(circle at 50% 20%,#fafafa,#3a4059 80%)}
+#modal .avatar-option:nth-child(5){background:radial-gradient(circle at 50% 20%,#9aff82,#1d6445 80%)}
+#modal .avatar-option:nth-child(6){background:radial-gradient(circle at 50% 20%,#85f7ff,#164875 80%)}
+#modal .avatar-option .portrait{font-size:clamp(39px,7vw,60px);transform:translateY(-3px);filter:drop-shadow(0 8px 4px #0007)}
+#modal .avatar-option[aria-pressed=true]{border:3px solid #f6ff71;box-shadow:0 0 0 3px #d6ff4160,0 0 24px #9aff3a60}
+#modal .avatar-option[aria-pressed=true]:after{content:'✓';position:absolute;right:7px;top:6px;background:#e2ff4b;color:#132a20;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-weight:900}
+@media(max-width:800px){#home .hero-art{min-height:350px;height:clamp(350px,75vw,520px)}#home .hero-art{background-position:50% 40%}#home .hero-actions{flex-wrap:wrap}#home .hero-actions .primary{flex:1;justify-content:center}}
+@media(max-width:450px){#home .hero-art{min-height:315px;height:345px}#home .hero h1{font-size:clamp(40px,11vw,60px)}#home .hero-actions .primary{font-size:12px;gap:14px}#home .hub-card{min-height:120px}}
