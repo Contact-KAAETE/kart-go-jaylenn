@@ -1,0 +1,12 @@
+{
+  "name": "kart-go-jaylenn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/online-controls.mjs && node tests/qr-roundtrip.mjs",
+    "test:live": "node tests/multiplayer-live.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.0"
+  }
+}
