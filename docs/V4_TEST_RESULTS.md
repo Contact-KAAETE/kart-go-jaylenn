@@ -31,4 +31,4 @@ Geteste kandidaat: ontwikkeltak work/kart-go-v4-20261111, 11–12 november 2026.
 - Zandkansen tijdelijk gelijk verdeeld; XP500 perlevel en glitter naeersteoverwinning zijn expliciete implementatiekeuzes voor nognietgedetailleerde beloningen.
 
 ## Publicatie
-Nog te verifiëren na samenvoegen: GitHub Pages-build en actuele HTTPS-game. De precieze livecontrole wordt in KART_GO_WORK_STATUS.md vastgelegd.
+Geverifieerd12november: Pages-run43155478534 completed/success op8f0fab77859279f04cdc335bede7f14877379093; rootHTTP200/V4 en alle6 runtime-assets SHA-256 identiek aan geteste bron. Compatibiliteitsroutes200. Echte live race1 en race21 gestart en gas gebruikt, pauze/hervat/wereldkaart en tekstimport bevestigd. Details in KART_GO_WORK_STATUS.md.

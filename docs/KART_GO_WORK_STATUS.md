@@ -1,5 +1,7 @@
 # KART GO V4.0 — voortgang
 
+**Actueel 12 november 2026: singleplayer V4 staat live en is online getest.** Online vrienden/multiplayer zijn niet gerealiseerd en blijven afzonderlijk open. Speellink: https://contact-kaaete.github.io/kart-go-jaylenn/ . Gepubliceerde gamecommit:8f0fab77859279f04cdc335bede7f14877379093. Laatste main-commit bevat dit verificatieverslag.
+
 Bedenker: Jaylenn. Opdracht: issue #1. Ontwikkeltak: `work/kart-go-v4-20261111`.
 
 ## Uitgangssituatie en audit
@@ -62,3 +64,34 @@ Nu exportdialoog met download én complete kopieerbare back-uptekst; import onde
 
 ## Fase8 — volgende concrete stap
 Geteste ontwikkeltak veilig fast-forwarden naar main (verwachte oudehead1359ca4), Pages-build afwachten en de daadwerkelijke officiële URL openen/spelen. Daarna exacte publicatiecommit en live-resultaat hieronder vastleggen. Onlinewerk blijft open als afzonderlijke vervolgfase in issue1.
+
+
+## Fase8 — publicatie geverifieerd
+Ontwikkeltak veilig gefast-forward naar main, vanaf gecontroleerde oudehead1359ca4753eabb9af02aad122c741f592c9bad62. Geen forcepush. Beide back-uptakken blijven bestaan.
+
+GitHub Pages-run43155478534 op gamecommit8f0fab77859279f04cdc335bede7f14877379093 is **completed/success**.
+- Officiële rootURL HTTP200 en V4.0 zichtbaar.
+- Alle6 stylesheet/scripts HTTP200, SHA-256 identiek aan geteste lokale bestanden (style, QR, player, scenery, desert, game).
+- Oude routes friends-prototype.html, preview-vrienden/ en preview-vrienden/friends-prototype.html HTTP200 met doorverwijzing naar echte game.
+- Echte livebrowser: Start→testalias kiezen→race1. Gas vasthouden liet kart versnellen tot58km/u; bots verschenen en verplaatsten. Pauze/hervat en terugwereldkaart werkten.
+- Op de liveURL een expliciete TEST-back-up met wins1–20 geïmporteerd via plakken, vervolgens via wereldkaart level21 gestart en werkelijk geaccelereerd (66km/u). Deze testdata staat uitsluitend in de remote testbrowser, niet op Jaylenns iPhone en niet in GitHub/de spelbron. Opslag van echte spelers is niet veranderd.
+- Geen fout uit een spelbestand in de browserconsole gezien; cloudbrowserextensie gaf eigen metadatawaarschuwingen. Geen spel404 of ontbrekende asset.
+- Screenshot van liveZandwereld opgeslagen als bewijs. Geen fysieke iPhone/Safaritest; geen hardwareFPS-claim.
+
+## Opgeslagen fasen
+| Fase | GitHub-commit |
+|---|---|
+|1 audit/touch |9af1790cb7ff6ce1cf62bf32f4a566895fecaf9d|
+|2 profiel/garage |394389bf6c427c55afbb831451ee91f58504805c|
+|3 items/effecten |ace6394c6db3cf5ac216c9e44c3f278ee7af0256|
+|4 zandwereld |dcb35d2100b44dc626768c0f59b57037109d62ae|
+|5/6 onlineonderzoek +7 herstel |4f9f9efc5e158efde185ffe5a6e79b34c187fba3|
+|7 verificatie/back-up |8f0fab77859279f04cdc335bede7f14877379093|
+
+## Wat nog open is (niet als werkend opgeleverd)
+1. Echte online identiteit, veilige vriendschapsverzoeken, acceptatie, verwijderen, scannen en afgeschermd zoeken.
+2. Private6speler-lobby en autoritatieve realtime-races; geen backend geactiveerd. Zie ONLINE_PLAN.md; nieuwe dienst met persoonsgegevens vereist toestemming.
+3. Jaylenns nog te kiezen bijzondere aanval voor Pizzaman. De gewone Pizzaman-eindrace werkt al.
+4. Fysieke iPhone/Android-test, Safari bestandsdownload/keuze en daadwerkelijke apparaatprestaties. Kopieer/plak-back-up is end-to-end getest en beschikbaar.
+
+Volgende Work-sessie: lees issue1 en dit document; bouw voort op laatste main. Offlinegame niet opnieuw bouwen. Alleen onlinefase activeren na concrete goedkeuring van dienst/gegevensbeheer; geen kosten starten.
