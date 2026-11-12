@@ -6,7 +6,7 @@ const PAINTS={"🔴": "#f56a48", "🔵": "#579be4", "🟢": "#78b747", "🟡": "
 const safeText=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function newFriendCode(){const bytes=new Uint8Array(12);crypto.getRandomValues(bytes);return 'KG-'+[...bytes].map(v=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[v%32]).join('');}
 function cleanPlayer(p={}){
- return{name:typeof p.name==='string'?p.name.replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,16):'',avatar:AVATARS.includes(p.avatar)?p.avatar:AVATARS[0],helmet:/^#[\da-f]{6}$/i.test(p.helmet)?p.helmet:'#306b4c',color:/^#[\da-f]{6}$/i.test(p.color)?p.color:PAINTS[p.paint]||'#f56a48',kart:'classic',effect:['none','glitter','splash','boem'].includes(p.effect)?p.effect:'none',code:/^KG-[A-HJ-NP-Z2-9]{6,16}$/.test(p.code)?p.code:newFriendCode()};
+ return{name:typeof p.name==='string'?p.name.replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,16):'',avatar:AVATARS.includes(p.avatar)?p.avatar:AVATARS[0],helmet:/^#[\da-f]{6}$/i.test(p.helmet)?p.helmet:'#306b4c',color:/^#[\da-f]{6}$/i.test(p.color)?p.color:PAINTS[p.paint]||'#f56a48',chicken:Number.isInteger(p.chicken)?Math.max(0,Math.min(2,p.chicken)):0,kart:'classic',effect:['none','glitter','splash','boem'].includes(p.effect)?p.effect:'none',code:/^KG-[A-HJ-NP-Z2-9]{6,16}$/.test(p.code)?p.code:newFriendCode()};
 }
 function reachedLevel(){return Math.min(70,Math.max(1,...saved.wins.map(n=>n+1)));}
 function xpLevel(){return 1+Math.floor(saved.xp/500);}

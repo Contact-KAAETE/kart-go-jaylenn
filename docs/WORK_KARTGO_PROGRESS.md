@@ -96,3 +96,15 @@ Volgende stap: deze kleine frontendcorrectie doorzetten en de productie-QR/uitno
 Live commit `1b825d91da91b4b90c40a5a742855de50b97a2d4`: Cloudflare Workers Builds en alle Pages-checks succesvol. Nieuwste HTML laadt assetversie ultimate-repair-2.1. In echte Chromium-browser: organisator maakt kamer, krijgt room-query; herladen en Doe mee herstelt precies één organisator; uitnodiging gekopieerd via spelknop opent juiste kamer zonder sleutelveld; tweede speler kiest Vos/blauw en verschijnt bij beide clients; herladen van tweede speler herstelt dezelfde naam/kart en houdt exact twee spelers over. Tijdelijke browsertestverbindingen netjes verlaten. Screenshot van geteste QR-wachtruimte vastgelegd; geen echte kindernamen of uitnodigingssleutels in de repository opgeslagen.
 
 Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer nodig. Resterend uit Ultimate: online vrije wereld/levelkeuze en Adventure-co-opregel, oorspronkelijke items/botsingen in online races, de complete Party-uitbreiding, fysieke iPhone/Android/camera/wifi-versus-mobieltesten. Noem het totale Ultimate-project dus nog niet afgerond.
+
+
+## 2026-11-12 — Ontwikkelcheckpoint wereldkeuze en kippen (nog niet gepubliceerd)
+- Gebruiker bevestigt dat de bestaande versie daadwerkelijk op twee telefoons samen kon racen. Productiebasis: `1b825d91da91b4b90c40a5a742855de50b97a2d4`.
+- Herstelpunt: `backup/pre-world-rollout-1b825d9-20261112`. Ontwikkeltak: `work/worlds-chicken-riders-20261112`.
+- Originele Blender-bronnen en zeven geoptimaliseerde WebP-assets: drie knotsgekke racekippen (kaart + achteraanzicht) en een paarse reuzenkat, onder `assets/graphics/chickens/`. Geen betaalde generaties of externe modellen.
+- Gedeelde servergestuurde parcoursen voor 70 oorspronkelijke levels plus vijf Party-races. Vier werelden in vaste volgorde: groen, zand, ijs, Party. Vrij racen en Avontuur blijven apart.
+- Kippenkeuze met bestaande coureur op het zadel geïntegreerd in Party en online garage/race. Originele singleplayerbestanden en beide opslagstructuren behouden; speler krijgt uitsluitend een extra gevalideerd `chicken`-veld.
+- Online wereld-/levelkeuze, drie motoren, drie inventarisplaatsen, power-ups, gezamenlijke kat/checkpoint en dezelfde kamer tussen races.
+- Getest: bestaande DOM/multitouch/QR-tests en Miniflare-regressietests slagen; Party-race met vos op Disco Tok in de browser gezien. Nieuwe wereldspecifieke tests en mobiele controle zijn nog vereist vóór samenvoegen.
+- Nog open: uitgebreidere feestomgeving, tests nieuwe spelregels en werkelijke live uitrol/controle. Dit checkpoint is geen oplevering.
+- Volgende stap: nieuwe simulatie- en twee-clienttests afronden; daarna gecontroleerd main publiceren en Pages én Worker controleren.
