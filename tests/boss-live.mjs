@@ -4,7 +4,7 @@ import '../assets/race-worlds.js';
 const K=globalThis.KartWorlds,api='https://kart-go-jaylenn.thijs30051970.workers.dev',clients=[];let driving;
 const last=(c,t)=>c.messages.filter(m=>m.type===t).at(-1),wait=async(f,label,ms=15000)=>{const end=Date.now()+ms;while(!f()){if(Date.now()>end)throw Error('Timeout '+label);await new Promise(r=>setTimeout(r,25));}};
 try{
- const health=await(await fetch(api+'/health')).json();assert.equal(health.version,'boss-fair-4.1');
+ const health=await(await fetch(api+'/health')).json();assert.equal(health.version,'family-racers-4.2');
  const invite=await(await fetch(api+'/rooms',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({selection:{level:20,mode:'free'}})})).json();
  for(let i=0;i<2;i++){const c={messages:[]};c.ws=new WebSocket(api.replace('https:','wss:')+'/rooms/'+invite.room+'/connect?secret='+invite.secret);c.send=m=>c.ws.send(JSON.stringify(m));c.ws.onmessage=e=>c.messages.push(JSON.parse(e.data));clients.push(c);await wait(()=>last(c,'welcome'),'welcome');c.id=last(c,'welcome').id;c.send({type:'profile',name:'Boss QA '+i,engine:1000,avatar:i,color:i});}
  const[a,b]=clients;await wait(()=>last(a,'lobby')?.players.every(p=>p.engine===1000),'profiles');for(const c of clients)c.send({type:'ready',ready:true});await wait(()=>last(a,'lobby').canStart,'ready');a.send({type:'start'});await wait(()=>last(a,'snapshot')&&last(b,'snapshot'),'grid');const grid=last(a,'snapshot');assert.equal(grid.npcs[0].d,0);assert.ok(grid.players.every(p=>p.d===0));assert.ok(grid.npcs[0].x<grid.players[0].x);assert.equal(last(a,'countdown').startAt,last(b,'countdown').startAt);

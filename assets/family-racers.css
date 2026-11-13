@@ -1,0 +1,4 @@
+/* Only the two new family portraits; existing art, controls and course styling stay intact. */
+.portrait-sprite.family-racer{background-image:url('./graphics/family-front-v7.webp?v=family-1');background-size:440% auto;background-repeat:no-repeat}
+.portrait-sprite.family-racer.family-0{background-position:17% 0}
+.portrait-sprite.family-racer.family-1{background-position:83% 0}

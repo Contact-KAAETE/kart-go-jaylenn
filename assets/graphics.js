@@ -1,8 +1,8 @@
 /* V5 raster presentation. Physics, level rules and saved avatar IDs stay in the original engine. */
 'use strict';
-const RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat'];
+const RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat','Jaylenn','Ezra'];
 function racerIndex(avatar){return Math.max(0,AVATARS.indexOf(avatar));}
-function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);return `<span class="portrait-sprite ${i>=6?'extra-racer':''} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
+function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);if(i>=12)return `<span class="portrait-sprite family-racer family-${i-12} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;return `<span class="portrait-sprite ${i>=6?'extra-racer':''} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
 function powerMarkup(item){const i=[1,2,3,4,6,5][item]??0;return `<span class="power-sprite" style="background-position:${(i%5)*25}% ${i>=5?100:0}%" aria-hidden="true"></span>`;}
 function showWorldMap(){
  $('#home').classList.add('world-open');$('#worldPanel').classList.remove('hidden');$('#home .hero').classList.add('hidden');$('#home .player-hub').classList.add('hidden');$('#home .menu-tools').classList.add('hidden');renderMap();window.scrollTo?.({top:0,behavior:'smooth'});
@@ -30,7 +30,7 @@ function recolorKartPixels(data,color){
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map(),counts={karts:0,drivers:0,scenery:0,landscapes:0,effects:0,terrain:0};let loadingRace=false,allowFallback=false;
  const files={menu:'menu',characters:'characters',charactersExtra:'characters-extra',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain',winter:'winter',iceprops:'iceprops',burger:'burger'};
- const source=name=>name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
+ const source=name=>name==='familyFront'?'./assets/graphics/family-front-v7.webp?v=family-1':name==='familyRear'?'./assets/graphics/family-rear-v7.webp?v=family-1':name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
  function image(name){const im=pictures.get(name);return im?.naturalWidth?im:null;}
  function load(name){
   if(typeof Image==='undefined')return Promise.resolve(null);if(pending.has(name))return pending.get(name);
@@ -41,11 +41,15 @@ const GFX=(()=>{
   const sw=im.naturalWidth/columns,sh=im.naturalHeight/rows,cv=document.createElement('canvas');cv.width=Math.round(sw);cv.height=Math.round(sh);cv.getContext('2d').drawImage(im,index%columns*sw,Math.floor(index/columns)*sh,sw,sh,0,0,cv.width,cv.height);frames.set(key,cv);return cv;
  }
  function coloredKart(index,color){const key=index+':'+color;if(tinted.has(key))return tinted.get(key);const base=tile('karts',3,2,index);if(!base)return null;const cv=document.createElement('canvas');cv.width=base.width;cv.height=base.height;const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(base,0,0);const pixels=c.getImageData(0,0,cv.width,cv.height);recolorKartPixels(pixels.data,color);c.putImageData(pixels,0,0);if(tinted.size>30)tinted.delete(tinted.keys().next().value);tinted.set(key,cv);return cv;}
- function driverSprite(avatar,rear=false){const i=racerIndex(avatar);return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
+ function familyIndex(avatar){const i=AVATARS.indexOf(avatar);return i>=12&&i<14?i-12:-1;}
+ function racerAssets(avatar){return familyIndex(avatar)>=0?['familyFront','familyRear']:racerIndex(avatar)>=6?['charactersExtra']:[];}
+ function driverSprite(avatar,rear=false){const i=racerIndex(avatar);if(i>=12){const key='family-driver:'+i+':'+rear;if(frames.has(key))return frames.get(key);const src=tile(rear?'familyRear':'familyFront',2,1,i-12);if(!src)return null;const cv=document.createElement('canvas');cv.width=256;cv.height=256;cv.getContext('2d').drawImage(src,src.width*.2,0,src.width*.6,src.height*.56,0,0,256,256);frames.set(key,cv);return cv;}return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
+ function drawFamilyKart(c,x,y,scale,index,steer,angle){const rear=angle===null||angle<3,src=tile(rear?'familyRear':'familyFront',2,1,index);if(!src)return false;const size=rear?174:158;c.save();c.translate(x,y);c.rotate((steer||0)*.035);ellipse(c,0,3*scale,57*scale,11*scale,'#071b2c4f');c.drawImage(src,-size/2*scale,(16-size)*scale,size*scale,size*scale);c.restore();counts.karts++;counts.drivers++;return true;}
  const kartFx={lastAir:0};
  function drawKart(c,x,y,scale,color,dog,steer,player,angle=null){
   if(scale<.015)return true;
   if(dog){const boss=dog===true?(tile('dogRear',1,1,0)||tile('bosses',2,2,1)):dog==='burger'?tile('burger',2,1,1):tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.drawImage(boss,-77*scale,-138*scale,154*scale,154*scale);c.restore();return true;}
+  const family=familyIndex(player?.avatar);if(family>=0)return drawFamilyKart(c,x,y,scale,family,steer,angle);
   const variant=angle===null?(steer<-.23?0:steer>.23?2:1):angle;
   const kart=coloredKart(variant,color),driver=driverSprite(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4],variant<3);if(!kart||!driver)return false;counts.karts++;counts.drivers++;
   // Lightweight suspension, steering lean and driver reactions. No new assets or engine.
@@ -135,17 +139,17 @@ const GFX=(()=>{
   stamp([[0,a.y+1],[a.x-a.w*1.1,a.y+1],[b.x-b.w*1.1,b.y],[0,b.y]],ground,0,W,opacity);
   stamp([[a.x+a.w*1.1,a.y+1],[W,a.y+1],[W,b.y],[b.x+b.w*1.1,b.y]],ground,0,W,opacity);
  }
- function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...(racerIndex(saved.player.avatar)>=6?['charactersExtra']:[]),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
+ function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
  function prepare(level,callback){
   if(loadingRace)return;loadingRace=true;showModal('<div class="loading-art"><span class="eyebrow">JE RACEWERELD WORDT KLAARGEZET</span><h2>Even de motor warmdraaien…</h2><div class="loading-wheel"></div><p>De nieuwe karts en omgeving worden geladen.</p></div>');
-  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...(racerIndex(saved.player.avatar)>=6?['charactersExtra']:[]),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
+  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
  }
  function init(){
   $('#openWorldMap').onclick=showWorldMap;$('#closeWorldMap').onclick=showHomeMenu;$('#menuSettings').onclick=settings;
   $('#home .brand').onclick=e=>{e.preventDefault();showHomeMenu();};
   if(typeof Image==='undefined')return;$('#assetStatus').textContent='Nieuwe racegraphics laden…';
-  Promise.all(['menu','characters'].map(load)).then(()=>{$('#assetStatus').textContent='';renderPlayer();}).catch(()=>{$('#assetStatus').textContent='Een beeldbestand ontbreekt. Herlaad bij een trage verbinding.';});
+  Promise.all(['menu','characters',...racerAssets(saved.player.avatar)].map(load)).then(()=>{$('#assetStatus').textContent='';renderPlayer();}).catch(()=>{$('#assetStatus').textContent='Een beeldbestand ontbreekt. Herlaad bij een trage verbinding.';});
  }
  function metrics(){return{...counts,loaded:[...pictures.keys()],frameCache:frames.size,tintCache:tinted.size,decodedBytes:[...pictures.values()].reduce((n,im)=>n+im.naturalWidth*im.naturalHeight*4,0)};}function resetMetrics(){for(const k of Object.keys(counts))counts[k]=0;}
- return {metrics,resetMetrics,image,load,tile,driverSprite,drawKart,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
+ return {metrics,resetMetrics,image,load,tile,driverSprite,drawKart,familyIndex,racerAssets,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
 })();

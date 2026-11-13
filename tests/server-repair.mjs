@@ -5,7 +5,7 @@ const wait=async(check,label,ms=10000)=>{const end=Date.now()+ms;while(!check())
 const last=(c,type)=>c.messages.filter(m=>m.type===type).at(-1);
 async function open(invitation,resume){const url=new URL('http://local/rooms/'+invitation.room+'/connect');url.searchParams.set('secret',invitation.secret);if(resume)url.searchParams.set('resume',resume);const result=await mf.dispatchFetch(url,{headers:{Upgrade:'websocket',Origin:'https://contact-kaaete.github.io'}});if(result.status!==101)return result;const c={ws:result.webSocket,messages:[]};c.ws.accept();c.ws.addEventListener('message',e=>c.messages.push(JSON.parse(e.data)));c.send=m=>c.ws.send(JSON.stringify(m));clients.push(c);await wait(()=>last(c,'welcome'),'welcome');return c;}
 try{
- const health=await(await mf.dispatchFetch('http://local/health')).json();assert.equal(health.version,'boss-fair-4.1');
+ const health=await(await mf.dispatchFetch('http://local/health')).json();assert.equal(health.version,'family-racers-4.2');
  assert.equal((await mf.dispatchFetch('http://local/rooms',{method:'POST',headers:{Origin:'https://evil.example'}})).status,403);
  const invitation=await(await mf.dispatchFetch('http://local/rooms',{method:'POST'})).json();
  assert.equal((await open({...invitation,secret:'A'.repeat(16)})).status,403);

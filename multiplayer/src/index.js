@@ -2,7 +2,7 @@ import '../../assets/race-worlds.js';
 const Worlds=globalThis.KartWorlds;
 // KART GO — Bedacht door Jaylenn. Shared online worlds, protocol 3.
 // One self-contained module for the existing Cloudflare Worker and RaceRoom binding.
-const VERSION='boss-fair-4.1', MAX=6, LENGTH=1800, TICK_MS=100;
+const VERSION='family-racers-4.2', MAX=6, LENGTH=1800, TICK_MS=100;
 const MAX_AGE=7200000, REJOIN=90000, ORIGIN='https://contact-kaaete.github.io';
 const clean=x=>String(x??'').replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,18);
 const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':ORIGIN}});
@@ -14,7 +14,7 @@ export default {
   const url=new URL(request.url),origin=request.headers.get('Origin');
   if(origin&&origin!==(env.ALLOWED_ORIGIN||ORIGIN))return reply({error:'Origin blocked'},403);
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,OPTIONS','access-control-allow-headers':'content-type'}});
-  if(url.pathname==='/health')return reply({ok:true,phase:'worlds',version:VERSION,protocol:3,maxPlayers:MAX,features:['resume','durable-rooms','explicit-host','worlds','items','chicken-riders','stunts','armed-bots']});
+  if(url.pathname==='/health')return reply({ok:true,phase:'worlds',version:VERSION,protocol:3,maxPlayers:MAX,features:['resume','durable-rooms','explicit-host','worlds','items','chicken-riders','stunts','armed-bots','family-racers']});
   if(!env.RACE_ROOMS)return reply({error:'RaceRoom binding ontbreekt.'},503);
   if(url.pathname==='/rooms'&&request.method==='POST'){
    let body={};try{const text=await request.text();if(text.length>2048)return reply({error:'Aanvraag te groot'},413);if(text)body=JSON.parse(text);}catch{return reply({error:'Ongeldige kamerkeuze'},400);}
@@ -87,7 +87,7 @@ export class RaceRoom {
   const r=this.room;
   if(now-r.created>=MAX_AGE){await this.alarm();return;}
   if(m.type==='ping'){this.send(socket,{type:'pong',time:now});return;}
-  if(m.type==='profile'&&r.phase==='lobby'){p.name=clean(m.name)||'Coureur';p.avatar=Number.isInteger(m.avatar)?Math.max(0,Math.min(11,m.avatar)):0;p.color=Number.isInteger(m.color)?Math.max(0,Math.min(19,m.color)):0;p.engine=[250,509,1000].includes(m.engine)?m.engine:250;p.chicken=Number.isInteger(m.chicken)?Math.max(0,Math.min(2,m.chicken)):0;p.wins=Array.isArray(m.wins)?[...new Set(m.wins.filter(n=>Number.isInteger(n)&&n>=1&&n<=75))].slice(0,75):[];p.ready=false;}
+  if(m.type==='profile'&&r.phase==='lobby'){p.name=clean(m.name)||'Coureur';p.avatar=Number.isInteger(m.avatar)?Math.max(0,Math.min(13,m.avatar)):0;p.color=Number.isInteger(m.color)?Math.max(0,Math.min(19,m.color)):0;p.engine=[250,509,1000].includes(m.engine)?m.engine:250;p.chicken=Number.isInteger(m.chicken)?Math.max(0,Math.min(2,m.chicken)):0;p.wins=Array.isArray(m.wins)?[...new Set(m.wins.filter(n=>Number.isInteger(n)&&n>=1&&n<=75))].slice(0,75):[];p.ready=false;}
   else if(m.type==='selection'&&id===r.hostId&&['lobby','done'].includes(r.phase)){r.selection=Worlds.selection(m.selection);r.phase='lobby';for(const p of r.players)p.ready=false;}
   else if(m.type==='use'&&r.phase==='race'&&now>=r.startAt){Worlds.use(r,p,m.slot);return;}
   else if(m.type==='jump'&&r.phase==='race'&&r.selection.world===4&&now>=r.startAt){if(p.jump<=0&&p.penalty<=0)Worlds.launch(p);return;}

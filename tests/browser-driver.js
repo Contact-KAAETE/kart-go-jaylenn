@@ -8,7 +8,7 @@ function layout(){const ids=['brake','left','right','wheel','joystick','gas'];co
 window.addEventListener('message',async e=>{
  if(e.origin!==location.origin||e.source!==parent||e.data.source!=='kartgo-local-qa')return;
  const action=e.data.action;
- try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage','charactersExtra'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
+ try{await Promise.all(['characters','karts','scenery','landscapes','effects','terrain','bosses','garage','charactersExtra','dogRear','familyFront','familyRear'].map(GFX.load));}catch(err){result(false,'graphics laden: '+err.message);return;}
  if(action.startsWith('winter')){
   try{await Promise.all(['winter','iceprops','burger'].map(GFX.load));}catch(err){result(false,'ijsbeelden: '+err.message);return;}
  }
@@ -35,10 +35,10 @@ window.addEventListener('message',async e=>{
     result(modal.scrollWidth<=modal.clientWidth+1,'geen horizontale profiel-overflow '+innerWidth);closeModal();
     start(1);state.count=0;draw();fronts.push(hash(GFX.driverSprite(avatar,false)));backs.push(hash(GFX.driverSprite(avatar,true)));
    }
-   result(new Set(fronts).size===12&&new Set(backs).size===12,'12 unieke vooraanzichten EN12 unieke race-rugaanzichten');
+   result(new Set(fronts).size===AVATARS.length&&new Set(backs).size===AVATARS.length,AVATARS.length+' unieke vooraanzichten EN rugaanzichten');
    result(cleanProgress(JSON.parse(progressText())).player.avatar===saved.player.avatar,'nieuwe coureur overleeft voortgangsexport/import');
    const swatches=Object.values(PAINTS).map(color=>{const p=new Uint8ClampedArray([220,30,50,255]);recolorKartPixels(p,color);return [...p].join();});result(new Set(swatches).size===20,'20 verschillende lakpixels inclusief wit/zwart');
-  }catch(err){result(false,'keuzes: '+err.message);}finally{saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE:12 coureurs en20 kleuren '+innerWidth+'×'+innerHeight);}
+  }catch(err){result(false,'keuzes: '+err.message);}finally{saved=prior;persist();state=null;backMap();renderPlayer();send('result','DONE:14 coureurs en20 kleuren '+innerWidth+'×'+innerHeight);}
  }else if(action==='winterSuite'){
   const prior=JSON.parse(JSON.stringify(saved));
   try{
