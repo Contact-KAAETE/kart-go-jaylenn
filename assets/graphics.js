@@ -5,10 +5,10 @@ function racerIndex(avatar){return Math.max(0,AVATARS.indexOf(avatar));}
 function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);return `<span class="portrait-sprite ${i>=6?'extra-racer':''} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
 function powerMarkup(item){const i=[1,2,3,4,6,5][item]??0;return `<span class="power-sprite" style="background-position:${(i%5)*25}% ${i>=5?100:0}%" aria-hidden="true"></span>`;}
 function showWorldMap(){
- $('#worldPanel').classList.remove('hidden');$('#home .hero').classList.add('hidden');$('#home .player-hub').classList.add('hidden');$('#home .menu-tools').classList.add('hidden');renderMap();window.scrollTo?.({top:0,behavior:'smooth'});
+ $('#home').classList.add('world-open');$('#worldPanel').classList.remove('hidden');$('#home .hero').classList.add('hidden');$('#home .player-hub').classList.add('hidden');$('#home .menu-tools').classList.add('hidden');renderMap();window.scrollTo?.({top:0,behavior:'smooth'});
 }
 function showHomeMenu(){
- $('#worldPanel').classList.add('hidden');$('#home .hero').classList.remove('hidden');$('#home .player-hub').classList.remove('hidden');$('#home .menu-tools').classList.remove('hidden');window.scrollTo?.({top:0,behavior:'smooth'});
+ $('#home').classList.remove('world-open');$('#worldPanel').classList.add('hidden');$('#home .hero').classList.remove('hidden');$('#home .player-hub').classList.remove('hidden');$('#home .menu-tools').classList.remove('hidden');window.scrollTo?.({top:0,behavior:'smooth'});
 }
 // Tint only the red lacquer. Pixel operations work without Canvas 2D filters.
 function recolorKartPixels(data,color){

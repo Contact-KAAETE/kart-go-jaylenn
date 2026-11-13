@@ -1,0 +1,405 @@
+/* KART GO — Bedacht door Jaylenn.
+   App presentation only. Existing game, input, profiles and network are retained. */
+:root{--ui-bg:#071321;--ui-panel:#11253d;--ui-line:#b4dcff25;--ui-text:#edf6ff;--ui-muted:#a8bdd4;--ui-gold:#ffce61;--ui-blue:#76d6ff;--ui-radius:26px;--ui-shadow:0 18px 50px #0004}
+body.app-home,body.app-online,body.app-party{background:radial-gradient(ellipse at 15% 0,#1a3c64 0,transparent 52%),radial-gradient(ellipse at 95% 35%,#232d58 0,transparent 52%),var(--ui-bg);color:var(--ui-text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100svh}
+body.app-home button,body.app-home a,body.app-online button,body.app-online a,body.app-party button,body.app-party a{-webkit-tap-highlight-color:transparent}
+body.app-home button:focus-visible,body.app-home a:focus-visible,body.app-online button:focus-visible,body.app-online a:focus-visible,body.app-party button:focus-visible,body.app-party a:focus-visible{outline:3px solid #ffda83;outline-offset:4px}
+.menu-icon svg,.menu-tools svg,.hero-actions svg,.party-play svg,.invite-actions svg{width:24px;height:24px;display:block;flex:none}
+body.app-home #home .primary,body.app-online .primary,body.app-party #menu .go{background:linear-gradient(180deg,#fff0b3,#ffcf61 48%,#f7b33c);border:1px solid #fff1bd;border-radius:18px;box-shadow:0 4px 0 #a77328,0 10px 24px #0003;color:#292316;min-height:54px;font-weight:850;letter-spacing:.2px;text-transform:none;text-decoration:none}
+body.app-home #home .primary::after,body.app-online .primary::after{animation:app-glint 9s 4s infinite}
+body.app-home #home .secondary,body.app-online button:not(.primary),body.app-party #menu select{border:1px solid var(--ui-line);background:linear-gradient(160deg,#253f5d,#152a43);border-radius:16px;color:var(--ui-text);box-shadow:0 3px 9px #0002}
+/* Home: an artwork-first game cover, one strong action and a compact player hub. */
+body.app-home #home.screen{width:100%;max-width:1320px;padding:0 24px 20px;margin:auto}
+body.app-home #home header{height:76px;border:0;gap:20px;padding:max(0px,env(safe-area-inset-top)) 4px 0}
+body.app-home #home .brand{font:950 italic 30px/1 system-ui;letter-spacing:-1.6px;color:white;text-shadow:0 2px 0 #153858;filter:none;transform:none}
+body.app-home #home .brand span{color:#ffd572;text-shadow:0 2px 0 #7d5b2e}
+body.app-home #home .brand i{display:none}
+body.app-home #home .byline{font-size:9px;font-weight:700;letter-spacing:1.4px;color:var(--ui-muted);text-shadow:none}
+body.app-home #home .round{width:42px;height:42px;background:#18304d;border:1px solid #ffffff26;box-shadow:inset 0 1px 0 #ffffff14;border-radius:15px;font-size:21px;color:#c9e8ff}
+body.app-home #home .hero{height:clamp(420px,63svh,650px);margin:0 0 16px;padding:0;display:block;position:relative;border:1px solid #b8dcff57;border-radius:32px;box-shadow:var(--ui-shadow);isolation:isolate;overflow:hidden}
+body.app-home #home .hero-art{position:absolute;inset:0;z-index:-2;background-position:center 51%;animation:app-camera 20s ease-in-out infinite alternate;border:0;border-radius:0;box-shadow:none}
+body.app-home #home .hero-art::after{background:linear-gradient(180deg,#02122533,transparent 33%,#06122305 51%,#071321ee 100%)}
+body.app-home #home .hero-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;padding:26px 32px;background:none;text-align:center}
+body.app-home #home .hero-copy>.eyebrow{position:absolute;top:24px;padding:7px 15px;border:1px solid #eef9ff47;box-shadow:0 4px 15px #0002;background:#102d4a99;border-radius:100px;color:#e9f6ff;font-size:10px;letter-spacing:3px;backdrop-filter:blur(10px)}
+body.app-home #home .hero h1{position:absolute;top:52px;left:0;right:0;margin:0;font:1000 italic clamp(76px,9vw,126px)/1 system-ui;letter-spacing:-6px;filter:none;text-shadow:0 3px 0 #9cbdcf,0 7px 0 #183e59,0 12px 20px #0004;-webkit-text-stroke:1px #17354c;color:#fff}
+body.app-home #home .hero h1 em{color:#ffd36c;font-style:italic;text-shadow:0 3px 0 #bd8b44,0 7px 0 #725029,0 12px 20px #0004}
+body.app-home #home .hero-copy>p{position:absolute;top:186px;margin:0;color:#e5f5ff;font-size:13px;font-weight:650;letter-spacing:1px;text-shadow:0 2px 6px #132b40}
+body.app-home #home .hero-actions{width:min(580px,100%);display:grid;grid-template-columns:1fr 1.6fr;align-items:center;gap:12px;margin:0 0 15px;padding:0}
+body.app-home #home #play{width:100%;min-width:0;font-size:20px;min-height:62px;display:flex;justify-content:space-between;padding:15px 24px;grid-column:2}
+body.app-home #home #play span{display:block;margin:0}
+body.app-home #home #resumeRace{grid-column:1;grid-row:1;min-width:0;min-height:60px;font-size:12px;line-height:1.4;padding:12px 18px;border-radius:18px;border:1px solid #c6e7ff72;background:linear-gradient(#234d70,#18344e);box-shadow:0 4px 0 #0a182b;color:white}
+body.app-home #home #resumeRace.hidden+#play{grid-column:1/-1}
+body.app-home #home #how{position:absolute;right:20px;top:21px;display:flex;gap:6px;align-items:center;min-height:36px;font-size:11px;color:#e3f3ff;padding:6px 11px;border-radius:100px;background:#0a203f9c;border:1px solid #d2ecff30;backdrop-filter:blur(10px)}
+body.app-home #home #how svg{width:17px;height:17px}body.app-home #home #how span{margin:0}
+body.app-home #home .hero-facts{padding:7px 18px;margin:0;gap:18px;border:0;box-shadow:none;background:none;color:#c1d7e9;font-size:10px;letter-spacing:.4px}
+body.app-home #home .hero-facts strong{font-size:20px;color:#ffe3a2;margin-right:5px}
+body.app-home #home .hero-facts>span+span{padding-left:18px;border-left:1px solid #c4dbef30}
+body.app-home #home .player-hub{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+body.app-home #home .hub-card{display:grid;grid-template-columns:52px 1fr;grid-template-rows:1fr 1fr;column-gap:12px;row-gap:0;min-height:91px;border:1px solid #9ccefc2d;border-radius:22px;padding:14px 16px;margin:0;text-align:left;align-items:center;background:linear-gradient(145deg,#1d3552,#10253c);box-shadow:inset 0 1px 0 #ffffff0a,0 5px 16px #0002;color:var(--ui-text);text-decoration:none;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+body.app-home #home .hub-card strong{font-size:14px;align-self:end;line-height:1.4}
+body.app-home #home .hub-card small{color:#a9c1d8;font-size:10px;align-self:start;line-height:1.6;overflow-wrap:anywhere}
+body.app-home #home .hub-card>span{grid-row:1/3;width:49px;height:49px;font-size:0;margin:0;display:grid;place-items:center}
+body.app-home #home .hub-card #playerAvatar{width:53px;height:58px;align-self:center;overflow:hidden;border-radius:14px}
+body.app-home #home .menu-icon{border-radius:15px;color:#b7dbff;background:linear-gradient(135deg,#37608a77,#183047)}
+body.app-home #home .menu-icon svg{width:27px;height:27px}
+body.app-home #home .hub-online{background:linear-gradient(145deg,#1c4e64,#13364c);border-color:#75d9eb55}
+body.app-home #home .hub-online .menu-icon{background:#5bdae11c;color:#a0f5f0}
+body.app-home #home .menu-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:8px;background:#091a2eea;border:1px solid #93bada2a;border-radius:22px;box-shadow:0 8px 25px #0003;backdrop-filter:blur(18px)}
+body.app-home #home .menu-tools button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border:0;box-shadow:none;border-radius:15px;background:transparent;color:#bcd3e8;font-size:12px;font-weight:700;transition:background .18s,color .18s}
+body.app-home #home .menu-tools button:first-child{background:#23405b8c;color:#e8f8ff}
+body.app-home #home .menu-tools button span{margin:0;color:inherit}
+body.app-home #home .menu-tools svg{width:21px;height:21px}
+body.app-home #home .party-teaser{position:relative;margin:0 0 16px;border:1px solid #b59aee3b;border-radius:24px;padding:20px 24px;background:linear-gradient(105deg,#222447,#17253e 74%);box-shadow:none;min-height:150px}
+body.app-home #home .party-teaser:before{display:none}
+body.app-home #home .party-teaser .eyebrow{color:#c3b6ee;font-size:9px;letter-spacing:2px}
+body.app-home #home .party-teaser h2{font-size:25px;color:#fff1c8;text-shadow:none;margin:8px 0 4px}
+body.app-home #home .party-teaser p{margin:0 0 10px;font-size:12px;line-height:1.6;max-width:65%;color:#bacbe0}
+body.app-home #home .party-teaser .party-mounts{position:absolute;right:12px;bottom:0;top:8px;height:auto;width:30%;float:none;opacity:.9;display:flex}
+body.app-home #home .party-teaser .party-mounts img{width:33.33%;height:100%;object-fit:contain;filter:drop-shadow(0 5px 8px #0004)}
+body.app-home #home .party-teaser .party-play{display:inline-flex;align-items:center;gap:8px;background:none;border:0;box-shadow:none;padding:0;color:#ffdf94;font-size:12px;min-height:28px}
+body.app-home #home .party-teaser .party-play svg{width:16px;height:16px}
+body.app-home #home .party-teaser .soon{display:none}
+body.app-home #home.world-open .party-teaser{display:none}
+body.app-home #home footer{padding:18px 4px 0;font-size:10px;color:#8fa9c0;gap:12px;align-items:flex-start;position:relative}
+body.app-home #home footer>span:first-child{color:#a4bad0;width:auto;font-size:10px}
+body.app-home #home footer>span:last-child{font-size:8px;color:#5f7d98;margin-left:auto}
+.save-tools{font-size:10px;color:#b9cfe2;margin-left:auto}
+.save-tools summary{cursor:pointer;min-height:32px;padding:0 3px}
+.save-tools>div{display:grid;gap:6px;background:#12283e;padding:10px;border-radius:14px;border:1px solid var(--ui-line)}
+body.app-home #home footer .text-button{min-height:40px;padding:9px 12px;color:#d6eaff;border-radius:10px;background:#27405d66;text-align:left}
+/* World map and modal screens retain their existing actions and imagery. */
+body.app-home #home .world{padding:24px;background:linear-gradient(145deg,#152e49,#0e2036);border:1px solid var(--ui-line);border-radius:28px;box-shadow:var(--ui-shadow)}
+body.app-home #home .world .section-heading h2{text-shadow:none;font-size:34px;letter-spacing:-1px}
+body.app-home #home .world-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+body.app-home #home .world-tabs button,body.app-home #home .party-world-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;min-height:150px;padding:18px 14px;border-radius:20px;border:1px solid #afd9ff51;box-shadow:0 4px 16px #0002;background:linear-gradient(0deg,#09232c 0%,#112e3533 65%),url('./graphics/landscapes-v5.webp') center top/cover;color:white;font-size:14px;font-weight:800;text-shadow:0 2px 4px #0009}
+body.app-home #home .world-tabs button[data-world="2"]{background:linear-gradient(0deg,#3c2717 0%,#42312411 65%),url('./graphics/landscapes-v5.webp') center bottom/cover;border-color:#e9c48955}
+body.app-home #home .world-tabs button[data-world="3"]{background:linear-gradient(0deg,#123251 0%,#18395111 65%),url('./graphics/winter-v6.webp') center/cover;border-color:#80d8f966}
+body.app-home #home .party-world-card{background:linear-gradient(0deg,#2d194e 0%,#31233c11 75%),url('./graphics/chickens/party-fairground.webp') center/cover;border-color:#d6b0ee66}
+body.app-home #home .world-tabs .selected{border-color:#ffe19b;box-shadow:0 0 0 2px #ffe19b55,0 8px 20px #0004;transform:none}
+body.app-home #home .world-tabs small{color:#e1ebfa;font-size:10px;font-weight:500;margin-top:5px}
+body.app-home #home .route-line{display:none}
+body.app-home #home .levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:20px}
+body.app-home #home .level{border:1px solid #87b6d137;box-shadow:inset 0 1px 0 #fff1,0 4px 12px #0002;border-radius:18px;background:linear-gradient(140deg,#254562,#132f4a);min-height:106px;padding:16px 8px 12px}
+body.app-home #home .level b{text-shadow:none;font-size:26px}
+body.app-home #home .level small{font-size:10px;line-height:1.5;color:#c8dbed}
+body.app-home #home .level.locked{opacity:.55}
+body.app-home #home .level.next{background:linear-gradient(#ffe69f,#e9b34d);border-color:#ffeab3;box-shadow:0 4px 12px #0002}
+body.app-home #home .level.next b,body.app-home #home .level.next small{color:#382e20}
+body.app-home #home .level.won{background:linear-gradient(#275d62,#173c49);border-color:#65b8ad88}
+body.app-home #home .level.boss{background:linear-gradient(#5b3b51,#322e4a);border-color:#dbab8f77}
+body.app-home #modal{border-radius:30px;border:1px solid #9bcbf049;background:radial-gradient(ellipse at 20% 0,#214563,transparent 55%),#10243a;box-shadow:0 30px 100px #0009;padding:34px;max-height:calc(100svh - 36px);overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#627b96 #10243a}
+body.app-home #modal::backdrop{background:#020b19ca;backdrop-filter:blur(12px)}
+body.app-home #modal h2{font-size:32px;letter-spacing:-.9px;line-height:1.15;margin:10px 0 14px}
+body.app-home #modal .close{width:40px;height:40px;top:15px;right:15px;border-radius:14px;background:#2b46627a;border:1px solid #b9d5ed33;color:#f1f9ff;font-size:25px}
+body.app-home #modal .eyebrow{padding-right:40px;font-size:9px;letter-spacing:2px;color:#8fcde9}
+body.app-home #modal p{color:#b7cce0;font-size:13px;line-height:1.7}
+body.app-home #modal input:not([type=color]),body.app-home #modal select,body.app-home #modal textarea{min-height:50px;border:1px solid #abcfee40;border-radius:15px;background:#081b2c;color:#f5faff;box-shadow:inset 0 2px 6px #0002;padding:12px 14px;font-size:16px}
+body.app-home #modal button:not(.close):not(.avatar-option):not([data-paint]){border-radius:15px;min-height:46px;transition:background .18s,border-color .18s}
+body.app-home #modal .choice{padding:16px;margin:8px 0;background:#1d3853;border:1px solid #9cc5e633;color:#dfeefa;border-radius:16px}
+body.app-home #modal .choice.selected{background:#2b5062;border-color:#8ee2d9;color:#edfffa}
+body.app-home #modal .profile-stage{padding:15px;background:radial-gradient(ellipse at 25% 0,#42698b66,#122a42 75%);border:1px solid #ffffff16;border-radius:24px}
+body.app-home #modal .avatar-option{border:1px solid #a3c7e834;background:linear-gradient(145deg,#27425c,#132d45);border-radius:18px;box-shadow:0 3px 12px #0002;min-height:136px}
+body.app-home #modal .avatar-option[aria-pressed=true]{border:2px solid #ffdf92;box-shadow:0 0 0 3px #f3cb6a22;transform:none}
+body.app-home #modal #garageArt{border:1px solid #9bcde93d;border-radius:22px;box-shadow:0 10px 30px #0003}
+body.app-home #modal .garage-angle{gap:6px;flex-wrap:wrap}
+body.app-home #modal .garage-angle button{padding:8px 13px;min-height:40px;font-size:11px;background:#1f3e58;border:1px solid #91c2de3a}
+body.app-home #modal .garage-effects button{border-radius:17px;background:linear-gradient(#254760,#173149);border:1px solid #9ecfe43b;box-shadow:none}
+body.app-home #modal .garage-effects button[aria-pressed=true]{border-color:#ffdf91;box-shadow:0 0 0 2px #f7d47725}
+body.app-home #modal .paint-row{gap:10px}
+body.app-home #modal .paint-row button{width:38px;height:38px;min-height:38px;padding:0;border-radius:50%;border:3px solid #e2edf3;box-shadow:0 2px 6px #0005}
+body.app-home #modal .paint-row button[aria-pressed=true]{outline:3px solid #f8d889;outline-offset:3px}
+/* Online setup and private race room. No styling of driving geometry or controls. */
+body.app-online>header,body.app-party>header{max-width:1180px;width:100%;margin:auto;min-height:74px;height:auto;padding:18px 22px;gap:20px;border:0;display:flex;justify-content:space-between;align-items:center;background:transparent}
+body.app-online>header .brand,body.app-party>header .logo{font:950 italic 28px/1 system-ui;letter-spacing:-1.4px;color:#f2f9ff;text-shadow:0 2px 0 #153850}
+body.app-online>header .brand span,body.app-party>header .logo span{color:#ffcf6c}
+body.app-online>header small{color:#9db4ce;font-size:9px;font-weight:650;letter-spacing:1.4px}
+body.app-online>header>a:last-child,body.app-party>header>a:last-child{min-height:40px;display:flex;align-items:center;border:1px solid #a4c8e229;background:#1930497a;border-radius:14px;padding:10px 13px;color:#c4def0;font-size:12px}
+body.app-online:not(.online-racing)>main{max-width:1180px;padding:4px 22px 24px;margin:auto}
+body.app-online #setup,body.app-online #lobby{background:linear-gradient(140deg,#152e48ee,#0d2138f5);border:1px solid #9bc6ee30;border-radius:30px;box-shadow:var(--ui-shadow);padding:30px;margin-bottom:16px}
+body.app-online #setup h1{font-size:clamp(34px,5vw,54px);line-height:1.06;letter-spacing:-1.7px;margin:12px 0}
+body.app-online .eyebrow,.step-label{display:block;color:#91c9e9;font-size:9px;font-weight:800;letter-spacing:2px;line-height:1.7}
+body.app-online #intro{color:#b5ccdf;font-size:14px;margin:0 0 25px;line-height:1.7}
+body.app-online .setup-layout{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}
+body.app-online .course-pick{margin:0 0 20px;background:#091d3199;padding:18px;border:1px solid #9eb7de21;border-radius:22px}
+body.app-online .course-pick>.step-label{margin-bottom:16px}
+body.app-online .profile{display:grid;grid-template-columns:1fr;gap:0}
+body.app-online .profile>.step-label{grid-column:1/-1;margin:0 0 6px}
+body.app-online .profile canvas{height:195px;max-height:195px;margin:0;width:100%;object-fit:contain;border-radius:22px;background:radial-gradient(ellipse at 50% 60%,#46799c4d,transparent 70%)}
+body.app-online .profile>div{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;align-items:start}
+body.app-online .profile>div label{grid-column:1/-1;margin:12px 0 0;font-size:11px;color:#abc7df}
+body.app-online .profile>div input,body.app-online .profile>div select{grid-column:1/-1}
+body.app-online input,body.app-online select{background:#0a1d31;color:#eaf6ff;border:1px solid #9dc8e841;border-radius:14px;min-height:46px;padding:10px 12px;margin:6px 0;max-width:100%;font-size:16px}
+body.app-online label{color:#bcd1e4;font-size:12px}
+body.app-online .world-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 20px}
+body.app-online .world-card{min-height:128px;border:1px solid #a2d6ee3d;border-radius:18px;padding:67px 12px 12px;box-shadow:0 6px 16px #0003;text-shadow:0 2px 6px #0009;isolation:isolate;overflow:hidden}
+body.app-online .world-card b{font-size:12px}body.app-online .world-card small{color:#dce8fa;font-size:10px}
+body.app-online .world-card[aria-pressed=true]{border-color:#ffe29c;box-shadow:0 0 0 2px #ffe29c55,0 6px 18px #0003}
+body.app-online .world-card[data-world="4"]{background:linear-gradient(0deg,#281942ee,#17375300),url('./graphics/chickens/party-fairground.webp') center/cover}
+body.app-online #create,body.app-online #joinInvite{width:min(420px,100%);justify-content:center;font-size:16px;margin:12px 0 0;display:flex;align-items:center}
+body.app-online details{margin-top:28px;border-top:1px solid var(--ui-line);padding-top:16px}
+body.app-online summary{font-size:12px;color:#a6c8df;min-height:36px;cursor:pointer}
+body.app-online #status{min-height:0;font-size:13px;color:#c5dcec;padding:0 8px;margin:16px 0;line-height:1.65}
+body.app-online main>.note{font-size:11px;line-height:1.7;color:#839eb8;padding:0 8px;max-width:800px}
+body.app-online #lobby:not(.hidden){display:grid;grid-template-columns:minmax(0,1fr) 310px;grid-template-rows:auto auto 1fr auto auto;column-gap:28px;row-gap:16px}
+body.app-online #lobby .heading{grid-column:1/-1;grid-row:1;margin-bottom:2px;gap:14px}
+body.app-online #roomName{font-size:26px;letter-spacing:-.7px;margin:5px 0;color:#fff}
+body.app-online #connection{border:1px solid #8ce6cf44;background:#183f4380;color:#acf1df;padding:8px 12px;font-size:10px;letter-spacing:.2px}
+body.app-online #lobbySelection{grid-column:1;grid-row:2;margin:0}
+body.app-online #selectedCourse{font-size:16px;color:#f3e0ac;line-height:1.4;margin-bottom:12px}
+body.app-online .lobby-course-row{display:grid;grid-template-columns:1fr 1.1fr;gap:8px}
+body.app-online #lobbyMode{grid-column:1/-1}
+body.app-online #courseRule{display:block;margin-top:9px;font-size:10px;color:#9bbbd2}
+body.app-online #members{grid-column:1;grid-row:3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;align-content:start}
+body.app-online .member{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto auto;align-items:center;column-gap:10px;padding:14px 10px;border:1px solid #8fbadb3d;border-radius:21px;background:linear-gradient(145deg,#24415b8c,#102b4166);text-align:left;min-width:0;min-height:112px;box-shadow:inset 0 1px 0 #ffffff08}
+body.app-online .member .portrait-sprite{grid-column:1;grid-row:1/4;width:68px;height:79px;margin:0;filter:drop-shadow(0 4px 7px #0004)}
+body.app-online .member b{font-size:13px;line-height:1.5;align-self:end;overflow-wrap:anywhere}
+body.app-online .member small{font-size:9px;line-height:1.7;color:#abc6dc;overflow-wrap:anywhere}
+body.app-online .member.is-ready{border-color:#80d9bc88;background:linear-gradient(135deg,#2c635f7a,#173f4f99)}
+body.app-online .member.is-ready:after{content:'✓';position:absolute;right:9px;top:7px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#9be4c7;color:#153d33;font-size:12px;font-weight:900}
+body.app-online .invitation{grid-column:2;grid-row:2/6;display:flex;flex-direction:column;align-self:start;gap:14px;margin:0;min-width:0}
+body.app-online .qr-card{padding:20px 18px 16px;border:1px solid #a0def569;border-radius:26px;background:radial-gradient(ellipse at 50% 0,#28547e,#142d49 62%,#172b47);box-shadow:inset 0 1px 0 #ffffff16,0 10px 30px #0002;position:relative;overflow:hidden}
+body.app-online .qr-card .flag{font-size:11px;letter-spacing:9px;color:#bdd5ee;display:block;margin-bottom:9px}
+body.app-online .qr-card h2{font-size:28px;font-weight:950;font-style:italic;letter-spacing:-.6px;color:#ffdf8d;margin:0 0 4px;text-shadow:0 2px 0 #5b4930}
+body.app-online .qr-card>strong{font-size:11px;font-weight:600;color:#c5dff2}
+body.app-online #qr{width:100%;max-width:260px;margin:16px auto 12px;padding:9px;border-radius:16px;background:#fff;box-shadow:0 5px 15px #06122344}
+body.app-online .qr-card>b{font-size:12px;font-weight:750;color:#f0f8ff;margin:4px 0 6px}
+body.app-online .qr-card>small{font-size:8px;color:#87aac5;letter-spacing:1.8px}
+body.app-online .invite-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body.app-online .invite-actions p:first-child{display:none}
+body.app-online #capacity{grid-column:1/-1;margin:0;font-size:11px;color:#b3d9e7;text-align:center;padding:0 0 4px}
+body.app-online .invite-actions button{width:100%;margin:0;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:14px;font-size:11px;padding:8px;background:#1d3a56;border:1px solid #8cbed63b}
+body.app-online .invite-actions button svg{width:16px;height:16px}
+body.app-online #share{background:linear-gradient(#306c80,#234e66);border-color:#83d8e266}
+body.app-online #newRoom{grid-column:1/-1;background:none;box-shadow:none;border:0;color:#98b5cc;min-height:32px;padding:4px;font-size:10px}
+body.app-online .invite-actions>small{grid-column:1/-1;font-size:9px;line-height:1.6;text-align:center;color:#819cb6}
+body.app-online #editProfile{grid-column:1;grid-row:4;min-height:42px;font-size:11px;background:#203e5666;border:1px solid #96bfd92e;border-radius:14px;align-self:end}
+body.app-online #lobby .actions{grid-column:1;grid-row:5;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0;padding-top:6px}
+body.app-online #lobby .actions button{min-height:52px;border-radius:16px;font-size:12px;letter-spacing:0;padding:12px 10px;box-shadow:0 4px 0 #95692f,0 5px 16px #0003}
+body.app-online #lobby #start{background:linear-gradient(#a1eee0,#68c9c0);border-color:#b9faef;color:#123f40;box-shadow:0 4px 0 #2c7775}
+body.app-online #lobby #leave{grid-column:1/-1;min-height:34px;background:none;box-shadow:none;border:0;color:#9db8ce;font-size:11px}
+body.app-online #lobby .actions button:disabled{opacity:.42;filter:saturate(.5);box-shadow:none;cursor:default}
+body.app-online #lobby .chicken-cards button,body.app-online .chicken-cards button{border-radius:20px;border:1px solid #b1c9ea3d;background:radial-gradient(ellipse at top,#37567088,#172e4966);box-shadow:none}
+/* Party menu: the same rounded game shell and illustrated character stage. */
+body.app-party:not(.party-racing) main.wrap{max-width:1180px;padding:0 22px 30px;margin:auto}
+body.app-party #menu{position:relative;isolation:isolate;padding:30px;border:1px solid #abc7f135;border-radius:30px;background:linear-gradient(140deg,#1c2949f2,#10223bf2);box-shadow:var(--ui-shadow);overflow:hidden}
+body.app-party #menu:before{content:'';position:absolute;inset:0;z-index:-1;opacity:.12;background:url('./graphics/chickens/party-fairground.webp') center top/cover;mask-image:linear-gradient(#000,transparent 65%);pointer-events:none}
+body.app-party #menu .title{font-size:clamp(38px,6vw,64px);letter-spacing:-1.8px;color:#fff0c9;text-shadow:0 3px 0 #453958;margin:10px 0 12px;line-height:1.05;position:relative}
+.title-spark{font-size:26px;color:#d6bfff;margin-left:12px;vertical-align:middle}
+body.app-party #menu>a.go{display:inline-flex;align-items:center;min-height:42px;border-radius:14px;padding:10px 16px;font-size:12px;margin:3px 0}
+body.app-party #menu .lead{font-size:13px;line-height:1.7;color:#b4c9df;margin:17px 0 22px;max-width:600px}
+body.app-party #menu label{font-size:11px;color:#bfd6e9;font-weight:700}
+body.app-party #menu select{font-family:inherit;font-size:16px;min-height:46px;padding:10px 12px;border:1px solid #9cb8d342;background:#0b2037;border-radius:14px;color:#e6f6ff;max-width:100%}
+body.app-party #menu #partyMode{margin:4px 0 18px 12px}
+body.app-party #menu .party-driver{position:relative;display:grid;grid-template-columns:1.15fr 1fr;gap:10px 24px;padding:18px 22px;border:1px solid #9bb9e026;border-radius:24px;background:radial-gradient(ellipse at 28% 20%,#5d448133,#13253eaa 60%);margin-bottom:14px}
+body.app-party #menu .party-driver>.step-label{grid-column:1/-1}
+body.app-party #menu .party-driver canvas{width:100%;height:280px;object-fit:contain;filter:drop-shadow(0 12px 18px #0003)}
+body.app-party #menu .party-driver label{margin:12px 0 5px}
+body.app-party #menu .party-driver select{width:100%;margin:0}
+body.app-party #menu .party-chicken-cards{gap:10px;margin:14px 0 10px}
+body.app-party #menu .party-chicken-cards button{border-radius:20px;border:1px solid #a9bee63d;background:linear-gradient(#2a3b5a88,#1b2d4988);padding:10px;color:#e5f1ff;box-shadow:none;transition:border-color .18s,background .18s}
+body.app-party #menu .party-chicken-cards button[aria-pressed=true]{border:2px solid #ffdc92;box-shadow:0 0 0 2px #eac66918;background:linear-gradient(#55475e88,#29324b)}
+body.app-party #menu .party-chicken-cards img{height:140px;filter:drop-shadow(0 5px 7px #0003)}
+body.app-party #menu .party-chicken-cards b{font-size:12px;margin-top:4px}
+body.app-party #menu #partyStatus{font-size:11px;color:#a9bbd2;line-height:1.6;margin:10px 3px 20px}
+body.app-party #menu .cards{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+body.app-party #menu .card{position:relative;min-height:140px;border:1px solid #b1b6e747;border-radius:20px;background:linear-gradient(0deg,#172039,#232e5266),url('./graphics/chickens/party-fairground.webp') center/cover;padding:16px 12px;text-align:left;box-shadow:0 6px 15px #0002;color:#f1e8ff;display:flex;flex-direction:column;justify-content:flex-end}
+body.app-party #menu .card b{font-size:30px;line-height:1;color:#ffdc92;margin-bottom:8px}
+body.app-party #menu .card small{font-size:10px;line-height:1.45;min-height:30px;color:#d1dbee}
+body.app-party #menu .card.active{border-color:#ffdb8e;box-shadow:0 0 0 2px #f0d18155}
+body.app-party #menu .card.locked{opacity:.5}
+body.app-party #menu .party-launch{border:1px solid #d7c1ea33;border-radius:24px;background:linear-gradient(120deg,#293555,#172b45);box-shadow:none;padding:24px;margin-top:22px}
+body.app-party #menu .party-launch h2{font-size:25px;line-height:1.2;letter-spacing:-.6px;color:#fff1ca;margin:10px 0}
+body.app-party #menu .party-launch p{font-size:13px;color:#bcd0e4;line-height:1.7}
+body.app-party #menu #play{min-width:240px;padding:14px 24px;font-size:16px;margin-top:8px}
+body.app-party #menu .party-launch .note{font-size:10px;line-height:1.7;color:#859fbc;max-width:660px}
+/* Small displays get a compact game hub; detail screens scroll naturally. */
+@media(max-width:760px){
+ body.app-home #home.screen{padding:0 14px 18px}
+ body.app-home #home header{height:65px;gap:12px}
+ body.app-home #home .brand{font-size:25px}
+ body.app-home #home .byline{font-size:7px;letter-spacing:1px;margin-left:auto}
+ body.app-home #home .round{width:36px;height:36px;border-radius:13px}
+ body.app-home #home .hero{height:clamp(350px,calc(100svh - 325px),570px);border-radius:26px;margin-bottom:12px}
+ body.app-home #home .hero-art{background-position:52% 50%}
+ body.app-home #home .hero-copy{padding:18px 17px}
+ body.app-home #home .hero-copy>.eyebrow{top:18px;letter-spacing:2px;font-size:8px;padding:6px 12px}
+ body.app-home #home .hero h1{top:49px;font-size:clamp(60px,17vw,104px);letter-spacing:-4.5px}
+ body.app-home #home .hero-copy>p{top:calc(50px + 17vw);font-size:10px;letter-spacing:.4px}
+ body.app-home #home #how{top:17px;right:14px;width:31px;height:31px;min-height:31px;justify-content:center;padding:6px}
+ body.app-home #home #how span{display:none}
+ body.app-home #home .hero-actions{display:flex;flex-direction:column;gap:9px;margin-bottom:10px;width:100%}
+ body.app-home #home #play{min-height:53px;font-size:19px;padding:12px 21px;border-radius:17px;order:1}
+ body.app-home #home #resumeRace{min-height:38px;width:100%;font-size:11px;padding:8px 14px;border-radius:13px;order:2;box-shadow:none;background:#214465c9}
+ body.app-home #home .hero-facts{gap:13px;font-size:8px;padding:5px 0;letter-spacing:0}
+ body.app-home #home .hero-facts strong{font-size:16px;margin-right:4px}
+ body.app-home #home .hero-facts>span+span{padding-left:13px}
+ body.app-home #home .player-hub{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:12px}
+ body.app-home #home .hub-card{grid-template-columns:39px minmax(0,1fr);grid-template-rows:auto auto;column-gap:9px;min-height:75px;border-radius:20px;padding:12px 11px;display:grid}
+ body.app-home #home .hub-card strong{font-size:12px;line-height:1.4}
+ body.app-home #home .hub-card small{font-size:8px;line-height:1.5}
+ body.app-home #home .hub-card>span{width:36px;height:36px}
+ body.app-home #home .hub-card #playerAvatar{width:41px;height:46px;margin:0}
+ body.app-home #home .menu-icon{border-radius:12px}
+ body.app-home #home .menu-icon svg{width:23px;height:23px}
+ body.app-home #home .menu-tools{padding:6px;gap:4px;border-radius:20px;position:sticky;bottom:max(10px,env(safe-area-inset-bottom));z-index:8}
+ body.app-home #home .menu-tools button{flex-direction:column;gap:5px;font-size:9px;min-height:55px;border-radius:14px}
+ body.app-home #home .menu-tools svg{width:20px;height:20px}
+ body.app-home #home .party-teaser{padding:17px 18px;min-height:139px;margin-bottom:12px;border-radius:23px}
+ body.app-home #home .party-teaser h2{font-size:20px;margin:8px 0 5px;max-width:70%}
+ body.app-home #home .party-teaser p{font-size:10px;max-width:66%;line-height:1.6;margin:0 0 6px}
+ body.app-home #home .party-teaser .party-play{font-size:10px;gap:3px}
+ body.app-home #home .party-teaser .party-mounts{width:32%;height:auto;top:22px;right:2px}
+ body.app-home #home footer{font-size:9px;gap:8px;padding:18px 3px 0;flex-wrap:wrap}
+ body.app-home #home footer>span:first-child{font-size:9px}
+ body.app-home #home footer>span:last-child{display:none}
+ body.app-home #home .world{border-radius:24px;padding:20px 14px}
+ body.app-home #home .world .section-heading{align-items:flex-start;gap:10px}
+ body.app-home #home .world .section-heading h2{font-size:28px}
+ body.app-home #home .world-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ body.app-home #home .world-tabs button,body.app-home #home .party-world-card{min-height:118px;border-radius:18px;font-size:12px;padding:14px 11px}
+ body.app-home #home .levels{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ body.app-home #home .level{min-height:94px;border-radius:16px;padding:12px 5px}
+ body.app-home #home .level small{font-size:8px}
+ body.app-home #home .level b{font-size:24px}
+ body.app-home #modal{width:calc(100% - 20px);padding:29px 18px 20px;border-radius:27px;max-height:calc(100svh - 26px)}
+ body.app-home #modal h2{font-size:28px}
+ body.app-home #modal .avatar-option{min-height:111px;border-radius:16px}
+ body.app-home #modal .avatar-option .portrait{width:80px;height:80px}
+ body.app-home #modal .avatar-option small{font-size:9px}
+ body.app-home #modal .profile-large{width:100px;height:100px}
+ body.app-home #modal .profile-stage{padding:6px 9px;gap:8px}
+ body.app-home #modal #garageControls{grid-template-columns:1fr;gap:16px}
+ body.app-home #modal .garage-effects{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ body.app-home #modal .garage-effects button{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7px 4px;gap:4px;min-height:90px;font-size:10px}
+ body.app-home #modal .garage-effects small{font-size:8px}
+ body.app-home #modal .garage-angle button{font-size:10px;padding:8px 11px}
+ body.app-home #modal #savePlayer,body.app-home #modal #saveGarage{width:100%;min-height:52px}
+ body.app-online>header,body.app-party>header{padding:17px 16px;min-height:64px;gap:10px}
+ body.app-online>header .brand,body.app-party>header .logo{font-size:25px}
+ body.app-online>header small{font-size:7px;letter-spacing:.8px}
+ body.app-online>header>a:last-child,body.app-party>header>a:last-child{font-size:10px;min-height:36px;padding:8px 10px}
+ body.app-online:not(.online-racing)>main{padding:0 12px 22px}
+ body.app-online #setup,body.app-online #lobby{padding:22px 16px;border-radius:25px}
+ body.app-online #setup h1{font-size:36px;max-width:300px;letter-spacing:-1.4px}
+ body.app-online #intro{font-size:12px;margin-bottom:20px}
+ body.app-online .setup-layout{grid-template-columns:1fr;gap:18px}
+ body.app-online .course-pick{padding:16px;border-radius:19px;margin-bottom:0}
+ body.app-online .profile canvas{height:190px;max-height:190px}
+ body.app-online .world-card{min-height:127px;padding:66px 11px 12px;border-radius:17px}
+ body.app-online #create,body.app-online #joinInvite{width:100%;font-size:15px}
+ body.app-online #lobby:not(.hidden){display:flex;flex-direction:column;gap:16px}
+ body.app-online #lobby .heading{order:0;gap:9px;align-items:flex-start}
+ body.app-online #roomName{font-size:22px}
+ body.app-online #connection{font-size:9px;padding:7px 10px;margin:2px 0 0;max-width:112px;text-align:center;white-space:normal}
+ body.app-online #members{order:1;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ body.app-online .member{display:flex;flex-direction:column;gap:2px;min-height:148px;padding:12px 8px;text-align:center;border-radius:20px}
+ body.app-online .member .portrait-sprite{width:65px;height:75px;margin:0 auto}
+ body.app-online .member b{align-self:center;font-size:12px;line-height:1.5}
+ body.app-online .member small{font-size:8px}
+ body.app-online #lobbySelection{order:2}
+ body.app-online #selectedCourse{font-size:14px}
+ body.app-online .lobby-course-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ body.app-online .lobby-course-row select{font-size:12px;min-height:44px;padding:9px}
+ body.app-online #lobbyMode{grid-column:1/-1}
+ body.app-online .invitation{order:3;align-self:stretch;max-width:370px;width:100%;margin:auto;gap:10px}
+ body.app-online .qr-card{padding:19px 18px 15px;border-radius:25px}
+ body.app-online #qr{max-width:245px;margin:15px auto 11px}
+ body.app-online .qr-card h2{font-size:29px}
+ body.app-online .invite-actions{gap:8px}
+ body.app-online .invite-actions button{font-size:11px;min-height:44px}
+ body.app-online #editProfile{order:4;width:100%;font-size:11px}
+ body.app-online #lobby .actions{order:5;width:100%;position:sticky;bottom:max(8px,env(safe-area-inset-bottom));z-index:5;padding:10px 9px 6px;margin:0 -7px;width:calc(100% + 14px);background:#0c2238f2;backdrop-filter:blur(14px);border:1px solid #95bed82c;border-radius:21px}
+ body.app-online #lobby .actions button{font-size:12px;min-height:50px}
+ body.app-online #lobby #leave{min-height:27px;padding:4px}
+ body.app-party:not(.party-racing) main.wrap{padding:0 12px 24px}
+ body.app-party #menu{padding:23px 16px;border-radius:25px}
+ body.app-party #menu .title{font-size:43px;margin-top:12px;letter-spacing:-1.8px}
+ body.app-party #menu .lead{font-size:12px;margin:15px 0 18px}
+ body.app-party #menu #partyMode{width:100%;margin:7px 0 18px}
+ body.app-party #menu .party-driver{grid-template-columns:1fr;padding:17px 15px;gap:0;border-radius:22px}
+ body.app-party #menu .party-driver canvas{height:220px;margin:-8px 0}
+ body.app-party #menu .party-chicken-cards{gap:7px;margin-top:12px}
+ body.app-party #menu .party-chicken-cards button{padding:7px 5px;border-radius:18px}
+ body.app-party #menu .party-chicken-cards img{height:100px}
+ body.app-party #menu .party-chicken-cards b{font-size:9px;min-height:26px}
+ body.app-party #menu .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ body.app-party #menu .card{min-height:130px;border-radius:18px;padding:14px 12px}
+ body.app-party #menu .card:last-child{grid-column:1/-1;min-height:111px;background-position:center 60%}
+ body.app-party #menu .card b{font-size:30px}
+ body.app-party #menu .card small{font-size:11px;min-height:0}
+ body.app-party #menu .party-launch{padding:21px 16px;border-radius:22px;margin-top:20px}
+ body.app-party #menu .party-launch h2{font-size:24px}
+ body.app-party #menu .party-launch p{font-size:12px}
+ body.app-party #menu #play{width:100%;min-width:0;min-height:54px;font-size:16px;padding:14px}
+}
+@media(min-width:761px){
+ body.app-home #home .party-teaser{margin-top:0;min-height:135px}
+ body.app-home #home .menu-tools{margin-bottom:0}
+}
+@media(max-width:360px){
+ body.app-home #home.screen{padding:0 10px 16px}
+ body.app-home #home .byline{font-size:6px;letter-spacing:.5px}
+ body.app-home #home .hero{height:360px}
+ body.app-home #home .hero h1{font-size:59px;letter-spacing:-4px}
+ body.app-home #home .hero-copy>.eyebrow{font-size:7px;letter-spacing:1.5px}
+ body.app-home #home .hero-copy>p{top:113px;font-size:9px}
+ body.app-home #home .hub-card{padding:10px 8px;column-gap:7px;grid-template-columns:32px minmax(0,1fr)}
+ body.app-home #home .hub-card strong{font-size:11px}
+ body.app-home #home .hub-card small{font-size:7px}
+ body.app-home #home .hub-card #playerAvatar{width:35px;height:40px}
+ body.app-home #home .menu-icon{width:30px;height:33px}
+ body.app-home #home .menu-tools button{font-size:8px}
+ body.app-home #home .levels{grid-template-columns:repeat(3,minmax(0,1fr))}
+ body.app-online #lobby .actions button{font-size:11px;padding:10px 5px}
+}
+@media(orientation:landscape) and (max-height:550px){
+ body.app-home #home .hero{height:390px}
+ body.app-home #home .hero h1{font-size:82px}
+ body.app-home #home .hero-copy>p{top:149px}
+ body.app-home #home .player-hub{grid-template-columns:repeat(4,minmax(0,1fr))}
+ body.app-home #home .menu-tools{position:relative;bottom:auto}
+ body.app-home #modal{max-height:calc(100svh - 18px)}
+}
+@media(hover:hover){
+ body.app-home #home .hub-card:hover{transform:translateY(-2px);border-color:#acd7f57a;filter:none}
+ body.app-home #home .menu-tools button:hover{background:#2a48647a;color:white}
+ body.app-online #setup .world-card:hover,body.app-party #menu .card:hover{border-color:#d0e5ff;transform:translateY(-1px)}
+}
+@keyframes app-camera{to{transform:scale(1.018) translateY(-2px)}}
+@keyframes app-glint{0%,75%{transform:translateX(-100%)}90%,100%{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){
+ body.app-home *,body.app-online *,body.app-party *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+
+/* The landscape atlas contains two panoramas, not one combined world. */
+body.app-home #home .world-tabs button[data-world="1"],body.app-home #home .world-tabs button[data-world="2"],body.app-online .world-card[data-world="1"],body.app-online .world-card[data-world="2"]{background-size:cover,auto 200%}
+body.app-home #modal[open]{animation:app-panel-in .2s ease-out}
+body.app-home #modal .friend-race-link{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:16px;margin:18px 0;background:linear-gradient(#ffe6a2,#f2ba52);color:#302b21;text-decoration:none;font-size:14px;font-weight:800}
+@keyframes app-panel-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px) and (max-height:700px){body.app-home #home .menu-tools{position:relative;bottom:auto}}
+@media(prefers-reduced-motion:reduce){body.app-home #modal[open]{animation:none}}
+
+/* Invitations come before optional course edits on a phone. Keep the QR above the action dock. */
+@media(max-width:760px){body.app-online .invitation{order:2}body.app-online #lobbySelection{order:3}}
+/* Keep dismiss and disabled states clear even while scrolling a long garage. */
+body.app-home #modal .close{position:sticky;top:0;float:right;right:auto;z-index:6;margin:-8px -2px -36px 0;backdrop-filter:blur(10px)}
+body.app-online #lobby #ready:disabled,body.app-online #lobby #start:disabled{background:#2b4054;color:#99afc3;border-color:#91adca33;opacity:1;filter:none;box-shadow:none}
+body.app-party #menu #play:disabled{opacity:.5;box-shadow:none}
+
+body.app-party>header small{font-size:9px;letter-spacing:1.4px;color:#9db4ce;font-weight:650}
+body.app-party #menu .party-customize{min-width:0;align-self:center;border:1px solid #adcbe42a;border-radius:17px;background:#10283e88;padding:2px 14px}
+body.app-party #menu .party-customize summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;font-size:12px;color:#e0efff;font-weight:750}
+body.app-party #menu .party-customize summary::-webkit-details-marker{display:none}
+body.app-party #menu .party-customize summary span{font-size:10px;font-weight:500;color:#98c9e1;white-space:nowrap}
+body.app-party #menu .party-customize[open]{padding-bottom:16px}
+body.app-party #menu .party-driver canvas{object-fit:cover}
+@media(max-width:760px){body.app-party>header small{font-size:7px;letter-spacing:.8px}body.app-party #menu .party-customize{margin-top:14px}body.app-party #menu #partyMode{background:#0b2037!important;border:1px solid #9cb8d342!important}}
+/* Preserve actual world art above the shared button treatment. */
+body.app-online #worldCards .world-card{background:linear-gradient(0deg,#0a2334f2,transparent 90%),url('./graphics/landscapes-v5.webp') center top;background-size:cover,auto 200%}
+body.app-online #worldCards .world-card[data-world="2"]{background:linear-gradient(0deg,#412a18ee,transparent 90%),url('./graphics/landscapes-v5.webp') center bottom;background-size:cover,auto 200%}
+body.app-online #worldCards .world-card[data-world="3"]{background:linear-gradient(0deg,#103657ee,transparent 90%),url('./graphics/winter-v6.webp') center;background-size:cover,cover}
+body.app-online #worldCards .world-card[data-world="4"]{background:linear-gradient(0deg,#2b194aee,transparent 90%),url('./graphics/chickens/party-fairground.webp') center;background-size:cover,cover}
+
+body.app-home #modal .choice small{color:#b5cee0!important}
+@media(max-width:760px) and (max-height:700px){body.app-online #lobby .actions{position:static}}
+@media(max-width:360px){body.app-online>header,body.app-party>header{gap:8px}body.app-online>header small,body.app-party>header small{font-size:6px;letter-spacing:.5px}body.app-online>header .brand,body.app-party>header .logo{font-size:23px}}

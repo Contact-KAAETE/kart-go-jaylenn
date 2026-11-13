@@ -175,3 +175,11 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Volgend: fysieke iPhone-lange-aanraaktest en QR-camera/twee telefoons op aparte netwerken door gebruiker. Niet als al uitgevoerd rapporteren. Auditrapport en ruwe testresultaten in docs/tests/results opgeslagen.
 
 - Expliciete resterende gameplaybeperking: gedeelde Party/online verwerkt obstakels/power-ups/baanranden, maar nog geen fysieke onderlinge kart-/kipbotsing. Geen succesvolle test daarvan claimen; oorspronkelijke solo-botsrespons bestaat wel.
+
+
+## 2026-11-13 — Professionele app-interface
+- Uitgangspunt `536b8de0cc1da34774c3a123fc7c792a3621aadc`; herstelpunt `backup/pre-app-ui-536b8de-20261113`, tak `design/app-interface-20261113`.
+- Nieuwe gedeelde interface voor hoofdmenu, kaarten, garage, coureur, instellingen, multiplayer/lobby/QR en Party-menu. Bestaande illustraties behouden; rustige ronde panelen, gelijkvormige knoppen, duidelijkere hiërarchie en betere mobiele indeling. Voortgangsopties compact maar volledig bereikbaar.
+- Geen nieuwe diensten/kosten, geen wijziging aan race-/netwerk-/opslaglogica. Oude misleidende vriendenpopup verwijst nu correct naar echte QR-racekamers; lokale code blijft lokaal.
+- `npm test` en na laatste Party-HTML `tests/party-riders.mjs` geslaagd; browser390×844/320×568/430×932/844×390 en desktoplobby gecontroleerd. Werkelijke naam-/karakter-/kleurkeuze bewaren getest, alle20 lakken visueel functioneel gecontroleerd, touchregressies geslaagd.
+- Volledig verslag: `docs/KART_GO_APP_INTERFACE_STATUS.md`. Volgende stap: UI-commit publiceren, live bestanden en echte twee-browser-lobby/start controleren, screenshots en eindresultaat vastleggen.
