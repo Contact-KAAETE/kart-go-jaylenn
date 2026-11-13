@@ -53,13 +53,13 @@ run('useItem(-1);useItem(10);useItem(undefined)');
 // Exact probability boundaries, independent of sampling noise.
 for(const [v,item] of [[0,0],[.499999,0],[.5,1],[.699999,1],[.7,2],[.849999,2],[.85,3],[.949999,3],[.95,4],[.999999,4]]){e.math.random=()=>v;assert.equal(run('randomItem()'),item);}
 e.math.random=e.random;
-// Boss: exactly nine blocks, no collection by the dog, ten-second cadence, two-second freeze and Jump protection.
-run('start(20);state.count=0;state.time=9.99;update(.02)');assert.equal(run('state.blocks.length'),9);assert.equal(run('state.shots.length'),1);assert.equal(run('state.nextShot'),20);
-run('state.shots=[{d:state.d+1,x:state.x,speed:-3000,life:5}];update(.01)');assert.equal(run('state.freeze'),2);
+// Boss: exactly nine blocks, no collection by the dog, ten-second cadence, 1.1.2-second freeze and Jump protection.
+run('start(20);state.count=0;state.opponents[0].d=5000;state.time=9.99;update(.02)');assert.equal(run('state.blocks.length'),9);assert.equal(run('state.shots.length'),1);assert.equal(run('state.nextShot'),20);
+run('state.shots=[{d:state.d+1,x:state.x,speed:-3000,life:5}];update(.01)');assert.equal(run('state.freeze'),1.2);
 run('state.freeze=0;state.jump=1;state.shots=[{d:state.d+1,x:state.x,speed:-3000,life:5}];update(.01)');assert.equal(run('state.freeze'),0);
 run('state.jump=0;state.inventory=[null,null,null];state.d=LENGTH+state.blocks[0].d;state.x=state.blocks[0].x;update(.001)');assert.equal(run('state.inventory.every(x=>x===null)'),true);
 run('start(20);state.count=0;state.opponents[0].d=state.blocks[0].d;state.d=0;update(.001)');assert.equal(run('state.blocks[0].lap'),-1,'dog never takes blocks');
-run('state.freeze=2;state.speed=0;state.shots=[]');for(let i=0;i<120;i++)run('update(1/60)');assert.ok(run('state.freeze')<.0001);
+run('state.freeze=1.2;state.speed=0;state.shots=[]');for(let i=0;i<73;i++)run('update(1/60)');assert.ok(run('state.freeze')<.0001);
 // Finish writes progression, and reopening preserves it and the chosen control.
 run('start(1);state.count=0;state.d=LENGTH*LAPS-5;state.opponents.forEach(o=>o.d=0);state.speed=MAX;update(.02)');assert.equal(run('state.finished'),true);assert.equal(run('saved.wins.includes(1)'),true);nodes.get('#closeModal').onclick();assert.equal(run('state===null'),true,'closing results returns to the map');
 run("saved.mode='joystick';persist();");const reopened=environment(storage);assert.equal(reopened.run('saved.wins.includes(1)'),true);assert.equal(reopened.run('saved.mode'),'joystick');
@@ -80,7 +80,7 @@ for(let level=1;level<=20;level++){
  if(level>=8){run("state.d=(state.features.find(f=>f.kind==='tunnel').from+5)*SEG;draw()");run("state.d=(state.features.find(f=>f.kind==='bridge').from+5)*SEG;draw()");}
 }
 assert.equal(tracks.size,20);assert.ok(winners>=18,`controller won ${winners}/20`);assert.equal(run('state.profile.difficulty'),29);
-console.log(`PASS: 20 unique playable tracks (${winners}/20 controller wins), multitouch ownership, all 3 controls, simultaneous pedals, cancellation, rotation, pause/resume, exact item thresholds, 9-block boss, 10-second ice, 2-second freeze, jump, legacy save migration, checkpoints and scenery.`);
+console.log(`PASS: 20 unique playable tracks (${winners}/20 controller wins), multitouch ownership, all 3 controls, simultaneous pedals, cancellation, rotation, pause/resume, exact item thresholds, 9-block boss, 10-second ice, 1.2-second freeze, jump, legacy save migration, checkpoints and scenery.`);
 
 // V4 player migration, rewards and garage survive reopening and import sanitization.
 const proto=JSON.stringify({nickname:'TurboJay',character:'🐸',paint:'🔵',code:'KG-ABC234',friends:['KG-DEF567']});
@@ -109,11 +109,11 @@ for(let level=21;level<=50;level++){
  assert.equal(run('state.finished'),true,`sand level${level} finishes`);assert.ok(run('state.time')<140);assert.ok(run('state.profile.difficulty')<=29);if(run('state.rank===1'))sandWinners++;run('draw()');
 }
 assert.equal(sandTracks.size,30);assert.ok(sandWinners>=27,`sand controller won${sandWinners}/30`);
-run('start(21);state.count=0;state.inventory=[5,2,1];useItem(0)');assert.equal(run('state.opponents[0].freeze'),2);run('useItem(1)');assert.equal(run('state.boost'),0,'Sand refuses manually inserted boost');const frozen=run('state.opponents[0].d');for(let i=0;i<119;i++)run('update(1/60)');assert.equal(run('state.opponents[0].d'),frozen);for(let i=0;i<3;i++)run('update(1/60)');assert.ok(run('state.opponents[0].d')>frozen);
+run('start(21);state.count=0;state.inventory=[5,2,1];useItem(0)');assert.equal(run('state.opponents[0].freeze'),1.2);run('useItem(1)');assert.equal(run('state.boost'),0,'Sand refuses manually inserted boost');const frozen=run('state.opponents[0].d');for(let i=0;i<71;i++)run('update(1/60)');assert.equal(run('state.opponents[0].d'),frozen);for(let i=0;i<3;i++)run('update(1/60)');assert.ok(run('state.opponents[0].d')>frozen);
 run('start(50);state.count=0;state.time=10;update(.01)');assert.equal(run('state.opponents[0].pizza'),true);assert.equal(run('state.shots.length'),0,'no invented Pizzaman ice attack');
 run('checkpoint()');const sandReopen=environment(storage);assert.equal(sandReopen.run('saved.session.level'),50);sandReopen.run('start(50,saved.session)');assert.equal(sandReopen.run('state.sand'),true);
 assert.equal(sandReopen.run('names.length'),70);assert.equal(sandReopen.run('saved.player.code'),JSON.parse(storage['kartgo-jaylenn-v1']).player.code);
-console.log(`PASS:30 unique Sand World tracks (${sandWinners}/30 controller wins), only3 allowed items, boost refused, freeze2s, Pizzaman without unapproved attacks and level50 save/reopen.`);
+console.log(`PASS:30 unique Sand World tracks (${sandWinners}/30 controller wins), only3 allowed items, boost refused, freeze1.2s, Pizzaman without unapproved attacks and level50 save/reopen.`);
 
 // Beginning a new race at a changed viewport must not trigger the rotation-pause path.
 e.sandbox.innerWidth=320;e.sandbox.innerHeight=568;run('start(1)');assert.equal(run('state.paused'),false);e.sandbox.innerWidth=844;e.sandbox.innerHeight=390;run('resize()');assert.equal(run('state.paused'),true);

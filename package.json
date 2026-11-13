@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/game.test.cjs && node tests/online-controls.mjs && node tests/party-riders.mjs && node tests/party-projection.mjs && node tests/qr-roundtrip.mjs",
+    "test": "node tests/game.test.cjs && node tests/boss-fairness.cjs && node tests/online-controls.mjs && node tests/party-riders.mjs && node tests/party-projection.mjs && node tests/qr-roundtrip.mjs",
     "test:live": "node tests/multiplayer-live.mjs",
     "test:server": "node tests/server-repair.mjs",
     "test:worlds": "node tests/worlds-simulation.mjs && node tests/worlds-runtime.mjs && node tests/stunts-bots.mjs"

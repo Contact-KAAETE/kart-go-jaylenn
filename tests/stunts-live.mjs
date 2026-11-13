@@ -8,7 +8,7 @@ const request=(path,options)=>live?fetch(api+path,options):mf.dispatchFetch('htt
 const clients=[],last=(c,t)=>c.messages.filter(m=>m.type===t).at(-1),wait=async(f,label,ms=15000)=>{const end=Date.now()+ms;while(!f()){if(Date.now()>end)throw Error('Timeout '+label);await new Promise(r=>setTimeout(r,30));}};
 let timer;const observed={kinds:new Set(),jump:false,banana:false,botSpeed:0};
 try{
- const health=await(await request('/health')).json();assert.equal(health.version,'stunt-racing-4.0');assert.ok(health.features.includes('armed-bots'));
+ const health=await(await request('/health')).json();assert.equal(health.version,'boss-fair-4.1');assert.ok(health.features.includes('armed-bots'));
  const invite=await(await request('/rooms',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({selection:{level:1,mode:'free'}})})).json();
  async function open(resume){const path='/rooms/'+invite.room+'/connect?secret='+invite.secret+(resume?'&resume='+resume:'');const c={messages:[]};if(live)c.ws=new WebSocket(api.replace('https:','wss:')+path);else{const response=await request(path,{headers:{Upgrade:'websocket',Origin:'https://contact-kaaete.github.io'}});assert.equal(response.status,101);c.ws=response.webSocket;c.ws.accept();}
  c.send=m=>c.ws.send(JSON.stringify(m));c.ws.addEventListener('message',e=>{const m=JSON.parse(e.data);c.messages.push(m);if(m.type==='snapshot'){for(const shot of m.shots||[])observed.kinds.add(shot.kind);observed.jump ||=m.players.some(p=>p.jump>1.5&&p.jumpLift>1.5);observed.banana ||=m.bananas.some(b=>b.owner.startsWith('bot'));observed.botSpeed=Math.max(observed.botSpeed,...m.npcs.map(p=>p.speed));}});clients.push(c);await wait(()=>last(c,'welcome'),'welcome');return c;}

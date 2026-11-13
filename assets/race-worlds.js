@@ -44,7 +44,7 @@ function item(level,r){const v=r*100;if(world(level)===2)return[1,3,5][Math.min(
 function initRacer(p){Object.assign(p,{d:0,x:0,speed:0,steer:0,gas:false,brake:false,finished:false,finishAt:null,boost:0,jump:0,jumpDuration:1.4,jumpLift:1,freeze:0,spin:0,hyp:0,slow:0,penalty:0,splash:0,invincible:0,slide:0,score:0,checkpoint:0,inventory:[null,null,null],seen:[],itemCount:0,catHit:false});return p;}
 function setup(room){room.selection=selection(room.selection);room.seed ||=1;room.course=layout(room.selection,room.seed);room.claimed=[];room.bananas=[];room.holes=[];room.shots=[];room.event={cat:false,catAt:0,removedLane:room.seed%2?-.62:.62,d:0};room.nextShot=10;room.shotCount=0;room.nextRoyal=12;room.royal=null;for(const p of room.players)initRacer(p);
  const level=room.selection.level,boss=[20,50,70].includes(level),engine=Math.max(250,...room.players.map(p=>p.engine||250));room.npcs=[];
- if(boss){const p=initRacer({id:'boss',bot:true,name:level===20?'Hotdog-Hond':level===50?'Pizzaman':'Burgerkoning',boss:level,avatar:0,color:3,engine});p.d=30;room.npcs.push(p);}
+ if(boss){const p=initRacer({id:'boss',bot:true,name:level===20?'Hotdog-Hond':level===50?'Pizzaman':'Burgerkoning',boss:level,avatar:0,color:3,engine});p.d=0;p.x=-.62;room.npcs.push(p);}
  if(level&&!boss)for(let i=room.npcs.length;i<Math.max(room.npcs.length,6-room.players.length);i++){const p=initRacer({id:'bot'+i,bot:true,name:['Turbo Vos','Bliksem Panda','Nitro Ninja','Drift Draak','Raketracer'][i%5]+' · BOT',avatar:[2,3,1,6,5][i%5],chicken:i%3,color:[1,4,8,12,16][i%5],engine});p.d=10+i*7;p.x=lanes[i%3];room.npcs.push(p);}
  for(const [i,p] of room.npcs.entries()){p.botIndex=i;p.inventory=p.boss?[null,null,null]:[world(level)===2?5:0,1,3];p.nextAttack=5+i*1.4;}
 }
@@ -66,7 +66,7 @@ function driveBot(room,p,dt){if(p.finished)return;const level=room.selection.lev
 }
 function effect(room,p,kind,duration){if(p.invincible>0)return;p[kind]=Math.max(p[kind]||0,duration);if(['freeze','penalty'].includes(kind))p.speed=0;p.invincible=duration+.7;}
 function use(room,p,slot){if(!Number.isInteger(slot)||slot<0||slot>2||p.penalty>0||p.freeze>0)return false;const v=p.inventory[slot];if(v===null||v===undefined)return false;const targets=[...room.players,...(room.npcs||[])].filter(t=>t.id!==p.id&&!t.finished).sort((a,b)=>Math.abs(a.d-p.d)-Math.abs(b.d-p.d));if([1,5].includes(v)&&!targets.length)return false;
- if(v===0)for(const t of targets)t.slow=3;if(v===1)targets[0].hyp=10;if(v===2&&world(room.selection.level)!==2){p.boost=4;if(world(room.selection.level)===3)room.holes.push({d:p.d,x:p.x,born:room.elapsed,open:room.elapsed+2,close:room.elapsed+5});}if(v===3)room.bananas.push({id:room.elapsed+':'+p.id,d:p.d-6,x:p.x,owner:p.id});if(v===4){launch(p);if(world(room.selection.level)===3)room.holes.push({d:p.d,x:p.x,born:room.elapsed,open:room.elapsed+2,close:room.elapsed+5});}if(v===5){targets[0].freeze=2;targets[0].speed=0;}p.inventory[slot]=null;return true;}
+ if(v===0)for(const t of targets)t.slow=3;if(v===1)targets[0].hyp=10;if(v===2&&world(room.selection.level)!==2){p.boost=4;if(world(room.selection.level)===3)room.holes.push({d:p.d,x:p.x,born:room.elapsed,open:room.elapsed+2,close:room.elapsed+5});}if(v===3)room.bananas.push({id:room.elapsed+':'+p.id,d:p.d-6,x:p.x,owner:p.id});if(v===4){launch(p);if(world(room.selection.level)===3)room.holes.push({d:p.d,x:p.x,born:room.elapsed,open:room.elapsed+2,close:room.elapsed+5});}if(v===5){targets[0].freeze=1.2;targets[0].speed=0;}p.inventory[slot]=null;return true;}
 function step(room,p,dt,now,active=true){const level=room.selection.level,w=world(level),total=length(level);if(p.finished)return;
  for(const k of ['boost','jump','freeze','spin','hyp','slow','penalty','splash','invincible'])p[k]=Math.max(0,(p[k]||0)-dt);
  const old=p.d;if(!active){p.speed=0;return;}let max=({250:62,509:76,1000:90}[p.engine]||62);if(!level)max=85;if(p.bot)max*=1.08+(p.botIndex||0)*.012;const inputSteer=p.hyp>0?Math.sin(room.elapsed*8)*.6:p.steer||0;
@@ -84,7 +84,7 @@ function step(room,p,dt,now,active=true){const level=room.selection.level,w=worl
  }
  for(const b of room.bananas)if(b.owner!==p.id&&!b.used&&Math.abs(b.d-p.d)<5&&Math.abs(b.x-p.x)<.28&&p.jump<=0){b.used=true;effect(room,p,'spin',2);}
  for(const h of room.holes)if(room.elapsed>=h.open&&room.elapsed<h.close&&Math.abs(h.d-p.d)<6&&Math.abs(h.x-p.x)<.3&&p.jump<=0){effect(room,p,'penalty',3);p.splash=3;}
- for(const s of room.shots)if(!s.used&&s.owner!==p.id&&Math.abs(s.d-p.d)<Math.max(9,Math.abs(s.velocity||95)*dt+4)&&Math.abs(s.x-p.x)<.34&&p.jump<=0){s.used=true;effect(room,p,s.kind==='storm'?'slow':s.kind==='hyp'?'hyp':'freeze',s.kind==='storm'?3:s.kind==='hyp'?4:2);}
+ for(const s of room.shots)if(!s.used&&s.owner!==p.id&&Math.abs(s.d-p.d)<Math.max(9,Math.abs(s.velocity||95)*dt+4)&&Math.abs(s.x-p.x)<.34&&p.jump<=0){s.used=true;effect(room,p,s.kind==='storm'?'slow':s.kind==='hyp'?'hyp':'freeze',s.kind==='storm'?3:s.kind==='hyp'?4:1.2);}
  if(p.d>=total){p.finished=true;p.speed=0;p.finishAt=now;}
 }
 function tick(room,dt,now,connected){room.elapsed=Math.max(0,(now-room.startAt)/1000);room.course ||=layout(room.selection,room.seed);room.event.d=Math.max(room.event.d,...room.players.map(p=>p.d));const level=room.selection.level;
