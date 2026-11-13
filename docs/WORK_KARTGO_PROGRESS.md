@@ -221,3 +221,10 @@ Nog open: fysieke multitouch op iPhone/Android, verschillende netwerken; oorzaak
 - Besturingshandlers, gevoeligheid, gas/rem, autogas en spelerbewegingsphysics exact behouden. Bestaande parcours-/omgevingsbestanden, CSS en textures ongewijzigd.
 - Volledige basistests, boss-fairness op vier schermformaten, gedeelde simulaties, server-repair en tweespelertest geslaagd. Productietest boss-live: gelijke start, echte ijs-treffer <=1,2s, herstel versnellen en identieke serverstatus. Publicatiechecks success; health `boss-fair-4.1`.
 - Details en bewijsbeeld: `docs/KART_GO_BOSS_FAIRNESS_STATUS.md`. Fysieke telefoons niet door ons getest.
+
+
+## 2026-11-13 — Jaylenn en Ezra speelbaar
+- Eigen goedgekeurde rode/groene karts, profielkeuze, garage, echte voor-/achterzijde en Ezra's staartje toegevoegd. Online avatars12/13; bestaande twaalf keuzes en voortgang behouden.
+- Gepubliceerd: `46db6abdec0147ef7a3543dcd162d102eece3e3a`, preview-fit `3f4a51684c0be0fd1ed11804ac595138d69c08b3`. Productie-health family-racers-4.2.
+- Volledige basistests, gerichte opslag/garage/render-tests en lokale én productie-tweespelerrace geslaagd. Publieke rootgame daadwerkelijk gespeeld op 390×844. Bestaande physics, besturing, banen en omgeving intact.
+- Details: `docs/KART_GO_FAMILY_RACERS_STATUS.md`; bewijsbeeld en testuitvoer daarbij. Fysieke telefoons niet getest.

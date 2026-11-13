@@ -1,0 +1,34 @@
+=== family-verified.log ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test
+> node tests/game.test.cjs && node tests/boss-fairness.cjs && node tests/family-racers.cjs && node tests/online-controls.mjs && node tests/party-riders.mjs && node tests/party-projection.mjs && node tests/qr-roundtrip.mjs
+
+PASS: 20 unique playable tracks (20/20 controller wins), multitouch ownership, all 3 controls, simultaneous pedals, cancellation, rotation, pause/resume, exact item thresholds, 9-block boss, 10-second ice, 1.2-second freeze, jump, legacy save migration, checkpoints and scenery.
+PASS: V4 prototype migration, safe profile, rewards 15/40, XP5, persistent paint/avatar/code and Boem 2-second cooldown.
+PASS: hypnose10s with leading player, purple feedback and banana spin2s ending automatically.
+PASS:30 unique Sand World tracks (29/30 controller wins), only3 allowed items, boost refused, freeze1.2s, Pizzaman without unapproved attacks and level50 save/reopen.
+PASS: fresh race stays active after a viewport change; rotating an ongoing race still pauses safely.
+PASS: export/import roundtrip preserves wins, best time, profile, garage, XP, code, rewards and settings; invalid imports rejected.
+PASS: V5.1 all50 terrain profiles/seams and finite projections, extra bridges, sharper curves, real player/bot ramps, pause/save/reopen/landing, slow and off-road rejection, ice clearance, unchanged Jump duration.
+PASS: left/right touch input, lateral physics and kart renderer agree for buttons, wheel and joystick; release recentres.
+PASS: overtaking free lane, temporary recoverable mistakes, original speed cap and bosses, selected Papa/driver podium.
+PASS: pixel tint without Canvas filters; blue/green paint changes while neutral materials, gold and transparency remain unchanged.
+PASS:20 unique Ice World courses (20/20 controller wins), all completed, nine secret blocks, gradual difficulty<=29, palace projection and narrowing.
+PASS: ice momentum/brake, Jump and Boost cracks2s/open3s, rescue3s/shield/save/pause, spike regrowth3s, king warning2s/safe lane/lettuce2s/basket3s, genuine long single lap and level70 progression.
+PASS:250/509/1000 real acceleration, safe engine import/save/resume, real dust2s and water3s collisions, pause/items/progress protection, bot recovery and15 full-course engine tests.
+PASS boss fairness: all three bosses start beside player, same ground line/scale, full viewport fit, countdown protection, chase framing restored, upright rear sprite and 1.2s actual ice recovery.
+PASS family racers: stable old IDs, 14 real picker choices, both own front/rear sprites and mount portraits, exact ground anchors, selected avatars survive storage/backup, garage previews and classic paint preserved.
+PASS: stable inventory through 50 snapshots, third-finger power-up with gas/steering, no double activation, keyboard fallback, organizer start, stored progress preserved on profile edits, simultaneous pointers, independent release, cancel, capture loss, orientation and blur reset. DOM simulation, not physical multitouch.
+PASS actual Party 71–75 start/countdown, steer, third-finger power-ups at speed, stable slots, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.
+PASS shared player/rival sizes and ground points, monotonic perspective, visual/physics lane agreement, world-bound train, no train in Rodeo, steering both ways in all five Party levels and all motors.
+QR generated with error correction Q and 24px quiet margin. Decode check runs separately.
+PASS 75 deterministic courses, exact World 1 odds, sand rules, timed inventory, six-second hazards, safe collectibles, shared cat/checkpoint/jump, ice cracks, dog 10-second shot and no blocks, instant train respawn.
+PASS centre recovery and correct Megamix zone label.
+PASS all 75 courses: full-width jumps, elevations, sharp left/right turns; 2–6 human grids; fast bots at all engines, weapons and real hits, boss variation and phone-size bend projection.
+
+=== family-runtime.log ===
+PASS RUNTIME family avatars 12/13: two clients, 4 fast bots, same jumps/projectiles/positions, onweer + hypnose + bananas, resume preserves identity, all 6 in identical authoritative finish.
+
+=== family-live.log ===
+PASS LIVE family avatars 12/13: two clients, 4 fast bots, same jumps/projectiles/positions, onweer + hypnose + bananas, resume preserves identity, all 6 in identical authoritative finish.
