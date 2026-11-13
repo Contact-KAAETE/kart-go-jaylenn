@@ -9,7 +9,7 @@ let sequence=0,time=1;const frames=new Map();w.requestAnimationFrame=cb=>{frames
 w.HTMLElement.prototype.setPointerCapture=()=>{};w.HTMLCanvasElement.prototype.getContext=()=>({});
 const pump=(count=1)=>{for(let i=0;i<count;i++){assert.equal(frames.size,1,'exactly one animation loop');const cb=frames.values().next().value;frames.clear();time+=50;cb(time);}};
 const pointer=(id,type,n,x=50)=>{const e=new w.Event(type,{bubbles:true,cancelable:true});Object.defineProperties(e,{pointerId:{value:n},clientX:{value:x}});d.querySelector('#'+id).dispatchEvent(e);return e;};
-w.eval(fs.readFileSync('assets/player.js','utf8')+'\n'+fs.readFileSync('assets/race-worlds.js','utf8')+"\nconst RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat'];const WorldRace={names:['Kuifkop','Professor Tok','Disco Tok'],load:()=>Promise.resolve(),preview(){},draw(_c,_w,_h,scene){globalThis.lastRaceFrame=JSON.parse(JSON.stringify(scene));}};function portraitMarkup(){return '<span></span>';}function powerMarkup(){return '';}\n"+fs.readFileSync('party/party-riders.js','utf8'));
+w.eval(fs.readFileSync('assets/player.js','utf8')+'\n'+fs.readFileSync('assets/race-worlds.js','utf8')+"\nconst RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat'];const WorldRace={names:['Kuifkop','Professor Tok','Disco Tok'],load:()=>Promise.resolve(),preview(){},draw(_c,_w,_h,scene){globalThis.lastRaceFrame=JSON.parse(JSON.stringify(scene));}};function portraitMarkup(){return '<span></span>';}function powerMarkup(){return '';}\n"+fs.readFileSync('party/party-riders.js','utf8')+'\nglobalThis.qaRacer=()=>state;');
 try{
  await new Promise(r=>setTimeout(r,0));
  const link=()=>new URL(d.querySelector('#menu a').href);assert.equal(link().searchParams.get('level'),'74');
@@ -33,6 +33,13 @@ try{
   const pad=d.querySelector('#partySteer');pad.getBoundingClientRect=()=>({left:0,width:100});pointer('partySteer','pointerdown',301,50);pointer('partySteer','pointermove',301,90);pointer('gas','pointerdown',302);pump(10);assert.ok(w.lastRaceFrame.players[0].steer>.8,mode+' steers with gas');pointer('gas','pointerup',302);pump();assert.ok(w.lastRaceFrame.players[0].steer>.8,mode+' survives gas release');pointer('partySteer','pointercancel',301);pump();assert.equal(w.lastRaceFrame.players[0].steer,0);
  }
  d.querySelector('#back').click();d.querySelector('#partyControlMode').value='buttons';d.querySelector('#partyControlMode').dispatchEvent(new w.Event('change'));d.querySelector('#play').click();pump(65);
+ // A collected item can be spent at speed with two other fingers still held.
+ Object.assign(w.qaRacer(),{d:100,x:0,speed:30,penalty:0,freeze:0,inventory:[2,3,4]});pump();
+ const slots=[...d.querySelector('#partyItems').children];pointer('gas','pointerdown',501);pointer('right','pointerdown',502);const beforeD=w.lastRaceFrame.players[0].d;
+ const itemTouch=new w.Event('pointerdown',{bubbles:true,cancelable:true});Object.defineProperties(itemTouch,{pointerId:{value:503},pointerType:{value:'touch'},isPrimary:{value:false}});slots[0].dispatchEvent(itemTouch);assert.ok(itemTouch.defaultPrevented);pump();
+ assert.equal(w.lastRaceFrame.players[0].inventory[0],null);assert.ok(w.lastRaceFrame.players[0].boost>0);assert.ok(w.lastRaceFrame.players[0].d>beforeD);assert.ok(w.lastRaceFrame.players[0].gas);assert.equal(w.lastRaceFrame.players[0].steer,1);assert.ok(d.querySelector('#gas').classList.contains('pressed'));assert.ok(d.querySelector('#right').classList.contains('pressed'));
+ slots[1].dispatchEvent(new w.MouseEvent('click',{bubbles:true,detail:1}));pump();assert.equal(w.lastRaceFrame.players[0].inventory[1],3,'synthetic click never spends another item');slots[1].click();pump();assert.equal(w.lastRaceFrame.players[0].inventory[1],null,'keyboard fallback works');
+ assert.ok(slots.every((b,i)=>b===d.querySelector('#partyItems').children[i]),'inventory updates retain touch targets');pointer('gas','pointerup',501);pointer('right','pointerup',502);w.qaRacer().boost=0;
  // Pedals override autogas and return to a complete standstill.
  pump(30);pointer('brake','pointerdown',401);pump(50);assert.equal(w.lastRaceFrame.players[0].speed,0,'brake overrides autogas');pointer('brake','pointerup',401);
  d.querySelector('#partyAuto').checked=false;d.querySelector('#partyAuto').dispatchEvent(new w.Event('change'));pump(40);assert.equal(w.lastRaceFrame.players[0].speed,0,'autogas off coasts to rest');assert.equal(JSON.parse(w.localStorage.getItem('kartgo-jaylenn-v1')).auto,false);pointer('gas','pointerdown',402);pump(10);assert.ok(w.lastRaceFrame.players[0].speed>0,'manual throttle works');pointer('gas','pointerup',402);d.querySelector('#partyAuto').checked=true;d.querySelector('#partyAuto').dispatchEvent(new w.Event('change'));
@@ -48,5 +55,5 @@ try{
  for(let steps=0;d.querySelector('#partyFinish').hidden&&steps<9000;steps++){const p=w.lastRaceFrame.players[0];pointer('left','pointerup',201);pointer('right','pointerup',202);if(p.x>.09)pointer('left','pointerdown',201);else if(p.x<-.09)pointer('right','pointerdown',202);if(p.jump<=0&&p.penalty<=0)d.querySelector('#jump').click();pump();}
  assert.deepEqual(JSON.parse(w.localStorage.getItem('kartgo-party-jaylenn-v1')),[0,1,2]);
  const after=JSON.parse(w.localStorage.getItem('kartgo-jaylenn-v1'));for(const key of ['wins','xp','best','session'])assert.deepEqual(after[key],progress[key]);
- console.log('PASS actual Party 71–75 start/countdown, steer, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.');
+ console.log('PASS actual Party 71–75 start/countdown, steer, third-finger power-ups at speed, stable slots, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.');
 }finally{w.close();}

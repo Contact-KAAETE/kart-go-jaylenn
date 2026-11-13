@@ -191,3 +191,16 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Open blijft: fysieke Safari/Android-test, eerdere Party/online-botsfysicabeperking. Volgende sessie: hervat vanaf laatste main-commit en dit document; niet opnieuw bouwen.
 
 - Definitieve label-/testrapportcommit `f2dff81d8c5d70f3398aa49f77faa12fde8ba769`: Pages en Workers-checks success. Bijgewerkte hoofdpagina met `?v=app7` daadwerkelijk in browser geopend. Bewijsbeeld `docs/screenshots/app-home-20261113.jpg` opgeslagen; geen geheime QR-gegevens in dit beeld.
+
+
+## 2026-11-13 — Power-ups gebruiken tijdens gas geven en sturen
+
+Basis/herstelpunt: `1bdcd3787844eeb00c69c653f0765a3b3331e3e4`, branch `backup/pre-touch-items-1bdcd37-20261113`. Ontwikkeling: `fix/multitouch-powerups-20261113`.
+
+Jaylenn meldt via screenshot dat hij moet stoppen om een power-up te gebruiken en dat een andere speler soms stilstaat. Concrete oorzaak van gemiste itemaanrakingen: online werden de drie knoppen bij elk 100ms-snapshot verwijderd; daarnaast hadden online/Party alleen click-activering. Gerepareerd met stabiele knoppen en onmiddellijke pointerdown-activering voor alle vingers, zonder gas/stuur-eigendom te wijzigen. Keyboard/assistieve bediening behouden; synthetische tweede klik genegeerd. Springen reageert op dezelfde manier direct.
+
+`npm test` slaagt, inclusief alle oorspronkelijke tracks en alle vijf Party-controllerfinishes. Nieuwe tests falen tegen de vorige code en slagen tegen de reparatie. Twee onafhankelijke WebSocket-clients op de echte server racen in level 1 en 72, verzamelen een echt item, gebruiken dat bij positieve snelheid en gas + stuurinput, ontvangen dezelfde effectstatus en blijven doorrijden. Zie `tests/results/touch-items-20261113.txt` en herhaalbaar `node tests/powerups-live.mjs`.
+
+Geen wijzigingen aan server, originele solo-engine, graphics, spelregels of opgeslagen voortgang. Controller-cacheversie `touch-items-1`. Publicatie en browsercontrole worden na het codecommit vastgelegd.
+
+Nog open: fysieke multitouch op iPhone/Android, verschillende netwerken; oorzaak van incidenteel stilvallen nog niet afzonderlijk bewezen. Bestaande straf/bevriezing/automatisch loslaten bij wegklikken blijven intact. Onderlinge botsfysica is geen onderdeel van deze reparatie. Volgende concrete stap: gepubliceerde controllers verifiëren, dan Jaylenn opnieuw laten proberen met gas/stuur vasthouden en item aantikken.
