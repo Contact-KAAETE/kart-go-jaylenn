@@ -189,3 +189,5 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Echte productie2browserclients: aanmaken→uitnodiging→Doe mee→juiste namen/coureurs/kleuren→beiden klaar→gedeelde start level51→beide karts bewogen. QR exact raster-teruggelezen (Sharp/jsQR); geheimen niet gepubliceerd.
 - Screenshot van het echte nieuwe beginscherm wordt ter bewijs vastgelegd. Kleine labelcorrectie Wereldkaart bewaart de bestaande navigatiesemantiek. Geen racephysics/backend/opslag gewijzigd.
 - Open blijft: fysieke Safari/Android-test, eerdere Party/online-botsfysicabeperking. Volgende sessie: hervat vanaf laatste main-commit en dit document; niet opnieuw bouwen.
+
+- Definitieve label-/testrapportcommit `f2dff81d8c5d70f3398aa49f77faa12fde8ba769`: Pages en Workers-checks success. Bijgewerkte hoofdpagina met `?v=app7` daadwerkelijk in browser geopend. Bewijsbeeld `docs/screenshots/app-home-20261113.jpg` opgeslagen; geen geheime QR-gegevens in dit beeld.

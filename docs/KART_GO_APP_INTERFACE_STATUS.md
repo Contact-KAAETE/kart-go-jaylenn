@@ -57,3 +57,13 @@ Samen racen: https://contact-kaaete.github.io/kart-go-jaylenn/multiplayer/
 Party: https://contact-kaaete.github.io/kart-go-jaylenn/party/
 
 Laatste kleine tekstcorrectie: de bestaande wereldkaartknop heet ‘Wereldkaart’, zodat de knop geen niet-gewijzigde avonturenmodus belooft nadat eerder Vrij racen is gekozen. De werkelijke spelmodus blijft via de bestaande modekeuze instelbaar.
+
+
+## Bewijsbeeld
+
+Gepubliceerde hoofdmenuversie op390×844, vastgelegd in de echte browser. Nieuwe browsercontext, dus zonder eerder gekozen naam. Het bestand bevat geen kamercodes of uitnodigingssleutels.
+
+![Live nieuw hoofdmenu](screenshots/app-home-20261113.jpg)
+
+Directe bijgewerkte link: https://contact-kaaete.github.io/kart-go-jaylenn/?v=app7
+De versietoevoeging ververst de menupagina en wijzigt de bestaande opslag niet.
