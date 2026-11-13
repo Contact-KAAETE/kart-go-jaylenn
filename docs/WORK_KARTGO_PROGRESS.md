@@ -212,3 +212,12 @@ Nog open: fysieke multitouch op iPhone/Android, verschillende netwerken; oorzaak
 - Gewone online races vullen het startveld tot zes met snelle bots; Party-bots gebruiken dezelfde betere AI. Bots verzamelen/verbruiken wapens: zichtbare onweer-/hypnose-/ijsprojectielen en bananen. Eindbazen wisselen drie aanvallen af.
 - `npm test`, worlds-simulation, worlds-runtime, server-repair en nieuwe stunts-bots/stunts-live lokaal geslaagd. Nieuwe tweespelertest op productie geslaagd: vier bots, gelijke sprongen/projectielen, herverbinden en gezamenlijke uitslag. Pages en Workers Builds success; health `stunt-racing-4.0`.
 - Status, exacte scope en bewijsgrenzen: `docs/KART_GO_STUNTS_BOTS_STATUS.md`. Fysieke iPhone/Android niet door ons getest. Voor de nieuwe baanobjecten een nieuwe kamer starten.
+
+
+## 2026-11-13 — Gerichte gebruikerscorrectie: eindbaasstart, schaal en ijs
+- Uitgangspunt `1485453`; code `a7906a7f3016803c89d2b46f7d5c17c39274cf2c` gepubliceerd en op productie geverifieerd. Herstelbranch `backup/pre-boss-fair-1485453-20261113`.
+- Screenshot betrof rootgame level20: de 1700-eenhedenvoorsprong en boss-factor2,15 verwijderd. Alle drie eindbaasraces starten gelijk op afstand0. Startkader houdt beide karts volledig naast elkaar; daarna bestaand volgbeeld.
+- Rechte achteraanblik van dezelfde Hotdog-Hond geïntegreerd; oude atlas intact. IJsduur 2→1,2s, ook voor eigen items en online/Party.
+- Besturingshandlers, gevoeligheid, gas/rem, autogas en spelerbewegingsphysics exact behouden. Bestaande parcours-/omgevingsbestanden, CSS en textures ongewijzigd.
+- Volledige basistests, boss-fairness op vier schermformaten, gedeelde simulaties, server-repair en tweespelertest geslaagd. Productietest boss-live: gelijke start, echte ijs-treffer <=1,2s, herstel versnellen en identieke serverstatus. Publicatiechecks success; health `boss-fair-4.1`.
+- Details en bewijsbeeld: `docs/KART_GO_BOSS_FAIRNESS_STATUS.md`. Fysieke telefoons niet door ons getest.

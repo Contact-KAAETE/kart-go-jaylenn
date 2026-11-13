@@ -25,7 +25,15 @@
 
 ## Publicatie
 
-Kandidaat vóór publicatie. Scriptcache `boss-fair-1`, backendversie `boss-fair-4.1`. Na publicatie de echte HTML/JS/WebP en serverversie controleren.
+Codecommit `a7906a7f3016803c89d2b46f7d5c17c39274cf2c` live op de bestaande speellink. Pages build/deploy/report en Cloudflare Workers Builds **success**. Scriptcache `boss-fair-1`; echte `/health`: `boss-fair-4.1`.
+
+Zes publieke HTML/JS/WebP-bestanden HTTP 200 en exact gelijk aan de geteste lokale bestanden, inclusief de nieuwe transparante hond.
+
+`node tests/boss-live.mjs` op productie **geslaagd**: twee onafhankelijke echte WebSocket-clients zien de baas en spelers op afstand 0 vóór GO, identieke ijsstatus na een echte boss-treffer, maximaal 1,2 seconde bevroren en daarna weer versnellen. Geen uitnodigingsgegevens in log of screenshot.
+
+Gepubliceerde rootgame via het normale menu op 390×844 geopend, Vrij racen → Hotdog-finale. De echte geladen afbeelding en beide startplaatsen op dezelfde checkerlijn visueel bevestigd. Geen fysieke iPhone/Androidtest.
+
+![Gepubliceerde startcorrectie op telefoonformaat](screenshots/boss-fair-live-20261113.jpg)
 
 ## Afbeelding
 
