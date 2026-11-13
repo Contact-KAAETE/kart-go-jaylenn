@@ -2,7 +2,7 @@ import '../../assets/race-worlds.js';
 const Worlds=globalThis.KartWorlds;
 // KART GO — Bedacht door Jaylenn. Shared online worlds, protocol 3.
 // One self-contained module for the existing Cloudflare Worker and RaceRoom binding.
-const VERSION='ultimate-worlds-3.2', MAX=6, LENGTH=1800, TICK_MS=100;
+const VERSION='stunt-racing-4.0', MAX=6, LENGTH=1800, TICK_MS=100;
 const MAX_AGE=7200000, REJOIN=90000, ORIGIN='https://contact-kaaete.github.io';
 const clean=x=>String(x??'').replace(/[<>\u0000-\u001f]/g,'').trim().slice(0,18);
 const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':ORIGIN}});
@@ -14,7 +14,7 @@ export default {
   const url=new URL(request.url),origin=request.headers.get('Origin');
   if(origin&&origin!==(env.ALLOWED_ORIGIN||ORIGIN))return reply({error:'Origin blocked'},403);
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,OPTIONS','access-control-allow-headers':'content-type'}});
-  if(url.pathname==='/health')return reply({ok:true,phase:'worlds',version:VERSION,protocol:3,maxPlayers:MAX,features:['resume','durable-rooms','explicit-host','worlds','items','chicken-riders']});
+  if(url.pathname==='/health')return reply({ok:true,phase:'worlds',version:VERSION,protocol:3,maxPlayers:MAX,features:['resume','durable-rooms','explicit-host','worlds','items','chicken-riders','stunts','armed-bots']});
   if(!env.RACE_ROOMS)return reply({error:'RaceRoom binding ontbreekt.'},503);
   if(url.pathname==='/rooms'&&request.method==='POST'){
    let body={};try{const text=await request.text();if(text.length>2048)return reply({error:'Aanvraag te groot'},413);if(text)body=JSON.parse(text);}catch{return reply({error:'Ongeldige kamerkeuze'},400);}
@@ -74,7 +74,7 @@ export class RaceRoom {
  prune(now){if(this.room.phase==='lobby')this.room.players=this.room.players.filter(p=>this.sockets.has(p.id)||!p.disconnectedAt||now-p.disconnectedAt<REJOIN);}
  send(socket,data){try{socket.send(JSON.stringify(data));}catch{}}
  broadcast(data){for(const s of this.sockets.values())this.send(s,data);}
- publicPlayers(){return this.room.players.map(p=>({engine:p.engine||250,chicken:p.chicken||0,inventory:p.inventory,boost:p.boost,jump:p.jump,freeze:p.freeze,spin:p.spin,hyp:p.hyp,slow:p.slow,penalty:p.penalty,splash:p.splash,score:p.score,checkpoint:p.checkpoint,id:p.id,name:p.name,avatar:p.avatar,color:p.color,ready:p.ready&&this.sockets.has(p.id),connected:this.sockets.has(p.id),d:p.d,x:p.x,speed:p.finished?0:p.speed,steer:p.steer,finished:p.finished,finishAt:p.finishAt}));}
+ publicPlayers(){return this.room.players.map(p=>({engine:p.engine||250,chicken:p.chicken||0,inventory:p.inventory,boost:p.boost,jump:p.jump,jumpDuration:p.jumpDuration,jumpLift:p.jumpLift,freeze:p.freeze,spin:p.spin,hyp:p.hyp,slow:p.slow,penalty:p.penalty,splash:p.splash,score:p.score,checkpoint:p.checkpoint,id:p.id,name:p.name,avatar:p.avatar,color:p.color,ready:p.ready&&this.sockets.has(p.id),connected:this.sockets.has(p.id),d:p.d,x:p.x,speed:p.finished?0:p.speed,steer:p.steer,finished:p.finished,finishAt:p.finishAt}));}
  lobby(){const players=this.publicPlayers(),active=players.filter(p=>p.connected);this.broadcast({type:'lobby',selection:this.room.selection,seed:this.room.seed,players,hostId:this.room.hostId,canStart:active.length>=2&&active.every(p=>p.ready)});}
  snapshot(){return{type:'snapshot',hostId:this.room.hostId,players:this.publicPlayers(),length:Worlds.length(this.room.selection.level),now:Date.now(),startAt:this.room.startAt,selection:this.room.selection,seed:this.room.seed,npcs:this.room.npcs,claimed:this.room.claimed,event:this.room.event,elapsed:this.room.elapsed||0,shots:this.room.shots,holes:this.room.holes,bananas:this.room.bananas,royal:this.room.royal};}
  results(){return{type:'results',selection:this.room.selection,players:[...this.publicPlayers(),...this.room.npcs].sort((a,b)=>(a.finishAt??Infinity)-(b.finishAt??Infinity)||b.d-a.d)};}
@@ -90,7 +90,7 @@ export class RaceRoom {
   if(m.type==='profile'&&r.phase==='lobby'){p.name=clean(m.name)||'Coureur';p.avatar=Number.isInteger(m.avatar)?Math.max(0,Math.min(11,m.avatar)):0;p.color=Number.isInteger(m.color)?Math.max(0,Math.min(19,m.color)):0;p.engine=[250,509,1000].includes(m.engine)?m.engine:250;p.chicken=Number.isInteger(m.chicken)?Math.max(0,Math.min(2,m.chicken)):0;p.wins=Array.isArray(m.wins)?[...new Set(m.wins.filter(n=>Number.isInteger(n)&&n>=1&&n<=75))].slice(0,75):[];p.ready=false;}
   else if(m.type==='selection'&&id===r.hostId&&['lobby','done'].includes(r.phase)){r.selection=Worlds.selection(m.selection);r.phase='lobby';for(const p of r.players)p.ready=false;}
   else if(m.type==='use'&&r.phase==='race'&&now>=r.startAt){Worlds.use(r,p,m.slot);return;}
-  else if(m.type==='jump'&&r.phase==='race'&&r.selection.world===4&&now>=r.startAt){if(p.jump<=0&&p.penalty<=0)p.jump=1.4;return;}
+  else if(m.type==='jump'&&r.phase==='race'&&r.selection.world===4&&now>=r.startAt){if(p.jump<=0&&p.penalty<=0)Worlds.launch(p);return;}
   else if(m.type==='ready'&&r.phase==='lobby')p.ready=m.ready===true;
   else if(m.type==='start'&&r.phase==='lobby'){
    const active=r.players.filter(p=>this.sockets.has(p.id));
