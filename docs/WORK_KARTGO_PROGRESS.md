@@ -204,3 +204,11 @@ Jaylenn meldt via screenshot dat hij moet stoppen om een power-up te gebruiken e
 Geen wijzigingen aan server, originele solo-engine, graphics, spelregels of opgeslagen voortgang. Controller-cacheversie `touch-items-1`. Publicatie en browsercontrole worden na het codecommit vastgelegd.
 
 Nog open: fysieke multitouch op iPhone/Android, verschillende netwerken; oorzaak van incidenteel stilvallen nog niet afzonderlijk bewezen. Bestaande straf/bevriezing/automatisch loslaten bij wegklikken blijven intact. Onderlinge botsfysica is geen onderdeel van deze reparatie. Volgende concrete stap: gepubliceerde controllers verifiëren, dan Jaylenn opnieuw laten proberen met gas/stuur vasthouden en item aantikken.
+
+
+## 2026-11-13 — Multiplayerbochten, hoogte, schansen en sterke gewapende bots
+- Vanaf `29bd10b`; gepubliceerd en op productie getest in `461b92b0fe8ee8fe239401657e043a6a77055a14`. Herstelbranch `backup/pre-stunt-racing-29bd10b-20261113`.
+- Alle 75 gedeelde onlineparcoursen met extra haarspeld-/S-bochten, hoogte en brede veilige schansen; renderer volgt nu de geïntegreerde wegbuiging. De oorspronkelijke singleplayerengine blijft behouden.
+- Gewone online races vullen het startveld tot zes met snelle bots; Party-bots gebruiken dezelfde betere AI. Bots verzamelen/verbruiken wapens: zichtbare onweer-/hypnose-/ijsprojectielen en bananen. Eindbazen wisselen drie aanvallen af.
+- `npm test`, worlds-simulation, worlds-runtime, server-repair en nieuwe stunts-bots/stunts-live lokaal geslaagd. Nieuwe tweespelertest op productie geslaagd: vier bots, gelijke sprongen/projectielen, herverbinden en gezamenlijke uitslag. Pages en Workers Builds success; health `stunt-racing-4.0`.
+- Status, exacte scope en bewijsgrenzen: `docs/KART_GO_STUNTS_BOTS_STATUS.md`. Fysieke iPhone/Android niet door ons getest. Voor de nieuwe baanobjecten een nieuwe kamer starten.

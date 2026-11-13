@@ -20,13 +20,21 @@
 - `tests/worlds-simulation.mjs`: geslaagd, deterministische parcoursen, bestaande wereldregels en events.
 - `tests/stunts-bots.mjs`: geslaagd, alle 75 parcoursen met brede schansen, hoogte en beide bochtrichtingen; aantallen bots bij 2–6 spelers; bots sneller dan vol gas bij alle drie motoren; werkelijk verbruik en treffen van drie projectielsoorten en bananen; eindbaasvariatie; zichtbare bochtprojectie op telefoonformaten.
 - `tests/server-repair.mjs`: geslaagd, echte workerd/SQLite-runtime, organisatorrechten, zes spelers, herverbinden, identiteitsbehoud en volledige runtimeherstart.
-- `tests/worlds-runtime.mjs`: twee onafhankelijke clients, IJs en volledige 5 km Party, gezamenlijke events/finish, configuratiewissel en Avontuurregels. Definitieve herhaling loopt bij dit checkpoint.
-- `tests/stunts-live.mjs`: nieuwe tweespelertest, standaard tegen lokale workerd; productie alleen met `KARTGO_LIVE=1`. Controleert vier echte serverbots, gesynchroniseerde hoge sprongen en projectielen, meerdere wapens, snelheid boven de menselijke motorbasis, herverbinden en identieke uitslag voor zes racers. Loopt bij dit checkpoint.
-- Echte Chrome-browser: daadwerkelijke Party-controller gestart; gebogen weg, bochtborden, brede schans, springende kippen en rijdende bots visueel beoordeeld. Telefoonformaten en productiecontrole worden hieronder aangevuld.
+- `tests/worlds-runtime.mjs`: twee onafhankelijke clients, IJs en volledige 5 km Party, gezamenlijke events/finish, configuratiewissel en Avontuurregels. Definitieve herhaling geslaagd. De finishcontrole blijft op beide menselijke deelnemers gericht; de toegevoegde bots mogen bij het sluiten van de race nog onderweg zijn en staan dan met hun afstand in de uitslag.
+- `tests/stunts-live.mjs`: nieuwe tweespelertest, standaard tegen lokale workerd; productie alleen met `KARTGO_LIVE=1`. Controleert vier echte serverbots, gesynchroniseerde hoge sprongen en projectielen, meerdere wapens, snelheid boven de menselijke motorbasis, herverbinden en identieke uitslag voor zes racers. Zowel lokale workerd als productie geslaagd.
+- Echte Chrome-browser: daadwerkelijke Party-controller gestart; gebogen weg, bochtborden, brede schans, springende kippen en rijdende bots visueel beoordeeld. Staand 390×844 en liggend 844×390 in de browser gecontroleerd: geen horizontale overloop. Gepubliceerde Party-race eveneens gestart en bekeken.
 
 Geen fysieke iPhone-/Androidtest door ons; geen fysieke tweetelefoontest claimen.
 
 ## Publicatie
 
-Nog niet gepubliceerd bij dit checkpoint. Backendversie `stunt-racing-4.0`, scriptcache `stunts-4-0`.
+Codecommit `461b92b0fe8ee8fe239401657e043a6a77055a14` gepubliceerd op de bestaande hoofdbranch. GitHub Pages build/deploy/report en Cloudflare Workers Builds allemaal **success**. De echte `/health` meldt `stunt-racing-4.0` en de features `stunts` / `armed-bots`. Scriptcache `stunts-4-0`.
+
+Zes gepubliceerde HTML-/JS-bestanden met HTTP 200 opgehaald: byte-voor-byte gelijk aan de geteste bron.
+
+`KARTGO_LIVE=1 node tests/stunts-live.mjs` op productie **geslaagd**: twee onafhankelijke WebSocket-clients, vier snelle serverbots, gelijke hoge schanssprong en projectielen, onweer én hypnose én bananen, herverbinden met dezelfde identiteit/positie, beide menselijke spelers de echte 2600 m gefinisht en exact dezelfde gezamenlijke uitslag met alle zes racers.
+
+Browsertest betreft echte Chrome en responsive formaten, geen fysieke telefoons. De speellink blijft https://contact-kaaete.github.io/kart-go-jaylenn/multiplayer/.
+
+![Gepubliceerde Party-baan met dezelfde gedeelde renderer](screenshots/stunts-live-20261113.jpg)
 Nieuwe racekamer maken voor een volledig nieuw parcours en startveld; een al begonnen kamer behoudt deels zijn bestaande parcoursobjecten.
