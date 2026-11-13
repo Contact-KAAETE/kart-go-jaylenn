@@ -25,3 +25,21 @@ Final Party presentation DOM regression:
 PASS actual Party 71–75 start/countdown, steer, multitouch, native selection guard, pause/resume, rotate, restart ownership, five complete races, free/adventure and original saves.
 
 Browser UI: 390x844,320x568,430x932,844x390 inspected; no measured horizontal overflow. 20 real garage colours and multitouch regression passed in Chrome. Not physical phones.
+
+PUBLICATION
+PASS LIVE exact HTTP200: index.html
+PASS LIVE exact HTTP200: assets/app-interface.css
+PASS LIVE exact HTTP200: assets/graphics.js
+PASS LIVE exact HTTP200: assets/player.js
+PASS LIVE exact HTTP200: multiplayer/index.html
+PASS LIVE exact HTTP200: party/index.html
+PASS LIVE art HTTP200: menu-v5.webp
+PASS LIVE art HTTP200: landscapes-v5.webp
+PASS LIVE art HTTP200: winter-v6.webp
+PASS LIVE art HTTP200: characters-v5.webp
+PASS LIVE art HTTP200: garage-v5.webp
+PASS LIVE art HTTP200: chickens/party-fairground.webp
+
+Two actual production browser clients: create room, copied invite, join, correct names/avatar/paint, both ready, shared Ice51 start, actual positions79m/54m.
+Actual production QR converted with Sharp and decoded exactly with jsQR to copied invite; no secrets logged or committed.
+Pages and Workers checks all success for5435ea7.

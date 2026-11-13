@@ -183,3 +183,9 @@ Deze serverreparatiefase is gepubliceerd. Geen handmatige Cloudflare-actie meer 
 - Geen nieuwe diensten/kosten, geen wijziging aan race-/netwerk-/opslaglogica. Oude misleidende vriendenpopup verwijst nu correct naar echte QR-racekamers; lokale code blijft lokaal.
 - `npm test` en na laatste Party-HTML `tests/party-riders.mjs` geslaagd; browser390×844/320×568/430×932/844×390 en desktoplobby gecontroleerd. Werkelijke naam-/karakter-/kleurkeuze bewaren getest, alle20 lakken visueel functioneel gecontroleerd, touchregressies geslaagd.
 - Volledig verslag: `docs/KART_GO_APP_INTERFACE_STATUS.md`. Volgende stap: UI-commit publiceren, live bestanden en echte twee-browser-lobby/start controleren, screenshots en eindresultaat vastleggen.
+
+### App-interface live gecontroleerd
+- UI-code `5435ea7632448ddd7180b77eadb34ed7b4d0f03a`: alle Pages-/Workers-checks success; zes publieke bestanden exact en zes beeldbestanden HTTP200.
+- Echte productie2browserclients: aanmaken→uitnodiging→Doe mee→juiste namen/coureurs/kleuren→beiden klaar→gedeelde start level51→beide karts bewogen. QR exact raster-teruggelezen (Sharp/jsQR); geheimen niet gepubliceerd.
+- Screenshot van het echte nieuwe beginscherm wordt ter bewijs vastgelegd. Kleine labelcorrectie Wereldkaart bewaart de bestaande navigatiesemantiek. Geen racephysics/backend/opslag gewijzigd.
+- Open blijft: fysieke Safari/Android-test, eerdere Party/online-botsfysicabeperking. Volgende sessie: hervat vanaf laatste main-commit en dit document; niet opnieuw bouwen.

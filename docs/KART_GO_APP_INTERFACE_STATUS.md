@@ -37,4 +37,23 @@ Geen wijzigingen aan de racephysics, besturinghandlers, multiplayerprotocol/Work
 
 ## Publicatie
 
-In voorbereiding: geteste UI-code naar main; daarna GitHub Pages, gepubliceerde bestanden en echte QR-racekamer controleren. CSS-/helpercache `app-7-1`.
+UI-codecommit `5435ea7632448ddd7180b77eadb34ed7b4d0f03a` gepubliceerd. GitHub Pages build/deploy/report én Cloudflare Workers Builds: success. CSS-/helpercache `app-7-1`.
+
+Zes gewijzigde publieke HTML/CSS/JS-bestanden met HTTP200 opgehaald en byte-voor-byte vergeleken met de geteste versie. De zes gebruikte illustratie-/atlasbestanden ook HTTP200 gecontroleerd.
+
+Echte gepubliceerde multiplayer met twee afzonderlijke browserclients gecontroleerd:
+
+1. Organisator maakt een besloten kamer; Kopieer link levert een geldige uitnodiging.
+2. Tweede browser opent die uitnodiging en kiest eigen naam, coureur en kleur.
+3. Beide clients tonen dezelfde deelnemers, met de juiste kleuren.
+4. Beide klaar; Start race wordt actief. Beide krijgen dezelfde IJs-Wereld/level51.
+5. Beide karts daadwerkelijk bestuurd: ongeveer79m en54m gereden; gedeelde stand en serververbinding functioneren.
+6. De werkelijke productie-QR uit de kamer met Sharp naar pixels omgezet en met jsQR exact teruggelezen naar de gekopieerde uitnodiging. Geen uitnodigingssleutels in de repository opgeslagen.
+
+Een nieuwe volledige live finish-/reconnecttest was voor deze presentatiewijziging niet nodig: de multiplayer-/racecode is ongewijzigd en de bestaande complete racetests zijn geslaagd. Geen nieuwe volledige live race of fysieke telefoontest claimen.
+
+Speellink: https://contact-kaaete.github.io/kart-go-jaylenn/
+Samen racen: https://contact-kaaete.github.io/kart-go-jaylenn/multiplayer/
+Party: https://contact-kaaete.github.io/kart-go-jaylenn/party/
+
+Laatste kleine tekstcorrectie: de bestaande wereldkaartknop heet ‘Wereldkaart’, zodat de knop geen niet-gewijzigde avonturenmodus belooft nadat eerder Vrij racen is gekozen. De werkelijke spelmodus blijft via de bestaande modekeuze instelbaar.
