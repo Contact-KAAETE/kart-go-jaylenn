@@ -57,7 +57,7 @@ const GFX=(()=>{
  function driverSprite(avatar,rear=false){const i=racerIndex(avatar);if(i>=12){const key='family-driver:'+i+':'+rear;if(frames.has(key))return frames.get(key);const src=tile(rear?'familyRear':'familyFront',2,1,i-12);if(!src)return null;const cv=document.createElement('canvas');cv.width=256;cv.height=256;cv.getContext('2d').drawImage(src,src.width*.2,0,src.width*.6,src.height*.56,0,0,256,256);frames.set(key,cv);return cv;}return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
  function drawFamilyKart(c,x,y,scale,index,steer,angle){const rear=angle===null||angle<3,src=tile(rear?'familyRear':'familyFront',2,1,index);if(!src)return false;const size=rear?174:158;c.save();c.translate(x,y);c.rotate((steer||0)*.035);ellipse(c,0,3*scale,57*scale,11*scale,'#071b2c4f');c.drawImage(src,-size/2*scale,(16-size)*scale,size*scale,size*scale);c.restore();counts.karts++;counts.drivers++;return true;}
  const kartFx={lastAir:0};
- // Car sprites face forward-right (rear view) or forward-left (front view); mirrored for the other side.
+ // Rear sprite: nose points up-left (left flank visible). Front sprite: nose points down-left. Mirrored for the other side.
  const CAR_W=205,CAR_SEAT={x:.47,y:.1};
  function carAssets(kart){const i=carIndex(kart);return i<0?[]:['car'+i+'Rear','car'+i+'Front'];}
  function drawCarBody(c,index,rear,mirror,scale,driver){
@@ -128,7 +128,10 @@ const GFX=(()=>{
   c.transform(1,0,lean*.035,1,0,0);
   if(isPlayer&&racing&&state.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);
   if(carNo>=0){
-   const rear=variant<3,mirror=rear?variant===0:variant===5;
+   // Perspective: a car left of the camera shows its right flank, a car right of it its left flank.
+   // Only the slanted rear view exists, so straight-driving cars pick the side that matches the road.
+   const rear=variant<3,m=c.getTransform?.(),screenX=m?(m.a*0+m.e)/Math.max(1,c.canvas?.width||1):.5;
+   const mirror=rear?(angle===null&&Math.abs(steer||0)<=.23?screenX<.47:variant===2):variant===5;
    drawCarBody(c,carNo,rear,mirror,scale,driver);
    if(player&&typeof xpLevel==='function'&&xpLevel()>=5&&isPlayer){const g=performance.now()/900;c.globalAlpha=.55+Math.sin(g)*.25;c.fillStyle='#fff5b5';c.beginPath();c.arc((mirror?-1:1)*60*scale,-60*scale,3*scale,0,7);c.fill();c.globalAlpha=1;}
    c.restore();return true;
