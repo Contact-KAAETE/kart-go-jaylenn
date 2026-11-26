@@ -41,8 +41,17 @@ Start je motor, kies bij eerste keer een bijnaam en poppetje. Rem links, gas rec
 - Garage: bestaande originele kart, kleur en helm; één cosmetisch effect. Glitters ophalen op kaart naeerste winst, Splash vanaf bereikt15, Boem40/elke2s. Geen effect zet cosmetische deeltjes uit.100XP pereerste levelwinst,500XP perXP-level; vanafXP5 glimt de kart.
 - Voortgang blijft lokaal onder bestaande opslagsleutel; V3-back-up automatisch bewaard. Bewaar/importeer JSON-bestand of kopieer/plak volledige back-uptekst. Import combineert overwinningen en beste tijden; neemt gekozen profiel/instellingen over.
 
-## Online status
-**Online vrienden en multiplayer zijn niet aangesloten.** Het vriendenvenster toont uitsluitend eigen lokale code en QR zonder persoonsgegevens in de QR. Geen werkende netwerkverzoeken/lobby gesuggereerd. Voor echte maximaal6speler-races is een veilige backend nodig. Geen externe dienst geactiveerd; ontwerp en gratis opties in [ONLINE_PLAN](docs/ONLINE_PLAN.md).
+## Samen racen (online)
+**Online samen racen werkt.** Kies in het hoofdmenu **Samen racen**, maak een kamer en laat vrienden de QR-uitnodiging scannen. Maximaal 6 spelers per kamer.
+
+- Server: eigen gratis Cloudflare Worker `kart-go-jaylenn` met Durable Object `RaceRoom` (code in `multiplayer/src/`). De server bepaalt organisator, klaarstatus, start, posities en uitslag.
+- Uitnodiging via QR-link (`?room=...#key=...`); herverbinden na wegvallen houdt dezelfde speler en plek. Een kamer verloopt na twee uur.
+- Live gecontroleerd: twee echte clients op de productieserver kregen na herverbinden dezelfde finishuitslag. Zie [serverreparatie](docs/CLOUDFLARE_SERVER_REPAIR.md) en [werkvoortgang](docs/WORK_KARTGO_PROGRESS.md).
+- **Nog beperkt:** online is het één trainingsbaan van 1800m. De 70 levels, Party-levels en power-ups zijn online nog niet speelbaar. Nog niet getest met twee fysieke telefoons op verschillende netwerken.
+- De **Vriendencode** in het menu is iets anders: een lokale code en QR zonder persoonsgegevens, zonder netwerkverbinding.
+
+## Party-Wereld
+Wereld 4, levels 71–75: race op een racekip, ontwijk meteorieten en de kat. Te vinden via het hoofdmenu of `party/`. Eigen lokale opslag; vrij racen opent alle levels.
 
 ## Hervatten en kwaliteit
 - [Werkstatus](docs/KART_GO_WORK_STATUS.md) en [issue1](https://github.com/Contact-KAAETE/kart-go-jaylenn/issues/1).
