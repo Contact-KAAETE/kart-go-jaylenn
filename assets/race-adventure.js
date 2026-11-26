@@ -7,7 +7,7 @@ const RaceAdventure=(()=>{
  const keys=['recovery','recoveryDuration','recoveryAge','returnD','returnX','crashSide','safeFor','offTrackFor'];
  function init(s){for(const r of [s,...s.opponents]){for(const k of keys)r[k]=0;r.recoveryKind='';}}
  function waterSide(s,index){const i=courseWrap(index,COUNT);if(s.features.some(f=>f.kind==='bridge'&&i>=f.from&&i<=f.to))return 2;if(s.ice||s.sand)return 0;const period=s.profile.theme==='valley'?29:59;for(let n=-2;n<=2;n++){const j=courseWrap(i+n,COUNT);if(j%period===5)return j%2?1:-1;}return 0;}
- function width(s,r){return s.ice?Ice.width(s.level,r.d):1;}
+ function width(s,r){return s.ice?Ice.width(s.level,r.d):Stunts.width(s,r.d);}
  function begin(s,r,kind){if(r.recovery>0||r.rescue>0||r.safeFor>0||r.iceShield>0)return false;const duration=kind==='water'?3:2;r.recovery=duration;r.recoveryDuration=duration;r.recoveryAge=0;r.recoveryKind=kind;r.returnD=clamp(r.d,0,s.finishDistance-600);r.returnX=0;r.crashSide=Math.sign(r.x)||1;r.offTrackFor=0;if(s.ice)r.iceShield=duration+2;
   if(r===s){r.speed=0;resetInput();toast(kind==='water'?'PLOOOONS! Over 3 seconden weer op de baan.':'Oeps, uit de bocht! Over 2 seconden terug.');beep(kind==='water'?110:75,.18,'triangle',.04);}return true;
  }

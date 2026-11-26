@@ -4,6 +4,16 @@
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
 
+## V8.0 — stuntbaan (stap 2 van 3)
+
+Geldt voor de Groene Wereld en de Zandwereld (levels 1–50); de IJs-Wereld houdt haar eigen regels. Code: `assets/stunts.js`.
+- **Hangbruggen**: hoger, met rode torens en draagkabels.
+- **Smalle brug** (tweede brug vanaf level 12, niet in eindbaaslevels): smal plankdek zonder reling. Eraf = PLONS, 3 seconden.
+- **Tunnels**: echte tunnelbuis met muren, plafond, lampen en oranje geleidelijnen.
+- **Schans over het water** (vanaf level 10): na de schans ligt water. Te langzaam = PLONS.
+- **Looping** (vanaf level 9, niet in eindbaaslevels): de looping is van ver te zien. Met genoeg snelheid volgt een looping-animatie van opzij en daarna een boost; te langzaam = terugrollen.
+- Waarschuwingen vooraf: "Looping! Vol gas erin!", "Smalle brug…", "Schans over het water!".
+
 ## V7.0 — eigen racewagens en bredere banen (stap 1 van 3)
 
 - Zes nieuwe racewagens uit Jaylenns eigen tekeningen: Blauwe Bliksem, Rode Raket, Oranje Orkaan, Zilveren Pijl, Gouden Schicht en Nachtstorm. Merklogo's en merknamen zijn weggeschilderd. Kies ze in de garage onder **Jouw kart**; de originele kart blijft ook kiesbaar. Elke wagen heeft een vaste lak.

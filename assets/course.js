@@ -31,7 +31,7 @@ function courseElevation(d,level){
  for(const f of trackFeatures(level)){
   if(f.kind==='bridge'){
    const climb=smoothCourse((segment-f.from+13)/15),descent=1-smoothCourse((segment-f.to+1)/15);
-   height+=Math.min(climb,descent)*profile.hill*.56;
+   height+=Math.min(climb,descent)*(profile.hill*.56+(level<=50?140:0));
   }else if(f.kind==='ramp'){
    height+=smoothCourse((segment-f.from)/(f.to-f.from))*(1-smoothCourse((segment-f.to)/12))*115;
   }

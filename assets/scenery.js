@@ -53,6 +53,7 @@ function elevation(d){return courseElevation(d,sceneryLevel);}
 
 // Road furniture is projected with the same points as the track.
 function drawRoadFurniture(c,a,b,terrain){
+ if(typeof Stunts!=='undefined'&&Stunts.furniture(c,a,b,terrain))return;
  if(terrain==='ramp'){
   const color=state?.ice?(a.segIndex%2?'#69b9e1':'#92dcf4'):(a.segIndex%2?'#f7b942':'#ffc958');
   shape(c,[[a.x-a.w*.96,a.y],[a.x+a.w*.96,a.y],[b.x+b.w*.96,b.y],[b.x-b.w*.96,b.y]],color);
