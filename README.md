@@ -12,7 +12,7 @@ Levels 1–50, behalve de eindbaaslevels 20 en 50. Jaylenns eigen power-upblokke
 - **Duwschild** 🛡️: 6 seconden. Je duwt iedereen hard opzij en het schild vangt een explosie op.
 - **Explosies** blazen auto's opzij, laten ze tollen en kunnen ze van de baan of het water in blazen.
 - **Duwen**: auto's naast elkaar duwen elkaar echt weg. Met boost of schild ben je sterker. Over de rand geduwd = de normale stof- of PLONS-redding.
-- **Tegenstanders vechten terug**: een raket als jij aan kop ligt, een bom als je vlak achter ze zit, en soms rammen ze je.
+- **Tegenstanders vechten terug** (V9.1, feller): een raket zodra jij vóór ze rijdt, een bom als je vlak achter ze zit, en ze rammen je vaker. Hoe hoger het level, hoe feller. Zes rijen wapenkisten per ronde; duwen en explosies zijn harder.
 
 ## V8.0 — stuntbaan (stap 2 van 3)
 

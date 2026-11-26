@@ -5,7 +5,7 @@
 const Combat=(()=>{
  const ROCKET=6,BOMB=7,SHIELD=8,ITEMS=[ROCKET,BOMB,SHIELD];
  const NAMES={6:'Raket',7:'Bom',8:'Duwschild'},ICONS={6:'🎯',7:'💣',8:'🛡️'};
- const CRATE_SEGS=[30,92,146,248],CRATE_LANES=[-.6,0,.6];
+ const CRATE_SEGS=[30,60,92,146,175,248],CRATE_LANES=[-.6,0,.6];
  function active(level){return level<=50&&level!==20&&level!==50;}
  function allowed(level,item){return active(level)&&ITEMS.includes(item);}
  // ---------- inventory icons (inline SVG, no extra image files) ----------
@@ -45,12 +45,12 @@ const Combat=(()=>{
  function explode(s,d,x,power=1,owner=null){
   const C=ensure(s);C.blasts.push({d,x,age:0,power});
   for(const r of racers(s)){
-   const dd=Math.abs(r.d-d),dx=r.x-x;if(dd>560||Math.abs(dx)>.75||r===owner&&dd>200)continue;
+   const dd=Math.abs(r.d-d),dx=r.x-x;if(dd>650||Math.abs(dx)>.85||r===owner&&dd>200)continue;
    if(dodge(r))continue;
    if(r.shield>0){r.shield=Math.max(0,r.shield-2.5);if(r===s)toast('🛡️ Je schild ving de explosie op!');continue;}
-   const side=Math.sign(dx)||(Math.random()<.5?-1:1),strength=(1-dd/560)*power;
-   r.pushV+=side*(1.6+strength*1.4);r.blast=.9;r.spin=Math.max(r.spin||0,1.1);
-   if(r===s){s.speed*=.3;s.impact=Math.max(s.impact||0,.6);s.hitFlash=.3;toast('💥 BOEM! Je bent geraakt!');}
+   const side=Math.sign(dx)||(Math.random()<.5?-1:1),strength=(1-dd/650)*power;
+   r.pushV+=side*(2.2+strength*1.8);r.blast=.9;r.spin=Math.max(r.spin||0,1.4);
+   if(r===s){s.speed*=.2;s.impact=Math.max(s.impact||0,.6);s.hitFlash=.3;toast('💥 BOEM! Je bent geraakt!');}
    else if(r.boss){r.pushV*=.25;}
   }
   if(typeof beep==='function'){beep(70,.35,'sawtooth',.06);setTimeout(()=>beep(45,.3,'square',.05),80);}
@@ -79,9 +79,9 @@ const Combat=(()=>{
   for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
    const a=list[i],b=list[j];if(dodge(a)||dodge(b)||(a.bumpCool>0&&b.bumpCool>0))continue;
    const dd=Math.abs(a.d-b.d),dx=b.x-a.x;if(dd>200||Math.abs(dx)>.32*HB)continue;
-   const force=r=>(r.boss?2.6:r===s?1:r.ram>0?1.3:.85)*(r.shield>0?3:1)*((r.boost||0)>0?1.5:1);
+   const force=r=>(r.boss?2.6:r===s?1:r.ram>0?1.6:.9)*(r.shield>0?3:1)*((r.boost||0)>0?1.5:1);
    const side=Math.sign(dx)||1,fa=force(a),fb=force(b);
-   a.pushV-=side*1.6*fb/(fa+fb)*2;b.pushV+=side*1.6*fa/(fa+fb)*2;
+   a.pushV-=side*2*fb/(fa+fb)*2;b.pushV+=side*2*fa/(fa+fb)*2;
    const behind=a.d<b.d?a:b;if(behind===s)s.speed*=.85;
    a.bumpCool=b.bumpCool=.35;
    C.sparks.push({d:(a.d+b.d)/2,x:(a.x+b.x)/2,age:0});
@@ -96,18 +96,18 @@ const Combat=(()=>{
     r.pushV*=Math.exp(-dt*4.2);if(Math.abs(r.pushV)<.02)r.pushV=0;}
   }
   // rivals fight back: rockets at a player ahead, bombs for a player right behind, and the odd ram
-  const fierce=Math.min(1,.25+s.level/60);
+  const fierce=Math.min(1.2,.45+s.level/50);
   for(const o of s.opponents){
    if(o.boss||o.recovery>0||o.rescue>0||s.count>0)continue;
    o.weaponCool-=dt*fierce;
    const gap=s.d-o.d;
    if(o.weaponCool<=0){
-    if(gap>400&&gap<4000&&s.opponents.every(q=>q.d<s.d)&&C.rockets.length<1){fireRocket(s,o,s);o.weaponCool=12+Math.random()*10;}
-    else if(gap<-200&&gap>-1800&&C.bombs.length<2){dropBomb(s,o);o.weaponCool=11+Math.random()*9;if(Math.random()<.6)toast('💣 Pas op, een bom op de weg!');}
+    if(gap>400&&gap<4500&&C.rockets.filter(m=>m.target===s).length<1){fireRocket(s,o,s);o.weaponCool=8+Math.random()*6;}
+    else if(gap<-200&&gap>-2200&&C.bombs.length<3){dropBomb(s,o);o.weaponCool=6+Math.random()*6;if(Math.random()<.6)toast('💣 Pas op, een bom op de weg!');}
     else o.weaponCool=1.5;
    }
    o.ram=Math.max(0,(o.ram||0)-dt);
-   if(!o.ram&&Math.abs(gap)<380&&Math.abs(o.x-s.x)<.7&&Math.random()<dt*.5*fierce)o.ram=1.2;
+   if(!o.ram&&Math.abs(gap)<420&&Math.abs(o.x-s.x)<.8&&Math.random()<dt*1.1*fierce)o.ram=1.5;
    if(o.ram>0)o.x=lerp(o.x,s.x,Math.min(1,dt*1.6));
   }
   for(const e of C.blasts)e.age+=dt;C.blasts=C.blasts.filter(e=>e.age<1.1);
