@@ -41,7 +41,7 @@ function carIndex(kart){const m=/^car([0-5])$/.exec(kart||'');return m?+m[1]:-1;
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map(),counts={karts:0,drivers:0,scenery:0,landscapes:0,effects:0,terrain:0};let loadingRace=false,allowFallback=false;
  const files={menu:'menu',characters:'characters',charactersExtra:'characters-extra',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain',winter:'winter',iceprops:'iceprops',burger:'burger'};
- const source=name=>/^car[0-5](Rear|Front)$/.test(name)?`./assets/graphics/cars/car-${name[3]}-${name.endsWith('Rear')?'rear':'front'}.webp?v=7.0`:name==='familyFront'?'./assets/graphics/family-front-v7.webp?v=family-1':name==='familyRear'?'./assets/graphics/family-rear-v7.webp?v=family-1':name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
+ const source=name=>/^car[0-5](Rear|Front|Straight)$/.test(name)?`./assets/graphics/cars/car-${name[3]}-${name.slice(4).toLowerCase()}.webp?v=7.1`:name==='familyFront'?'./assets/graphics/family-front-v7.webp?v=family-1':name==='familyRear'?'./assets/graphics/family-rear-v7.webp?v=family-1':name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
  function image(name){const im=pictures.get(name);return im?.naturalWidth?im:null;}
  function load(name){
   if(typeof Image==='undefined')return Promise.resolve(null);if(pending.has(name))return pending.get(name);
@@ -60,12 +60,12 @@ const GFX=(()=>{
  // Rear sprite: nose points up-left (left flank visible). Front sprite: nose points down-left. Mirrored for the other side.
  const CAR_W=205,CAR_SEAT={x:.47,y:.1};
  function carAssets(kart){const i=carIndex(kart);return i<0?[]:['car'+i+'Rear','car'+i+'Front'];}
- function drawCarBody(c,index,rear,mirror,scale,driver){
-  const im=image('car'+index+(rear?'Rear':'Front'));if(!im)return false;
-  const w=CAR_W*scale,h=w*im.naturalHeight/im.naturalWidth;
+ function drawCarBody(c,index,rear,mirror,scale,driver,straight=false){
+  const im=(straight&&image('car'+index+'Straight'))||image('car'+index+(rear?'Rear':'Front'));if(!im)return false;
+  const flat=straight&&im===image('car'+index+'Straight'),w=(flat?170:CAR_W)*scale,h=w*im.naturalHeight/im.naturalWidth,seat=flat?{x:.4,y:.06}:CAR_SEAT;
   c.save();if(mirror)c.scale(-1,1);
   c.drawImage(im,-w/2,12*scale-h,w,h);
-  if(driver){const d=w*.2,sx=(CAR_SEAT.x-.5)*w,sy=12*scale-h+CAR_SEAT.y*h;c.save();if(mirror)c.scale(-1,1);c.drawImage(driver,(mirror?-sx:sx)-d/2,sy-d*.62,d,d);c.restore();}
+  if(driver){const d=w*(flat?.24:.2),sx=(seat.x-.5)*w,sy=12*scale-h+seat.y*h;c.save();if(mirror)c.scale(-1,1);c.drawImage(driver,(mirror?-sx:sx)-d/2,sy-d*.62,d,d);c.restore();}
   c.restore();counts.karts++;return true;
  }
  function drawKart(c,x,y,scale,color,dog,steer,player,angle=null,car=null){
@@ -132,7 +132,11 @@ const GFX=(()=>{
    // Only the slanted rear view exists, so straight-driving cars pick the side that matches the road.
    const rear=variant<3,m=c.getTransform?.(),screenX=m?(m.a*0+m.e)/Math.max(1,c.canvas?.width||1):.5;
    const mirror=rear?(angle===null&&Math.abs(steer||0)<=.23?screenX<.47:variant===2):variant===5;
-   drawCarBody(c,carNo,rear,mirror,scale,driver);
+   // In the race every car uses its straight rear view, so all cars share one drawing style.
+   // Steering only leans and skews the body; the garage keeps the detailed angled photos.
+   const straight=rear&&angle===null;
+   if(straight){c.rotate(lean*.05);c.transform(1,0,-lean*.12,1,0,0);}
+   drawCarBody(c,carNo,rear,straight?false:mirror,scale,driver,straight);
    if(player&&typeof xpLevel==='function'&&xpLevel()>=5&&isPlayer){const g=performance.now()/900;c.globalAlpha=.55+Math.sin(g)*.25;c.fillStyle='#fff5b5';c.beginPath();c.arc((mirror?-1:1)*60*scale,-60*scale,3*scale,0,7);c.fill();c.globalAlpha=1;}
    c.restore();return true;
   }
@@ -173,7 +177,7 @@ const GFX=(()=>{
   stamp([[0,a.y+1],[a.x-a.w*1.1,a.y+1],[b.x-b.w*1.1,b.y],[0,b.y]],ground,0,W,opacity);
   stamp([[a.x+a.w*1.1,a.y+1],[W,a.y+1],[W,b.y],[b.x+b.w*1.1,b.y]],ground,0,W,opacity);
  }
- function raceCarAssets(){return [0,1,2,3,4,5].map(i=>'car'+i+'Rear');}
+ function raceCarAssets(){return [0,1,2,3,4,5].flatMap(i=>['car'+i+'Rear','car'+i+'Straight']);}
  function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...raceCarAssets(),...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
  function prepare(level,callback){
   if(loadingRace)return;loadingRace=true;showModal('<div class="loading-art"><span class="eyebrow">JE RACEWERELD WORDT KLAARGEZET</span><h2>Even de motor warmdraaien…</h2><div class="loading-wheel"></div><p>De nieuwe karts en omgeving worden geladen.</p></div>');

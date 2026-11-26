@@ -9,7 +9,7 @@ Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/
 - Zes nieuwe racewagens uit Jaylenns eigen tekeningen: Blauwe Bliksem, Rode Raket, Oranje Orkaan, Zilveren Pijl, Gouden Schicht en Nachtstorm. Merklogo's en merknamen zijn weggeschilderd. Kies ze in de garage onder **Jouw kart**; de originele kart blijft ook kiesbaar. Elke wagen heeft een vaste lak.
 - Tegenstanders rijden ook in deze wagens, nooit in dezelfde als jij. Eindbazen blijven gelijk.
 - Banen zijn 45% breder. Raak-, pak- en botsafstanden zijn meegeschaald, zodat ze bij de getekende wagens passen.
-- Beelden: `assets/graphics/cars/` (achter- en vooraanzicht per wagen). Tijdens het racen wordt het schuine achteraanzicht gespiegeld bij sturen naar links; een recht achteraanzicht kan later worden toegevoegd.
+- Beelden: `assets/graphics/cars/`. Tijdens het racen gebruiken alle wagens een recht achteraanzicht (V7.1, `car-N-straight.webp`); bij sturen helt de wagen over. De garage toont de gedetailleerde schuine foto's van voren en achteren.
 - Nog niet online: Samen racen en de Party-Wereld gebruiken nog de oude karts.
 - Volgende stappen: 2) bruggen, tunnels, schansen en loopings; 3) items, explosies en elkaar van de baan duwen.
 
