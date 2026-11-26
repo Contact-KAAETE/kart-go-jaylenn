@@ -4,6 +4,16 @@
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
 
+## V9.0 — gevechten: wapenkisten, explosies en duwen (stap 3 van 3)
+
+Levels 1–50, behalve de eindbaaslevels 20 en 50. Jaylenns eigen power-upblokken en hun kansen blijven ongewijzigd; wapens komen uit aparte rode **wapenkisten** (vier rijen per ronde). Code: `assets/combat.js`.
+- **Raket** 🎯: zoekt de auto vóór je en ontploft. Ontwijken kan met hard opzij sturen of springen.
+- **Bom** 💣: leg je achter je neer; ontploft als iemand dichtbij komt (of na 7 seconden).
+- **Duwschild** 🛡️: 6 seconden. Je duwt iedereen hard opzij en het schild vangt een explosie op.
+- **Explosies** blazen auto's opzij, laten ze tollen en kunnen ze van de baan of het water in blazen.
+- **Duwen**: auto's naast elkaar duwen elkaar echt weg. Met boost of schild ben je sterker. Over de rand geduwd = de normale stof- of PLONS-redding.
+- **Tegenstanders vechten terug**: een raket als jij aan kop ligt, een bom als je vlak achter ze zit, en soms rammen ze je.
+
 ## V8.0 — stuntbaan (stap 2 van 3)
 
 Geldt voor de Groene Wereld en de Zandwereld (levels 1–50); de IJs-Wereld houdt haar eigen regels. Code: `assets/stunts.js`.

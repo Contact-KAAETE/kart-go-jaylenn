@@ -3,7 +3,7 @@
 const RACER_NAMES=['Astronaut','Ninja','Vos','Panda','Kikker','Robot','Draak','Konijn','Tijger','Pinguïn','Kat','Piraat','Jaylenn','Ezra'];
 function racerIndex(avatar){return Math.max(0,AVATARS.indexOf(avatar));}
 function portraitMarkup(avatar,extra=''){const i=racerIndex(avatar);if(i>=12)return `<span class="portrait-sprite family-racer family-${i-12} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;return `<span class="portrait-sprite ${i>=6?'extra-racer':''} ${extra}" data-character="${i}" role="img" aria-label="${RACER_NAMES[i]}"></span>`;}
-function powerMarkup(item){const i=[1,2,3,4,6,5][item]??0;return `<span class="power-sprite" style="background-position:${(i%5)*25}% ${i>=5?100:0}%" aria-hidden="true"></span>`;}
+function powerMarkup(item){if(item>=6&&typeof Combat!=='undefined')return Combat.iconMarkup(item);const i=[1,2,3,4,6,5][item]??0;return `<span class="power-sprite" style="background-position:${(i%5)*25}% ${i>=5?100:0}%" aria-hidden="true"></span>`;}
 function showWorldMap(){
  $('#home').classList.add('world-open');$('#worldPanel').classList.remove('hidden');$('#home .hero').classList.add('hidden');$('#home .player-hub').classList.add('hidden');$('#home .menu-tools').classList.add('hidden');renderMap();window.scrollTo?.({top:0,behavior:'smooth'});
 }
