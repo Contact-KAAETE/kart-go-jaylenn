@@ -4,6 +4,15 @@
 
 Speel op https://contact-kaaete.github.io/kart-go-jaylenn/ . Bestaande Canvas2D/2,5D-game hervat; geen nieuwe repository of herbouw. €0, zonder advertenties/tracking/accounts.
 
+## V7.0 — eigen racewagens en bredere banen (stap 1 van 3)
+
+- Zes nieuwe racewagens uit Jaylenns eigen tekeningen: Blauwe Bliksem, Rode Raket, Oranje Orkaan, Zilveren Pijl, Gouden Schicht en Nachtstorm. Merklogo's en merknamen zijn weggeschilderd. Kies ze in de garage onder **Jouw kart**; de originele kart blijft ook kiesbaar. Elke wagen heeft een vaste lak.
+- Tegenstanders rijden ook in deze wagens, nooit in dezelfde als jij. Eindbazen blijven gelijk.
+- Banen zijn 45% breder. Raak-, pak- en botsafstanden zijn meegeschaald, zodat ze bij de getekende wagens passen.
+- Beelden: `assets/graphics/cars/` (achter- en vooraanzicht per wagen). Tijdens het racen wordt het schuine achteraanzicht gespiegeld bij sturen naar links; een recht achteraanzicht kan later worden toegevoegd.
+- Nog niet online: Samen racen en de Party-Wereld gebruiken nog de oude karts.
+- Volgende stappen: 2) bruggen, tunnels, schansen en loopings; 3) items, explosies en elkaar van de baan duwen.
+
 ## V6.2 — motoren en terug op de baan
 
 Kies250,509 of1000pk in garage/instellingen. Uit de bocht:2s stof; in water:3s plons, daarna vanzelf terug. Bestaande70 levels,12 coureurs,20 kleuren en lokale voortgang blijven bewaard. [Details en tests](docs/KART_GO_ENGINE_RECOVERY_STATUS.md).

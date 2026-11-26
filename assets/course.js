@@ -1,5 +1,8 @@
 /* V5.1 course geometry: original race engine, richer routes and forgiving launch ramps. */
 'use strict';
+// V7 wider roads: the road is 45% wider. Lateral positions stay fractions of the road,
+// so contact/pick-up distances shrink with HB to keep matching the drawn karts and cars.
+const ROAD_SCALE=1.45,HB=.8,LATERAL_SCALE=.86;
 const smoothCourse=t=>{t=Math.max(0,Math.min(1,t));return t*t*t*(t*(t*6-15)+10);};
 const courseWrap=(v,period)=>(v%period+period)%period;
 function courseCorners(level){
@@ -60,9 +63,9 @@ function botTactic(s,o,i){
  let ideal=[-.54,0,.54][i]+Math.sin(s.time*.34+i)*.12;
  if(o.boss)return {ideal,factor:1};
  const traffic=[...s.opponents.filter(other=>other!==o),{d:s.d,x:s.x}];
- const ahead=traffic.find(other=>other.d-o.d>0&&other.d-o.d<1700&&Math.abs(other.x-o.x)<.34);
+ const ahead=traffic.find(other=>other.d-o.d>0&&other.d-o.d<1700&&Math.abs(other.x-o.x)<.34*HB);
  if(ahead){
-  const lanes=[-.66,0,.66].map(x=>({x,cost:traffic.reduce((n,other)=>n+(Math.abs(other.d-o.d)<1800&&Math.abs(other.x-x)<.38?3:0),0)+Math.abs(x-o.x)*.25})).sort((a,b)=>a.cost-b.cost);
+  const lanes=[-.66,0,.66].map(x=>({x,cost:traffic.reduce((n,other)=>n+(Math.abs(other.d-o.d)<1800&&Math.abs(other.x-x)<.38*HB?3:0),0)+Math.abs(x-o.x)*.25})).sort((a,b)=>a.cost-b.cost);
   ideal=lanes[0].x;
  }
  if(s.profile.difficulty>9){const hazard=s.obstacles.find(b=>{const gap=circularGap(b.d,o.d);return gap>0&&gap<2200&&Math.abs(ideal-b.x)<.42;});if(hazard)ideal=hazard.x>0?-.56:.56;}

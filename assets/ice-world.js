@@ -35,12 +35,12 @@ const Ice=(()=>{
   for(const obstacle of s.obstacles){const gap=circularGap(obstacle.d,s.d),lap=Math.floor(s.d/LENGTH);
    if(obstacle.kind==='fissure'){if(gap>0&&gap<6500&&obstacle.hitLap!==lap){crack(s,lap*LENGTH+obstacle.d,obstacle.x);obstacle.hitLap=lap;}continue;}
    if(obstacle.brokenUntil>s.time)continue;
-   for(const r of [s,...s.opponents]){if(Math.abs(circularGap(obstacle.d,r.d))<185&&Math.abs(obstacle.x-r.x)<.25&&(obstacle.kind==='icicle'?airborne(r):!airborne(r))){if(penalty(s,r,'spike'))obstacle.brokenUntil=s.time+3;}}
+   for(const r of [s,...s.opponents]){if(Math.abs(circularGap(obstacle.d,r.d))<185&&Math.abs(obstacle.x-r.x)<.25*HB&&(obstacle.kind==='icicle'?airborne(r):!airborne(r))){if(penalty(s,r,'spike'))obstacle.brokenUntil=s.time+3;}}
   }
-  for(const h of data.holes)if(s.time>=h.opens&&s.time<h.closes){for(const r of [s,...s.opponents])if(Math.abs(h.d-r.d)<210&&Math.abs(h.x-r.x)<.29&&!airborne(r))penalty(s,r,'hole');}
+  for(const h of data.holes)if(s.time>=h.opens&&s.time<h.closes){for(const r of [s,...s.opponents])if(Math.abs(h.d-r.d)<210&&Math.abs(h.x-r.x)<.29*HB&&!airborne(r))penalty(s,r,'hole');}
   data.holes=data.holes.filter(h=>h.closes>s.time);data.waves=data.waves.filter(w=>s.time-w.born<1.1);
   if(s.level===70){
-   if(data.attack&&s.time>=data.attack.at){const a=data.attack;for(const r of [s,...s.opponents.filter(o=>!o.boss)]){if(a.kind==='lettuce'?Math.abs(r.x-a.safe)>.30:Math.abs(r.x-a.lane)<.30)penalty(s,r,a.kind);}
+   if(data.attack&&s.time>=data.attack.at){const a=data.attack;for(const r of [s,...s.opponents.filter(o=>!o.boss)]){if(a.kind==='lettuce'?Math.abs(r.x-a.safe)>.30:Math.abs(r.x-a.lane)<.30*HB)penalty(s,r,a.kind);}
     data.waves.push({...a,d:s.d+700,born:s.time});data.lastAttack=s.time;data.attack=null;
    }
    if(!data.attack&&s.time-data.lastAttack>=4){let kind=null;if(s.time>=data.nextLettuce){kind='lettuce';data.nextLettuce=s.time+12;}else if(s.time>=data.nextBasket){kind='basket';data.nextBasket=s.time+20;}

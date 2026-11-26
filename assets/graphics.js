@@ -27,10 +27,21 @@ function recolorKartPixels(data,color){
  }
  return data;
 }
+// V7 race cars: Jaylenns own car artwork, without brand logos. Fixed liveries.
+const CARS=[
+ {id:'car0',name:'Blauwe Bliksem',tone:'#2347b8'},
+ {id:'car1',name:'Rode Raket',tone:'#d81f1f'},
+ {id:'car2',name:'Oranje Orkaan',tone:'#f08a1c'},
+ {id:'car3',name:'Zilveren Pijl',tone:'#b9c0c8'},
+ {id:'car4',name:'Gouden Schicht',tone:'#c99a2e'},
+ {id:'car5',name:'Nachtstorm',tone:'#2c3d5e'}
+];
+const KART_IDS=['classic',...CARS.map(c=>c.id)];
+function carIndex(kart){const m=/^car([0-5])$/.exec(kart||'');return m?+m[1]:-1;}
 const GFX=(()=>{
  const pictures=new Map(),pending=new Map(),frames=new Map(),tinted=new Map(),counts={karts:0,drivers:0,scenery:0,landscapes:0,effects:0,terrain:0};let loadingRace=false,allowFallback=false;
  const files={menu:'menu',characters:'characters',charactersExtra:'characters-extra',karts:'karts',scenery:'scenery',landscapes:'landscapes',bosses:'bosses',effects:'effects',garage:'garage',terrain:'terrain',winter:'winter',iceprops:'iceprops',burger:'burger'};
- const source=name=>name==='familyFront'?'./assets/graphics/family-front-v7.webp?v=family-1':name==='familyRear'?'./assets/graphics/family-rear-v7.webp?v=family-1':name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
+ const source=name=>/^car[0-5](Rear|Front)$/.test(name)?`./assets/graphics/cars/car-${name[3]}-${name.endsWith('Rear')?'rear':'front'}.webp?v=7.0`:name==='familyFront'?'./assets/graphics/family-front-v7.webp?v=family-1':name==='familyRear'?'./assets/graphics/family-rear-v7.webp?v=family-1':name==='dogRear'?'./assets/graphics/hotdog-rear-v7.webp?v=boss-fair-1':name==='charactersExtra'?'./assets/graphics/characters-extra-v6-1.webp?v=6.1.0':`./assets/graphics/${files[name]}-v${['winter','iceprops','burger'].includes(name)?'6':'5'}.webp?v=${['winter','iceprops','burger'].includes(name)?'6.0':'5.0'}`;
  function image(name){const im=pictures.get(name);return im?.naturalWidth?im:null;}
  function load(name){
   if(typeof Image==='undefined')return Promise.resolve(null);if(pending.has(name))return pending.get(name);
@@ -46,12 +57,26 @@ const GFX=(()=>{
  function driverSprite(avatar,rear=false){const i=racerIndex(avatar);if(i>=12){const key='family-driver:'+i+':'+rear;if(frames.has(key))return frames.get(key);const src=tile(rear?'familyRear':'familyFront',2,1,i-12);if(!src)return null;const cv=document.createElement('canvas');cv.width=256;cv.height=256;cv.getContext('2d').drawImage(src,src.width*.2,0,src.width*.6,src.height*.56,0,0,256,256);frames.set(key,cv);return cv;}return tile(i>=6?'charactersExtra':'characters',3,4,i%6+(rear?6:0));}
  function drawFamilyKart(c,x,y,scale,index,steer,angle){const rear=angle===null||angle<3,src=tile(rear?'familyRear':'familyFront',2,1,index);if(!src)return false;const size=rear?174:158;c.save();c.translate(x,y);c.rotate((steer||0)*.035);ellipse(c,0,3*scale,57*scale,11*scale,'#071b2c4f');c.drawImage(src,-size/2*scale,(16-size)*scale,size*scale,size*scale);c.restore();counts.karts++;counts.drivers++;return true;}
  const kartFx={lastAir:0};
- function drawKart(c,x,y,scale,color,dog,steer,player,angle=null){
+ // Car sprites face forward-right (rear view) or forward-left (front view); mirrored for the other side.
+ const CAR_W=205,CAR_SEAT={x:.47,y:.1};
+ function carAssets(kart){const i=carIndex(kart);return i<0?[]:['car'+i+'Rear','car'+i+'Front'];}
+ function drawCarBody(c,index,rear,mirror,scale,driver){
+  const im=image('car'+index+(rear?'Rear':'Front'));if(!im)return false;
+  const w=CAR_W*scale,h=w*im.naturalHeight/im.naturalWidth;
+  c.save();if(mirror)c.scale(-1,1);
+  c.drawImage(im,-w/2,12*scale-h,w,h);
+  if(driver){const d=w*.2,sx=(CAR_SEAT.x-.5)*w,sy=12*scale-h+CAR_SEAT.y*h;c.save();if(mirror)c.scale(-1,1);c.drawImage(driver,(mirror?-sx:sx)-d/2,sy-d*.62,d,d);c.restore();}
+  c.restore();counts.karts++;return true;
+ }
+ function drawKart(c,x,y,scale,color,dog,steer,player,angle=null,car=null){
   if(scale<.015)return true;
   if(dog){const boss=dog===true?(tile('dogRear',1,1,0)||tile('bosses',2,2,1)):dog==='burger'?tile('burger',2,1,1):tile('bosses',2,2,dog==='pizza'?3:1);if(!boss)return false;counts.karts++;c.save();c.translate(x,y);c.drawImage(boss,-77*scale,-138*scale,154*scale,154*scale);c.restore();return true;}
-  const family=familyIndex(player?.avatar);if(family>=0)return drawFamilyKart(c,x,y,scale,family,steer,angle);
+  const carNo=car!==null&&car!==undefined?car:carIndex(player?.kart);
+  const family=familyIndex(player?.avatar);if(family>=0&&carNo<0)return drawFamilyKart(c,x,y,scale,family,steer,angle);
   const variant=angle===null?(steer<-.23?0:steer>.23?2:1):angle;
-  const kart=coloredKart(variant,color),driver=driverSprite(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4],variant<3);if(!kart||!driver)return false;counts.karts++;counts.drivers++;
+  const kart=carNo>=0?null:coloredKart(variant,color),driver=driverSprite(player?.avatar||AVATARS[color==='#719dd4'?2:color==='#cb81ac'?3:4],variant<3);if((carNo<0&&!kart)||!driver)return false;
+  if(carNo>=0&&!image('car'+carNo+(variant<3?'Rear':'Front')))return false;
+  counts.drivers++;if(carNo<0)counts.karts++;
   // Lightweight suspension, steering lean and driver reactions. No new assets or engine.
   const t=performance.now()/1000;
   const racing=typeof state!=='undefined'&&state&&!state.paused&&!state.finished;
@@ -97,11 +122,17 @@ const GFX=(()=>{
   if(isPlayer&&racing)kartFx.lastAir=airborne;
   else if(isPlayer)kartFx.lastAir=0;
   // Shadow stays on the road while the chassis lifts over jumps.
-  ellipse(c,0,3*scale,57*scale*(1-airborne*.14),11*scale*(1-airborne*.14),'#071b2c4f');
+  ellipse(c,0,3*scale,(carNo>=0?92:57)*scale*(1-airborne*.14),(carNo>=0?13:11)*scale*(1-airborne*.14),'#071b2c4f');
   c.translate(0,(-lift+suspension)*scale);
   c.rotate(lean*(.025+speed*.055));
   c.transform(1,0,lean*.035,1,0,0);
   if(isPlayer&&racing&&state.boost>0)effect(c,3,0,5*scale,70*scale,65*scale,.85);
+  if(carNo>=0){
+   const rear=variant<3,mirror=rear?variant===0:variant===5;
+   drawCarBody(c,carNo,rear,mirror,scale,driver);
+   if(player&&typeof xpLevel==='function'&&xpLevel()>=5&&isPlayer){const g=performance.now()/900;c.globalAlpha=.55+Math.sin(g)*.25;c.fillStyle='#fff5b5';c.beginPath();c.arc((mirror?-1:1)*60*scale,-60*scale,3*scale,0,7);c.fill();c.globalAlpha=1;}
+   c.restore();return true;
+  }
   c.drawImage(kart,-77*scale,-138*scale,154*scale,154*scale);
   // Driver leans a little into turns, with independent spring motion.
   const driverLean=lean*4*scale;
@@ -139,10 +170,11 @@ const GFX=(()=>{
   stamp([[0,a.y+1],[a.x-a.w*1.1,a.y+1],[b.x-b.w*1.1,b.y],[0,b.y]],ground,0,W,opacity);
   stamp([[a.x+a.w*1.1,a.y+1],[W,a.y+1],[W,b.y],[b.x+b.w*1.1,b.y]],ground,0,W,opacity);
  }
- function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
+ function raceCarAssets(){return [0,1,2,3,4,5].map(i=>'car'+i+'Rear');}
+ function canRace(level){if(typeof Image==='undefined'||allowFallback)return true;return ['characters','karts','scenery','landscapes','effects','terrain',...raceCarAssets(),...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].every(image);}
  function prepare(level,callback){
   if(loadingRace)return;loadingRace=true;showModal('<div class="loading-art"><span class="eyebrow">JE RACEWERELD WORDT KLAARGEZET</span><h2>Even de motor warmdraaien…</h2><div class="loading-wheel"></div><p>De nieuwe karts en omgeving worden geladen.</p></div>');
-  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
+  const loader=document.querySelector('.loading-art');Promise.all(['characters','karts','scenery','landscapes','effects','terrain',...raceCarAssets(),...racerAssets(saved.player.avatar),...(level===20?['bosses','dogRear']:level===50?['bosses']:[]),...(level>50?['winter','iceprops']:[]),...(level===70?['burger']:[])].map(load).concat([RaceAudio.prepare(level)])).then(()=>{loadingRace=false;if(loader?.isConnected&&modal.open)callback();}).catch(()=>{loadingRace=false;allowFallback=true;showModal('<h2>Een beeldbestand kon niet laden.</h2><p>Je kunt met de bestaande tekeningen verder racen, of opnieuw proberen.</p><button class="primary" id="retryArt">Opnieuw laden</button> <button class="secondary" id="fallbackRace">Verder racen</button>');$('#retryArt').onclick=()=>location.reload();$('#fallbackRace').onclick=callback;});
  }
  function init(){
   $('#openWorldMap').onclick=showWorldMap;$('#closeWorldMap').onclick=showHomeMenu;$('#menuSettings').onclick=settings;
@@ -151,5 +183,5 @@ const GFX=(()=>{
   Promise.all(['menu','characters',...racerAssets(saved.player.avatar)].map(load)).then(()=>{$('#assetStatus').textContent='';renderPlayer();}).catch(()=>{$('#assetStatus').textContent='Een beeldbestand ontbreekt. Herlaad bij een trage verbinding.';});
  }
  function metrics(){return{...counts,loaded:[...pictures.keys()],frameCache:frames.size,tintCache:tinted.size,decodedBytes:[...pictures.values()].reduce((n,im)=>n+im.naturalWidth*im.naturalHeight*4,0)};}function resetMetrics(){for(const k of Object.keys(counts))counts[k]=0;}
- return {metrics,resetMetrics,image,load,tile,driverSprite,drawKart,familyIndex,racerAssets,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
+ return {metrics,resetMetrics,image,load,tile,driverSprite,drawKart,familyIndex,racerAssets,carAssets,drawScenery,landscape,effect,trackTexture,canRace,prepare,init,source};
 })();
